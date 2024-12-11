@@ -1,0 +1,9 @@
+a{
+    text-decoration: none;
+}
+.side-menu{
+    position: fixed;
+    background-color: brown;
+    width: 20vw;
+    height: 100vh;
+}

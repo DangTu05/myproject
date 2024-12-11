@@ -1,0 +1,21 @@
+.card{
+    margin: 10px 10px;
+}
+ul{
+    list-style-type: none;
+}
+.nav{
+    padding:10px 20px !important;
+    background-color: rgb(238, 238, 238);
+    align-items: center;
+    gap: 20px; 
+}
+.ul{
+    display: flex;
+    margin:auto;
+    gap: 20px;
+}
+a{
+    text-decoration: none !important; 
+    color:black !important; /* Màu sắc của liên kết */
+}

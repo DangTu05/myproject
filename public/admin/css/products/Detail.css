@@ -1,0 +1,60 @@
+.main-content {
+  position: relative;
+  width: calc(100% - 265px);
+  height: 100vh;
+  min-height: 100%;
+  float: right;
+  transition: all 0.3s;
+}
+.product-img {
+  margin-top: 15px;
+  padding: 15px;
+}
+.image {
+  width: 250px;
+  height: 100%; /* Chiều cao đầy đủ theo thiết lập */
+  object-fit: contain; /* Duy trì tỷ lệ, không bị vỡ */
+}
+.info-panel {
+  box-sizing: border-box;
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+}
+.product {
+  background-color: #fff;
+  margin: 50px 15px;
+}
+.product-content {
+  margin-top: 15px;
+  padding: 15px;
+  line-height: 2;
+}
+.Updated-in4 {
+  margin-top: 15px;
+  padding: 15px;
+  line-height: 2;
+}
+.pro_name{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(240, 221, 221);
+  padding: 10px;
+  box-sizing: border-box;
+}
+span {
+  word-wrap: break-word;
+  display: inline-block;
+}
+.title{
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 10px;
+}
+.fix{
+  float: right;
+  margin-right: 15px;
+}
