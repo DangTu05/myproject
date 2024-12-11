@@ -1,0 +1,10 @@
+const express = require("express");
+const multer = require("multer");
+const storage = require("../../../helpers/StorageMulti.helper");
+const validate = require("../../../middlewares/validate/admin/ValidateProduct");
+const upload = multer({ storage: storage });
+const router = express.Router();
+const CreateController = require("../../../controllers/admin/products/CreateController");
+router.get("/create", CreateController.show);
+router.post("/create",upload.single("img"),validate.create,CreateController.create);
+module.exports = router;
