@@ -1,0 +1,32 @@
+extends ../layouts/main
+block head
+    head 
+        link(rel="stylesheet" href="css/site.css")
+    body
+        .nav 
+            #logo
+            .option 
+                ul.ul 
+                    li 
+                        a(href="") Home 
+                    li 
+                        a(href="") Lựa Chọn 
+                    li 
+            form.d-flex(action="",role="search")  
+                input.form-control.me-2(aria-label="Search" 
+                    placeholder="Search" 
+                    type="search")
+                button.btn.btn-outline-success(type="submit") Search             
+        .card(style="width: 18rem;")
+          each item, index in products 
+            a(href=`/product/${item.slug}`) 
+              img.card-img-top(
+                alt=""
+                src=item.img
+                )
+            a(href=`/product/${item.slug}`)       
+              .card-body
+                  h5.card-title #{item.product_name}
+                  p.card-text
+                      | Giá: #{Price[index]} VNĐ 
+                  a.btn.btn-primary(href="#") Xem chi tiết

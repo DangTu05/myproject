@@ -1,0 +1,6 @@
+mixin FilterStatus(FilterStatus)
+  each item in FilterStatus
+    button(data-status=item.status,class=item.class).btn.btn-outline-success #{item.name}                
+  form.Search.d-flex(role="search")
+    input.ValueSearch.form-control.me-2(type="search",value=keyword, placeholder="Search", aria-label="Search")
+    button.btn.btn-outline-success(type="submit") Search
