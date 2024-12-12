@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "engines": {
-    "node": "14.x"
+    "node": "22.x"
   },
   "scripts": {
     "beautiful": "prettier --write 'src/**/*.{js,json,scss}' --write --single-quote --tab-width 4 --trailing-comma all",
