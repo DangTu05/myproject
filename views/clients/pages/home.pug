@@ -1,32 +1,153 @@
-extends ../layouts/main
-block head
-    head 
-        link(rel="stylesheet" href="css/site.css")
-    body
-        .nav 
-            #logo
-            .option 
-                ul.ul 
-                    li 
-                        a(href="") Home 
-                    li 
-                        a(href="") Lựa Chọn 
-                    li 
-            form.d-flex(action="",role="search")  
-                input.form-control.me-2(aria-label="Search" 
-                    placeholder="Search" 
-                    type="search")
-                button.btn.btn-outline-success(type="submit") Search             
-        .card(style="width: 18rem;")
-          each item, index in products 
-            a(href=`/product/${item.slug}`) 
-              img.card-img-top(
-                alt=""
-                src=item.img
-                )
-            a(href=`/product/${item.slug}`)       
-              .card-body
-                  h5.card-title #{item.product_name}
-                  p.card-text
-                      | Giá: #{Price[index]} VNĐ 
-                  a.btn.btn-primary(href="#") Xem chi tiết
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title Grocery Mart
+//  Favicon 
+link(rel="apple-touch-icon", sizes="76x76", href="/client/home/assets/favicon/apple-touch-icon.png")
+link(rel="icon", type="image/png", sizes="32x32", href="/client/home/assets/favicon/favicon-32x32.png")
+link(rel="icon", type="image/png", sizes="16x16", href="/client/home/assets/favicon/favicon-16x16.png")
+link(rel="manifest", href="/client/home/assets/favicon/site.webmanifest")
+meta(name="msapplication-TileColor", content="#da532c")
+meta(name="theme-color", content="#ffffff")
+//  Fonts 
+link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
+//  Styles 
+link(rel="stylesheet", href="/client/home/assets/css/main.css")
+//  Scripts 
+script(src="/client/home/assets/js/scripts.js")
+//  Header 
+header#header.header
+script.
+  
+  load("#header", "./templates/header.html");
+  
+//  MAIN 
+main.container.home
+  //  Slideshow 
+  .home__container
+    .slideshow
+      .slideshow__inner
+        .slideshow__item
+          a.slideshow__link(href="#!")
+            picture
+              source(media="(max-width: 767.98px)", srcset="/client/home/assets/img/slideshow/item-1-md.png")
+              img.slideshow__img(src="/client/home/assets/img/slideshow/item-1.png", alt)
+      .slideshow__page
+        span.slideshow__num 1
+        span.slideshow__slider
+        span.slideshow__num 5
+  //  Browse Categories 
+  section.home__container
+    .home__row
+      h2.home__heading Browse Categories
+    .home__cate.row.row-cols-3.row-cols-md-1
+      //  Category item 1 
+      .col
+        a(href="#!")
+          article.cate-item
+            img.cate-item__thumb(src="/client/home/assets/img/category-item/item-1.png", alt)
+            .cate-item__info
+              h3.cate-item__title $24 - $150
+              p.cate-item__desc New sumatra mandeling coffe blend
+      //  Category item 2 
+      .col
+        a(href="#!")
+          article.cate-item
+            img.cate-item__thumb(src="/client/home/assets/img/category-item/item-2.png", alt)
+            .cate-item__info
+              h3.cate-item__title $37 - $160
+              p.cate-item__desc Espresso arabica and robusta beans
+      //  Category item 3 
+      .col
+        a(href="#!")
+          article.cate-item
+            img.cate-item__thumb(src="/client/home/assets/img/category-item/item-3.png", alt)
+            .cate-item__info
+              h3.cate-item__title $32 - $160
+              p.cate-item__desc Lavazza top class whole bean coffee blend
+  //  Browse Products 
+  section.home__container
+    .home__row
+      h2.home__heading Total LavAzza 1320
+      .filter-wrap
+        button.filter-btn.js-toggle(toggle-target="#home-filter")
+          | Filter
+          img.filter-btn__icon.icon(src="/client/home/assets/icons/filter.svg", alt)
+        #home-filter.filter.hide
+          img.filter__arrow(src="/client/home/assets/icons/arrow-up.png", alt)
+          h3.filter__heading Filter
+          form.filter__form.form(action)
+            .filter__row.filter__content
+              //  Filter column 1 
+              .filter__col
+                label.form__label(for) Price
+                .filter__form-group
+                  .filter__form-slider(style="--min-value: 10%; --max-value: 60%")
+                .filter__form-group.filter__form-group--inline
+                  div
+                    label.form__label.form__label--small(for) Minimum
+                    .filter__form-text-input.filter__form-text-input--small
+                      input.filter__form-input(type="text", name, value="$30.00")
+                  div
+                    label.form__label.form__label--small(for) Maximum
+                    .filter__form-text-input.filter__form-text-input--small
+                      input.filter__form-input(type="text", name, value="$100.00")
+              .filter__separate
+              //  Filter column 2 
+              .filter__col
+                label.form__label(for) Size/Weight
+                .filter__form-group
+                  .form__select-wrap
+                    .form__select(style="--width: 158px")
+                      | 500g
+                      img.form__select-arrow.icon(src="/client/home/assets/icons/select-arrow.svg", alt)
+                    .form__select
+                      | Gram
+                      img.form__select-arrow.icon(src="/client/home/assets/icons/select-arrow.svg", alt)
+                .filter__form-group
+                  .form__tags
+                    button.form__tag Small
+                    button.form__tag Medium
+                    button.form__tag Large
+              .filter__separate
+              //  Filter column 3 
+              .filter__col
+                label.form__label(for) Brand
+                .filter__form-group
+                  .filter__form-text-input
+                    input.filter__form-input(type="text", name, placeholder="Search brand name")
+                    img.filter__form-input-icon.icon(src="/client/home/assets/icons/search.svg", alt)
+                .filter__form-group
+                  .form__tags
+                    button.form__tag Lavazza
+                    button.form__tag Nescafe
+                    button.form__tag Starbucks
+            .filter__row.filter__footer
+              button.btn.btn--text.filter__cancel.js-toggle(toggle-target="#home-filter").
+                
+                Cancel
+                
+              button.btn.btn--primary.filter__submit.js-toggle(toggle-target="#home-filter").
+                
+                Show Result
+                
+    .row.row-cols-5.row-cols-lg-2.row-cols-sm-1.g-3
+      //  Product card 1
+      each item, index in products
+        .col
+          article.product-card
+            .product-card__img-wrap
+              a(href="./product-detail.html")
+                img.product-card__thumb(src=item.img, alt)
+            h3.product-card__title
+              a(href="./product-detail.html") #{item.product_name}
+            p.product-card__brand Lavazza
+            .product-card__row
+              span.product-card__price #{Price[index]} VNĐ
+              img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
+              span.product-card__score 4.3
+//  Footer 
+footer#footer.footer
+script.
+  
+  load("#footer", "./templates/footer.html");
+  
