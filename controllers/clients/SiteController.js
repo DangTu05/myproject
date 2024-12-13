@@ -11,7 +11,6 @@ class SiteController {
         const price = item.Price.toLocaleString("vi-VN");
         Price.push(price);
       });
-      console.log(products);
       res.render("./clients/pages/home", {
         products: mutipleMongooseToObject(products),
         Price: Price,
