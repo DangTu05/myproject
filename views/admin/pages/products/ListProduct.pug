@@ -1,4 +1,5 @@
 include ../../mixins/FilterStatus.pug
+include ../../mixins/sort.pug
 doctype html
 html(lang="en")
   head
@@ -242,6 +243,7 @@ html(lang="en")
                       button(type="" class="btn btn-primary add-pro") Thêm Sản Phẩm
                       a(href="", class="fa-solid fa-trash trash-icon restore")
                         span(class="count") #{Count_Deleted}
+                    +sort()
                     .table-responsive
                       table.table
                         thead

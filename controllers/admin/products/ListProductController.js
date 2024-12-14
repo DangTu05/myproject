@@ -16,7 +16,7 @@ class ListProductController {
     }
     find.deleted = false;
     const CountProduct = await Products.countDocuments(find);
-    const Count_Deleted = await Products.countDocuments({deleted:true});
+    const Count_Deleted = await Products.countDocuments({ deleted: true });
     /// Phân trang
     const ObjectPagination = PaginationHelper(
       {
@@ -26,8 +26,15 @@ class ListProductController {
       req.query,
       CountProduct
     );
-    
+    // Sắp xếp
+    let sort = {};
+    if (req.query.sortKey && req.query.sortValue) {
+      sort[req.query.sortKey] = req.query.sortValue;
+    } else {
+      sort.product_name = "asc";
+    }
     const products = await Products.find(find)
+      .sort(sort)
       .limit(ObjectPagination.limitItems)
       .skip(ObjectPagination.skip);
     res.render("./admin/pages/products/ListProduct", {
@@ -35,7 +42,7 @@ class ListProductController {
       FilterStatus: FilterStatus,
       keyword: ObjectSearch.keyword,
       ObjectPagination: ObjectPagination,
-      Count_Deleted:Count_Deleted
+      Count_Deleted: Count_Deleted,
     });
   }
   async ChangeStatus(req, res, next) {

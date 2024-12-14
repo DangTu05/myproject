@@ -9,7 +9,7 @@ const Fix = document.querySelectorAll(".fix");
 const Delete = document.querySelectorAll(".delete");
 const modal = document.querySelector("#modal");
 const addPro = document.querySelector(".add-pro");
-
+const sort = document.querySelector("[sort]");
 if (ButtonStatus.length > 0) {
   const url = new URL(window.location.href);
   ButtonStatus.forEach((item) => {
@@ -232,6 +232,29 @@ if (Apply) {
   });
 }
 
-/// xử lý form sửa sản phẩm
-
-///end form sửa sản phẩm
+// sắp xếp
+if (sort) {
+  let url = new URL(window.location.href);
+  const sortSelect = document.querySelector("[sort-select]");
+  const clear = document.querySelector("[clear]");
+  sortSelect.addEventListener("change", (e) => {
+    const value = e.target.value;
+    const [sortKey, sortValue] = value.split("-");
+    url.searchParams.set("sortKey", sortKey);
+    url.searchParams.set("sortValue", sortValue);
+    window.location.href = url.href;
+  });
+  /// Xóa sắp xếp
+  clear.addEventListener("click", () => {
+    url.searchParams.delete("sortKey");
+    url.searchParams.delete("sortValue");
+    window.location.href = url.href;
+  });
+  /// xử lý selected
+  const sortKey = url.searchParams.get("sortKey");
+  const sortValue = url.searchParams.get("sortValue");
+  const string = `${sortKey}-${sortValue}`;
+  const selected = document.querySelector(`option[value='${string}']`);
+  selected.selected = true;
+}
+// end sắp xếp

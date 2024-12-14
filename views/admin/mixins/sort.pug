@@ -1,0 +1,8 @@
+mixin sort()
+  div(sort, style="padding:10px;")
+    select(class="form-control",style="width:19.4%", name="sort",sort-select)
+      option(value="product_name-asc") Từ A-Z 
+      option(value="product_name-desc") Từ Z-A
+      option(value="Price-desc") Giá giảm dần 
+      option(value="Price-asc") Giá tăng dần
+    button(class="btn btn-warning mt-2 btn-sm" clear) Clear
