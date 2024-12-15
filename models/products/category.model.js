@@ -9,6 +9,7 @@ const productCategory = new Schema(
     img: {type:String,unique:true},
     slug: { type: String, unique: true },
     description: String,
+    position:Number,
     status: { type: String, default: "active" },
     deletedAt: { type: Boolean, default: false },
   },

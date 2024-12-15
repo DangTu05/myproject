@@ -52,17 +52,21 @@ input[type="submit"]:hover {
   border-radius: 5px;
 }
 .form-create {
-  margin: auto;
+  margin-right: 15px;
   background: white;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  width: calc(100% - 265px);
-  /* height: 100vh; */
+  width: calc(100% - 300px);
   min-height: 100%;
   float: right;
   transition: all 0.3s;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 100px;
+  box-sizing: border-box;
+}
+.main-panel{
+  height: 0 !important;
+  min-height: 0 !important;
 }

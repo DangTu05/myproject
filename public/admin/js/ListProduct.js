@@ -255,6 +255,8 @@ if (sort) {
   const sortValue = url.searchParams.get("sortValue");
   const string = `${sortKey}-${sortValue}`;
   const selected = document.querySelector(`option[value='${string}']`);
-  selected.selected = true;
+  if (selected) {
+    selected.selected = true;
+  }
 }
 // end sắp xếp
