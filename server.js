@@ -1,10 +1,11 @@
 const express = require("express");
+const cors = require("cors");
 const morgan = require("morgan");
 const configViewEngine = require("./configs/ViewEngine");
 const route = require("./routes/clients/index");
 const routeAdmin = require("./routes/admin/index.route");
-const app = express();
 require("dotenv").config();
+const app = express();
 const port = process.env.PORT;
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
@@ -17,6 +18,7 @@ app.use(
     extended: true,
   })
 );
+app.use(cors());
 app.use(express.json());
 //*HTTP Logger
 app.use(morgan("combined"));
