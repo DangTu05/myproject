@@ -34,7 +34,7 @@ html(lang="en")
                   "Font Awesome 5 Brands",
                   "simple-line-icons",
                 ],
-                urls: [""],
+                urls: ["/admin/css/dashboard/fonts.min.css"],
               },
               active: function () {
                 sessionStorage.fonts = true;
@@ -56,7 +56,7 @@ html(lang="en")
           //  Logo Header 
           .logo-header(data-background-color="dark")
             a.logo(href="index.html")
-              img.navbar-brand(src="/imgs/tuta-high-resolution-logo (6).png", alt="navbar brand", height="20")
+              img.navbar-brand(src="", alt="navbar brand", height="20")
             .nav-toggle
               button.btn.btn-toggle.toggle-sidebar
                 i.gg-menu-right
@@ -132,13 +132,16 @@ html(lang="en")
               li.nav-item
                 a(data-bs-toggle="collapse", href="#forms")
                   i.fas.fa-pen-square
-                  p Forms
+                  p Thêm 
                   span.caret
                 .collapse#forms
                   ul.nav.nav-collapse
                     li
-                      a(href="forms/forms.html")
-                        span.sub-item Basic Form
+                      a(href="/admin/Create")
+                        span.sub-item Thêm sản phẩm
+                    li
+                      a(href="/admin/category/create")
+                        span.sub-item Thêm danh mục
               li.nav-item
                 a(data-bs-toggle="collapse", href="#tables")
                   i.fas.fa-table
@@ -187,7 +190,7 @@ html(lang="en")
                 a(href="http://localhost:8000/admin/Products")
                   i.fas.fa-file
                   p Danh sách sản phẩm
-                  span.badge.badge-secondary 
+                  span.badge.badge-secondary #{count}
               li.nav-item
                 a(data-bs-toggle="collapse", href="#submenu")
                   i.fas.fa-bars
@@ -264,21 +267,21 @@ html(lang="en")
                         .notif-center
                           a(href="#")
                             .notif-img
-                              img(src="assets/img/jm_denis.jpg", alt="Img Profile")
+                              img(src="/admin/img/jm_denis.jpg", alt="Img Profile")
                             .notif-content
                               span.subject Jimmy Denis
                               span.block How are you ? 
                               span.time 5 minutes ago
                           a(href="#")
                             .notif-img
-                              img(src="assets/img/chadengle.jpg", alt="Img Profile")
+                              img(src="/admin/img/chadengle.jpg", alt="Img Profile")
                             .notif-content
                               span.subject Chad
                               span.block Ok, Thanks ! 
                               span.time 12 minutes ago
                           a(href="#")
                             .notif-img
-                              img(src="assets/img/mlane.jpg", alt="Img Profile")
+                              img(src="/admin/img/mlane.jpg", alt="Img Profile")
                             .notif-content
                               span.subject Jhon Doe
                               span.block.
@@ -288,7 +291,7 @@ html(lang="en")
                               span.time 12 minutes ago
                           a(href="#")
                             .notif-img
-                              img(src="assets/img/talha.jpg", alt="Img Profile")
+                              img(src="/admin/img/talha.jpg", alt="Img Profile")
                             .notif-content
                               span.subject Talha
                               span.block Hi, Apa Kabar ? 
@@ -327,7 +330,7 @@ html(lang="en")
                               span.time 12 minutes ago
                           a(href="#")
                             .notif-img
-                              img(src="assets/img/profile2.jpg", alt="Img Profile")
+                              img(src="/admin/img/profile2.jpg", alt="Img Profile")
                             .notif-content
                               span.block.
                                 
@@ -387,7 +390,7 @@ html(lang="en")
                 li.nav-item.topbar-user.dropdown.hidden-caret
                   a.dropdown-toggle.profile-pic(data-bs-toggle="dropdown", href="#", aria-expanded="false")
                     .avatar-sm
-                      img.avatar-img.rounded-circle(src="assets/img/profile.jpg", alt="...")
+                      img.avatar-img.rounded-circle(src="/admin/img/profile.jpg", alt="...")
                     span.profile-username
                       span.op-7 Hi,
                       span.fw-bold Hizrian
@@ -396,7 +399,7 @@ html(lang="en")
                       li
                         .user-box
                           .avatar-lg
-                            img.avatar-img.rounded(src="assets/img/profile.jpg", alt="image profile")
+                            img.avatar-img.rounded(src="/admin/img/profile.jpg", alt="image profile")
                           .u-text
                             h4 Hizrian
                             p.text-muted hello@example.com
@@ -410,5 +413,111 @@ html(lang="en")
                         a.dropdown-item(href="#") Account Setting
                         .dropdown-divider
                         a.dropdown-item(href="#") Logout
+      //  Custom template | don't include it in your project! 
+      .custom-template
+        .title Settings
+        .custom-content
+          .switcher
+            .switch-block
+              h4 Logo Header
+              .btnSwitch
+                button.selected.changeLogoHeaderColor(type="button", data-color="dark")
+                button.selected.changeLogoHeaderColor(type="button", data-color="blue")
+                button.changeLogoHeaderColor(type="button", data-color="purple")
+                button.changeLogoHeaderColor(type="button", data-color="light-blue")
+                button.changeLogoHeaderColor(type="button", data-color="green")
+                button.changeLogoHeaderColor(type="button", data-color="orange")
+                button.changeLogoHeaderColor(type="button", data-color="red")
+                button.changeLogoHeaderColor(type="button", data-color="white")
+                br
+                button.changeLogoHeaderColor(type="button", data-color="dark2")
+                button.changeLogoHeaderColor(type="button", data-color="blue2")
+                button.changeLogoHeaderColor(type="button", data-color="purple2")
+                button.changeLogoHeaderColor(type="button", data-color="light-blue2")
+                button.changeLogoHeaderColor(type="button", data-color="green2")
+                button.changeLogoHeaderColor(type="button", data-color="orange2")
+                button.changeLogoHeaderColor(type="button", data-color="red2")
+            .switch-block
+              h4 Navbar Header
+              .btnSwitch
+                button.changeTopBarColor(type="button", data-color="dark")
+                button.changeTopBarColor(type="button", data-color="blue")
+                button.changeTopBarColor(type="button", data-color="purple")
+                button.changeTopBarColor(type="button", data-color="light-blue")
+                button.changeTopBarColor(type="button", data-color="green")
+                button.changeTopBarColor(type="button", data-color="orange")
+                button.changeTopBarColor(type="button", data-color="red")
+                button.changeTopBarColor(type="button", data-color="white")
+                br
+                button.changeTopBarColor(type="button", data-color="dark2")
+                button.selected.changeTopBarColor(type="button", data-color="blue2")
+                button.changeTopBarColor(type="button", data-color="purple2")
+                button.changeTopBarColor(type="button", data-color="light-blue2")
+                button.changeTopBarColor(type="button", data-color="green2")
+                button.changeTopBarColor(type="button", data-color="orange2")
+                button.changeTopBarColor(type="button", data-color="red2")
+            .switch-block
+              h4 Sidebar
+              .btnSwitch
+                button.selected.changeSideBarColor(type="button", data-color="white")
+                button.changeSideBarColor(type="button", data-color="dark")
+                button.changeSideBarColor(type="button", data-color="dark2")
+        .custom-toggle
+          i.icon-settings
+          // End Custom template
       block content
-          //  End Navbar 
+          //  End Navbar
+    script(src="/admin/js/core/jquery-3.7.1.min.js")
+    script(src="/admin/js/core/popper.min.js")
+    script(src="/admin/js/core/bootstrap.min.js")
+    //  jQuery Scrollbar 
+    script(src="/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js")
+    //  Chart JS 
+    script(src="/admin/js/plugin/chart.js/chart.min.js")
+    //  jQuery Sparkline 
+    script(src="/admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js")
+    //  Chart Circle 
+    script(src="/admin/js/plugin/chart-circle/circles.min.js")
+    //  Datatables 
+    script(src="/admin/js/plugin/datatables/datatables.min.js")
+    //  Bootstrap Notify 
+    script(src="/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js")
+    //  jQuery Vector Maps 
+    script(src="/admin/js/plugin/jsvectormap/jsvectormap.min.js")
+    script(src="/admin/js/plugin/jsvectormap/world.js")
+    //  Sweet Alert 
+    script(src="/admin/js/plugin/sweetalert/sweetalert.min.js")
+    //  Kaiadmin JS 
+    script(src="/admin/js/kaiadmin.min.js")
+    //  Kaiadmin DEMO methods, don't include it in your project! 
+    script(src="/admin/js/setting-demo.js")
+    script(src="/admin/js/demo.js")
+    script.
+  
+      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+              type: "line",
+              height: "70",
+              width: "100%",
+              lineWidth: "2",
+              lineColor: "#177dff",
+              fillColor: "rgba(23, 125, 255, 0.14)",
+            });
+      
+            $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+              type: "line",
+              height: "70",
+              width: "100%",
+              lineWidth: "2",
+              lineColor: "#f3545d",
+              fillColor: "rgba(243, 84, 93, .14)",
+            });
+      
+            $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+              type: "line",
+              height: "70",
+              width: "100%",
+              lineWidth: "2",
+              lineColor: "#ffa534",
+              fillColor: "rgba(255, 165, 52, .14)",
+            });
+      

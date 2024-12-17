@@ -1,10 +1,10 @@
-const Site_Admin = require("./products/Site_Admin.route");
+const Site_Admin = require("./products/Default.route");
 const systemConfig = require("../../configs/system");
 const ListProduct = require("./products/ListProduct.route");
 const Create = require("./products/Create.router");
 const Edit = require("./products/EditProduct.router");
 const Detail = require("./products/Detail.router");
-const CreateCategory = require("./products/CreateCategory.route");
+const CreateCategory = require("./products/Category.route");
 function router(app) {
   const PATH_ADMIN = systemConfig.prefixAdmin;
   app.use(PATH_ADMIN + "/dashboard", Site_Admin);

@@ -1,12 +1,25 @@
 const productCategories = require("../../../models/products/category.model");
-
+const Products = require("../../../models/products/products");
 class CreateController {
   /// Show giao diện tạo sản phẩm
   async show(req, res, next) {
-    // const products = await Products.countDocuments({ deleted: false });
-    res.render("./admin/pages/products/Product-Category", {});
+    const count = await Products.countDocuments({ deleted: false });
+    res.render("./admin/pages/products/Product-Category", {
+      count: count,
+    });
   }
   /// end show sản phẩm
+  /// show giao diện danh mục sản phẩm
+  async Detail(req, res, next) {
+    let find = {
+      deleted: false,
+    };
+    const records = await productCategories.find(find);
+    res.render("./admin/pages/products/Category", {
+      records: records,
+    });
+  }
+  /// end show giao diện danh mục sản phẩm
   /// Tạo sản phẩm
   async create(req, res, next) {
     const category = new productCategories(req.body);

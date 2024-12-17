@@ -9,7 +9,8 @@ block content
       label(for="name") Product Category:
       input#name(type="text", name="name")
       label(for="parent_id") Parent Id:
-      input#parent_id(type="text", name="parent_id")
+      select(name="parent_id" id="parent_id" class="form-control")
+        option(value="") -- Chọn danh mục cha --
       label(for="description") Description:
       textarea#description(name="description", rows="4", cols="50", placeholder="Nhập mô tả ở đây...") 
       label(for="optionSelect") Choose an option:
