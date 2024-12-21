@@ -3,10 +3,31 @@ const Products = require("../../../models/products/products");
 class CreateController {
   /// Show giao diện tạo sản phẩm
   async show(req, res, next) {
-    const count = await Products.countDocuments({ deleted: false });
-    res.render("./admin/pages/products/Product-Category", {
-      count: count,
-    });
+    try {
+      const count = await Products.countDocuments({ deleted: false });
+      const categories = await productCategories.find({ deleted: false });
+      function buildCategoryTree(categories, parent_id = "") {
+        let tree = [];
+        for (let category of categories) {
+          if (category.parent_id === parent_id) {
+            const children = buildCategoryTree(categories, category.id);
+            if (children.length) {
+              category.children = children; // Thêm mảng con vào danh mục
+            }
+            tree.push(category);
+          }
+        }
+        return tree;
+      }
+      const records = buildCategoryTree(categories);
+      res.render("./admin/pages/products/Product-Category", {
+        count: count,
+        records: records, // Thêm categories vào render nếu cần
+      });
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      return;
+    }
   }
   /// end show sản phẩm
   /// show giao diện danh mục sản phẩm

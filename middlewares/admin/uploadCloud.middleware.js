@@ -7,8 +7,8 @@ module.exports.upload = async (req, res, next) => {
       return;
     }
     cloudinary.config({
-      cloud_name: process.cloud_name,
-      api_key: process.API_KEY,
+      cloud_name: process.env.cloud_name,
+      api_key: process.env.API_KEY,
       api_secret: process.env.API_SECRET, // Click 'View API Keys' above to copy your API secret
     });
     // Lấy buffer từ req.file.buffer
