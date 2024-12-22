@@ -1,24 +1,12 @@
 const productCategories = require("../../../models/products/category.model");
 const Products = require("../../../models/products/products");
+const buildCategoryTree = require("../../../helpers/products/buildCategoryTree.helper");
 class CreateController {
   /// Show giao diện tạo sản phẩm
   async show(req, res, next) {
     try {
       const count = await Products.countDocuments({ deleted: false });
       const categories = await productCategories.find({ deleted: false });
-      function buildCategoryTree(categories, parent_id = "") {
-        let tree = [];
-        for (let category of categories) {
-          if (category.parent_id === parent_id) {
-            const children = buildCategoryTree(categories, category.id);
-            if (children.length) {
-              category.children = children; // Thêm mảng con vào danh mục
-            }
-            tree.push(category);
-          }
-        }
-        return tree;
-      }
       const records = buildCategoryTree(categories);
       res.render("./admin/pages/products/Product-Category", {
         count: count,
@@ -32,13 +20,19 @@ class CreateController {
   /// end show sản phẩm
   /// show giao diện danh mục sản phẩm
   async Detail(req, res, next) {
-    let find = {
-      deleted: false,
-    };
-    const records = await productCategories.find(find);
-    res.render("./admin/pages/products/Category", {
-      records: records,
-    });
+    try {
+      let find = {
+        deleted: false,
+      };
+      const records = await productCategories.find(find);
+      const categories = buildCategoryTree(records);
+      res.render("./admin/pages/products/Category", {
+        records: categories,
+      });
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      return;
+    }
   }
   /// end show giao diện danh mục sản phẩm
   /// Tạo sản phẩm
