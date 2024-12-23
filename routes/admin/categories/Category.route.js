@@ -18,4 +18,5 @@ router.get(
   "/category/edit/:id",
   CategoryController.showEdit
 );
+router.patch("/category/change-status/:status/:id", CategoryController.ChangeStatus);
 module.exports = router;
