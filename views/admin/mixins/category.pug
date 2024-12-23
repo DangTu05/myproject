@@ -16,7 +16,7 @@ mixin category(items, level=1)
         else
           a(href="javascript:;",change-status="",data-status=item.status,data-id=item._id, class="badge badge-danger") Dừng Hoạt Động
       td
-        a(href=`` class=" btn btn-warning btn-sm m-1 fix") Sửa 
+        a(href=`${prefixAdmin}/category/edit/${item._id}` class=" btn btn-warning btn-sm m-1 fix") Sửa 
         button(value=item._id).btn.btn-danger.btn-sm.m-1.delete Xóa
       if item.children && item.children.length>0
         +category(item.children, level+1) 

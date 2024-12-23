@@ -8,7 +8,7 @@ class CreateController {
       const count = await Products.countDocuments({ deleted: false });
       const categories = await productCategories.find({ deleted: false });
       const records = buildCategoryTree(categories);
-      res.render("./admin/pages/products/Product-Category", {
+      res.render("./admin/pages/categories/Product-Category", {
         count: count,
         records: records, // Thêm categories vào render nếu cần
       });
@@ -26,7 +26,7 @@ class CreateController {
       };
       const records = await productCategories.find(find);
       const categories = buildCategoryTree(records);
-      res.render("./admin/pages/products/Category", {
+      res.render("./admin/pages/categories/Category", {
         records: categories,
       });
     } catch (error) {
@@ -47,6 +47,20 @@ class CreateController {
     }
   }
   /// end tạo sản phẩm
+  async showEdit(req, res, next) {
+    try {
+      const id = req.params.id;
+      const categories = await productCategories.find({ deleted: false });
+      const records = buildCategoryTree(categories);
+      const category = await productCategories.findOne({ _id: id });
+      res.render("./admin/pages/categories/EditCategory",{
+        category: category,
+        records: records,
+      });
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      return;
+    }
+  }
 }
 module.exports = new CreateController();
-/// end show

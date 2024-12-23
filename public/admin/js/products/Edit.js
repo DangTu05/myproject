@@ -1,4 +1,3 @@
-
 const product_name = document.querySelector("#name");
 const quantity = document.querySelector("#quantity");
 const description = document.querySelector("#description");

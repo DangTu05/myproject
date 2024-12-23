@@ -1,0 +1,29 @@
+extends ../../layouts/default.pug
+include ../../mixins/select-category.pug
+block head 
+  link(rel="stylesheet", href="/admin/css/Create.css") 
+block sidebar
+block content
+  .form-create
+    h1 Edit Product
+    form(enctype="multipart/form-data", id="editProductForm")
+      label(for="name" ) Product Category:
+      input#name(type="text",value=category.category_name, name="name")
+      label(for="parent_id") Parent Id:
+      select(name="parent_id" id="parent_id" class="form-control" selected=category.parent_id)
+        option(value="") --  Chọn danh mục cha  --
+        if(records)
+          +Select-Category(records,1,category.parent_id)
+      label(for="description" value=category.description) Description:
+      textarea#description(name="description", rows="4", cols="50", placeholder="Nhập mô tả ở đây...") 
+      label(for="optionSelect") Choose an option:
+      select#optionSelect
+        option(value="text") Text
+        option(value="file") File
+      label(for="image") Category Image:
+      input#image(type="", name="image", accept="", required)
+      img.preview(src=category.img)
+      input(type="submit", value="Edit Category")
+  script(type="module", src="/admin/js/categories/Category.js")
+  script(type="application/javascript", src="/tinymce/tinymce.min.js")
+  script(type="application/javascript", src="/admin/js/tinymce-config.js")
