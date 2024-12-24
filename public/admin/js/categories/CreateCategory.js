@@ -5,7 +5,7 @@ const img = document.querySelector("#image");
 const submit = document.querySelector("#createProductForm");
 const option = document.querySelector("#optionSelect");
 const preview = document.querySelector(".preview");
-
+const Delete=document.querySelector(".delete");
 
 if (submit) {
   submit.addEventListener("submit", (e) => {
@@ -36,7 +36,7 @@ if (submit) {
           return;
         }
         alert("Đã tạo thành công!");
-        // window.location.href = "product-category";
+        window.location.href = "/category";
       })
       .catch((err) => {
         alert("Đã xảy ra lỗi khi tạo sản phẩm.");
@@ -54,3 +54,4 @@ img.addEventListener("change", () => {
   }
 });
 ///end preview img
+

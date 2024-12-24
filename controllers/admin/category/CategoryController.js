@@ -1,4 +1,4 @@
-const productCategories = require("../../../models/products/category.model");
+const productCategories = require("../../../models/categories/category.model");
 const Products = require("../../../models/products/products");
 const buildCategoryTree = require("../../../helpers/products/buildCategoryTree.helper");
 class CreateController {
@@ -73,6 +73,19 @@ class CreateController {
     }
   }
   /// end change status
+
+  /// xóa mềm
+  async Delete(req, res, next) {
+    const _id  = req.body._id;
+    console.log(_id);
+    try {
+      await productCategories.delete({ _id });
+      res.status(200).json({ message: "Xóa thành công!" });
+    } catch (error) {      
+      return res.status(500).json({ message: "Đã xảy ra lỗi" });
+    }
+  }
+  /// end xóa mềm
 }
 
 module.exports = new CreateController();

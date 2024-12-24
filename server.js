@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const configViewEngine = require("./configs/ViewEngine");
@@ -20,6 +21,7 @@ app.use(
 );
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 //*HTTP Logger
 app.use(morgan("combined"));
 //* template engine
