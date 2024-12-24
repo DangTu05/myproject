@@ -6,17 +6,6 @@ const submit = document.querySelector("#createProductForm");
 const option = document.querySelector("#optionSelect");
 const preview = document.querySelector(".preview");
 
-/// Xử lý lựa chọn file
-option.addEventListener("change", () => {
-  if (option.value === "text") {
-    img.type = "text";
-  } else {
-    img.type = "file";
-    img.accept = "image/*";
-  }
-});
-
-/// end
 
 if (submit) {
   submit.addEventListener("submit", (e) => {

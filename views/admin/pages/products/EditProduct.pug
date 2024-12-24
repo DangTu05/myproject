@@ -14,12 +14,8 @@ block content
       input#quantity(type="number", name="quantity",value=product.quantity, required)
       label(for="price") Price:
       input#price(type="number", step="0.01",value=product.Price, name="price", required)
-      label(for="optionSelect") Choose an option:
-      select#optionSelect
-        option(value="text") Text
-        option(value="file") File
       label(for="image") Product Image:
-      input#image(type="", name="image", accept="")
+      input#image(type="file", name="image", accept="image/*")
       img.preview(src=product.img)
       input(type="submit", value="Cập Nhật")
       script(type="module", src="/admin/js/products/Edit.js") 

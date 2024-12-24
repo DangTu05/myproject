@@ -6,7 +6,7 @@ if(ChangeStatus){
       const Id=item.getAttribute("data-id");
       const ChangeStatus=StatusCurrent=="active"?"inactive":"active";
       $.ajax({
-        url:`category/change-status/${ChangeStatus}/${Id}`,
+        url:`change-status/${ChangeStatus}/${Id}`,
         method:"PATCH",
         data:{
           _id:Id,

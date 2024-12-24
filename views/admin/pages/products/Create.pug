@@ -14,12 +14,8 @@ block content
       input#quantity(type="number", name="quantity", required)
       label(for="price") Price:
       input#price(type="number", step="0.01", name="price", required)
-      label(for="optionSelect") Choose an option:
-      select#optionSelect
-        option(value="text") Text
-        option(value="file") File
       label(for="image") Product Image:
-      input#image(type="", name="image", accept="", required)
+      input#image(type="file", name="image", accept="", required)
       img.preview(src="")
       input(type="submit", value="Create Product")
   script(type="module", src="/admin/js/products/Create.js")

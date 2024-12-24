@@ -8,17 +8,6 @@ const option = document.querySelector("#optionSelect");
 const preview = document.querySelector(".preview");
 /// lấy ra id gửi lên từ url
 const id = window.location.pathname.split('/').pop();
-/// Xử lý lựa chọn file
-option.addEventListener("change", () => {
-  if (option.value === "text") {
-    img.type = "text";
-  } else {
-    img.type = "file";
-    img.accept = "image/*";
-  }
-});
-
-/// end
 
 if (submit) {
   submit.addEventListener("submit", (e) => {    

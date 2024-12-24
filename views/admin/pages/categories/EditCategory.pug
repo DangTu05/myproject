@@ -16,12 +16,8 @@ block content
           +Select-Category(records,1,category.parent_id)
       label(for="description" value=category.description) Description:
       textarea#description(name="description", rows="4", cols="50", placeholder="Nhập mô tả ở đây...") 
-      label(for="optionSelect") Choose an option:
-      select#optionSelect
-        option(value="text") Text
-        option(value="file") File
       label(for="image") Category Image:
-      input#image(type="", name="image", accept="", required)
+      input#image(type="file", name="image", accept="image/*", required)
       img.preview(src=category.img)
       input(type="submit", value="Edit Category")
   script(type="module", src="/admin/js/categories/CreateCategory.js")
