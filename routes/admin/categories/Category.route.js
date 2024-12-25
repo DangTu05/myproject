@@ -31,6 +31,7 @@ router.patch(
   uploadCloud.upload,
   CategoryController.Edit
 );
+router.patch("/category/change-status/:status/", CategoryController.ChangeMultiStatus);
 /// xử lý chỉnh sửa status danh mục sản phẩm
 router.patch("/category/change-status/:status/:id", CategoryController.ChangeStatus);
 /// xử lý xóa mềm danh mục sản phẩm

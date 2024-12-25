@@ -1,5 +1,15 @@
 const ChangeStatus = document.querySelectorAll("[change-status]");
 const Delete = document.querySelectorAll(".delete");
+const Checkbox = document.querySelectorAll(".checkbox");
+const CheckboxAll = document.getElementById("checkbox-all");
+const Add_Category = document.querySelector(".add-category");
+const Apply = document.querySelector(".apply");
+const selectElement = document.querySelector('select[name="type"]');
+/// Đẩy về trang tạo danh mục
+Add_Category.onclick = (e) => {
+  window.location.href = "/admin/category/create";
+};
+// end đẩy về trang tạo danh mục
 /// Thay đổi trạng thái
 if (ChangeStatus) {
   ChangeStatus.forEach((item) => {
@@ -25,7 +35,27 @@ if (ChangeStatus) {
   });
 }
 /// end thay đổi trạng thái
-
+/// CheckboxMulti
+if (CheckboxAll) {
+  /// Lấy sự kiện checkbox tất cả
+  CheckboxAll.addEventListener("click", function () {
+    var isCheckboxAll = this.checked;
+    Checkbox.forEach((item) => {
+      item.checked = isCheckboxAll;
+    });
+  });
+}
+Checkbox.forEach((item, index) => {
+  item.addEventListener("change", function () {
+    // Kiểm tra xem tất cả checkbox có được chọn không
+    /// from(check) để chuyển check về mảng và dùng filter
+    var isCheckedAll =
+      Checkbox.length ===
+      Array.from(Checkbox).filter((cb) => cb.checked).length;
+    CheckboxAll.checked = isCheckedAll;
+  });
+});
+/// End CheckboxMulti
 /// xóa mềm
 if (Delete) {
   Delete.forEach((item) => {
@@ -76,11 +106,11 @@ if (Delete) {
             })
             .catch((err) => {
               // Xử lý khi lỗi
-                Swal.fire({
-                  title: "Lỗi!",
-                  text: `Đã xảy ra lỗi!`,
-                  icon: "error",
-                });
+              Swal.fire({
+                title: "Lỗi!",
+                text: `Đã xảy ra lỗi!`,
+                icon: "error",
+              });
             });
         }
       });
@@ -88,3 +118,47 @@ if (Delete) {
   });
 }
 /// end xóa mềm
+
+/// change-multi-status and  soft delete multi
+if (Apply) {
+  Apply.onclick = (e) => {
+    const CheckboxChecked = document.querySelectorAll(".checkbox:checked");
+    const status = selectElement.value;
+    let ids = [];
+    if (CheckboxChecked.length == 0) {
+      Swal.fire({
+        title: "Lỗi!",
+        text: "Vui lòng chọn ít nhất một sản phẩm",
+        icon: "error",
+      });
+      return;
+    } else {
+      CheckboxChecked.forEach((item) => {
+        let id = item.value;
+        ids.push(id);
+      });
+    }
+    if (status == "active" || status == "inactive") {
+      fetch(`/admin/category/change-status/${status}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ids: ids,
+          status: status,
+        }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then(() => {
+          location.reload();
+        })
+        .catch((err) => {
+          alert("Lỗi!!!");
+        });
+    }
+  };
+}
+/// end-change-multi-status and soft delete multi

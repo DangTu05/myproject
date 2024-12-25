@@ -103,6 +103,19 @@ class CreateController {
     }
     /// end chỉnh sửa sản phẩm
   }
+
+  /// change-multi-status
+  async ChangeMultiStatus(req, res, next) {
+    const { ids, status } = req.body;
+    try {
+      await productCategories.updateMany({ _id: { $in: ids } }, { status });
+      res.status(200).json("Cập nhật thành công");
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      return;
+    }
+  }
+  /// end change-multi-status
 }
 
 module.exports = new CreateController();
