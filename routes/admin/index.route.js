@@ -12,6 +12,6 @@ function router(app) {
   app.use(PATH_ADMIN, CreateCategory);
   app.use(PATH_ADMIN, Detail);
   app.use(PATH_ADMIN, Create);
-  app.use(PATH_ADMIN, Edit);
+  app.use(PATH_ADMIN + "/product", Edit);
 }
 module.exports = router;

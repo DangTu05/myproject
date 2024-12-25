@@ -17,13 +17,9 @@ if (submit) {
     formData.append("quantity", quantity.value);
     formData.append("description", description.value);
     formData.append("Price", price.value);
-    if (img.type === "file") {
-      formData.append("img", img.files[0]); // Thêm tệp hình ảnh
-    } else {
-      formData.append("img", img.value);
-    }
-    if (product_name.value && quantity.value && price.value ) {
-      fetch(`/admin/edit/${id}`, {
+    formData.append("img", img.files[0]); // Thêm tệp hình ảnh
+    if (product_name.value && quantity.value ) {
+      fetch(`/admin/product/edit/${id}`, {
         method: "PATCH",
         body: formData,
       })
@@ -47,11 +43,9 @@ if (submit) {
 
 /// xử lý preview img
 img.addEventListener("change", () => {
-  if (img.type === "create") {
+  if (img.type === "file") {
     const [file] = img.files;
     preview.src = URL.createObjectURL(file);
-  } else {
-    preview.src = img.value;
   }
 });
 ///end preview img

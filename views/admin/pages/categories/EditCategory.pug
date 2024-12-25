@@ -17,9 +17,9 @@ block content
       label(for="description" value=category.description) Description:
       textarea#description(name="description", rows="4", cols="50", placeholder="Nhập mô tả ở đây...") 
       label(for="image") Category Image:
-      input#image(type="file", name="image", accept="image/*", required)
+      input#image(type="file", name="image", accept="image/*")
       img.preview(src=category.img)
       input(type="submit", value="Edit Category")
-  script(type="module", src="/admin/js/categories/CreateCategory.js")
+  script(type="module", src="/admin/js/categories/EditCategory.js")
   script(type="application/javascript", src="/tinymce/tinymce.min.js")
   script(type="application/javascript", src="/admin/js/tinymce-config.js")

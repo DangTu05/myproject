@@ -1,6 +1,5 @@
 const ChangeStatus = document.querySelectorAll("[change-status]");
 const Delete = document.querySelectorAll(".delete");
-
 /// Thay đổi trạng thái
 if (ChangeStatus) {
   ChangeStatus.forEach((item) => {
@@ -9,7 +8,7 @@ if (ChangeStatus) {
       const Id = item.getAttribute("data-id");
       const ChangeStatus = StatusCurrent == "active" ? "inactive" : "active";
       $.ajax({
-        url: `change-status/${ChangeStatus}/${Id}`,
+        url: `/admin/category/change-status/${ChangeStatus}/${Id}`,
         method: "PATCH",
         data: {
           _id: Id,
@@ -41,7 +40,7 @@ if (Delete) {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`category/delete/${_id}`, {
+          fetch(`/admin/category/delete/${_id}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
@@ -50,12 +49,11 @@ if (Delete) {
               _id: _id,
             }),
           })
-            .then((response) => {
+            .then(async (response) => {
               if (!response.ok) {
                 // Nếu HTTP status không phải 200-299, trả về lỗi
-                return response.json().then((err) => {
-                  throw new Error(err.message || "Đã xảy ra lỗi");
-                });
+                const err = await response.json();
+                throw new Error(err.message || "Đã xảy ra lỗi");
               }
               return response.json(); // Đọc dữ liệu JSON nếu thành công
             })

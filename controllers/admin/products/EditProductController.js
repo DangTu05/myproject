@@ -19,12 +19,8 @@ class EditController {
 
   /// Sửa sản phẩm
   async Edit(req, res, next) {
-    /// xử lý nếu người dùng gửi tệp
-    if (req.file) {
-      req.body.img = `/uploads/${req.file.filename}`;
-    }
-    let id = req.params.id;
-    if (req.body.img === "") {
+    let id = req.params.id; 
+    if (!req.file) {
       const product = await Products.findOne({ _id: id });
       req.body.img = product.img;
     }

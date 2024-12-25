@@ -16,12 +16,8 @@ if (submit) {
     formData.append("quantity", quantity.value);
     formData.append("description", description.value);
     formData.append("Price", price.value);
-    if (img.type === "file") {
-      formData.append("img", img.files[0]); // Thêm tệp hình ảnh
-    } else {
-      formData.append("img", img.value);
-    }
-    if (quantity.value && price.value && img.value) {
+    formData.append("img", img.files[0]); // Thêm tệp hình ảnh
+    if (quantity.value && price.value ) {
       fetch("create", {
         method: "POST",
         body: formData,
@@ -53,8 +49,6 @@ img.addEventListener("change", () => {
   if (img.type === "file") {
     const [file] = img.files;
     preview.src = URL.createObjectURL(file);
-  } else {
-    preview.src = img.value;
   }
 });
 ///end preview img

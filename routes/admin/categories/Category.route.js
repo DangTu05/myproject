@@ -23,6 +23,14 @@ router.get(
   "/category/edit/:id",
   CategoryController.showEdit
 );
+/// sửa danh mục sản phẩm
+router.patch(
+  "/category/edit/:id",
+  upload.single("img"),
+  validate.create,
+  uploadCloud.upload,
+  CategoryController.Edit
+);
 /// xử lý chỉnh sửa status danh mục sản phẩm
 router.patch("/category/change-status/:status/:id", CategoryController.ChangeStatus);
 /// xử lý xóa mềm danh mục sản phẩm

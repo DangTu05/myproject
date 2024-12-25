@@ -66,7 +66,7 @@ class CreateController {
     const { _id, status } = req.body;
     try {
       await productCategories.updateOne({ _id }, { status });
-      res.status(200).send("Cập nhật thành công");
+      res.status(200).json("Cập nhật thành công");
     } catch (error) {
       console.error("Error fetching categories:", error);
       return;
@@ -76,16 +76,33 @@ class CreateController {
 
   /// xóa mềm
   async Delete(req, res, next) {
-    const _id  = req.body._id;
+    const _id = req.body._id;
     console.log(_id);
     try {
       await productCategories.delete({ _id });
       res.status(200).json({ message: "Xóa thành công!" });
-    } catch (error) {      
+    } catch (error) {
       return res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
   /// end xóa mềm
+  /// chỉnh sửa sản phẩm
+  async Edit(req, res, next) {
+    if (!req.file) {
+      const category = await productCategories.findOne({ _id: req.params.id });
+      req.body.img = category.img;
+    }
+    try {
+      await productCategories
+        .updateOne({ _id: req.params.id }, req.body)
+        .then(() => {
+          res.status(200).json({ message: "Thành công!" });
+        });
+    } catch (error) {
+      res.status(500).json({ message: "Đã xảy ra lỗi" });
+    }
+    /// end chỉnh sửa sản phẩm
+  }
 }
 
 module.exports = new CreateController();

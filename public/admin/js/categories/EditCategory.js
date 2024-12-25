@@ -2,22 +2,21 @@ const category_name = document.querySelector("#name");
 const parent_id = document.querySelector("#parent_id");
 const description = document.querySelector("#description");
 const img = document.querySelector("#image");
-const submit = document.querySelector("#createProductForm");
-const option = document.querySelector("#optionSelect");
+const submit = document.querySelector("#editProductForm");
 const preview = document.querySelector(".preview");
-const Delete=document.querySelector(".delete");
-
+const Delete = document.querySelector(".delete");
+/// lấy ra id gửi lên từ url
+const id = window.location.pathname.split('/').pop();
 if (submit) {
   submit.addEventListener("submit", (e) => {
     e.preventDefault();
-    const formData = new FormData(); 
+    const formData = new FormData();
     formData.append("category_name", category_name.value);
     formData.append("parent_id", parent_id.value);
     formData.append("description", description.value);
     formData.append("img", img.files[0]); // Thêm tệp hình ảnh
-    formData.append("img", img.value);
-    fetch("create", {
-      method: "POST",
+    fetch(`${id}`, {
+      method: "PATCH",
       body: formData,
     })
       .then(async (response) => {
@@ -32,11 +31,11 @@ if (submit) {
           alert("Tên danh mục không được trống!");
           return;
         }
-        alert("Đã tạo thành công!");
-        window.location.href = "/category";
+        alert("Sửa thành công!");
+        window.location.href = "";
       })
       .catch((err) => {
-        alert("Đã xảy ra lỗi khi tạo sản phẩm.");
+        alert("Đã xảy ra lỗi khi sửa sản phẩm.");
       });
   });
 }
@@ -47,4 +46,3 @@ img.addEventListener("change", () => {
   preview.src = URL.createObjectURL(file);
 });
 ///end preview img
-
