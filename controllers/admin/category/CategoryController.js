@@ -116,6 +116,19 @@ class CreateController {
     }
   }
   /// end change-multi-status
+
+  /// xóa nhiều
+  async DeleteMulti(req, res, next) {
+    const ids  = req.body._id;
+    try {
+      await productCategories.deleteMany({ _id: { $in: ids } });
+      res.status(200).json("Xóa thành công");
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      return;
+    }
+  }
+  /// end xóa nhiều
 }
 
 module.exports = new CreateController();

@@ -161,4 +161,72 @@ if (Apply) {
     }
   };
 }
+/// soft delete multi
+if (Apply) {
+  Apply.addEventListener("click", (e) => {
+    const CheckboxChecked = document.querySelectorAll(".checkbox:checked");
+    const status = selectElement.value;
+    let ids = [];
+    if (CheckboxChecked.length == 0) {
+      Swal.fire({
+        title: "Lỗi!",
+        text: "Bạn chưa chọn bất kì sản phẩm nào!",
+        icon: "error",
+      });
+      return;
+    } else {
+      CheckboxChecked.forEach((item) => {
+        let id = item.value;
+        ids.push(id);
+      });
+    }
+    if (status == "delete-all") {
+      Swal.fire({
+        text: "Bạn có muốn xóa sản phẩm không?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch("/admin/category/delete-multi/", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              _id: ids,
+            }),
+          })
+            .then((response) => {
+              {
+                return response.json();
+              }
+            })
+            .then(() => {
+              Swal.fire({
+                title: "Xóa!",
+                text: "Bạn đã xóa thành công!",
+                icon: "success",
+              });
+              document.addEventListener("click", (e) => {
+                if (
+                  e.target.matches(".swal2-confirm") ||
+                  e.target.matches(".swal2-container")
+                ) {
+                  location.reload();
+                }
+              });
+            })
+            .catch((err) => {
+              alert("Đã xảy ra lỗi: " + err.message); // Hiển thị thông báo lỗi cho người dùng
+            });
+        }
+      });
+    }
+  });
+}
+/// end-soft-delete-multi
+
 /// end-change-multi-status and soft delete multi
