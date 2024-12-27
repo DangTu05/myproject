@@ -1,0 +1,32 @@
+extends ../../layouts/default.pug
+block head 
+  link(rel="stylesheet", href="/admin/css/roles/role.css") 
+block sidebar
+block content
+  if (count>0)
+    .main
+      .container
+        div.option
+          h1 Nhóm quyền #{count}
+          button#add.btn.btn-primary Thêm quyền
+        table
+          thead
+            tr
+              th Role
+              th Description
+              th Action
+          tbody
+          each item in roles
+            tr
+              td #{item.title}
+              td !{item.description}
+              td.actions
+                button(data-id=item._id).btn.btn-edit Edit
+                button(data-id=item._id).btn.btn-delete Delete
+  else 
+    .empty-state
+      .empty-state-icon &#128274;
+      h2 Chưa có nhóm quyền nào
+      p Bạn chưa tạo nhóm quyền nào. Hãy tạo nhóm quyền đầu tiên để phân quyền cho người dùng.
+      button(style="margin-top:7px").btn.btn-primary.sm Tạo nhóm quyền mới
+    script(type="module", src="/admin/js/roles/Role.js")

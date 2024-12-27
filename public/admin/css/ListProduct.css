@@ -151,7 +151,7 @@ td {
   position: relative;
 }
 .count {
-  position: absolute;
+    position: absolute;
     top: -15px;
     right: -13px;
     background-color:rgb(6, 5, 5);

@@ -1,6 +1,5 @@
 const product_name = document.querySelector("#name");
 const quantity = document.querySelector("#quantity");
-const description = document.querySelector("#description");
 const price = document.querySelector("#price");
 const img = document.querySelector("#image");
 const submit = document.querySelector("#EditProductForm");
@@ -12,6 +11,7 @@ const id = window.location.pathname.split('/').pop();
 if (submit) {
   submit.addEventListener("submit", (e) => {    
     e.preventDefault();
+    const description = tinymce.get("description").getContent();
     const formData = new FormData();
     formData.append("product_name", product_name.value);
     formData.append("quantity", quantity.value);

@@ -1,6 +1,5 @@
 const category_name = document.querySelector("#name");
 const parent_id = document.querySelector("#parent_id");
-const description = document.querySelector("#description");
 const img = document.querySelector("#image");
 const submit = document.querySelector("#editProductForm");
 const preview = document.querySelector(".preview");
@@ -10,6 +9,7 @@ const id = window.location.pathname.split('/').pop();
 if (submit) {
   submit.addEventListener("submit", (e) => {
     e.preventDefault();
+    const description = tinymce.get("description").getContent();
     const formData = new FormData();
     formData.append("category_name", category_name.value);
     formData.append("parent_id", parent_id.value);

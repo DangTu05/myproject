@@ -1,0 +1,41 @@
+extends ../../layouts/default.pug
+block head 
+  link(rel="stylesheet", href="/admin/css/roles/permissions.css") 
+block sidebar
+block content
+  .content-container
+    //  Permissions Content 
+    .permissions-content
+      .permissions-header
+        h1 Phân quyền 
+        button.update-btn Cập nhật
+      table
+        thead
+          tr
+            th Tính năng
+            each item in roles  
+              th(style="text-align:center") #{item.title}
+        tbody
+          tr.permission-header
+            td(colspan=count+1) Danh mục sản phẩm
+          tr
+            td Xem
+            each item in roles
+              td
+                input(type="checkbox")
+          tr
+            td Thêm mới
+            each item in roles
+              td
+                input(type="checkbox")
+          tr
+            td Chỉnh sửa
+            each item in roles
+              td
+                input(type="checkbox")
+          tr
+            td Xóa
+            each item in roles
+              td
+                input(type="checkbox")
+
