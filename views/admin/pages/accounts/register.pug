@@ -1,0 +1,27 @@
+extends ../../layouts/default.pug
+include ../../mixins/select-category.pug
+block head 
+  link(rel="stylesheet", href="/admin/css/accounts/register.css") 
+block sidebar
+block content
+  .form-create
+    h1 Đăng kí
+    form(enctype="multipart/form-data", id="createAccountForm")
+      label(for="name") Họ tên:
+      input#name(type="text", name="name" required)
+      label(for="email") Email:
+      input#email(type="email", name="email" required)
+      label(for="phone") Số điện thoại:
+      input#phone(name="phone")
+      label(for="password" required) Mật khẩu:
+      input#password(type="password", name="password" required)
+      label(for="image") Avatar:
+      input#image(type="file", name="image", accept="image/*")
+      label(for="role_id") Quyền
+      select(name="role_id" id="role_id" class="form-control")
+        option(disabled selected) --  Chọn quyền  --
+        each item in Roles 
+          option(value=item._id) #{item.title}
+      img.preview(src="")
+      input(type="submit", value="Đăng Kí")
+  script(type="module", src="/admin/js/accounts/register.js") 

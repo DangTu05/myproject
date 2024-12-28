@@ -6,6 +6,7 @@ const Edit = require("./products/EditProduct.route");
 const Detail = require("./products/Detail.route");
 const CreateCategory = require("./categories/Category.route");
 const Role= require("./roles/role.route");
+const Accounts = require("./accounts/account.route");
 function router(app) {
   const PATH_ADMIN = systemConfig.prefixAdmin;
   app.use(PATH_ADMIN + "/dashboard", Site_Admin);
@@ -14,6 +15,7 @@ function router(app) {
   app.use(PATH_ADMIN, Detail);
   app.use(PATH_ADMIN, Create);
   app.use(PATH_ADMIN + "/product", Edit);
+  app.use(PATH_ADMIN+"/account",Accounts);
   app.use(PATH_ADMIN+"/role", Role);
 }
 module.exports = router;

@@ -1,16 +1,16 @@
 const express = require("express");
 const multer = require("multer");
 const uploadCloud = require("../../../middlewares/admin/upload/uploadCloud");
-const validate = require("../../../middlewares/admin/validate/ValidateProduct");
+const validate = require("../../../middlewares/admin/validate/ValidateAccount");
 const upload = multer();
 const router = express.Router();
-const CreateController = require("../../../controllers/admin/products/CreateController");
-router.get("/create", CreateController.show);
+const AccountController = require("../../../controllers/admin/accounts/AccountController");
 router.post(
-  "/create",
+  "/register",
   upload.single("img"),
   validate.create,
   uploadCloud.upload,
-  CreateController.create
+  AccountController.create
 );
+router.get("/register", AccountController.show);
 module.exports = router;

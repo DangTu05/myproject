@@ -11,7 +11,7 @@ const product = new Schema(
     Price: Number,
     description: String,
     status: { type: String, default: "active" },
-    deletedAt: { type: Boolean, default: false },
+    deleted: { type: Boolean, default: false },
   },
   {
     timestamps: true,

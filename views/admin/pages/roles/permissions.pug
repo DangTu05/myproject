@@ -44,7 +44,7 @@ block content
               td
                 input(type="checkbox")
           tr.permission-header
-            td(colspan=count+1) Danh sách sản phẩm
+            td(colspan=count+1) Sản phẩm
           tr(data-name="product_view")
             td Xem
             each item in roles
@@ -62,6 +62,33 @@ block content
                 input(type="checkbox")
           tr(data-name="product_delete")
             td Xóa
+            each item in roles
+              td
+                input(type="checkbox")
+          tr.permission-header
+            td(colspan=count+1) Nhóm quyền
+          tr(data-name="role_view")
+            td Xem
+            each item in roles
+              td
+                input(type="checkbox")
+          tr(data-name="role_create") 
+            td Thêm mới
+            each item in roles
+              td
+                input(type="checkbox")
+          tr(data-name="role_edit")
+            td Chỉnh sửa
+            each item in roles
+              td
+                input(type="checkbox")
+          tr(data-name="role_delete")
+            td Xóa
+            each item in roles
+              td
+                input(type="checkbox")
+          tr(data-name="role_permissions")
+            td Phân quyền
             each item in roles
               td
                 input(type="checkbox")

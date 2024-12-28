@@ -1,4 +1,9 @@
 const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: "dry3sdlc1",
+  api_key: "832558234163985",
+  api_secret: "QYUhDxhatOVZmWFS4QRLufSDk7A", // Click 'View API Keys' above to copy your API secret
+});
 module.exports.upload = async (req, res, next) => {
   try {
     // Kiểm tra xem file có được gửi lên không
@@ -6,11 +11,6 @@ module.exports.upload = async (req, res, next) => {
       next();
       return;
     }
-    cloudinary.config({
-      cloud_name: process.env.cloud_name,
-      api_key: process.env.API_KEY,
-      api_secret: process.env.API_SECRET, // Click 'View API Keys' above to copy your API secret
-    });
     // Lấy buffer từ req.file.buffer
     const byteArrayBuffer = req.file.buffer;
     // Upload file lên Cloudinary từ buffer
@@ -24,6 +24,7 @@ module.exports.upload = async (req, res, next) => {
               return reject(error);
             }
             resolve(result);
+            console.log(result);
             req.body[req.file.fieldname] = result.url;
             next();
           }
