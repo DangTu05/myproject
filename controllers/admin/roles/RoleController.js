@@ -68,6 +68,36 @@ class RoleController {
   }
   /// End xử lý xóa role
 
+  /// Show giao diện edit
+  async showEdit(req, res, next) {
+    const role=await Role.findOne({_id:req.params.id})
+    try {
+      res.render("admin/pages/roles/edit",{
+        role:role
+      });
+    } catch (error) {
+      res.redirect("/admin/dashboard");
+    }
+  }
+  /// End show giao diện edit
+
+  /// Xử lý edit nhóm quyền
+  async edit(req, res, next) {
+    const id = req.params.id;
+    console.log(req.body);
+    const { title, description } = req.body;    
+    try {
+      await Role.updateOne(
+        { _id: id },
+        { title: title, description: description }
+      );
+      return res.status(200).json({ message: "Cập nhật thành công" });
+    } catch (error) {
+      return res.status(500).json({ message: "Đã xảy ra lỗi" });
+    }
+  }
+  /// End xử lý nhóm quyền
+
   /// Cập nhật quyền
   async updatePermissions(req, res, next) {
     const permissions = req.body.permissions;

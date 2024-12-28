@@ -21,7 +21,7 @@ block content
               td #{item.title}
               td !{item.description}
               td.actions
-                button(data-id=item._id).btn.btn-edit Edit
+                a(href=`${prefixAdmin}/role/edit/${item._id}` class=" btn btn-edit") Edit
                 button(data-id=item._id).btn.btn-delete Delete
   else 
     .empty-state

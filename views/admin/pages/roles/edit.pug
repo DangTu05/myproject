@@ -1,0 +1,16 @@
+extends ../../layouts/default.pug
+block head 
+  link(rel="stylesheet", href="/admin/css/Create.css") 
+block sidebar
+block content                 
+  .form-create
+    h1 Edit Role
+    form(enctype="multipart/form-data", id="editRoleForm")
+      label(for="name") Role Name:
+      input#name(type="text", name="name",value=role.title)
+      label(for="description") Mô tả:
+      textarea#description(name="description", rows="4", cols="50", placeholder="Nhập mô tả ở đây...") !{role.description} 
+      input(type="submit", value="Create Role")
+  script(type="module", src="/admin/js/roles/EditRole.js") 
+  script(type="application/javascript", src="/tinymce/tinymce.min.js")
+  script(type="application/javascript", src="/admin/js/tinymce-config.js")
