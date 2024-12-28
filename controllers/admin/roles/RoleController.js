@@ -67,5 +67,22 @@ class RoleController {
     }
   }
   /// End xử lý xóa role
+
+  /// Cập nhật quyền
+  async updatePermissions(req, res, next) {
+    const permissions = req.body.permissions;
+    try {
+      for (const item of permissions) {
+        await Role.updateOne(
+          { _id: item._id },
+          { permissions: item.permissions }
+        );
+      }
+      res.status(200).json({ message: "Cập nhật thành công" });
+    } catch (error) {
+      res.status(500).json({ message: "Đã xảy ra lỗi" });
+    }
+  }
+  /// End cập nhật quyền
 }
 module.exports = new RoleController();

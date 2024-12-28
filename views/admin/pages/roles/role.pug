@@ -7,7 +7,7 @@ block content
     .main
       .container
         div.option
-          h1 Nhóm quyền #{count}
+          h1 Nhóm quyền 
           button#add.btn.btn-primary Thêm quyền
         table
           thead
@@ -28,5 +28,5 @@ block content
       .empty-state-icon &#128274;
       h2 Chưa có nhóm quyền nào
       p Bạn chưa tạo nhóm quyền nào. Hãy tạo nhóm quyền đầu tiên để phân quyền cho người dùng.
-      button(style="margin-top:7px").btn.btn-primary.sm Tạo nhóm quyền mới
-    script(type="module", src="/admin/js/roles/Role.js")
+      button#add(style="margin-top:7px").btn.btn-primary.sm Tạo nhóm quyền mới
+  script(type="module", src="/admin/js/roles/Role.js")

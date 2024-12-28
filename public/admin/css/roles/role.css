@@ -16,7 +16,7 @@ p {
 }
 .empty-state {
   text-align: center;
-  padding: 40px;
+  padding: 43px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -27,7 +27,7 @@ p {
   box-sizing: border-box;
 }
 .empty-state-icon {
-  font-size: 48px;
+  font-size: 53px;
   color: #0084ff;
   margin-bottom: 20px;
 }
