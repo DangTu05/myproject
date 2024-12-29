@@ -1,0 +1,586 @@
+meta(http-equiv="X-UA-Compatible", content="IE=edge")
+title Datatables - Kaiadmin Bootstrap 5 Admin Dashboard
+meta(content="width=device-width,initial-scale=1,shrink-to-fit=no", name="viewport")
+link(rel="icon", href="/admin/img/kaiadmin/favicon.ico", type="image/x-icon")
+//  Fonts and icons 
+script(src="/admin/js/plugin/webfont/webfont.min.js")
+script.
+  
+  WebFont.load({
+          google: { families: ["Public Sans:300,400,500,600,700"] },
+          custom: {
+            families: [
+              "Font Awesome 5 Solid",
+              "Font Awesome 5 Regular",
+              "Font Awesome 5 Brands",
+              "simple-line-icons",
+            ],
+            urls: ["/admin/css/dashboard/fonts.min.css"],
+          },
+          active: function () {
+            sessionStorage.fonts = true;
+          },
+        });
+  
+//  CSS Files 
+link(rel="stylesheet", href="/admin/css/dashboard/bootstrap.min.css")
+link(rel="stylesheet", href="/admin/css/dashboard/plugins.min.css")
+link(rel="stylesheet", href="/admin/css/dashboard/kaiadmin.min.css")
+//  CSS Just for demo purpose, don't include it in your project 
+link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
+.wrapper
+  //  Sidebar 
+  .sidebar(data-background-color="dark")
+    .sidebar-logo
+      //  Logo Header 
+      .logo-header(data-background-color="dark")
+        a.logo(href="../index.html")
+          img.navbar-brand(src="/admin/img/kaiadmin/logo_light.svg", alt="navbar brand", height="20")
+        .nav-toggle
+          button.btn.btn-toggle.toggle-sidebar
+            i.gg-menu-right
+          button.btn.btn-toggle.sidenav-toggler
+            i.gg-menu-left
+        button.topbar-toggler.more
+          i.gg-more-vertical-alt
+      //  End Logo Header 
+    .sidebar-wrapper.scrollbar.scrollbar-inner
+      .sidebar-content
+        ul.nav.nav-secondary
+          li.nav-item
+            a.collapsed(data-bs-toggle="collapse", href="#dashboard", aria-expanded="false")
+              i.fas.fa-home
+              p Dashboard
+              span.caret
+            .collapse#dashboard
+              ul.nav.nav-collapse
+                li
+                  a(href="../../demo1/index.html")
+                    span.sub-item Dashboard 1
+          li.nav-section
+            span.sidebar-mini-icon
+              i.fa.fa-ellipsis-h
+            h4.text-section Components
+          li.nav-item
+            a(data-bs-toggle="collapse", href="#base")
+              i.fas.fa-layer-group
+              p Base
+              span.caret
+            .collapse#base
+              ul.nav.nav-collapse
+                li
+                  a(href="../components/avatars.html")
+                    span.sub-item Avatars
+                li
+                  a(href="../components/buttons.html")
+                    span.sub-item Buttons
+                li
+                  a(href="../components/gridsystem.html")
+                    span.sub-item Grid System
+                li
+                  a(href="../components/panels.html")
+                    span.sub-item Panels
+                li
+                  a(href="../components/notifications.html")
+                    span.sub-item Notifications
+                li
+                  a(href="../components/sweetalert.html")
+                    span.sub-item Sweet Alert
+                li
+                  a(href="../components/font-awesome-icons.html")
+                    span.sub-item Font Awesome Icons
+                li
+                  a(href="../components/simple-line-icons.html")
+                    span.sub-item Simple Line Icons
+                li
+                  a(href="../components/typography.html")
+                    span.sub-item Typography
+          li.nav-item
+            a(data-bs-toggle="collapse", href="#sidebarLayouts")
+              i.fas.fa-th-list
+              p Sidebar Layouts
+              span.caret
+            .collapse#sidebarLayouts
+              ul.nav.nav-collapse
+                li
+                  a(href="../sidebar-style-2.html")
+                    span.sub-item Sidebar Style 2
+                li
+                  a(href="../icon-menu.html")
+                    span.sub-item Icon Menu
+          li.nav-item
+            a(data-bs-toggle="collapse", href="#forms")
+              i.fas.fa-pen-square
+              p Forms
+              span.caret
+            .collapse#forms
+              ul.nav.nav-collapse
+                li
+                  a(href="../forms/forms.html")
+                    span.sub-item Basic Form
+          li.nav-item.active.submenu
+            a(data-bs-toggle="collapse", href="#tables")
+              i.fas.fa-table
+              p Tables
+              span.caret
+            .collapse.show#tables
+              ul.nav.nav-collapse
+                li
+                  a(href="../tables/tables.html")
+                    span.sub-item Basic Table
+                li.active
+                  a(href="../tables/datatables.html")
+                    span.sub-item Datatables
+          li.nav-item
+            a(data-bs-toggle="collapse", href="#maps")
+              i.fas.fa-map-marker-alt
+              p Maps
+              span.caret
+            .collapse#maps
+              ul.nav.nav-collapse
+                li
+                  a(href="../maps/googlemaps.html")
+                    span.sub-item Google Maps
+                li
+                  a(href="../maps/jsvectormap.html")
+                    span.sub-item Jsvectormap
+          li.nav-item
+            a(data-bs-toggle="collapse", href="#charts")
+              i.far.fa-chart-bar
+              p Charts
+              span.caret
+            .collapse#charts
+              ul.nav.nav-collapse
+                li
+                  a(href="../charts/charts.html")
+                    span.sub-item Chart Js
+                li
+                  a(href="../charts/sparkline.html")
+                    span.sub-item Sparkline
+          li.nav-item
+            a(href="../widgets.html")
+              i.fas.fa-desktop
+              p Widgets
+              span.badge.badge-success 4
+          li.nav-item
+            a(href="../../../documentation/index.html")
+              i.fas.fa-file
+              p Documentation
+              span.badge.badge-secondary 1
+          li.nav-item
+            a(data-bs-toggle="collapse", href="#submenu")
+              i.fas.fa-bars
+              p Menu Levels
+              span.caret
+            .collapse#submenu
+              ul.nav.nav-collapse
+                li
+                  a(data-bs-toggle="collapse", href="#subnav1")
+                    span.sub-item Level 1
+                    span.caret
+                  .collapse#subnav1
+                    ul.nav.nav-collapse.subnav
+                      li
+                        a(href="#")
+                          span.sub-item Level 2
+                      li
+                        a(href="#")
+                          span.sub-item Level 2
+                li
+                  a(data-bs-toggle="collapse", href="#subnav2")
+                    span.sub-item Level 1
+                    span.caret
+                  .collapse#subnav2
+                    ul.nav.nav-collapse.subnav
+                      li
+                        a(href="#")
+                          span.sub-item Level 2
+                li
+                  a(href="#")
+                    span.sub-item Level 1
+  //  End Sidebar 
+  .main-panel
+    .main-header
+      .main-header-logo
+        //  Logo Header 
+        .logo-header(data-background-color="dark")
+          a.logo(href="../index.html")
+            img.navbar-brand(src="/admin/img/kaiadmin/logo_light.svg", alt="navbar brand", height="20")
+          .nav-toggle
+            button.btn.btn-toggle.toggle-sidebar
+              i.gg-menu-right
+            button.btn.btn-toggle.sidenav-toggler
+              i.gg-menu-left
+          button.topbar-toggler.more
+            i.gg-more-vertical-alt
+        //  End Logo Header 
+      //  Navbar Header 
+      nav.navbar.navbar-header.navbar-header-transparent.navbar-expand-lg.border-bottom
+        .container-fluid
+          nav.navbar.navbar-header-left.navbar-expand-lg.navbar-form.nav-search.p-0.d-none.d-lg-flex
+            .input-group
+              .input-group-prepend
+                button.btn.btn-search.pe-1(type="submit")
+                  i.fa.fa-search.search-icon
+              input.form-control(type="text", placeholder="Search ...")
+          ul.navbar-nav.topbar-nav.ms-md-auto.align-items-center
+            li.nav-item.topbar-icon.dropdown.hidden-caret.d-flex.d-lg-none
+              a.nav-link.dropdown-toggle(data-bs-toggle="dropdown", href="#", role="button", aria-expanded="false", aria-haspopup="true")
+                i.fa.fa-search
+              ul.dropdown-menu.dropdown-search.animated.fadeIn
+                form.navbar-left.navbar-form.nav-search
+                  .input-group
+                    input.form-control(type="text", placeholder="Search ...")
+            li.nav-item.topbar-icon.dropdown.hidden-caret
+              a.nav-link.dropdown-toggle#messageDropdown(href="#", role="button", data-bs-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+                i.fa.fa-envelope
+              ul.dropdown-menu.messages-notif-box.animated.fadeIn(aria-labelledby="messageDropdown")
+                li
+                  .dropdown-title.d-flex.justify-content-between.align-items-center
+                    | Messages
+
+                    a.small(href="#") Mark all as read
+                li
+                  .message-notif-scroll.scrollbar-outer
+                    .notif-center
+                      a(href="#")
+                        .notif-img
+                          img(src="/admin/img/jm_denis.jpg", alt="Img Profile")
+                        .notif-content
+                          span.subject Jimmy Denis
+                          span.block How are you ? 
+                          span.time 5 minutes ago
+                      a(href="#")
+                        .notif-img
+                          img(src="/admin/img/chadengle.jpg", alt="Img Profile")
+                        .notif-content
+                          span.subject Chad
+                          span.block Ok, Thanks ! 
+                          span.time 12 minutes ago
+                      a(href="#")
+                        .notif-img
+                          img(src="/admin/img/mlane.jpg", alt="Img Profile")
+                        .notif-content
+                          span.subject Jhon Doe
+                          span.block.
+                            
+                            Ready for the meeting today...
+                            
+                          span.time 12 minutes ago
+                      a(href="#")
+                        .notif-img
+                          img(src="/admin/img/talha.jpg", alt="Img Profile")
+                        .notif-content
+                          span.subject Talha
+                          span.block Hi, Apa Kabar ? 
+                          span.time 17 minutes ago
+                li
+                  a.see-all(href="javascript:void(0);")
+                    | See all messages
+                    i.fa.fa-angle-right
+            li.nav-item.topbar-icon.dropdown.hidden-caret
+              a.nav-link.dropdown-toggle#notifDropdown(href="#", role="button", data-bs-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+                i.fa.fa-bell
+                span.notification 4
+              ul.dropdown-menu.notif-box.animated.fadeIn(aria-labelledby="notifDropdown")
+                li
+                  .dropdown-title.
+                    
+                    You have 4 new notification
+                    
+                li
+                  .notif-scroll.scrollbar-outer
+                    .notif-center
+                      a(href="#")
+                        .notif-icon.notif-primary
+                          i.fa.fa-user-plus
+                        .notif-content
+                          span.block New user registered 
+                          span.time 5 minutes ago
+                      a(href="#")
+                        .notif-icon.notif-success
+                          i.fa.fa-comment
+                        .notif-content
+                          span.block.
+                            
+                            Rahmad commented on Admin
+                            
+                          span.time 12 minutes ago
+                      a(href="#")
+                        .notif-img
+                          img(src="/admin/img/profile2.jpg", alt="Img Profile")
+                        .notif-content
+                          span.block.
+                            
+                            Reza send messages to you
+                            
+                          span.time 12 minutes ago
+                      a(href="#")
+                        .notif-icon.notif-danger
+                          i.fa.fa-heart
+                        .notif-content
+                          span.block Farrah liked Admin 
+                          span.time 17 minutes ago
+                li
+                  a.see-all(href="javascript:void(0);")
+                    | See all notifications
+                    i.fa.fa-angle-right
+            li.nav-item.topbar-icon.dropdown.hidden-caret
+              a.nav-link(data-bs-toggle="dropdown", href="#", aria-expanded="false")
+                i.fas.fa-layer-group
+              .dropdown-menu.quick-actions.animated.fadeIn
+                .quick-actions-header
+                  span.title.mb-1 Quick Actions
+                  span.subtitle.op-7 Shortcuts
+                .quick-actions-scroll.scrollbar-outer
+                  .quick-actions-items
+                    .row.m-0
+                      a.col-6.col-md-4.p-0(href="#")
+                        .quick-actions-item
+                          .avatar-item.bg-danger.rounded-circle
+                            i.far.fa-calendar-alt
+                          span.text Calendar
+                      a.col-6.col-md-4.p-0(href="#")
+                        .quick-actions-item
+                          .avatar-item.bg-warning.rounded-circle
+                            i.fas.fa-map
+                          span.text Maps
+                      a.col-6.col-md-4.p-0(href="#")
+                        .quick-actions-item
+                          .avatar-item.bg-info.rounded-circle
+                            i.fas.fa-file-excel
+                          span.text Reports
+                      a.col-6.col-md-4.p-0(href="#")
+                        .quick-actions-item
+                          .avatar-item.bg-success.rounded-circle
+                            i.fas.fa-envelope
+                          span.text Emails
+                      a.col-6.col-md-4.p-0(href="#")
+                        .quick-actions-item
+                          .avatar-item.bg-primary.rounded-circle
+                            i.fas.fa-file-invoice-dollar
+                          span.text Invoice
+                      a.col-6.col-md-4.p-0(href="#")
+                        .quick-actions-item
+                          .avatar-item.bg-secondary.rounded-circle
+                            i.fas.fa-credit-card
+                          span.text Payments
+            li.nav-item.topbar-user.dropdown.hidden-caret
+              a.dropdown-toggle.profile-pic(data-bs-toggle="dropdown", href="#", aria-expanded="false")
+                .avatar-sm
+                  img.avatar-img.rounded-circle(src="/admin/img/profile.jpg", alt="...")
+                span.profile-username
+                  span.op-7 Hi,
+                  span.fw-bold Hizrian
+              ul.dropdown-menu.dropdown-user.animated.fadeIn
+                .dropdown-user-scroll.scrollbar-outer
+                  li
+                    .user-box
+                      .avatar-lg
+                        img.avatar-img.rounded(src="/admin/img/profile.jpg", alt="image profile")
+                      .u-text
+                        h4 Hizrian
+                        p.text-muted hello@example.com
+                        a.btn.btn-xs.btn-secondary.btn-sm(href="profile.html") View Profile
+                  li
+                    .dropdown-divider
+                    a.dropdown-item(href="#") My Profile
+                    a.dropdown-item(href="#") My Balance
+                    a.dropdown-item(href="#") Inbox
+                    .dropdown-divider
+                    a.dropdown-item(href="#") Account Setting
+                    .dropdown-divider
+                    a.dropdown-item(href="#") Logout
+      //  End Navbar 
+    .container
+      .page-inner
+        .page-header
+          h3.fw-bold.mb-3 Danh sách tài khoản
+          ul.breadcrumbs.mb-3
+            li.nav-home
+              a(href="#")
+                i.icon-home
+            li.separator
+              i.icon-arrow-right
+            li.nav-item
+              a(href="/admin/account/register") Thêm tài khoản
+        .row
+          .col-md-12
+            .card
+              .card-body
+                .table-responsive
+                  table#add-row.display.table.table-striped.table-hover
+                    thead
+                      tr
+                        th Họ tên
+                        th Quyền
+                        th Email 
+                        th Số điện thoại
+                        th(style="width: 10%") Hành động
+                    tfoot
+                      tr
+                        th Họ tên
+                        th Quyền
+                        th Email 
+                        th Số điện thoại 
+                        th Hành động
+                    tbody
+                      each item in accounts
+                        tr
+                          td #{item.name}
+                          td #{item.role.title}
+                          td #{item.email}
+                          td #{item.phone}
+                          td
+                            .form-button-action
+                              button.btn.btn-link.btn-primary.btn-lg(type="button", data-bs-toggle="tooltip", data-original-title="Edit Task")
+                                i.fa.fa-edit
+                              button.btn.btn-link.btn-danger(type="button", data-bs-toggle="tooltip", data-original-title="Remove")
+                                i.fa.fa-times
+    footer.footer
+      .container-fluid.d-flex.justify-content-between
+        nav.pull-left
+          ul.nav
+            li.nav-item
+              a.nav-link(href="http://www.themekita.com").
+                
+                ThemeKita
+                
+            li.nav-item
+              a.nav-link(href="#") Help 
+            li.nav-item
+              a.nav-link(href="#") Licenses 
+        .copyright
+          | 2024, made with 
+          i.fa.fa-heart.heart.text-danger
+          |  by
+
+          a(href="http://www.themekita.com") ThemeKita
+        div
+          | Distributed by
+
+          a(target="_blank", href="https://themewagon.com/") ThemeWagon
+          | .
+
+  //  Custom template | don't include it in your project! 
+  .custom-template
+    .title Settings
+    .custom-content
+      .switcher
+        .switch-block
+          h4 Logo Header
+          .btnSwitch
+            button.selected.changeLogoHeaderColor(type="button", data-color="dark")
+            button.selected.changeLogoHeaderColor(type="button", data-color="blue")
+            button.changeLogoHeaderColor(type="button", data-color="purple")
+            button.changeLogoHeaderColor(type="button", data-color="light-blue")
+            button.changeLogoHeaderColor(type="button", data-color="green")
+            button.changeLogoHeaderColor(type="button", data-color="orange")
+            button.changeLogoHeaderColor(type="button", data-color="red")
+            button.changeLogoHeaderColor(type="button", data-color="white")
+            br
+            button.changeLogoHeaderColor(type="button", data-color="dark2")
+            button.changeLogoHeaderColor(type="button", data-color="blue2")
+            button.changeLogoHeaderColor(type="button", data-color="purple2")
+            button.changeLogoHeaderColor(type="button", data-color="light-blue2")
+            button.changeLogoHeaderColor(type="button", data-color="green2")
+            button.changeLogoHeaderColor(type="button", data-color="orange2")
+            button.changeLogoHeaderColor(type="button", data-color="red2")
+        .switch-block
+          h4 Navbar Header
+          .btnSwitch
+            button.changeTopBarColor(type="button", data-color="dark")
+            button.changeTopBarColor(type="button", data-color="blue")
+            button.changeTopBarColor(type="button", data-color="purple")
+            button.changeTopBarColor(type="button", data-color="light-blue")
+            button.changeTopBarColor(type="button", data-color="green")
+            button.changeTopBarColor(type="button", data-color="orange")
+            button.changeTopBarColor(type="button", data-color="red")
+            button.changeTopBarColor(type="button", data-color="white")
+            br
+            button.changeTopBarColor(type="button", data-color="dark2")
+            button.selected.changeTopBarColor(type="button", data-color="blue2")
+            button.changeTopBarColor(type="button", data-color="purple2")
+            button.changeTopBarColor(type="button", data-color="light-blue2")
+            button.changeTopBarColor(type="button", data-color="green2")
+            button.changeTopBarColor(type="button", data-color="orange2")
+            button.changeTopBarColor(type="button", data-color="red2")
+        .switch-block
+          h4 Sidebar
+          .btnSwitch
+            button.selected.changeSideBarColor(type="button", data-color="white")
+            button.changeSideBarColor(type="button", data-color="dark")
+            button.changeSideBarColor(type="button", data-color="dark2")
+    .custom-toggle
+      i.icon-settings
+  //  End Custom template 
+//    Core JS Files   
+script(src="/admin/js/core/jquery-3.7.1.min.js")
+script(src="/admin/js/core/popper.min.js")
+script(src="/admin/js/core/bootstrap.min.js")
+//  jQuery Scrollbar 
+script(src="/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js")
+//  Datatables 
+script(src="/admin/js/plugin/datatables/datatables.min.js")
+//  Kaiadmin JS 
+script(src="/admin/js/kaiadmin.min.js")
+//  Kaiadmin DEMO methods, don't include it in your project! 
+script(src="/admin/js/setting-demo2.js")
+script.
+  
+  $(document).ready(function () {
+          $("#basic-datatables").DataTable({});
+  
+          $("#multi-filter-select").DataTable({
+            pageLength: 5,
+            initComplete: function () {
+              this.api()
+                .columns()
+                .every(function () {
+                  var column = this;
+                  var select = $(
+                    '<select class="form-select"><option value=""></option></select>'
+                  )
+                    .appendTo($(column.footer()).empty())
+                    .on("change", function () {
+                      var val = $.fn.dataTable.util.escapeRegex($(this).val());
+  
+                      column
+                        .search(val ? "^" + val + "$" : "", true, false)
+                        .draw();
+                    });
+  
+                  column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
+                      select.append(
+                        '<option value="' + d + '">' + d + "</option>"
+                      );
+                    });
+                });
+            },
+          });
+  
+          // Add Row
+          $("#add-row").DataTable({
+            pageLength: 5,
+          });
+  
+          var action =
+            '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+  
+          $("#addRowButton").click(function () {
+            $("#add-row")
+              .dataTable()
+              .fnAddData([
+                $("#addName").val(),
+                $("#addPosition").val(),
+                $("#addOffice").val(),
+                action,
+              ]);
+            $("#addRowModal").modal("hide");
+          });
+        });
+  

@@ -25,5 +25,31 @@ class AccountController {
     }
   }
   /// End tạo tk
+
+  /// Show danh sách tài khoản
+  async showAccounts(req, res, next) {
+    const accounts = await Accounts.find({ deleted: false }).select(
+      "-token -password"
+    );
+    // Lấy vai trò cho tất cả tài khoản đồng thời
+    const roles = await Promise.all(
+      accounts.map(async (item) => {
+        const role = await Role.findOne({ deleted: false, _id: item.role_id });
+        return role;
+      })
+    );
+    // Gán vai trò lại cho các tài khoản
+    accounts.forEach((item, index) => {
+      item.role = roles[index];
+    });
+    try {
+      res.render("./admin/pages/accounts/AccountList", {
+        accounts: accounts,
+      });
+    } catch (err) {
+      res.redirect("/admin/dashboard");
+    }
+  }
+  /// End show danh sách tài khoản
 }
 module.exports = new AccountController();

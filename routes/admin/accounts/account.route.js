@@ -13,4 +13,5 @@ router.post(
   AccountController.create
 );
 router.get("/register", AccountController.show);
+router.get("/accounts",AccountController.showAccounts);
 module.exports = router;
