@@ -10,6 +10,7 @@ const Account = new Schema(
     token: {
       type: String,
       default: generateToken(20),
+      unique: true,
     },
     password: String,
     phone: String,

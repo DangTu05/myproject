@@ -51,5 +51,39 @@ class AccountController {
     }
   }
   /// End show danh sách tài khoản
+
+  ///Show sửa thông tin tài khoản
+  async showEdit(req, res, next) {
+    const id = req.params.id;
+    const account = await Accounts.findOne({ _id: id });
+    const Roles = await Role.find({ deleted: false });
+    try {
+      res.render("./admin/pages/accounts/Edit", {
+        account: account,
+        Roles: Roles,
+      });
+    } catch (error) {
+      res.redirect("admin/dashboard ");
+    }
+  }
+  /// End show sửa thông tin tài khoản
+
+  /// Sửa thông tin tài khoản
+  async edit(req, res, next) {
+    const id = req.params.id;
+    console.log(id);
+    
+    if (!req.file) {
+      const account = await Accounts.findOne({ _id: id });
+      req.body.img = account.img;
+    }
+    try {
+      await Accounts.updateOne({ _id: id }, req.body);
+      res.status(200).json({ message: "Cập nhật thành công" });
+    } catch (error) {
+      res.status(500).json({ message: "Đã xảy ra lỗi" });
+    }
+  }
+  /// End sửa thông tin tài khoản
 }
 module.exports = new AccountController();

@@ -1,11 +1,13 @@
-const submit = document.querySelector("#createAccountForm");
+const submit = document.querySelector("#editAccountForm");
 const fullname = document.querySelector("#name");
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 const img = document.querySelector("#image");
 const preview = document.querySelector(".preview");
 const phone = document.querySelector("#phone");
-const select=document.querySelector("#role_id");
+const select = document.querySelector("#role_id");
+/// lấy ra id gửi lên từ url
+const id = window.location.pathname.split("/").pop();
 if (submit) {
   submit.addEventListener("submit", (e) => {
     e.preventDefault(); // Ngăn chặn hành động gửi mẫu mặc định
@@ -16,8 +18,8 @@ if (submit) {
     formData.append("phone", phone.value);
     formData.append("role_id", select.value);
     formData.append("img", img.files[0]); // Thêm tệp hình ảnh
-    fetch("/admin/account/register", {
-      method: "POST",
+    fetch(`/admin/account/edit/${id}`, {
+      method: "PATCH",
       body: formData,
     })
       .then(async (response) => {
@@ -36,11 +38,11 @@ if (submit) {
           alert("Thông tin không được để trống!");
           return;
         }
-        alert("Đã tạo thành công!");
+        alert("Đã sửa thành công!");
         window.location.href = "";
       })
       .catch((err) => {
-        alert("Đã xảy ra lỗi khi tạo tài khoản.");
+        alert("Đã xảy ra lỗi khi sửa tài khoản.");
       });
   });
 }
@@ -52,4 +54,3 @@ img.addEventListener("change", () => {
   }
 });
 ///end preview img
-

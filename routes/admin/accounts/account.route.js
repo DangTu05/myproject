@@ -13,5 +13,13 @@ router.post(
   AccountController.create
 );
 router.get("/register", AccountController.show);
-router.get("/accounts",AccountController.showAccounts);
+router.get("/accounts", AccountController.showAccounts);
+router.get("/edit/:id", AccountController.showEdit);
+router.patch(
+  "/edit/:id",
+  upload.single("img"),
+  validate.create,
+  uploadCloud.upload,
+  AccountController.edit
+);
 module.exports = router;

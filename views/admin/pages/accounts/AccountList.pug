@@ -433,9 +433,9 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
                           td #{item.phone}
                           td
                             .form-button-action
-                              button.btn.btn-link.btn-primary.btn-lg(type="button", data-bs-toggle="tooltip", data-original-title="Edit Task")
+                              button.btn.btn-link.btn-primary.btn-lg(data-id=`${item._id}`,class="edit",type="button", data-bs-toggle="tooltip", data-original-title="Edit Task")
                                 i.fa.fa-edit
-                              button.btn.btn-link.btn-danger(type="button", data-bs-toggle="tooltip", data-original-title="Remove")
+                              button.btn.btn-link.btn-danger(class="remove",type="button", data-bs-toggle="tooltip", data-original-title="Remove")
                                 i.fa.fa-times
     footer.footer
       .container-fluid.d-flex.justify-content-between
@@ -514,6 +514,7 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
     .custom-toggle
       i.icon-settings
   //  End Custom template 
+script(type="module", src="/admin/js/accounts/AccountList.js") 
 //    Core JS Files   
 script(src="/admin/js/core/jquery-3.7.1.min.js")
 script(src="/admin/js/core/popper.min.js")
@@ -583,4 +584,3 @@ script.
             $("#addRowModal").modal("hide");
           });
         });
-  
