@@ -16,6 +16,9 @@ class AccountController {
   /// Tạo tài khoản
   async create(req, res, next) {
     try {
+      if (!req.file) {
+        req.body.img = "";
+      }
       req.body.password = md5(req.body.password);
       const account = new Accounts(req.body);
       account.save();
@@ -56,7 +59,7 @@ class AccountController {
   async showEdit(req, res, next) {
     const id = req.params.id;
     const account = await Accounts.findOne({ _id: id });
-    const Roles = await Role.find({ deleted: false });
+    const Roles = await Role.findOne({ deleted: false, _id: account.role_id });
     try {
       res.render("./admin/pages/accounts/Edit", {
         account: account,
@@ -71,8 +74,6 @@ class AccountController {
   /// Sửa thông tin tài khoản
   async edit(req, res, next) {
     const id = req.params.id;
-    console.log(id);
-    
     if (!req.file) {
       const account = await Accounts.findOne({ _id: id });
       req.body.img = account.img;

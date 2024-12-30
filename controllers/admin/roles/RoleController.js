@@ -107,8 +107,7 @@ class RoleController {
           { _id: item._id },
           { permissions: item.permissions }
         );
-      }
-      
+      }      
       res.status(200).json({ message: "Cập nhật thành công" });
     } catch (error) {
       res.status(500).json({ message: "Đã xảy ra lỗi" });

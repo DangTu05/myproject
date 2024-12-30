@@ -19,15 +19,14 @@ class EditController {
 
   /// Sửa sản phẩm
   async Edit(req, res, next) {
-    let id = req.params.id; 
+    let id = req.params.id;
     if (!req.file) {
       const product = await Products.findOne({ _id: id });
       req.body.img = product.img;
     }
     try {
-      await Products.updateOne({ _id: id }, req.body).then(() => {
-        res.status(200).json({ message: "Thành công!" });
-      });
+      await Products.updateOne({ _id: id }, req.body);
+      return res.status(200).json({ message: "Thành công!" });
     } catch (err) {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
     }

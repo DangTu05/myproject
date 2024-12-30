@@ -38,9 +38,8 @@ class CreateController {
   async create(req, res, next) {
     const category = new productCategories(req.body);
     try {
-      await category.save().then(() => {
-        return res.status(200).json({ message: "Thành công!" });
-      });
+      await category.save();
+      return res.status(200).json({ message: "Thành công!" });
     } catch (err) {
       return res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
@@ -95,9 +94,7 @@ class CreateController {
     try {
       await productCategories
         .updateOne({ _id: req.params.id }, req.body)
-        .then(() => {
           res.status(200).json({ message: "Thành công!" });
-        });
     } catch (error) {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
@@ -119,7 +116,7 @@ class CreateController {
 
   /// xóa nhiều
   async DeleteMulti(req, res, next) {
-    const ids  = req.body._id;
+    const ids = req.body._id;
     try {
       await productCategories.deleteMany({ _id: { $in: ids } });
       res.status(200).json("Xóa thành công");

@@ -37,7 +37,7 @@ if (submit) {
           return;
         }
         alert("Đã tạo thành công!");
-        window.location.href = "";
+        window.location.href = "/admin/account/accounts";
       })
       .catch((err) => {
         alert("Đã xảy ra lỗi khi tạo tài khoản.");
