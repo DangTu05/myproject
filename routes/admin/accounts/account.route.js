@@ -22,4 +22,5 @@ router.patch(
   uploadCloud.upload,
   AccountController.edit
 );
+router.delete("/delete/:id", AccountController.delete);
 module.exports = router;

@@ -14,9 +14,8 @@ class RoleController {
   async create(req, res, next) {
     const role = new Role(req.body);
     try {
-      await role.save().then(() => {
+      await role.save()
         return res.status(200).json({ message: "Tạo thành công!" });
-      });
     } catch (error) {
       return res.status(500).json({ message: "Đã xảy ra lỗi" });
     }

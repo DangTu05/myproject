@@ -86,5 +86,17 @@ class AccountController {
     }
   }
   /// End sửa thông tin tài khoản
+
+  /// Xóa tài khoản
+  async delete(req, res, next) {
+    const id=req.body._id;
+    try {
+      await Accounts.delete({ _id: id });
+      res.status(200).json({ message: "Xóa thành công" });
+    } catch (error) {
+      res.status(500).json({ message: "Đã xảy ra lỗi" });
+    }
+  }
+  /// End xóa tài khoản
 }
 module.exports = new AccountController();
