@@ -8,7 +8,7 @@ class Validate {
       res.json({ message: "Email không được để trống!" });
       return;
     }
-    if (!req.body.password) {
+    if (!req.body.password&&req.body.password!=="") {
       res.json({ message: "Mật khẩu không được để trống!" });
       return;
     }

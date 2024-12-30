@@ -74,11 +74,25 @@ class AccountController {
   /// Sửa thông tin tài khoản
   async edit(req, res, next) {
     const id = req.params.id;
-    if (!req.file) {
-      const account = await Accounts.findOne({ _id: id });
-      req.body.img = account.img;
-    }
+    const emailExist = await Accounts.findOne({
+      _id: { $ne: id },
+      email: req.body.email,
+      deleted: false,
+    });
     try {
+      if (emailExist) {
+        ///Yêu cầu không đúng định dạng, không hợp lệ hoặc thiếu dữ liệu cần thiết.Server không thể xử lý yêu cầu do lỗi từ client
+        return res.json({ message: "Email đã tồn tại" });
+      }
+      if (!req.file) {
+        const account = await Accounts.findOne({ _id: id });
+        req.body.img = account.img;
+      }
+      if (req.body.password) {
+        req.body.password = md5(req.body.password);
+      } else {
+        delete req.body.password;
+      }
       await Accounts.updateOne({ _id: id }, req.body);
       res.status(200).json({ message: "Cập nhật thành công" });
     } catch (error) {
@@ -89,7 +103,7 @@ class AccountController {
 
   /// Xóa tài khoản
   async delete(req, res, next) {
-    const id=req.body._id;
+    const id = req.body._id;
     try {
       await Accounts.delete({ _id: id });
       res.status(200).json({ message: "Xóa thành công" });

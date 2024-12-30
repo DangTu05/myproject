@@ -31,11 +31,14 @@ if (submit) {
       })
       .then((res) => {
         if (
-          res.message === "Họ không được để trống!" ||
-          res.message === "Email không được để trống!" ||
-          res.message === "Mật khẩu không được để trống!"
+          res.message === "Họ tên không được để trống!" ||
+          res.message === "Email không được để trống!"
         ) {
           alert("Thông tin không được để trống!");
+          return;
+        }
+        if (res.message === "Email đã tồn tại") {
+          alert(res.message); // Hiển thị thông báo email đã tồn tại
           return;
         }
         alert("Đã sửa thành công!");
