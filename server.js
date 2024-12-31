@@ -2,7 +2,6 @@ const express = require("express");
 const flash= require('express-flash');
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const session = require("express-session");
 const morgan = require("morgan");
 const configViewEngine = require("./configs/ViewEngine");
 const route = require("./routes/clients/index");
@@ -21,6 +20,7 @@ app.use(
     extended: true,
   })
 );
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 //*HTTP Logger
