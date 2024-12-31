@@ -1,6 +1,8 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+const flash= require('express-flash');
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 const morgan = require("morgan");
 const configViewEngine = require("./configs/ViewEngine");
 const route = require("./routes/clients/index");
@@ -21,7 +23,6 @@ app.use(
 );
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.json());
 //*HTTP Logger
 app.use(morgan("combined"));
 //* template engine

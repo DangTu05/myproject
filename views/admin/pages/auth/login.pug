@@ -1,0 +1,18 @@
+extends ../../layouts/auth.pug
+
+block main
+
+  .form-container
+    h1 Đăng nhập
+    form(id="submit", type="submit")
+      .form-group
+        label(for="email") Email:
+        input#email(type="email", name="email", placeholder="Nhập địa chỉ email của bạn")
+      .form-group
+        label(for="password") Mật khẩu:
+        .password-container
+          input#password(type="password", name="password", placeholder="Nhập mật khẩu của bạn")
+          i.toggle-password.fas.fa-eye#togglePassword
+      button Đăng nhập
+  script(type="module", src="/admin/js/auth/login.js") 
+    
