@@ -19,6 +19,7 @@ const Account = new Schema(
     deleted: { type: Boolean, default: false },
     createdBy: String,
     deletedBy: String,
+    updatedBy: [{ user_id: String, updateAt: Date }],
   },
   {
     timestamps: true,

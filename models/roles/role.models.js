@@ -4,11 +4,12 @@ const Schema = mongoose.Schema;
 const Role = new Schema(
   {
     title: String,
-    description: String,
-    permissions: {type:Array,default:[]},
+    description: { type: String, default: "" },
+    permissions: { type: Array, default: [] },
     deleted: { type: Boolean, default: false },
-    createdBy:String,
-    deletedBy:String,
+    createdBy: String,
+    deletedBy: String,
+    updatedBy: [{ user_id: String, updateAt: Date }],
   },
   {
     timestamps: true,

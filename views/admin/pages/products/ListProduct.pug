@@ -536,7 +536,7 @@ html(lang="en")
                                   if(role.permissions.includes('product_delete'))
                                     button(value=item._id).btn.btn-danger.btn-sm.m-1.delete Xóa
                                   else
-                                    span(value=item._id).btn.btn-danger.btn-sm.m-1(disabled) Xóa
+                                    span(value=item._id,disabled).btn.btn-danger.btn-sm.m-1 Xóa
               nav(style="margin-left:35px;padding-bottom:15px")
                 //- phân trang 
                 ul(class="pagination")

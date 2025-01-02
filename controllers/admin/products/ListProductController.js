@@ -3,6 +3,7 @@ const FilterStatusHelper = require("../../../helpers/products/FilterStatus");
 const SearchHelper = require("../../../helpers/products/Search");
 const PaginationHelper = require("../../../helpers/products/pagination.helper");
 class ListProductController {
+  /// Show danh sách sản phẩm
   async show(req, res, next) {
     ///Bộ lọc tìm kiếm
     const FilterStatus = FilterStatusHelper(req.query);
@@ -45,18 +46,33 @@ class ListProductController {
       Count_Deleted: Count_Deleted,
     });
   }
+  /// End show danh sách sản phẩm
+
+  /// thay đổi trạng thái
   async ChangeStatus(req, res, next) {
     const { _id, status } = req.body;
+    const updated = {
+      user_id: res.locals.user._id,
+      updateAt: new Date(),
+    };
     try {
       await Products.updateOne({ _id }, { status });
+      await Products.updateOne({ _id }, { $push: { updatedBy: updated } });
       res.status(200).send("Cập nhật thành công");
     } catch (err) {
       res.status(500).send("Đã xảy ra lỗi");
     }
   }
+  /// End thay đổi trạng thái
+
+  /// thay đổi trạng thái nhiều
   async ChangeMultiStatus(req, res, next) {
     const type = req.body.status;
     const ids = req.body._id;
+    const updated = {
+      user_id: res.locals.user._id,
+      updateAt: new Date(),
+    };
     try {
       switch (type) {
         case "active":
@@ -74,11 +90,16 @@ class ListProductController {
         default:
           break;
       }
+      await Products.updateMany(
+        { _id: { $in: ids } },
+        { $push: { updatedBy: updated } }
+      );
       res.status(200).json({ message: "Cập nhật thành công " });
     } catch (err) {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
+  /// End thay đổi trạng thái nhiều
 
   /// soft delete
   async DeleteItem(req, res, next) {
@@ -92,6 +113,8 @@ class ListProductController {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
+
+  /// End soft delete
 
   /// soft delete multi
   async DeleteMulti(req, res, next) {
@@ -108,5 +131,6 @@ class ListProductController {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
+  /// End soft delete multi
 }
 module.exports = new ListProductController();

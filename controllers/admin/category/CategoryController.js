@@ -64,8 +64,16 @@ class CreateController {
   /// change status
   async ChangeStatus(req, res, next) {
     const { _id, status } = req.body;
+    const updated = {
+      user_id: res.locals.user._id,
+      updateAt: new Date(),
+    };
     try {
       await productCategories.updateOne({ _id }, { status });
+      await productCategories.updateOne(
+        { _id },
+        { $push: { updatedBy: updated } }
+      );
       res.status(200).json("Cập nhật thành công");
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -93,10 +101,17 @@ class CreateController {
       const category = await productCategories.findOne({ _id: req.params.id });
       req.body.img = category.img;
     }
+    const updated = {
+      user_id: res.locals.user._id,
+      updateAt: new Date(),
+    };
     try {
-      await productCategories
-        .updateOne({ _id: req.params.id }, req.body)
-          res.status(200).json({ message: "Thành công!" });
+      await productCategories.updateOne({ _id: req.params.id }, req.body);
+      await productCategories.updateOne(
+        { _id: req.params.id },
+        { $push: { updatedBy: updated } }
+      );
+      res.status(200).json({ message: "Thành công!" });
     } catch (error) {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
@@ -106,8 +121,16 @@ class CreateController {
   /// change-multi-status
   async ChangeMultiStatus(req, res, next) {
     const { ids, status } = req.body;
+    const updated = {
+      user_id: res.locals.user._id,
+      updateAt: new Date(),
+    };
     try {
       await productCategories.updateMany({ _id: { $in: ids } }, { status });
+      await productCategories.updateMany(
+        { _id: { $in: ids } },
+        { $push: { updatedBy: updated } }
+      );
       res.status(200).json("Cập nhật thành công");
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -121,7 +144,10 @@ class CreateController {
     const ids = req.body._id;
     const deletedBy = res.locals.user._id;
     try {
-      await productCategories.updateMany({ _id: { $in: ids } }, { deletedBy: deletedBy });
+      await productCategories.updateMany(
+        { _id: { $in: ids } },
+        { deletedBy: deletedBy }
+      );
       await productCategories.deleteMany({ _id: { $in: ids } });
       res.status(200).json("Xóa thành công");
     } catch (error) {

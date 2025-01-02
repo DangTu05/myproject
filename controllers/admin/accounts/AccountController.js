@@ -80,6 +80,10 @@ class AccountController {
       email: req.body.email,
       deleted: false,
     });
+    const updated = {
+      user_id: res.locals.user._id,
+      updateAt: new Date(),
+    };
     try {
       if (emailExist) {
         ///Yêu cầu không đúng định dạng, không hợp lệ hoặc thiếu dữ liệu cần thiết.Server không thể xử lý yêu cầu do lỗi từ client
@@ -95,6 +99,7 @@ class AccountController {
         delete req.body.password;
       }
       await Accounts.updateOne({ _id: id }, req.body);
+      await Accounts.updateOne({ _id: id }, { $push: { updatedBy: updated } });
       res.status(200).json({ message: "Cập nhật thành công" });
     } catch (error) {
       res.status(500).json({ message: "Đã xảy ra lỗi" });

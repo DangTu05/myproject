@@ -16,8 +16,8 @@ class RoleController {
     req.body.createdBy = res.locals.user._id;
     const role = new Role(req.body);
     try {
-      await role.save()
-        return res.status(200).json({ message: "Tạo thành công!" });
+      await role.save();
+      return res.status(200).json({ message: "Tạo thành công!" });
     } catch (error) {
       return res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
@@ -31,7 +31,7 @@ class RoleController {
     };
     const count = await Role.countDocuments({ deleted: false });
     const roles = await Role.find(find);
-    const accounts = await Accounts.find({ deleted: false,status:"active" });
+    const accounts = await Accounts.find({ deleted: false, status: "active" });
     try {
       res.render("admin/pages/roles/permissions", {
         roles: roles,
@@ -75,10 +75,10 @@ class RoleController {
 
   /// Show giao diện edit
   async showEdit(req, res, next) {
-    const role=await Role.findOne({_id:req.params.id})
+    const role = await Role.findOne({ _id: req.params.id });
     try {
-      res.render("admin/pages/roles/edit",{
-        role:role
+      res.render("admin/pages/roles/edit", {
+        role: role,
       });
     } catch (error) {
       res.redirect("/admin/dashboard");
@@ -89,13 +89,17 @@ class RoleController {
   /// Xử lý edit nhóm quyền
   async edit(req, res, next) {
     const id = req.params.id;
-    console.log(req.body);
-    const { title, description } = req.body;    
+    const updated = {
+      user_id: res.locals.user._id,
+      updateAt: new Date(),
+    };
+    const { title, description } = req.body;
     try {
       await Role.updateOne(
         { _id: id },
         { title: title, description: description }
       );
+      await Role.updatedOne({ _id: id }, { $push: { updatedBy: updated } });
       return res.status(200).json({ message: "Cập nhật thành công" });
     } catch (error) {
       return res.status(500).json({ message: "Đã xảy ra lỗi" });
@@ -106,13 +110,21 @@ class RoleController {
   /// Cập nhật quyền
   async updatePermissions(req, res, next) {
     const permissions = req.body.permissions;
+    const updated = {
+      user_id: res.locals.user._id,
+      updateAt: new Date(),
+    };
     try {
       for (const item of permissions) {
         await Role.updateOne(
           { _id: item._id },
           { permissions: item.permissions }
         );
-      }      
+        await Role.updateOne(
+          { _id: item._id },
+          { $push: { updatedBy: updated } }
+        );
+      }
       res.status(200).json({ message: "Cập nhật thành công" });
     } catch (error) {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
