@@ -83,7 +83,9 @@ class ListProductController {
   /// soft delete
   async DeleteItem(req, res, next) {
     const id = req.body._id;
+    const deletedBy = res.locals.user._id;
     try {
+      await Products.updateOne({ _id: id }, { deleted: true, deletedBy });
       await Products.delete({ _id: id });
       res.status(200).json({ message: "Xóa thành công" });
     } catch (err) {
@@ -94,7 +96,12 @@ class ListProductController {
   /// soft delete multi
   async DeleteMulti(req, res, next) {
     const ids = req.body._id;
+    const deletedBy = res.locals.user._id;
     try {
+      await Products.updateMany(
+        { _id: { $in: ids } },
+        { deletedBy: deletedBy }
+      );
       await Products.delete({ _id: { $in: ids } });
       res.status(200).json({ message: "Xóa thành công" });
     } catch (err) {

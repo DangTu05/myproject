@@ -13,6 +13,7 @@ class RoleController {
 
   /// xử lý tạo role
   async create(req, res, next) {
+    req.body.createdBy = res.locals.user._id;
     const role = new Role(req.body);
     try {
       await role.save()
@@ -61,7 +62,9 @@ class RoleController {
   /// Xử lý xóa role
   async delete(req, res, next) {
     const id = req.body._id;
+    const deletedBy = res.locals.user._id;
     try {
+      await Role.updateOne({ _id: id }, { deletedBy: deletedBy });
       await Role.delete({ _id: id });
       return res.status(200).json({ message: "Xóa thành công" });
     } catch (error) {

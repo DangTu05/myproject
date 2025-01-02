@@ -12,6 +12,8 @@ const productCategory = new Schema(
     position:Number,
     status: { type: String, default: "active" },
     deleted: { type: Boolean, default: false },
+    createdBy:String,
+    deletedBy:String,
   },
   {
     timestamps: true,

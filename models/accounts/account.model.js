@@ -17,6 +17,8 @@ const Account = new Schema(
     role_id: String,
     status: { type: String, default: "active" },
     deleted: { type: Boolean, default: false },
+    createdBy: String,
+    deletedBy: String,
   },
   {
     timestamps: true,

@@ -7,6 +7,8 @@ const Role = new Schema(
     description: String,
     permissions: {type:Array,default:[]},
     deleted: { type: Boolean, default: false },
+    createdBy:String,
+    deletedBy:String,
   },
   {
     timestamps: true,

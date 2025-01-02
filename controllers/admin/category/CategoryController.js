@@ -36,6 +36,7 @@ class CreateController {
   /// end show giao diện danh mục sản phẩm
   /// Tạo sản phẩm
   async create(req, res, next) {
+    req.body.createdBy = res.locals.user._id;
     const category = new productCategories(req.body);
     try {
       await category.save();
@@ -76,8 +77,9 @@ class CreateController {
   /// xóa mềm
   async Delete(req, res, next) {
     const _id = req.body._id;
-    console.log(_id);
+    const deletedBy = res.locals.user._id;
     try {
+      await productCategories.updateOne({ _id }, { deletedBy: deletedBy });
       await productCategories.delete({ _id });
       res.status(200).json({ message: "Xóa thành công!" });
     } catch (error) {
@@ -117,7 +119,9 @@ class CreateController {
   /// xóa nhiều
   async DeleteMulti(req, res, next) {
     const ids = req.body._id;
+    const deletedBy = res.locals.user._id;
     try {
+      await productCategories.updateMany({ _id: { $in: ids } }, { deletedBy: deletedBy });
       await productCategories.deleteMany({ _id: { $in: ids } });
       res.status(200).json("Xóa thành công");
     } catch (error) {

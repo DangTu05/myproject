@@ -19,6 +19,7 @@ class AccountController {
       if (!req.file) {
         req.body.img = "";
       }
+      req.body.createdBy = res.locals.user._id;
       req.body.password = md5(req.body.password);
       const account = new Accounts(req.body);
       account.save();
@@ -104,7 +105,9 @@ class AccountController {
   /// Xóa tài khoản
   async delete(req, res, next) {
     const id = req.body._id;
+    const deletedBy = res.locals.user._id;
     try {
+      await Accounts.updateOne({ _id: id }, { deletedBy: deletedBy });
       await Accounts.delete({ _id: id });
       res.status(200).json({ message: "Xóa thành công" });
     } catch (error) {

@@ -12,6 +12,9 @@ const product = new Schema(
     description: String,
     status: { type: String, default: "active" },
     deleted: { type: Boolean, default: false },
+    category_id:String,
+    createdBy: String,
+    deletedBy: String,
   },
   {
     timestamps: true,
