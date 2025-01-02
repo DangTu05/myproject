@@ -410,51 +410,64 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
                     .dropdown-divider
                     a.dropdown-item(href="#") Logout
       //  End Navbar 
-    .container
-      .page-inner
-        .page-header
-          h3.fw-bold.mb-3 Danh sách tài khoản
-          ul.breadcrumbs.mb-3
-            li.nav-home
-              a(href="#")
-                i.icon-home
-            li.separator
-              i.icon-arrow-right
-            li.nav-item
-              a(href="/admin/account/register") Thêm tài khoản
-        .row
-          .col-md-12
-            .card
-              .card-body
-                .table-responsive
-                  table#add-row.display.table.table-striped.table-hover
-                    thead
-                      tr
-                        th Họ tên
-                        th Quyền
-                        th Email 
-                        th Số điện thoại
-                        th(style="width: 10%") Hành động
-                    tfoot
-                      tr
-                        th Họ tên
-                        th Quyền
-                        th Email 
-                        th Số điện thoại 
-                        th Hành động
-                    tbody
-                      each item in accounts
+    if(role.permissions.includes('account_view'))
+      .container
+        .page-inner
+          .page-header
+            h3.fw-bold.mb-3 Danh sách tài khoản
+            ul.breadcrumbs.mb-3
+              li.nav-home
+                a(href="#")
+                  i.icon-home
+              li.separator
+                i.icon-arrow-right
+              if(role.permissions.includes('account_create'))
+                li.nav-item
+                  a(href="/admin/account/register") Thêm tài khoản
+              else 
+                li.nav-item
+                  span Thêm tài khoản
+          .row
+            .col-md-12
+              .card
+                .card-body
+                  .table-responsive
+                    table#add-row.display.table.table-striped.table-hover
+                      thead
                         tr
-                          td #{item.name}
-                          td #{item.role.title}
-                          td #{item.email}
-                          td #{item.phone}
-                          td
-                            .form-button-action
-                              button.btn.btn-link.btn-primary.btn-lg(data-id=`${item._id}`,class="edit",type="button", data-bs-toggle="tooltip", data-original-title="Edit Task")
-                                i.fa.fa-edit
-                              button.btn.btn-link.btn-danger(data-id=`${item._id}`,class="remove",type="button", data-bs-toggle="tooltip", data-original-title="Remove")
-                                i.fa.fa-times
+                          th Họ tên
+                          th Quyền
+                          th Email 
+                          th Số điện thoại
+                          th(style="width: 10%") Hành động
+                      tfoot
+                        tr
+                          th Họ tên
+                          th Quyền
+                          th Email 
+                          th Số điện thoại 
+                          th Hành động
+                      tbody
+                        each item in accounts
+                          tr
+                            td #{item.name}
+                            td #{item.role.title}
+                            td #{item.email}
+                            td #{item.phone}
+                            td
+                              .form-button-action
+                                if(role.permissions.includes('account_edit'))
+                                  button.btn.btn-link.btn-primary.btn-lg(data-id=`${item._id}`,class="edit",type="button", data-bs-toggle="tooltip", data-original-title="Edit Task")
+                                    i.fa.fa-edit
+                                else 
+                                  span.btn.btn-link.btn-primary.btn-lg.disabled(type="button", data-bs-toggle="tooltip", data-original-title="Edit Task")
+                                    i.fa.fa-edit
+                                if(role.permissions.includes('account_delete'))
+                                  button.btn.btn-link.btn-danger(data-id=`${item._id}`,class="remove",type="button", data-bs-toggle="tooltip", data-original-title="Remove")
+                                    i.fa.fa-times
+                                else 
+                                  span.btn.btn-link.btn-danger.disabled(type="button", data-bs-toggle="tooltip", data-original-title="Remove")
+                                    i.fa.fa-times
     footer.footer
       .container-fluid.d-flex.justify-content-between
         nav.pull-left

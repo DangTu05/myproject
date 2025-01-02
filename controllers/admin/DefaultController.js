@@ -1,10 +1,21 @@
 const Products = require("../../models/products/products");
 const Accounts = require("../../models/accounts/account.model");
+const Categories = require("../../models/categories/category.model");
 class SiteController {
   async show(req, res, next) {
-    const count = await Products.countDocuments({ deleted: false });
+    const user = await Accounts.findOne({
+      deleted: false,
+      token: req.cookies.token,
+    });
+    const countProduct = await Products.countDocuments({ deleted: false, status: "active" });
+    const countCategory = await Categories.countDocuments({ deleted: false, status: "active" });
+    const countAccount = await Accounts.countDocuments({ deleted: false, status: "active" });
+    
     res.render("./admin/pages/index", {
-      count: count,
+      countProduct: countProduct,
+      user: user,
+      countCategory: countCategory,
+      countAccount: countAccount,
     });
   }
 }

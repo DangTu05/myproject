@@ -5,17 +5,23 @@ const validate = require("../../../middlewares/admin/validate/ValidateAccount");
 const upload = multer();
 const router = express.Router();
 const AccountController = require("../../../controllers/admin/accounts/AccountController");
-const emailExist=require("../../../middlewares/admin/exist/EmailExist");
+const emailExist = require("../../../middlewares/admin/exist/EmailExist");
+const AuthMiddleware = require("../../../middlewares/admin/auth/auth.middleware");
 router.post(
-  "/register",
+  "/create",
+  AuthMiddleware.requireAuth,
   upload.single("img"),
   validate.create,
   uploadCloud.upload,
   AccountController.create
 );
-router.get("/register", AccountController.show);
-router.get("/accounts", AccountController.showAccounts);
-router.get("/edit/:id", AccountController.showEdit);
+router.get("/create", AuthMiddleware.requireAuth, AccountController.show);
+router.get(
+  "/accounts",
+  AuthMiddleware.requireAuth,
+  AccountController.showAccounts
+);
+router.get("/edit/:id", AuthMiddleware.requireAuth, AccountController.showEdit);
 router.patch(
   "/edit/:id",
   upload.single("img"),
@@ -24,5 +30,9 @@ router.patch(
   uploadCloud.upload,
   AccountController.edit
 );
-router.delete("/delete/:id", AccountController.delete);
+router.delete(
+  "/delete/:id",
+  AuthMiddleware.requireAuth,
+  AccountController.delete
+);
 module.exports = router;

@@ -14,7 +14,7 @@ function router(app) {
   app.use(PATH_ADMIN + "/Products", ListProduct);
   app.use(PATH_ADMIN, CreateCategory);
   app.use(PATH_ADMIN, Detail);
-  app.use(PATH_ADMIN, Create);
+  app.use(PATH_ADMIN+ "/product", Create);
   app.use(PATH_ADMIN + "/product", Edit);
   app.use(PATH_ADMIN + "/account", Accounts);
   app.use(PATH_ADMIN + "/role", Role);

@@ -1,4 +1,5 @@
 const Role = require("../../../models/roles/role.models");
+const Accounts = require("../../../models/accounts/account.model");
 class RoleController {
   /// show giao diện tạo role
   async show(req, res, next) {
@@ -29,10 +30,12 @@ class RoleController {
     };
     const count = await Role.countDocuments({ deleted: false });
     const roles = await Role.find(find);
+    const accounts = await Accounts.find({ deleted: false,status:"active" });
     try {
       res.render("admin/pages/roles/permissions", {
         roles: roles,
         count: count,
+        accounts: accounts,
       });
     } catch {
       res.redirect("/admin/dashboard");

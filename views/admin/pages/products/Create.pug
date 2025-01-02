@@ -2,22 +2,23 @@ extends ../../layouts/default.pug
 block head 
   link(rel="stylesheet", href="/admin/css/products/Create.css") 
 block sidebar
-block content                 
-  .form-create
-    h1 Create Product
-    form(enctype="multipart/form-data", id="createProductForm")
-      label(for="name") Product Name:
-      input#name(type="text", name="name")
-      label(for="description") Mô tả:
-      textarea#description(name="description", rows="4", cols="50", placeholder="Nhập mô tả ở đây...") 
-      label(for="quantity") Quantity:
-      input#quantity(type="number", name="quantity", required)
-      label(for="price") Price:
-      input#price(type="number", step="0.01", name="price", required)
-      label(for="image") Product Image:
-      input#image(type="file", name="image", accept="", required)
-      img.preview(src="")
-      input(type="submit", value="Create Product")
-  script(type="module", src="/admin/js/products/Create.js")
-  script(type="application/javascript", src="/tinymce/tinymce.min.js")
-  script(type="application/javascript", src="/admin/js/tinymce-config.js")
+block content 
+  if(role.permissions.includes('product_create'))                
+    .form-create
+      h1 Create Product
+      form(enctype="multipart/form-data", id="createProductForm")
+        label(for="name") Product Name:
+        input#name(type="text", name="name")
+        label(for="description") Mô tả:
+        textarea#description(name="description", rows="4", cols="50", placeholder="Nhập mô tả ở đây...") 
+        label(for="quantity") Quantity:
+        input#quantity(type="number", name="quantity", required)
+        label(for="price") Price:
+        input#price(type="number", step="0.01", name="price", required)
+        label(for="image") Product Image:
+        input#image(type="file", name="image", accept="", required)
+        img.preview(src="")
+        input(type="submit", value="Create Product")
+    script(type="module", src="/admin/js/products/Create.js")
+    script(type="application/javascript", src="/tinymce/tinymce.min.js")
+    script(type="application/javascript", src="/admin/js/tinymce-config.js")

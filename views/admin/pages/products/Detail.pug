@@ -3,39 +3,43 @@ block head
   link(rel="stylesheet", href="/admin/css/products/Detail.css")
 block sidebar
 block content
-  div.main-content
-    div(class="product")
-      div(class="pro_name")
-        h4(style="margin-bottom:0 !important") Tên sản phẩm: #{product.product_name}
-      div(class="info-panel")
-        div(class="product-img")
-          img(class="image",src=product.img)
-        div(class="product-content")
-          h3 Thông tin cơ bản
-          div 
-            span #{product.product_name}
-          if(product.description)  
-            div(style="width:250px") 
-              span Mô tả: !{product.description}
-          div 
-            span Đường dẫn: #{product.slug}
-          div 
-            span Số lượng: #{product.quantity}
-          div 
-            span Giá: ₫#{Price} 
-        div(class="Updated-in4")
-          h3 Thông tin cập nhật
-          if(product.status ==="active")
-            div Trạng thái:  
-              span(class="badge badge-success" ) Hoạt Động
-          else
-            div Trạng thái:
-              span(class="badge badge-danger") Dừng Hoạt Động
-          if(Time.createdAt)
+  if(role.permissions.includes('product_view'))
+    div.main-content
+      div(class="product")
+        div(class="pro_name")
+          h4(style="margin-bottom:0 !important") Tên sản phẩm: #{product.product_name}
+        div(class="info-panel")
+          div(class="product-img")
+            img(class="image",src=product.img)
+          div(class="product-content")
+            h3 Thông tin cơ bản
             div 
-              span Ngày tạo: #{Time.createdAt}
-          if(Time.updatedAt)
+              span #{product.product_name}
+            if(product.description)  
+              div(style="width:250px") 
+                span Mô tả: !{product.description}
             div 
-              span Cập nhật mới: #{Time.updatedAt}
-    div(class="fix") 
-      a(href=`${prefixAdmin}/edit/${product._id}`,class="btn btn-warning btn-lg") Sửa
+              span Đường dẫn: #{product.slug}
+            div 
+              span Số lượng: #{product.quantity}
+            div 
+              span Giá: ₫#{Price} 
+          div(class="Updated-in4")
+            h3 Thông tin cập nhật
+            if(product.status ==="active")
+              div Trạng thái:  
+                span(class="badge badge-success" ) Hoạt Động
+            else
+              div Trạng thái:
+                span(class="badge badge-danger") Dừng Hoạt Động
+            if(Time.createdAt)
+              div 
+                span Ngày tạo: #{Time.createdAt}
+            if(Time.updatedAt)
+              div 
+                span Cập nhật mới: #{Time.updatedAt}
+      div(class="fix") 
+        if(role.permissions.includes('product_edit'))
+          a(href=`${prefixAdmin}/product/edit/${product._id}`,class="btn btn-warning btn-lg") Sửa
+        else 
+          button(class="btn btn-warning",disabled) Sửa

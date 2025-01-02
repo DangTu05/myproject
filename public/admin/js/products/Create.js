@@ -18,7 +18,7 @@ if (submit) {
     formData.append("Price", price.value);
     formData.append("img", img.files[0]); // Thêm tệp hình ảnh
     if (quantity.value && price.value ) {
-      fetch("create", {
+      fetch("/admin/product/create", {
         method: "POST",
         body: formData,
       })
@@ -35,7 +35,7 @@ if (submit) {
             return;
           }
           alert("Đã tạo thành công!");
-          window.location.href = "Products";
+          window.location.href = "/admin/Products";
         })
         .catch((err) => {
           alert("Đã xảy ra lỗi khi tạo sản phẩm.");

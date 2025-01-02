@@ -6,7 +6,7 @@ class AccountController {
   async show(req, res, next) {
     const Roles = await Role.find({ deleted: false });
     try {
-      res.render("./admin/pages/accounts/register", {
+      res.render("./admin/pages/accounts/Create", {
         Roles: Roles,
       });
     } catch (error) {}

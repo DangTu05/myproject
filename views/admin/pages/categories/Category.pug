@@ -9,7 +9,7 @@ html(lang="en")
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       )
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css")
-    link(rel="stylesheet", href="/admin/css/ListProduct.css")
+    link(rel="stylesheet", href="/admin/css/products/ListProduct.css")
     script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js")
     link(
       href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" 
@@ -68,15 +68,9 @@ html(lang="en")
           .sidebar-content
             ul.nav.nav-secondary
               li.nav-item
-                a.collapsed(data-bs-toggle="collapse", href="#dashboard", aria-expanded="false")
+                a(href=`${prefixAdmin}/dashboard`)
                   i.fas.fa-home
-                  p Dashboard
-                  span.caret
-                .collapse#dashboard
-                  ul.nav.nav-collapse
-                    li
-                      a(href="../../demo1/index.html")
-                        span.sub-item Dashboard 1
+                  p Trang chủ
               li.nav-section
                 span.sidebar-mini-icon
                   i.fa.fa-ellipsis-h
@@ -462,37 +456,44 @@ html(lang="en")
         .custom-toggle
           i.icon-settings
           // End Custom template
-      div.main-content
-        .page-content.page-container#page-content
-          div(style="padding-top:25px")
-            .row.container.d-flex.justify-content-center
-              .col-lg-11.grid-margin.stretch-card
-                .card
-                  .card-body
-                    h4.card-title Danh sách
-                    .d-flex.align-items-center.choise
-                      .form-group
-                        select(name="type" class="form-control")
-                          option(disabled selected) --Chọn Hành Động--
-                          option(value="active") Hoạt Động
-                          option(value="inactive") Dừng Hoạt Động
-                          option(value="delete-all") Xóa Tất Cả
-                      button(type="submit" class="apply btn btn-primary") Áp Dụng
-                      button(type="" class="btn btn-primary add-category") Thêm danh mục
-                    .table-responsive
-                      table.table
-                        thead
-                          tr
-                            th
-                              label(for)
-                              input#checkbox-all(type="checkbox")
-                            th index
-                            th Imgs
-                            th Name
-                            th Status
-                            th action 
-                        tbody  
-                          +category(records)              
+      if(role.permissions.includes('category_view'))
+        div.main-content
+          .page-content.page-container#page-content
+            div(style="padding-top:25px")
+              .row.container.d-flex.justify-content-center
+                .col-lg-11.grid-margin.stretch-card
+                  .card
+                    .card-body
+                      h4.card-title Danh sách
+                      .d-flex.align-items-center.choise
+                        .form-group
+                          select(name="type" class="form-control")
+                            option(disabled selected) --Chọn Hành Động--
+                            option(value="active") Hoạt Động
+                            option(value="inactive") Dừng Hoạt Động
+                            option(value="delete-all") Xóa Tất Cả
+                        if(role.permissions.includes('category_edit'))
+                          button(type="submit" class="apply btn btn-primary") Áp Dụng
+                        else 
+                          span(class="btn btn-primary" disabled) Áp Dụng
+                        if(role.permissions.includes('category_delete'))
+                          button(type="submit" class="apply btn btn-danger") Xóa
+                        else 
+                          span(class="btn btn-danger" disabled) Xóa
+                      .table-responsive
+                        table.table
+                          thead
+                            tr
+                              th
+                                label(for)
+                                input#checkbox-all(type="checkbox")
+                              th index
+                              th Imgs
+                              th Name
+                              th Status
+                              th action 
+                          tbody  
+                            +category(records)              
       //  End Navbar
   script(type="module", src="/admin/js/categories/Category.js") 
   script(src="/admin/js/core/jquery-3.7.1.min.js")

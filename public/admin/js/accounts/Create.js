@@ -16,7 +16,7 @@ if (submit) {
     formData.append("phone", phone.value);
     formData.append("role_id", select.value);
     formData.append("img", img.files[0]); // Thêm tệp hình ảnh
-    fetch("/admin/account/register", {
+    fetch("/admin/account/create", {
       method: "POST",
       body: formData,
     })

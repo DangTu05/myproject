@@ -8,7 +8,7 @@ class Detail {
       _id: req.params.id,
     };
     let Time = {};
-    const Count = await Products.countDocuments({ deleted: false });
+    const Count = await Products.countDocuments({ deleted: false, status: "active" });
     const product = await Products.findOne(find);
     const Price = product.Price.toLocaleString("vi-VN");
     if (product.createdAt) {

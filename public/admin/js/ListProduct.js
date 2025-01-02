@@ -160,7 +160,7 @@ if (Delete) {
 /// xử lý khi nhấn nút thêm sp
 if (addPro) {
   addPro.addEventListener("click", (item) => {
-    window.location.href = "create";
+    window.location.href = "account/create";
   });
 }
 // end thêm sp

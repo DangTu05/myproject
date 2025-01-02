@@ -1,0 +1,28 @@
+extends ../../layouts/default.pug
+include ../../mixins/select-category.pug
+block head 
+  link(rel="stylesheet", href="/admin/css/accounts/register.css") 
+block sidebar
+block content
+  if(role.permissions.includes('account_create'))
+    .form-create
+      h1 Tạo tài khoản
+      form(enctype="multipart/form-data", id="createAccountForm")
+        label(for="name") Họ tên:
+        input#name(type="text", name="name" )
+        label(for="email") Email:
+        input#email(type="email", name="email" )
+        label(for="phone") Số điện thoại:
+        input#phone(name="phone")
+        label(for="password" ) Mật khẩu:
+        input#password(type="password", name="password")
+        label(for="image") Avatar:
+        input#image(type="file", name="image", accept="image/*")
+        label(for="role_id") Quyền
+        select(name="role_id" id="role_id" class="form-control")
+          option(disabled selected) --  Chọn quyền  --
+          each item in Roles 
+            option(value=item._id) #{item.title}
+        img.preview(src="")
+        input(type="submit", value="Tạo tài khoản")
+    script(type="module", src="/admin/js/accounts/Create.js") 

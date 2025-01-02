@@ -4,22 +4,23 @@ block head
   link(rel="stylesheet", href="/admin/css/products/Create.css") 
 block sidebar
 block content
-  .form-create
-    h1 Create Product
-    form(enctype="multipart/form-data", id="createProductForm")
-      label(for="name") Product Category:
-      input#name(type="text", name="name")
-      label(for="parent_id") Parent Id:
-      select(name="parent_id" id="parent_id" class="form-control")
-        option(value="") --  Chọn danh mục cha  --
-        if(records)
-          +Select-Category(records)
-      label(for="description") Description:
-      textarea#description(name="description", rows="4", cols="50", placeholder="Nhập mô tả ở đây...") 
-      label(for="image") Category Image:
-      input#image(type="file", name="image", accept="image/*", required)
-      img.preview(src="")
-      input(type="submit", value="Create Category")
-  script(type="module", src="/admin/js/categories/CreateCategory.js")
-  script(type="application/javascript", src="/tinymce/tinymce.min.js")
-  script(type="application/javascript", src="/admin/js/tinymce-config.js")
+  if(role.permissions.includes('category.create'))
+    .form-create
+      h1 Create Product
+      form(enctype="multipart/form-data", id="createProductForm")
+        label(for="name") Product Category:
+        input#name(type="text", name="name")
+        label(for="parent_id") Parent Id:
+        select(name="parent_id" id="parent_id" class="form-control")
+          option(value="") --  Chọn danh mục cha  --
+          if(records)
+            +Select-Category(records)
+        label(for="description") Description:
+        textarea#description(name="description", rows="4", cols="50", placeholder="Nhập mô tả ở đây...") 
+        label(for="image") Category Image:
+        input#image(type="file", name="image", accept="image/*", required)
+        img.preview(src="")
+        input(type="submit", value="Create Category")
+    script(type="module", src="/admin/js/categories/CreateCategory.js")
+    script(type="application/javascript", src="/tinymce/tinymce.min.js")
+    script(type="application/javascript", src="/admin/js/tinymce-config.js")

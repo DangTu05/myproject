@@ -2,6 +2,7 @@ meta(http-equiv="X-UA-Compatible", content="IE=edge")
 title Kaiadmin - Bootstrap 5 Admin Dashboard
 meta(content="width=device-width,initial-scale=1,shrink-to-fit=no", name="viewport")
 link(rel="icon", href="/admin/img/kaiadmin/favicon.ico", type="image/x-icon")
+link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css")
 //  Fonts and icons 
 script(src="/admin/js/plugin/webfont/webfont.min.js")
 script.
@@ -48,15 +49,9 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
       .sidebar-content
         ul.nav.nav-secondary
           li.nav-item.active
-            a.collapsed(data-bs-toggle="collapse", href="#dashboard", aria-expanded="false")
+            a(href="")
               i.fas.fa-home
               p Dashboard
-              span.caret
-            .collapse#dashboard
-              ul.nav.nav-collapse
-                li
-                  a(href="../demo1/index.html")
-                    span.sub-item Dashboard 1
           li.nav-section
             span.sidebar-mini-icon
               i.fa.fa-ellipsis-h
@@ -111,13 +106,26 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
           li.nav-item
             a(data-bs-toggle="collapse", href="#forms")
               i.fas.fa-pen-square
-              p Forms
+              p Thêm
               span.caret
             .collapse#forms
               ul.nav.nav-collapse
-                li
-                  a(href="forms/forms.html")
-                    span.sub-item Basic Form
+                if(role.permissions.includes('product_create'))
+                  li
+                    a(href=`${prefixAdmin}/product/create`)
+                      span.sub-item Thêm sản phẩm
+                if(role.permissions.includes('category_create'))
+                  li
+                    a(href=`${prefixAdmin}/category/create`)
+                      span.sub-item Thêm danh mục sản phẩm
+                if(role.permissions.includes('role_create'))
+                  li
+                    a(href=`${prefixAdmin}/role/create`)
+                      span.sub-item Thêm quyền
+                if(role.permissions.includes('account_create'))
+                  li
+                    a(href=`${prefixAdmin}/account/create`)
+                      span.sub-item Thêm tài khoản
           li.nav-item
             a(data-bs-toggle="collapse", href="#tables")
               i.fas.fa-table
@@ -133,40 +141,37 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
                     span.sub-item Datatables
           li.nav-item
             a(data-bs-toggle="collapse", href="#maps")
-              i.fas.fa-map-marker-alt
-              p Maps
+              i.fa-solid.fa-file-shield
+              p Quyền
               span.caret
             .collapse#maps
               ul.nav.nav-collapse
-                li
-                  a(href="maps/googlemaps.html")
-                    span.sub-item Google Maps
-                li
-                  a(href="maps/jsvectormap.html")
-                    span.sub-item Jsvectormap
-          li.nav-item
-            a(data-bs-toggle="collapse", href="#charts")
-              i.far.fa-chart-bar
-              p Charts
-              span.caret
-            .collapse#charts
-              ul.nav.nav-collapse
-                li
-                  a(href="charts/charts.html")
-                    span.sub-item Chart Js
-                li
-                  a(href="charts/sparkline.html")
-                    span.sub-item Sparkline
-          li.nav-item
-            a(href="widgets.html")
-              i.fas.fa-desktop
-              p Widgets
-              span.badge.badge-success 4
-          li.nav-item
-            a(href="../../documentation/index.html")
-              i.fas.fa-file
-              p Documentation
-              span.badge.badge-secondary 1
+                if(role.permissions.includes('role_view'))
+                  li
+                    a(href=`${prefixAdmin}/role/roles`)
+                      span.sub-item Danh sách quyền
+                if(role.permissions.includes('role_permissions'))
+                  li
+                    a(href=`${prefixAdmin}/role/permissions`)
+                      span.sub-item Phân quyền
+          if(role.permissions.includes('account_view'))
+            li.nav-item
+              a( href=`${prefixAdmin}/account/accounts`)
+                i.fa-solid.fa-file
+                p Danh sách tài khoản
+                span.badge.badge-secondary #{countAccount}
+          if(role.permissions.includes('category_view'))
+            li.nav-item
+              a(href=`${prefixAdmin}/category`)
+                i.fa-solid.fa-list
+                p Danh mục sản phẩm
+                span.badge.badge-success #{countCategory}
+          if(role.permissions.includes('product_view'))
+            li.nav-item
+              a(href=`${prefixAdmin}/Products`)
+                i.fas.fa-file
+                p Danh sách sản phẩm
+                span.badge.badge-secondary #{countProduct}
           li.nav-item
             a(data-bs-toggle="collapse", href="#submenu")
               i.fas.fa-bars
@@ -368,19 +373,19 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
             li.nav-item.topbar-user.dropdown.hidden-caret
               a.dropdown-toggle.profile-pic(data-bs-toggle="dropdown", href="#", aria-expanded="false")
                 .avatar-sm
-                  img.avatar-img.rounded-circle(src="/admin/img/profile.jpg", alt="...")
-                span.profile-username
+                  img.avatar-img.rounded-circle(src=user.img, alt="...")
+                span.profile-username 
                   span.op-7 Hi,
-                  span.fw-bold Hizrian
+                  span.fw-bold #{user.name}
               ul.dropdown-menu.dropdown-user.animated.fadeIn
                 .dropdown-user-scroll.scrollbar-outer
                   li
                     .user-box
                       .avatar-lg
-                        img.avatar-img.rounded(src="/admin/img/profile.jpg", alt="image profile")
+                        img.avatar-img.rounded(src=`${user.img}`, alt="image profile")
                       .u-text
-                        h4 Hizrian
-                        p.text-muted hello@example.com
+                        h4 #{user.name}
+                        p.text-muted #{user.email}
                         a.btn.btn-xs.btn-secondary.btn-sm(href="profile.html") View Profile
                   li
                     .dropdown-divider

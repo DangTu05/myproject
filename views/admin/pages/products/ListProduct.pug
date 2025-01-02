@@ -464,91 +464,104 @@ html(lang="en")
         .custom-toggle
           i.icon-settings
           // End Custom template
-      div.main-content                  
-        .page-content.page-container#page-content
-          div(style="padding-top:25px")
-            .row.container.d-flex.justify-content-center.mb-3
-              .col-lg-11.d-flex
-                .catalogue
-                  //-Mixins
-                  +FilterStatus(FilterStatus)
-            .row.container.d-flex.justify-content-center
-              .col-lg-11.grid-margin.stretch-card
-                .card
-                  .card-body
-                    h4.card-title Danh sách
-                    .d-flex.align-items-center.choise
-                      .form-group
-                        select(name="type" class="form-control")
-                          option(disabled selected) --Chọn Hành Động--
-                          option(value="active") Hoạt Động
-                          option(value="inactive") Dừng Hoạt Động
-                          option(value="delete-all") Xóa Tất Cả
-                      button(type="submit" class="apply btn btn-primary") Áp Dụng
-                      button(type="" class="btn btn-primary add-pro") Thêm Sản Phẩm
-                      a(href="", class="fa-solid fa-trash trash-icon restore")
-                        span(class="count") #{Count_Deleted}
-                    +sort()
-                    .table-responsive
-                      table.table
-                        thead
-                          tr
-                            th
-                              label(for)
-                              input#checkbox-all(type="checkbox")
-                            th index
-                            th Imgs
-                            th Name
-                            th Quantity
-                            th Price
-                            th Status
-                            th action 
-                        tbody
-                          each item,index in products
+      if(role.permissions.includes('product_view'))
+        div.main-content                  
+          .page-content.page-container#page-content
+            div(style="padding-top:25px")
+              .row.container.d-flex.justify-content-center.mb-3
+                .col-lg-11.d-flex
+                  .catalogue
+                    //-Mixins
+                    +FilterStatus(FilterStatus)
+              .row.container.d-flex.justify-content-center
+                .col-lg-11.grid-margin.stretch-card
+                  .card
+                    .card-body
+                      h4.card-title Danh sách
+                      .d-flex.align-items-center.choise
+                        .form-group
+                          select(name="type" class="form-control")
+                            option(disabled selected) --Chọn Hành Động--
+                            option(value="active") Hoạt Động
+                            option(value="inactive") Dừng Hoạt Động
+                            option(value="delete-all") Xóa Tất Cả
+                        if(role.permissions.includes('product_edit'))
+                          button(type="submit" class="apply btn btn-primary") Áp Dụng
+                        else 
+                          span(type="" class=" btn btn-primary" disabled) Áp Dụng
+                        if(role.permissions.includes('product_create'))
+                          button(class="btn btn-primary add-pro") Thêm Sản Phẩm
+                        else 
+                          span(type="" class="btn btn-primary " disabled) Thêm Sản Phẩm
+                        a(href="", class="fa-solid fa-trash trash-icon restore")
+                          span(class="count") #{Count_Deleted}
+                      +sort()
+                      .table-responsive
+                        table.table
+                          thead
                             tr
-                              td
+                              th
                                 label(for)
-                                input.checkbox(type="checkbox" name="id" value=item._id)
-                              td #{ index+1 }
-                              td
-                                img(src=item.img, alt="")
-                              td 
-                                a(href=`${prefixAdmin}/Products/${item._id}`) #{item.product_name}
-                              td.text-center #{item.quantity}
-                              td #{item.Price}
-                              td 
-                                if(item.status ==="active")
-                                  a(href="javascript:;",change-status="",data-status=item.status,data-id=item._id, class="badge badge-success" ) Hoạt Động
-                                else
-                                  a(href="javascript:;",change-status="",data-status=item.status,data-id=item._id, class="badge badge-danger") Dừng Hoạt Động
-                              td
-                                a(href=`${prefixAdmin}/product/edit/${item._id}` class=" btn btn-warning btn-sm m-1 fix") Sửa 
-                                button(value=item._id).btn.btn-danger.btn-sm.m-1.delete Xóa
-            nav(style="margin-left:35px;padding-bottom:15px")
-              //- phân trang 
-              ul(class="pagination")
-                  if(ObjectPagination.currentPage > 1)
-                    li.page-item
-                        button.page-link(type="button", button-pagination=ObjectPagination.currentPage-1) Trang trước
-                  if (ObjectPagination.currentPage === 1) 
-                    //- Khi ở trang 1, hiển thị nút 1, 2, 3
-                    - for (var i = 1; i <= 3; i++)
-                        li(class=`page-item ${ObjectPagination.currentPage === i ? 'active' : ''}`)
-                          button.page-link(type='button', button-pagination=i) #{i}
-                  else if(ObjectPagination.currentPage === ObjectPagination.TotalPage) 
-                    //- Khi ở trang cuối, hiển thị 2 nút cuối
-                    - var startPage = Math.max(ObjectPagination.TotalPage - 2, 1); // Đảm bảo không nhỏ hơn 1
-                    - for (var i = startPage; i <= ObjectPagination.TotalPage; i++)
-                        li(class=`page-item ${ObjectPagination.currentPage === i ? 'active' : ''}`)
-                          button.page-link(type='button', button-pagination=i) #{i}  
-                  else if(ObjectPagination.currentPage !== ObjectPagination.TotalPage&&ObjectPagination.currentPage !==1)
-                    - var maxpage=ObjectPagination.currentPage+1;
-                    - for (var i = ObjectPagination.currentPage-1; i <=maxpage ; i++)
-                        li(class=`page-item ${ObjectPagination.currentPage == i ? "active" :""}`)
-                          button.page-link(type="button", button-pagination=i) #{i}
-                  if(ObjectPagination.currentPage<ObjectPagination.TotalPage)        
-                    li.page-item
-                      button.page-link(type="button", button-pagination=ObjectPagination.currentPage+1) Trang sau
+                                input#checkbox-all(type="checkbox")
+                              th index
+                              th Imgs
+                              th Name
+                              th Quantity
+                              th Price
+                              th Status
+                              th action 
+                          tbody
+                            each item,index in products
+                              tr
+                                td
+                                  label(for)
+                                  input.checkbox(type="checkbox" name="id" value=item._id)
+                                td #{ index+1 }
+                                td
+                                  img(src=item.img, alt="")
+                                td 
+                                  a(href=`${prefixAdmin}/Products/${item._id}`) #{item.product_name}
+                                td.text-center #{item.quantity}
+                                td #{item.Price}
+                                td 
+                                  if(item.status ==="active")
+                                    a(href="javascript:;",change-status="",data-status=item.status,data-id=item._id, class="badge badge-success" ) Hoạt Động
+                                  else
+                                    a(href="javascript:;",change-status="",data-status=item.status,data-id=item._id, class="badge badge-danger") Dừng Hoạt Động
+                                td
+                                  if(role.permissions.includes('product_edit'))
+                                    a(href=`${prefixAdmin}/product/edit/${item._id}` class=" btn btn-warning btn-sm m-1 fix") Sửa 
+                                  else 
+                                    span(class=" btn btn-warning btn-sm m-1" disabled) Sửa
+                                  if(role.permissions.includes('product_delete'))
+                                    button(value=item._id).btn.btn-danger.btn-sm.m-1.delete Xóa
+                                  else
+                                    span(value=item._id).btn.btn-danger.btn-sm.m-1(disabled) Xóa
+              nav(style="margin-left:35px;padding-bottom:15px")
+                //- phân trang 
+                ul(class="pagination")
+                    if(ObjectPagination.currentPage > 1)
+                      li.page-item
+                          button.page-link(type="button", button-pagination=ObjectPagination.currentPage-1) Trang trước
+                    if (ObjectPagination.currentPage === 1) 
+                      //- Khi ở trang 1, hiển thị nút 1, 2, 3
+                      - for (var i = 1; i <= 3; i++)
+                          li(class=`page-item ${ObjectPagination.currentPage === i ? 'active' : ''}`)
+                            button.page-link(type='button', button-pagination=i) #{i}
+                    else if(ObjectPagination.currentPage === ObjectPagination.TotalPage) 
+                      //- Khi ở trang cuối, hiển thị 2 nút cuối
+                      - var startPage = Math.max(ObjectPagination.TotalPage - 2, 1); // Đảm bảo không nhỏ hơn 1
+                      - for (var i = startPage; i <= ObjectPagination.TotalPage; i++)
+                          li(class=`page-item ${ObjectPagination.currentPage === i ? 'active' : ''}`)
+                            button.page-link(type='button', button-pagination=i) #{i}  
+                    else if(ObjectPagination.currentPage !== ObjectPagination.TotalPage&&ObjectPagination.currentPage !==1)
+                      - var maxpage=ObjectPagination.currentPage+1;
+                      - for (var i = ObjectPagination.currentPage-1; i <=maxpage ; i++)
+                          li(class=`page-item ${ObjectPagination.currentPage == i ? "active" :""}`)
+                            button.page-link(type="button", button-pagination=i) #{i}
+                    if(ObjectPagination.currentPage<ObjectPagination.TotalPage)        
+                      li.page-item
+                        button.page-link(type="button", button-pagination=ObjectPagination.currentPage+1) Trang sau
 
     
   script(type="module",src="/admin/js/ListProduct.js")
