@@ -32,9 +32,15 @@ block content
             else
               div Trạng thái:
                 span(class="badge badge-danger") Dừng Hoạt Động
+            if(product.createdBy)
+              div 
+                span Người tạo: #{product.createdName}
             if(Time.createdAt)
               div 
                 span Ngày tạo: #{Time.createdAt}
+            if(product.updatedBy)
+              div 
+                span Người cập nhật: #{product.updatedName}
             if(Time.updatedAt)
               div 
                 span Cập nhật mới: #{Time.updatedAt}
