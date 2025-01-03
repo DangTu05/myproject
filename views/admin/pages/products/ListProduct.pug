@@ -388,20 +388,20 @@ html(lang="en")
                 li.nav-item.topbar-user.dropdown.hidden-caret
                   a.dropdown-toggle.profile-pic(data-bs-toggle="dropdown", href="#", aria-expanded="false")
                     .avatar-sm
-                      img.avatar-img.rounded-circle(src="/admin/img/profile.jpg", alt="...")
+                      img.avatar-img.rounded-circle(src=user.img, alt="...")
                     span.profile-username
                       span.op-7 Hi,
-                      span.fw-bold Hizrian
+                      span.fw-bold #{user.name}
                   ul.dropdown-menu.dropdown-user.animated.fadeIn
                     .dropdown-user-scroll.scrollbar-outer
                       li
                         .user-box
                           .avatar-lg
-                            img.avatar-img.rounded(src="/admin/img/profile.jpg", alt="image profile")
+                            img.avatar-img.rounded(src=`${user.img}`, alt="image profile")
                           .u-text
-                            h4 Hizrian
-                            p.text-muted hello@example.com
-                            a.btn.btn-xs.btn-secondary.btn-sm(href="profile.html") View Profile
+                            h4 #{user.name}
+                            p.text-muted #{user.email}
+                            a.btn.btn-xs.btn-secondary.btn-sm(href=`${prefixAdmin}/my-account`) View Profile
                       li
                         .dropdown-divider
                         a.dropdown-item(href="#") My Profile
@@ -410,7 +410,7 @@ html(lang="en")
                         .dropdown-divider
                         a.dropdown-item(href="#") Account Setting
                         .dropdown-divider
-                        a.dropdown-item(href="#") Logout
+                        a.dropdown-item(href=`${prefixAdmin}/auth/login`) Logout
           //  End Navbar 
       //  Custom template | don't include it in your project! 
       .custom-template
