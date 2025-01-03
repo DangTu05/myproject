@@ -3,7 +3,7 @@ module.exports.emailExist = async (req, res, next) => {
   try {
     const existingEmail = await Accounts.findOne({
       email: req.body.email,
-      _id: { $ne: req.params.id },
+      _id: { $ne: res.locals.user._id },
       deleted: false,
     });
     if (existingEmail) {

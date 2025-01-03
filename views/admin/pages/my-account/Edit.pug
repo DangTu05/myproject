@@ -1,0 +1,22 @@
+extends ../../layouts/default.pug
+include ../../mixins/select-category.pug
+block head 
+  link(rel="stylesheet", href="/admin/css/my-account/edit.css") 
+block sidebar
+block content
+  .form-edit
+    h1 Sửa tài khoản
+    form(enctype="multipart/form-data", id="editAccountForm")
+      label(for="name") Họ tên:
+      input#name(type="text",value=user.name, name="name" )
+      label(for="email") Email:
+      input#email(type="email",value=user.email, name="email" )
+      label(for="phone") Số điện thoại:
+      input#phone(name="phone",value=user.phone)
+      label(for="password" ) Mật khẩu:
+      input#password(type="password", name="password")
+      label(for="image") Avatar:
+      input#image(type="file", name="image", accept="image/*")
+      img.preview(src=user.img)
+      input(type="submit", value="Sửa tài khoản")
+  script(type="module", src="/admin/js/my-account/Edit.js") 

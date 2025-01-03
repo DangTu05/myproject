@@ -6,7 +6,7 @@ const Account = new Schema(
   {
     name: String,
     email: String,
-    img: String,
+    img: {type:String,default:""},
     token: {
       type: String,
       default: generateToken(20),

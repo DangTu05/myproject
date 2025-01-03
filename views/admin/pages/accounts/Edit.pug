@@ -1,7 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/select-category.pug
 block head 
-  link(rel="stylesheet", href="/admin/css/accounts/register.css") 
+  link(rel="stylesheet", href="/admin/css/accounts/create.css") 
 block sidebar
 block content
   if(role.permissions.includes('account_edit'))
@@ -21,7 +21,11 @@ block content
         label(for="role_id") Quyền
         select(name="role_id" id="role_id" class="form-control")
           option(disabled) --  Chọn quyền  --
-          option(value=Roles._id,selected) #{Roles.title}
+          each Role in Roles
+            if(Role._id == account.role_id)
+              option(value=Role._id,selected) #{Role.title}
+            else
+              option(value=Role._id) #{Role.title}
         img.preview(src=`${account.img}`)
         input(type="submit", value="Sửa")
     script(type="module", src="/admin/js/accounts/Edit.js") 

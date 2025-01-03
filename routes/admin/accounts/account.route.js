@@ -24,6 +24,7 @@ router.get(
 router.get("/edit/:id", AuthMiddleware.requireAuth, AccountController.showEdit);
 router.patch(
   "/edit/:id",
+  AuthMiddleware.requireAuth,
   upload.single("img"),
   validate.create,
   emailExist.emailExist,

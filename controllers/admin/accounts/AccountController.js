@@ -32,9 +32,10 @@ class AccountController {
 
   /// Show danh sách tài khoản
   async showAccounts(req, res, next) {
-    const accounts = await Accounts.find({ deleted: false }).select(
-      "-token -password"
-    );
+    const accounts = await Accounts.find({
+      deleted: false,
+      _id: { $ne: res.locals.user._id },
+    }).select("-token -password");
     // Lấy vai trò cho tất cả tài khoản đồng thời
     const roles = await Promise.all(
       accounts.map(async (item) => {
@@ -60,7 +61,7 @@ class AccountController {
   async showEdit(req, res, next) {
     const id = req.params.id;
     const account = await Accounts.findOne({ _id: id });
-    const Roles = await Role.findOne({ deleted: false, _id: account.role_id });
+    const Roles = await Role.find({ deleted: false });
     try {
       res.render("./admin/pages/accounts/Edit", {
         account: account,
@@ -75,20 +76,11 @@ class AccountController {
   /// Sửa thông tin tài khoản
   async edit(req, res, next) {
     const id = req.params.id;
-    const emailExist = await Accounts.findOne({
-      _id: { $ne: id },
-      email: req.body.email,
-      deleted: false,
-    });
     const updated = {
       user_id: res.locals.user._id,
       updateAt: new Date(),
     };
     try {
-      if (emailExist) {
-        ///Yêu cầu không đúng định dạng, không hợp lệ hoặc thiếu dữ liệu cần thiết.Server không thể xử lý yêu cầu do lỗi từ client
-        return res.json({ message: "Email đã tồn tại" });
-      }
       if (!req.file) {
         const account = await Accounts.findOne({ _id: id });
         req.body.img = account.img;
