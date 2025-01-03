@@ -8,6 +8,7 @@ const CreateCategory = require("./categories/Category.route");
 const Role = require("./roles/role.route");
 const Accounts = require("./accounts/account.route");
 const Auth = require("./auth/auth.route");
+const MyAccout = require("./my-account/index.route");
 function router(app) {
   const PATH_ADMIN = systemConfig.prefixAdmin;
   app.use(PATH_ADMIN + "/dashboard", Site_Admin);
@@ -19,5 +20,6 @@ function router(app) {
   app.use(PATH_ADMIN + "/account", Accounts);
   app.use(PATH_ADMIN + "/role", Role);
   app.use(PATH_ADMIN + "/auth", Auth);
+  app.use(PATH_ADMIN + "/my-account", MyAccout);
 }
 module.exports = router;

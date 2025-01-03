@@ -1,0 +1,29 @@
+extends ../../layouts/default.pug
+block head 
+  link(rel="stylesheet", href="/admin/css/my-account/index.css") 
+block sidebar
+block content 
+  div.main-content
+    div(class="my-account")
+      div(class="name")
+        h4(style="margin-bottom:0 !important") Họ và tên: #{user.name}
+      div(class="info-panel")
+        div(class="account-img")
+          img(class="image",src=user.img)
+        div(class="account-content")
+          h3 Thông tin cơ bản
+          div 
+            span Email: #{user.email}
+          div 
+            span Số điện thoại: #{user.phone}
+          div 
+            span Quyền: #{role.title}
+        div(class="Updated-in4")
+          h3 Thông tin cập nhật
+          div 
+            span Ngày tạo: #{user.time.createdAt}
+          div 
+            span Ngày cập nhật: #{user.time.updatedAt}
+    div(class="fix") 
+      a(href=`${prefixAdmin}/my-account/edit`,class="btn btn-warning btn-lg") Sửa
+

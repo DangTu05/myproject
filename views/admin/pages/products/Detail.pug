@@ -23,22 +23,22 @@ block content
             div 
               span Số lượng: #{product.quantity}
             div 
-              span Giá: ₫#{Price} 
+              span Giá: ₫ #{Price} 
           div(class="Updated-in4")
             h3 Thông tin cập nhật
-            if(product.status ==="active")
+            if(product.status === "active")
               div Trạng thái:  
-                span(class="badge badge-success" ) Hoạt Động
+                span(class = "badge badge-success" ) Hoạt Động
             else
               div Trạng thái:
-                span(class="badge badge-danger") Dừng Hoạt Động
+                span(class = "badge badge-danger" ) Dừng Hoạt Động
             if(product.createdBy)
               div 
                 span Người tạo: #{product.createdName}
             if(Time.createdAt)
               div 
                 span Ngày tạo: #{Time.createdAt}
-            if(product.updatedBy)
+            if(product.updatedBy.length > 0)
               div 
                 span Người cập nhật: #{product.updatedName}
             if(Time.updatedAt)
