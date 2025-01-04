@@ -1,2 +1,340 @@
-extends ../../layouts/main
-block head
+head
+  meta(charset="UTF-8")
+  meta(name="viewport", content="width=device-width,initial-scale=1")
+  title Grocery Mart
+  //  Favicon 
+  link(rel="apple-touch-icon", sizes="76x76", href="/client/home/assets/favicon/apple-touch-icon.png")
+  link(rel="icon", type="image/png", sizes="32x32", href="/client/home/assets/favicon/favicon-32x32.png")
+  link(rel="icon", type="image/png", sizes="16x16", href="/client/home/assets/favicon/favicon-16x16.png")
+  link(rel="manifest", href="/client/home/assets/favicon/site.webmanifest")
+  meta(name="msapplication-TileColor", content="#da532c")
+  meta(name="theme-color", content="#ffffff")
+  //  Fonts 
+  link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
+  //  Styles 
+  link(rel="stylesheet", href="/client/home/assets/css/main.css")
+  //  Scripts 
+  script(src="/client/home/assets/js/scripts.js")
+  //  Header 
+body
+  header#header.header
+    include ../../layouts/header-login.pug
+
+
+  
+  //  MAIN 
+  main.product-page
+    .container
+      //  Search bar 
+      .product-container
+        .search-bar.d-none.d-md-flex
+          input.search-bar__input(type="text", name, placeholder="Search for item")
+          button.search-bar__submit
+            img.search-bar__icon.icon(src="/client/home/assets/icons/search.svg", alt)
+      //  Breadcrumbs 
+      .product-container
+        ul.breadcrumbs
+          li
+            a.breadcrumbs__link(href="#!")
+              | Departments
+
+              img(src="/client/home/assets/icons/arrow-right.svg", alt)
+          li
+            a.breadcrumbs__link(href="#!")
+              | Coffee
+
+              img(src="/client/home/assets/icons/arrow-right.svg", alt)
+          li
+            a.breadcrumbs__link(href="#!")
+              | Coffee Beans
+
+              img(src="/client/home/assets/icons/arrow-right.svg", alt)
+          li
+            a.breadcrumbs__link.breadcrumbs__link--current(href="#!") LavAzza
+      //  Product info 
+      .product-container.prod-info-content
+        .row
+          .col-5.col-xl-6.col-lg-12
+            .prod-preview
+              .prod-preview__list
+                .prod-preview__item
+                  img.prod-preview__img(src=product.img, alt)
+                .prod-preview__item
+                  img.prod-preview__img(src=product.img, alt)
+                .prod-preview__item
+                  img.prod-preview__img(src=product.img, alt)
+                .prod-preview__item
+                  img.prod-preview__img(src=product.img, alt)
+              .prod-preview__thumbs
+                img.prod-preview__thumb-img.prod-preview__thumb-img--current(src=product.img, alt)
+          .col-7.col-xl-6.col-lg-12
+            form.form(action)
+              section.prod-info
+                h1.prod-info__heading.
+                  
+                  #{product.product_name}
+                  
+                .row
+                  .col-5.col-xxl-6.col-xl-12
+                    .prod-prop
+                      img.prod-prop__icon(src="/client/home/assets/icons/star.svg", alt)
+                      h4.prod-prop__title (3.5) 1100 reviews
+                    .prod-prop 
+                      span Số Lượng :#{product.quantity}
+                    .prod-prop 
+                      a.btn(style="background-color:rgb(35, 169, 35);",href="") Mua hàng
+                  .col-7.col-xxl-6.col-xl-12
+                    .prod-props
+                      .prod-info__card
+                        .prod-info__row
+                        p.prod-info__total-price #{Price} 
+                        .prod-info__row
+                          button.btn.btn--primary.prod-info__add-to-cart.
+                            
+                            Add to cart
+                            
+                          button.like-btn.prod-info__like-btn
+                            img.like-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
+                            img.like-btn__icon--liked(src="/client/home/assets/icons/heart-red.svg", alt)
+      //  Product content 
+      .product-container
+        .prod-tab.js-tabs
+          ul.prod-tab__list
+            li.prod-tab__item.prod-tab__item--current Description
+            li.prod-tab__item Review (1100)
+            li.prod-tab__item Similar
+          .prod-tab__contents
+            .prod-tab__content.prod-tab__content--current
+              .row
+                .col-8.col-xl-10.col-lg-12
+                  .text-content.prod-tab__text-content
+                    h2 Lorem ipsum dolor sit amet.
+                    p
+                      | Lorem ipsum dolor sit amet 
+                      a(href="#!") consectetur
+                      |  adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda
+
+                      a(href="#!") praesentium
+                      |  et! Illum dolorem est rem voluptas nam! Voluptatem.
+
+                    h3 Lorem ipsum dolor sit amet.
+                    p.
+                      
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                      
+                    p
+                      img(src="/client/home/assets/img/product/item-1.png", alt)
+                      em Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    blockquote
+                      p
+                        | Lorem ipsum dolor sit amet 
+                        em consectetur
+                        u adipisicing
+                        |  elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+
+                    h3 Lorem ipsum dolor sit amet.
+                    p.
+                      
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                      
+                    p.
+                      
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                      
+                    hr
+                    h2 Lorem ipsum dolor sit amet.
+                    p.
+                      
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                      
+                    p
+                      img(src="/client/home/assets/img/product/item-1.png", alt)
+                      em Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    p.
+                      
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                      
+                    p.
+                      
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                      
+                    hr
+                    h2 Lorem ipsum dolor sit amet.
+                    p.
+                      
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                      
+                    p.
+                      
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                      
+                    p
+                      img(src="/client/home/assets/img/product/item-1.png", alt)
+                      em Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    p.
+                      
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates dignissimos similique animi assumenda praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                      
+            .prod-tab__content
+              .prod-content
+                h2.prod-content__heading What our customers are saying
+                .row.row-cols-3.gx-lg-2.row-cols-md-1.gy-md-3
+                  //  Review card 1 
+                  .col
+                    .review-card
+                      .review-card__content
+                        img.review-card__avatar(src="/client/home/assets/img/avatar/avatar-1.png", alt)
+                        .review-card__info
+                          h4.review-card__title Jakir Hussen
+                          p.review-card__desc.
+                            
+                            Great product, I love this Coffee Beans
+                            
+                      .review-card__rating
+                        .review-card__star-list
+                          img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star-half.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star-blank.svg", alt)
+                        span.review-card__rating-title (3.5) Review
+                  //  Review card 2 
+                  .col
+                    .review-card
+                      .review-card__content
+                        img.review-card__avatar(src="/client/home/assets/img/avatar/avatar-2.png", alt)
+                        .review-card__info
+                          h4.review-card__title Jubed Ahmed
+                          p.review-card__desc.
+                            
+                            Awesome Coffee, I love this Coffee Beans
+                            
+                      .review-card__rating
+                        .review-card__star-list
+                          img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star-half.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star-blank.svg", alt)
+                        span.review-card__rating-title (3.5) Review
+                  //  Review card 3 
+                  .col
+                    .review-card
+                      .review-card__content
+                        img.review-card__avatar(src="/client/home/assets/img/avatar/avatar-3.png", alt)
+                        .review-card__info
+                          h4.review-card__title Delwar Hussain
+                          p.review-card__desc.
+                            
+                            Great product, I like this Coffee Beans
+                            
+                      .review-card__rating
+                        .review-card__star-list
+                          img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star-half.svg", alt)
+                          img.review-card__star(src="/client/home/assets/icons/star-blank.svg", alt)
+                        span.review-card__rating-title (3.5) Review
+            .prod-tab__content
+              .prod-content
+                h2.prod-content__heading Similar items you might like
+                .row.row-cols-6.row-cols-xl-4.row-cols-lg-3.row-cols-md-2.row-cols-sm-1.g-2
+                  //  Product card 1 
+                  .col
+                    article.product-card
+                      .product-card__img-wrap
+                        a(href="./product-detail.html")
+                          img.product-card__thumb(src="/client/home/assets/img/product/item-1.png", alt)
+                        button.like-btn.product-card__like-btn
+                          img.like-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
+                          img.like-btn__icon--liked(src="/client/home/assets/icons/heart-red.svg", alt)
+                      h3.product-card__title
+                        a(href="./product-detail.html") Coffee Beans - Espresso Arabica and Robusta Beans
+                      p.product-card__brand Lavazza
+                      .product-card__row
+                        span.product-card__price $47.00
+                        img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
+                        span.product-card__score 4.3
+                  //  Product card 2 
+                  .col
+                    article.product-card
+                      .product-card__img-wrap
+                        a(href="./product-detail.html")
+                          img.product-card__thumb(src="/client/home/assets/img/product/item-2.png", alt)
+                        button.like-btn.product-card__like-btn
+                          img.like-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
+                          img.like-btn__icon--liked(src="/client/home/assets/icons/heart-red.svg", alt)
+                      h3.product-card__title
+                        a(href="./product-detail.html") Lavazza Coffee Blends - Try the Italian Espresso
+                      p.product-card__brand Lavazza
+                      .product-card__row
+                        span.product-card__price $53.00
+                        img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
+                        span.product-card__score 3.4
+                  //  Product card 3 
+                  .col
+                    article.product-card
+                      .product-card__img-wrap
+                        a(href="./product-detail.html")
+                          img.product-card__thumb(src="/client/home/assets/img/product/item-3.png", alt)
+                        button.like-btn.like-btn--liked.product-card__like-btn
+                          img.like-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
+                          img.like-btn__icon--liked(src="/client/home/assets/icons/heart-red.svg", alt)
+                      h3.product-card__title
+                        a(href="./product-detail.html") Lavazza - Caffè Espresso Black Tin - Ground coffee
+                      p.product-card__brand Welikecoffee
+                      .product-card__row
+                        span.product-card__price $99.99
+                        img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
+                        span.product-card__score 5.0
+                  //  Product card 4 
+                  .col
+                    article.product-card
+                      .product-card__img-wrap
+                        a(href="./product-detail.html")
+                          img.product-card__thumb(src="/client/home/assets/img/product/item-4.png", alt)
+                        button.like-btn.product-card__like-btn
+                          img.like-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
+                          img.like-btn__icon--liked(src="/client/home/assets/icons/heart-red.svg", alt)
+                      h3.product-card__title
+                        a(href="./product-detail.html") Qualità Oro Mountain Grown - Espresso Coffee Beans
+                      p.product-card__brand Lavazza
+                      .product-card__row
+                        span.product-card__price $38.65
+                        img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
+                        span.product-card__score 4.4
+                  //  Product card 5 
+                  .col
+                    article.product-card
+                      .product-card__img-wrap
+                        a(href="./product-detail.html")
+                          img.product-card__thumb(src="/client/home/assets/img/product/item-1.png", alt)
+                        button.like-btn.product-card__like-btn
+                          img.like-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
+                          img.like-btn__icon--liked(src="/client/home/assets/icons/heart-red.svg", alt)
+                      h3.product-card__title
+                        a(href="./product-detail.html") Coffee Beans - Espresso Arabica and Robusta Beans
+                      p.product-card__brand Lavazza
+                      .product-card__row
+                        span.product-card__price $47.00
+                        img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
+                        span.product-card__score 4.3
+                  //  Product card 6 
+                  .col
+                    article.product-card
+                      .product-card__img-wrap
+                        a(href="./product-detail.html")
+                          img.product-card__thumb(src="/client/home/assets/img/product/item-2.png", alt)
+                        button.like-btn.product-card__like-btn
+                          img.like-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
+                          img.like-btn__icon--liked(src="/client/home/assets/icons/heart-red.svg", alt)
+                      h3.product-card__title
+                        a(href="./product-detail.html") Lavazza Coffee Blends - Try the Italian Espresso
+                      p.product-card__brand Lavazza
+                      .product-card__row
+                        span.product-card__price $53.00
+                        img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
+                        span.product-card__score 3.4
+  
+    

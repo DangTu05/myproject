@@ -1,0 +1,143 @@
+.container
+  .top-bar
+    //  More 
+    button.top-bar__more.d-none.d-lg-block.js-toggle(toggle-target="#navbar")
+      img.icon.top-bar__more-icon(src="/client/home/assets/icons/more.svg", alt)
+    //  Logo 
+    a.logo.top-bar__logo(href="./")
+      img.logo__img.top-bar__logo-img(src="/client/home/assets/icons/logo.svg", alt="grocerymart")
+      h1.logo__title.top-bar__logo-title 
+    //  Navbar 
+    nav#navbar.navbar.hide
+      button.navbar__close-btn.js-toggle(toggle-target="#navbar")
+        img.icon(src="/client/home/assets/icons/arrow-left.svg", alt)
+      a.nav-btn.d-none.d-md-flex(href="./checkout.html")
+        img.nav-btn__icon.icon(src="/client/home/assets/icons/buy.svg", alt)
+        span.nav-btn__title Cart
+        span.nav-btn__qnt 3
+      a.nav-btn.d-none.d-md-flex(href="#!")
+        img.nav-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
+        span.nav-btn__title Favorite
+        span.nav-btn__qnt 3
+    .navbar__overlay.js-toggle(toggle-target="#navbar")
+    //  Actions 
+    .top-act
+      .top-act__group.d-md-none.top-act__group--single
+        button.top-act__btn
+          img.icon.top-act__icon(src="/client/home/assets/icons/search.svg", alt)
+      .top-act__group.d-md-none
+        .top-act__btn-wrap
+          button.top-act__btn
+            img.icon.top-act__icon(src="/client/home/assets/icons/heart.svg", alt)
+            span.top-act__title 03
+          //  Dropdown 
+          .act-dropdown
+            .act-dropdown__inner
+              img.act-dropdown__arrow(src="/client/home/assets/icons/arrow-up.png", alt)
+              .act-dropdown__top
+                h2.act-dropdown__title You have 3 item(s)
+                a.act-dropdown__view-all(href="./favourite.html") 
+              .row.row-cols-3.gx-2.act-dropdown__list
+                //  Cart preview item 1 
+                .col
+                  article.cart-preview-item
+                    .cart-preview-item__img-wrap
+                      img.cart-preview-item__thumb(src="./assets/img/product/item-1.png", alt)
+                    h3.cart-preview-item__title Lavazza Coffee Blends
+                    p.cart-preview-item__price $329.00
+                //  Cart preview item 2 
+                .col
+                  article.cart-preview-item
+                    .cart-preview-item__img-wrap
+                      img.cart-preview-item__thumb(src="./assets/img/product/item-2.png", alt)
+                    h3.cart-preview-item__title Coffee Beans Espresso
+                    p.cart-preview-item__price $39.99
+                //  Cart preview item 3 
+                .col
+                  article.cart-preview-item
+                    .cart-preview-item__img-wrap
+                      img.cart-preview-item__thumb(src="./assets/img/product/item-3.png", alt)
+                    h3.cart-preview-item__title Qualità Oro Mountain
+                    p.cart-preview-item__price $47.00
+              .act-dropdown__separate
+              .act-dropdown__checkout
+                a.btn.btn--primary.btn--rounded.act-dropdown__checkout-btn(href="./checkout.html").
+                  
+                  Check Out All
+                  
+        .top-act__separate
+        .top-act__btn-wrap
+          button.top-act__btn
+            img.icon.top-act__icon(src="./assets/icons/buy.svg", alt)
+            span.top-act__title $65.42
+          //  Dropdown 
+          .act-dropdown
+            .act-dropdown__inner
+              img.act-dropdown__arrow(src="./assets/icons/arrow-up.png", alt)
+              .act-dropdown__top
+                h2.act-dropdown__title You have 3 item(s)
+                a.act-dropdown__view-all(href="./checkout.html") See All
+              .row.row-cols-3.gx-2.act-dropdown__list
+                //  Cart preview item 1 
+                .col
+                  article.cart-preview-item
+                    .cart-preview-item__img-wrap
+                      img.cart-preview-item__thumb(src="./assets/img/product/item-1.png", alt)
+                    h3.cart-preview-item__title Lavazza Coffee Blends
+                    p.cart-preview-item__price $329.00
+                //  Cart preview item 2 
+                .col
+                  article.cart-preview-item
+                    .cart-preview-item__img-wrap
+                      img.cart-preview-item__thumb(src="./assets/img/product/item-2.png", alt)
+                    h3.cart-preview-item__title Coffee Beans Espresso
+                    p.cart-preview-item__price $39.99
+                //  Cart preview item 3 
+                .col
+                  article.cart-preview-item
+                    .cart-preview-item__img-wrap
+                      img.cart-preview-item__thumb(src="./assets/img/product/item-3.png", alt)
+                    h3.cart-preview-item__title Qualità Oro Mountain
+                    p.cart-preview-item__price $47.00
+              .act-dropdown__bottom
+                .act-dropdown__row
+                  span.act-dropdown__label Subtotal
+                  span.act-dropdown__value $415.99
+                .act-dropdown__row
+                  span.act-dropdown__label Texes
+                  span.act-dropdown__value Free
+                .act-dropdown__row
+                  span.act-dropdown__label Shipping
+                  span.act-dropdown__value $10.00
+                .act-dropdown__row.act-dropdown__row--bold
+                  span.act-dropdown__label Total Price
+                  span.act-dropdown__value $425.99
+              .act-dropdown__checkout
+                a.btn.btn--primary.btn--rounded.act-dropdown__checkout-btn(href="./checkout.html").
+                  
+                  Check Out All
+                  
+      .top-act__user
+        img.top-act__avatar(src="./assets/img/avatar.jpg", alt)
+        //  Dropdown 
+        .act-dropdown.top-act__dropdown
+          .act-dropdown__inner.user-menu
+            img.act-dropdown__arrow.top-act__dropdown-arrow(src="./assets/icons/arrow-up.png", alt)
+            .user-menu__top
+              img.user-menu__avatar(src="./assets/img/avatar.jpg", alt)
+              div
+                p.user-menu__name John Smith
+                p @johnsmith
+            ul.user-menu__list
+              li
+                a.user-menu__link(href="./profile.html") Profile
+              li
+                a.user-menu__link(href="./favourite.html") Favourite list
+              li.user-menu__separate
+                a.user-menu__link#switch-theme-btn(href="#!")
+                  span Dark mode
+                  img.icon.user-menu__icon(src="./assets/icons/sun.svg", alt)
+              li
+                a.user-menu__link(href="#!") Settings
+              li.user-menu__separate
+                a.user-menu__link(href="./sign-in.html") Logout
