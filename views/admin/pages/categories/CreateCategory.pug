@@ -4,14 +4,14 @@ block head
   link(rel="stylesheet", href="/admin/css/products/Create.css") 
 block sidebar
 block content
-  if(role.permissions.includes('category.create'))
+  if(role.permissions.includes('category_create'))
     .form-create
       h1 Create Product
       form(enctype="multipart/form-data", id="createProductForm")
         label(for="name") Product Category:
         input#name(type="text", name="name")
         label(for="parent_id") Parent Id:
-        select(name="parent_id" id="parent_id" class="form-control")
+        select(name="parent_id" id="parent_id" class="form-control" required)
           option(value="") --  Chọn danh mục cha  --
           if(records)
             +Select-Category(records)

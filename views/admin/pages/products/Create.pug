@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../../mixins/select-category.pug
 block head 
   link(rel="stylesheet", href="/admin/css/products/Create.css") 
 block sidebar
@@ -15,6 +16,11 @@ block content
         input#quantity(type="number", name="quantity", required)
         label(for="price") Price:
         input#price(type="number", step="0.01", name="price", required)
+        label(for="category_id") Parent Id:
+        select(name="category_id" id="category_id" class="form-control")
+          option(value="") --  Chọn danh mục  --
+          if(records)
+            +Select-Category(records)
         label(for="image") Product Image:
         input#image(type="file", name="image", accept="", required)
         img.preview(src="")

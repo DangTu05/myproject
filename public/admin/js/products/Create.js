@@ -5,7 +5,7 @@ const img = document.querySelector("#image");
 const submit = document.querySelector("#createProductForm");
 const option = document.querySelector("#optionSelect");
 const preview = document.querySelector(".preview");
-
+const category_id=document.querySelector("#category_id");
 
 if (submit) {
   submit.addEventListener("submit", (e) => {
@@ -16,6 +16,7 @@ if (submit) {
     formData.append("quantity", quantity.value);
     formData.append("description", description.value);
     formData.append("Price", price.value);
+    formData.append("category_id", category_id.value);
     formData.append("img", img.files[0]); // Thêm tệp hình ảnh
     if (quantity.value && price.value ) {
       fetch("/admin/product/create", {

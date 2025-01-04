@@ -1,12 +1,16 @@
 const productCategories = require("../../../models/categories/category.model");
 const Products = require("../../../models/products/products");
 const buildCategoryTree = require("../../../helpers/products/buildCategoryTree.helper");
+const accountModel = require("../../../models/accounts/account.model");
 class CreateController {
   /// Show giao diện tạo sản phẩm
   async show(req, res, next) {
     try {
       const count = await Products.countDocuments({ deleted: false });
-      const categories = await productCategories.find({ deleted: false });
+      const categories = await productCategories.find({
+        deleted: false,
+        status: "active",
+      });
       const records = buildCategoryTree(categories);
       res.render("./admin/pages/categories/CreateCategory", {
         count: count,
