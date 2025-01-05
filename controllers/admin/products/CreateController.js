@@ -20,8 +20,6 @@ class CreateController {
   /// Tạo sản phẩm
   async create(req, res, next) {
     req.body.createdBy = res.locals.user._id;
-    console.log(req.body);
-    
     const product = new Products(req.body);
     try {
       await product.save();

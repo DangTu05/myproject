@@ -9,7 +9,7 @@ const product = new Schema(
     img: {type:String,unique:true},
     slug: { type: String, unique: true },
     Price: Number,
-    description: {type:String, default:""},
+    description: {type:String,default:""},
     status: { type: String, default: "active" },
     deleted: { type: Boolean, default: false },
     featured: String,

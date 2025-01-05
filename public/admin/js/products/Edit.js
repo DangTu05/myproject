@@ -11,12 +11,14 @@ const id = window.location.pathname.split('/').pop();
 if (submit) {
   submit.addEventListener("submit", (e) => {    
     e.preventDefault();
+    const featured = document.querySelector("input[name='featured']:checked");
     const description = tinymce.get("description").getContent();
     const formData = new FormData();
     formData.append("product_name", product_name.value);
     formData.append("quantity", quantity.value);
-    formData.append("description", description.value);
+    formData.append("description", description);
     formData.append("Price", price.value);
+    formData.append("featured", featured.value);
     formData.append("img", img.files[0]); // Thêm tệp hình ảnh
     if (product_name.value && quantity.value ) {
       fetch(`/admin/product/edit/${id}`, {

@@ -14,7 +14,7 @@ if (submit) {
     const formData = new FormData();
     formData.append("product_name", product_name.value);
     formData.append("quantity", quantity.value);
-    formData.append("description", description.value);
+    formData.append("description", description);
     formData.append("featured", featured.value);
     formData.append("Price", price.value);
     formData.append("category_id", category_id.value);

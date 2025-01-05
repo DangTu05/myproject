@@ -28,6 +28,9 @@ class EditController {
       const product = await Products.findOne({ _id: id });
       req.body.img = product.img;
     }
+    if(!req.body.description){
+      delete req.body.description;
+    }
     try {
       await Products.updateOne({ _id: id }, req.body);
       await Products.updateOne({ _id: id }, { $push: { updatedBy: updated } });
