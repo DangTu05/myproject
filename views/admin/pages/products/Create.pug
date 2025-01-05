@@ -16,6 +16,12 @@ block content
         input#quantity(type="number", name="quantity", required)
         label(for="price") Price:
         input#price(type="number", step="0.01", name="price", required)
+        div.d-flex(style="align-items:center" class="form-group form-check form-check-inline")
+          input(type="radio" class="form-check-input" value="1" id="featured1" name="featured")
+          label(for="featured1" class="form-check-label") Nổi bật
+        div.d-flex(style="align-items:center" class="form-group form-check form-check-inline")
+          input(type="radio" class="form-check-input" value="0" id="featured0" name="featured" )
+          label(for="featured0" class="form-check-label") Không 
         label(for="category_id") Parent Id:
         select(name="category_id" id="category_id" class="form-control")
           option(value="") --  Chọn danh mục  --

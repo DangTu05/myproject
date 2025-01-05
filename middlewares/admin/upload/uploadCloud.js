@@ -24,7 +24,6 @@ module.exports.upload = async (req, res, next) => {
               return reject(error);
             }
             resolve(result);
-            console.log(result);
             req.body[req.file.fieldname] = result.url;
             next();
           }
