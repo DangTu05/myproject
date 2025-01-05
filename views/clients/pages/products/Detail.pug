@@ -17,10 +17,13 @@ head
   script(src="/client/home/assets/js/scripts.js")
   //  Header 
 body
+
+  //  Header 
   header#header.header
-    include ../../layouts/header-login.pug
-
-
+  script.
+    
+    load("#header", "/client/home/templates/header-logined.html");
+    
   
   //  MAIN 
   main.product-page
@@ -336,5 +339,9 @@ body
                         span.product-card__price $53.00
                         img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
                         span.product-card__score 3.4
-  
+  footer#footer.footer
+  script.
+    
+    load("#footer", "/client/home/templates/footer.html");
+    
     
