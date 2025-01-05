@@ -5,7 +5,7 @@ const password = document.querySelector("#password");
 const img = document.querySelector("#image");
 const preview = document.querySelector(".preview");
 const phone = document.querySelector("#phone");
-const select=document.querySelector("#role_id");
+const select = document.querySelector("#role_id");
 if (submit) {
   submit.addEventListener("submit", (e) => {
     e.preventDefault(); // Ngăn chặn hành động gửi mẫu mặc định
@@ -28,6 +28,10 @@ if (submit) {
         return response.json(); // Chuyển đổi phản hồi thành JSON nếu thành công
       })
       .then((res) => {
+        if (res.message === "Bạn không có quyền tạo tài khoản") {
+          alert(res.message);
+          return;
+        }
         if (
           res.message === "Họ không được để trống!" ||
           res.message === "Email không được để trống!" ||
@@ -52,4 +56,3 @@ img.addEventListener("change", () => {
   }
 });
 ///end preview img
-

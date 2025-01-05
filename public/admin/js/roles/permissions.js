@@ -48,7 +48,11 @@ if (tablePermission) {
               return response.json();
             }
           })
-          .then(() => {
+          .then((res) => {
+            if(res.message === "Bạn không có quyền cập nhật quyền"){
+              alert(res.message);
+              return;
+            }
             Swal.fire({
               title: "Thành công!",
               text: "Bạn đã cập nhật thành công!",

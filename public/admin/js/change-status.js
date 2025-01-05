@@ -13,7 +13,12 @@ if (ChangeStatus) {
           status: ChangeStatus,
         },
         success: function (response) {
-          location.reload();
+          if (response.message === "Bạn không có quyền sửa") {
+            alert(res.message);
+            return;
+          } else {
+            location.reload();
+          }
         },
         error: function () {
           alert("Lỗi!!!");

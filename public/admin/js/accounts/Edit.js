@@ -30,6 +30,10 @@ if (submit) {
         return response.json(); // Chuyển đổi phản hồi thành JSON nếu thành công
       })
       .then((res) => {
+        if (res.message === "Bạn không có quyền sửa tài khoản") {
+          alert(res.message);
+          return;
+        }
         if (
           res.message === "Họ tên không được để trống!" ||
           res.message === "Email không được để trống!"

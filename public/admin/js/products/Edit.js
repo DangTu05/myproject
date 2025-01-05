@@ -6,10 +6,10 @@ const submit = document.querySelector("#EditProductForm");
 const option = document.querySelector("#optionSelect");
 const preview = document.querySelector(".preview");
 /// lấy ra id gửi lên từ url
-const id = window.location.pathname.split('/').pop();
+const id = window.location.pathname.split("/").pop();
 
 if (submit) {
-  submit.addEventListener("submit", (e) => {    
+  submit.addEventListener("submit", (e) => {
     e.preventDefault();
     const featured = document.querySelector("input[name='featured']:checked");
     const description = tinymce.get("description").getContent();
@@ -20,7 +20,7 @@ if (submit) {
     formData.append("Price", price.value);
     formData.append("featured", featured.value);
     formData.append("img", img.files[0]); // Thêm tệp hình ảnh
-    if (product_name.value && quantity.value ) {
+    if (product_name.value && quantity.value) {
       fetch(`/admin/product/edit/${id}`, {
         method: "PATCH",
         body: formData,
@@ -33,6 +33,14 @@ if (submit) {
           return response.json(); // Chuyển đổi phản hồi thành JSON nếu thành công
         })
         .then((res) => {
+          if (res.message === "Tên sản phẩm không được để trống!") {
+            alert("Tên sản phẩm không được trống!");
+            return;
+          }
+          if (res.message === "Bạn không có quyền tạo sản phẩm") {
+            alert(res.message);
+            return;
+          }
           alert("Đã cập nhật thành công!");
           window.location.href = "";
         })

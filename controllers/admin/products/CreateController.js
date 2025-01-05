@@ -19,13 +19,18 @@ class CreateController {
 
   /// Tạo sản phẩm
   async create(req, res, next) {
-    req.body.createdBy = res.locals.user._id;
-    const product = new Products(req.body);
-    try {
-      await product.save();
-      return res.status(200).json({ message: "Thành công!" });
-    } catch (err) {
-      return res.status(500).json({ message: "Đã xảy ra lỗi" });
+    const role = res.locals.role;
+    if (!role.permissions.includes("product_create")) {
+      return res.json({message:"Bạn không có quyền tạo sản phẩm"})
+    } else {
+      req.body.createdBy = res.locals.user._id;
+      const product = new Products(req.body);
+      try {
+        // await product.save();
+        return res.status(200).json({ message: "Thành công!" });
+      } catch (err) {
+        return res.status(500).json({ message: "Đã xảy ra lỗi" });
+      }
     }
   }
   /// end tạo sản phẩm

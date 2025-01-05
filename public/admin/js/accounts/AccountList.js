@@ -40,7 +40,11 @@ if (remove) {
                 return response.json();
               }
             })
-            .then(() => {
+            .then((res) => {
+              if (res.message === "Bạn không có quyền xóa tài khoản") {
+                alert(res.message);
+                return;
+              }
               Swal.fire({
                 title: "Xóa!",
                 text: "Bạn đã xóa thành công!",

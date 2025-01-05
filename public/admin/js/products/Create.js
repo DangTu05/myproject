@@ -36,6 +36,10 @@ if (submit) {
             alert("Tên sản phẩm không được trống!");
             return;
           }
+          if (res.message === "Bạn không có quyền tạo sản phẩm") {
+            alert(res.message);
+            return;
+          }
           alert("Đã tạo thành công!");
           window.location.href = "/admin/Products";
         })

@@ -4,13 +4,13 @@ const img = document.querySelector("#image");
 const submit = document.querySelector("#createProductForm");
 const option = document.querySelector("#optionSelect");
 const preview = document.querySelector(".preview");
-const Delete=document.querySelector(".delete");
+const Delete = document.querySelector(".delete");
 
 if (submit) {
   submit.addEventListener("submit", (e) => {
     e.preventDefault();
     const description = tinymce.get("description").getContent();
-    const formData = new FormData(); 
+    const formData = new FormData();
     formData.append("category_name", category_name.value);
     formData.append("parent_id", parent_id.value);
     formData.append("description", description.value);
@@ -28,6 +28,10 @@ if (submit) {
         return response.json(); // Chuyển đổi phản hồi thành JSON nếu thành công
       })
       .then((res) => {
+        if (res.message === "Bạn không có quyền tạo danh mục sản phẩm") {
+          alert(res.message);
+          return;
+        }
         if (res.message === "Tên danh mục không được để trống!") {
           alert("Tên danh mục không được trống!");
           return;
@@ -47,4 +51,3 @@ img.addEventListener("change", () => {
   preview.src = URL.createObjectURL(file);
 });
 ///end preview img
-

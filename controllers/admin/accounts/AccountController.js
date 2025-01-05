@@ -9,23 +9,30 @@ class AccountController {
       res.render("./admin/pages/accounts/Create", {
         Roles: Roles,
       });
-    } catch (error) {}
+    } catch (error) {
+      res.redirect("/admin/dashboard");
+    }
   }
   /// End show giao diện tạo tk
 
   /// Tạo tài khoản
   async create(req, res, next) {
-    try {
-      if (!req.file) {
-        req.body.img = "";
+    const role = res.locals.role;
+    if (!role.permissions.includes("account_create")) {
+      return res.json({ message: "Bạn không có quyền tạo tài khoản" });
+    } else {
+      try {
+        if (!req.file) {
+          req.body.img = "";
+        }
+        req.body.createdBy = res.locals.user._id;
+        req.body.password = md5(req.body.password);
+        const account = new Accounts(req.body);
+        account.save();
+        return res.status(200).json({ message: "Tạo thành công!" });
+      } catch (error) {
+        return res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
-      req.body.createdBy = res.locals.user._id;
-      req.body.password = md5(req.body.password);
-      const account = new Accounts(req.body);
-      account.save();
-      return res.status(200).json({ message: "Tạo thành công!" });
-    } catch (error) {
-      return res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
   /// End tạo tk
@@ -75,40 +82,53 @@ class AccountController {
 
   /// Sửa thông tin tài khoản
   async edit(req, res, next) {
-    const id = req.params.id;
-    const updated = {
-      user_id: res.locals.user._id,
-      updateAt: new Date(),
-    };
-    try {
-      if (!req.file) {
-        const account = await Accounts.findOne({ _id: id });
-        req.body.img = account.img;
+    const role = res.locals.role;
+    if (!role.permissions.includes("account_edit")) {
+      return res.json({ message: "Bạn không có quyền sửa tài khoản" });
+    } else {
+      const id = req.params.id;
+      const updated = {
+        user_id: res.locals.user._id,
+        updateAt: new Date(),
+      };
+      try {
+        if (!req.file) {
+          const account = await Accounts.findOne({ _id: id });
+          req.body.img = account.img;
+        }
+        if (req.body.password) {
+          req.body.password = md5(req.body.password);
+        } else {
+          delete req.body.password;
+        }
+        await Accounts.updateOne({ _id: id }, req.body);
+        await Accounts.updateOne(
+          { _id: id },
+          { $push: { updatedBy: updated } }
+        );
+        res.status(200).json({ message: "Cập nhật thành công" });
+      } catch (error) {
+        res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
-      if (req.body.password) {
-        req.body.password = md5(req.body.password);
-      } else {
-        delete req.body.password;
-      }
-      await Accounts.updateOne({ _id: id }, req.body);
-      await Accounts.updateOne({ _id: id }, { $push: { updatedBy: updated } });
-      res.status(200).json({ message: "Cập nhật thành công" });
-    } catch (error) {
-      res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
   /// End sửa thông tin tài khoản
 
   /// Xóa tài khoản
   async delete(req, res, next) {
-    const id = req.body._id;
-    const deletedBy = res.locals.user._id;
-    try {
-      await Accounts.updateOne({ _id: id }, { deletedBy: deletedBy });
-      await Accounts.delete({ _id: id });
-      res.status(200).json({ message: "Xóa thành công" });
-    } catch (error) {
-      res.status(500).json({ message: "Đã xảy ra lỗi" });
+    const role = res.locals.role;
+    if (!role.permissions.includes("account_delete")) {
+      return res.json({ message: "Bạn không có quyền xóa tài khoản" });
+    } else {
+      const id = req.body._id;
+      const deletedBy = res.locals.user._id;
+      try {
+        await Accounts.updateOne({ _id: id }, { deletedBy: deletedBy });
+        await Accounts.delete({ _id: id });
+        res.status(200).json({ message: "Xóa thành công" });
+      } catch (error) {
+        res.status(500).json({ message: "Đã xảy ra lỗi" });
+      }
     }
   }
   /// End xóa tài khoản

@@ -36,7 +36,11 @@ if (deleteRole) {
                 return response.json();
               }
             })
-            .then(() => {
+            .then((res) => {
+              if(res.message==="Bạn không có quyền xóa nhóm quyền"){
+                alert(res.message);
+                return;
+              }
               Swal.fire({
                 title: "Xóa!",
                 text: "Bạn đã xóa thành công!",

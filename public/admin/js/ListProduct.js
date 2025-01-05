@@ -92,7 +92,11 @@ if (Apply) {
         .then((response) => {
           return response.json(); // Chỉ gọi json nếu không có lỗi
         })
-        .then(() => {
+        .then((res) => {
+          if (res.message === "Bạn không có quyền sửa") {
+            alert(res.message);
+            return;
+          }
           location.reload(); // Tải lại trang nếu thành công
         })
         .catch((error) => {
@@ -132,7 +136,11 @@ if (Delete) {
                 return response.json();
               }
             })
-            .then(() => {
+            .then((res) => {
+              if (res.message === "Bạn không có quyền xóa") {
+                alert(res.message);
+                return;
+              }
               Swal.fire({
                 title: "Xóa!",
                 text: "Bạn đã xóa thành công!",
@@ -208,7 +216,11 @@ if (Apply) {
                 return response.json();
               }
             })
-            .then(() => {
+            .then((res) => {
+              if (res.message === "Bạn không có quyền tạo xóa") {
+                alert(res.message);
+                return;
+              }
               Swal.fire({
                 title: "Xóa!",
                 text: "Bạn đã xóa thành công!",

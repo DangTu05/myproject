@@ -17,7 +17,11 @@ if (submit) {
         description: description, // Gửi nội dung
       }),
     })
-      .then(() => {
+      .then((res) => {
+        if(res.message === "Bạn không có quyền sửa nhóm quyền"){
+          alert(res.message);
+          return;
+        }
         alert("Cập nhật thành công!");
         window.location.href = `/admin/role/edit/${id}`;
       })

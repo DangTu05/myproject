@@ -13,13 +13,17 @@ class RoleController {
 
   /// xử lý tạo role
   async create(req, res, next) {
-    req.body.createdBy = res.locals.user._id;
-    const role = new Role(req.body);
-    try {
-      await role.save();
-      return res.status(200).json({ message: "Tạo thành công!" });
-    } catch (error) {
-      return res.status(500).json({ message: "Đã xảy ra lỗi" });
+    if (!res.locals.role.permissions.includes("role_create")) {
+      return res.json({ message: "Bạn không có quyền tạo nhóm quyền" });
+    } else {
+      req.body.createdBy = res.locals.user._id;
+      const role = new Role(req.body);
+      try {
+        await role.save();
+        return res.status(200).json({ message: "Tạo thành công!" });
+      } catch (error) {
+        return res.status(500).json({ message: "Đã xảy ra lỗi" });
+      }
     }
   }
   /// end xử lý tạo role
@@ -61,14 +65,19 @@ class RoleController {
 
   /// Xử lý xóa role
   async delete(req, res, next) {
-    const id = req.body._id;
-    const deletedBy = res.locals.user._id;
-    try {
-      await Role.updateOne({ _id: id }, { deletedBy: deletedBy });
-      await Role.delete({ _id: id });
-      return res.status(200).json({ message: "Xóa thành công" });
-    } catch (error) {
-      return res.status(500).json({ message: "Đã xảy ra lỗi" });
+    const role = res.locals.role;
+    if (!role.permissions.includes("role_delete")) {
+      return res.json({ message: "Bạn không có quyền xóa nhóm quyền" });
+    } else {
+      const id = req.body._id;
+      const deletedBy = res.locals.user._id;
+      try {
+        await Role.updateOne({ _id: id }, { deletedBy: deletedBy });
+        await Role.delete({ _id: id });
+        return res.status(200).json({ message: "Xóa thành công" });
+      } catch (error) {
+        return res.status(500).json({ message: "Đã xảy ra lỗi" });
+      }
     }
   }
   /// End xử lý xóa role
@@ -88,46 +97,56 @@ class RoleController {
 
   /// Xử lý edit nhóm quyền
   async edit(req, res, next) {
-    const id = req.params.id;
-    const updated = {
-      user_id: res.locals.user._id,
-      updateAt: new Date(),
-    };
-    const { title, description } = req.body;
-    try {
-      await Role.updateOne(
-        { _id: id },
-        { title: title, description: description }
-      );
-      await Role.updatedOne({ _id: id }, { $push: { updatedBy: updated } });
-      return res.status(200).json({ message: "Cập nhật thành công" });
-    } catch (error) {
-      return res.status(500).json({ message: "Đã xảy ra lỗi" });
+    const role = res.locals.role;
+    if (!role.permissions.includes("role_edit")) {
+      return res.json({ message: "Bạn không có quyền sửa nhóm quyền" });
+    } else {
+      const id = req.params.id;
+      const updated = {
+        user_id: res.locals.user._id,
+        updateAt: new Date(),
+      };
+      const { title, description } = req.body;
+      try {
+        await Role.updateOne(
+          { _id: id },
+          { title: title, description: description }
+        );
+        await Role.updatedOne({ _id: id }, { $push: { updatedBy: updated } });
+        return res.status(200).json({ message: "Cập nhật thành công" });
+      } catch (error) {
+        return res.status(500).json({ message: "Đã xảy ra lỗi" });
+      }
     }
   }
   /// End xử lý nhóm quyền
 
   /// Cập nhật quyền
   async updatePermissions(req, res, next) {
-    const permissions = req.body.permissions;
-    const updated = {
-      user_id: res.locals.user._id,
-      updateAt: new Date(),
-    };
-    try {
-      for (const item of permissions) {
-        await Role.updateOne(
-          { _id: item._id },
-          { permissions: item.permissions }
-        );
-        await Role.updateOne(
-          { _id: item._id },
-          { $push: { updatedBy: updated } }
-        );
+    const role = res.locals.role;
+    if (role.permissions.includes("role_premission")) {
+      return res.json({ message: "Bạn không có quyền cập nhật quyền" });
+    } else {
+      const permissions = req.body.permissions;
+      const updated = {
+        user_id: res.locals.user._id,
+        updateAt: new Date(),
+      };
+      try {
+        for (const item of permissions) {
+          await Role.updateOne(
+            { _id: item._id },
+            { permissions: item.permissions }
+          );
+          await Role.updateOne(
+            { _id: item._id },
+            { $push: { updatedBy: updated } }
+          );
+        }
+        res.status(200).json({ message: "Cập nhật thành công" });
+      } catch (error) {
+        res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
-      res.status(200).json({ message: "Cập nhật thành công" });
-    } catch (error) {
-      res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
   /// End cập nhật quyền

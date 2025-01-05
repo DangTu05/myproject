@@ -25,6 +25,10 @@ if (ChangeStatus) {
           status: ChangeStatus,
         },
         success: function (response) {
+          if (response.message === "Bạn không có quyền sửa danh mục sản phẩm") {
+            alert(res.message);
+            return;
+          }
           location.reload();
         },
         error: function () {
@@ -87,7 +91,11 @@ if (Delete) {
               }
               return response.json(); // Đọc dữ liệu JSON nếu thành công
             })
-            .then((data) => {
+            .then((res) => {
+              if (res.message === "Bạn không có quyền xóa danh mục sản phẩm") {
+                alert(res.message);
+                return;
+              }
               // Xử lý khi thành công
               Swal.fire({
                 title: "Xóa!",
@@ -152,7 +160,11 @@ if (Apply) {
         .then((response) => {
           return response.json();
         })
-        .then(() => {
+        .then((res) => {
+          if (res.message === "Bạn không có quyền sửa danh mục sản phẩm") {
+            alert(res.message);
+            return;
+          }
           location.reload();
         })
         .catch((err) => {
@@ -204,7 +216,11 @@ if (Apply) {
                 return response.json();
               }
             })
-            .then(() => {
+            .then((res) => {
+              if (res.message === "Bạn không có quyền xóa danh mục sản phẩm") {
+                alert(res.message);
+                return;
+              }
               Swal.fire({
                 title: "Xóa!",
                 text: "Bạn đã xóa thành công!",

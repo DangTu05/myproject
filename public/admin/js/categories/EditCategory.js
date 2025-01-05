@@ -5,7 +5,7 @@ const submit = document.querySelector("#editProductForm");
 const preview = document.querySelector(".preview");
 const Delete = document.querySelector(".delete");
 /// lấy ra id gửi lên từ url
-const id = window.location.pathname.split('/').pop();
+const id = window.location.pathname.split("/").pop();
 if (submit) {
   submit.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -27,6 +27,10 @@ if (submit) {
         return response.json(); // Chuyển đổi phản hồi thành JSON nếu thành công
       })
       .then((res) => {
+        if (res.message === "Bạn không có quyền sửa danh mục sản phẩm") {
+          alert(res.message);
+          return;
+        }
         if (res.message === "Tên danh mục không được để trống!") {
           alert("Tên danh mục không được trống!");
           return;
