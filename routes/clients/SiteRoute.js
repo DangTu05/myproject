@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const SiteController = require("../../controllers/clients/SiteController");
-router.get("/", SiteController.show);
+const locals = require("../../middlewares/client/products/Home.Middleware");
+router.get("/", locals.locals, SiteController.show);
 module.exports = router;

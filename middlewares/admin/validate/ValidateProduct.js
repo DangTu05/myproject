@@ -7,16 +7,16 @@ class Validate {
     if (!req.body.Price) {
       res.json({ message: "Giá không được để trống!" });
     }
-    if(req.body.Price<0){
+    if (req.body.Price < 0) {
       res.json({ message: "Giá không được âm!" });
     }
-    if(!req.body.quantity){
+    if (!req.body.quantity) {
       res.json({ message: "Số lượng không được để trống!" });
     }
-    if(req.body.quantity<0){
+    if (req.body.quantity < 0) {
       res.json({ message: "Số lượng không được âm!" });
     }
-    if(!req.body.parent_id){
+    if (!req.body.parent_id) {
       res.json({ message: "Danh mục không được để trống!" });
     }
     next();

@@ -19,7 +19,6 @@ router.post(
   "/category/create",
   AuthMiddleware.requireAuth,
   upload.single("img"),
-  validate.create,
   uploadCloud.upload,
   CategoryController.create
 );
@@ -34,7 +33,6 @@ router.patch(
   "/category/edit/:id",
   AuthMiddleware.requireAuth,
   upload.single("img"),
-  validate.create,
   uploadCloud.upload,
   CategoryController.Edit
 );

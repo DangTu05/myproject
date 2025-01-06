@@ -1,0 +1,70 @@
+.menu-item {
+  position: relative;
+  /* border-bottom: 1px solid #eee; */
+}
+
+.menu-item a {
+  display: block;
+  padding: 12px 15px;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.navbar__item a {
+  display: block;
+  padding: 12px 15px;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Mũi tên cho danh mục cha */
+.has-submenu > a::after {
+  content: "›";
+  position: absolute;
+  right: 9px;
+  transition: transform 0.3s ease;
+}
+
+/* Danh mục con */
+.submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 200px;
+  background: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.navbar__item:hover > a {
+  background-color: #ffc234;
+}
+/* Hiệu ứng hover */
+.menu-item:hover > a {
+  background-color: #ffc234;
+}
+
+.menu-item:hover > .submenu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .submenu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    display: none;
+  }
+
+  .menu-item:hover > .submenu {
+    display: block;
+  }
+
+  .has-submenu > a::after {
+    transform: rotate(90deg);
+  }
+}

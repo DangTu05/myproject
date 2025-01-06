@@ -7,7 +7,7 @@ const Apply = document.querySelector(".apply");
 const selectElement = document.querySelector('select[name="type"]');
 /// Đẩy về trang tạo danh mục
 Add_Category.onclick = (e) => {
-  window.location.href = "/admin/category/create";
+  window.location.href = "/admin/category/create"
 };
 // end đẩy về trang tạo danh mục
 /// Thay đổi trạng thái

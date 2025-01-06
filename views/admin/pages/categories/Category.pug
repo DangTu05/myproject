@@ -476,10 +476,10 @@ html(lang="en")
                           button(type="submit" class="apply btn btn-primary") Áp Dụng
                         else 
                           span(class="btn btn-primary" disabled) Áp Dụng
-                        if(role.permissions.includes('category_delete'))
-                          button(type="submit" class="apply btn btn-danger") Xóa
+                        if(role.permissions.includes('category_create'))
+                          button(class="btn btn-primary add-category") Thêm Sản Phẩm
                         else 
-                          span(class="btn btn-danger" disabled) Xóa
+                          span(type="" class="btn btn-primary " disabled) Thêm Sản Phẩm
                       .table-responsive
                         table.table
                           thead

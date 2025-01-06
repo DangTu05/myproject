@@ -31,10 +31,6 @@ if (submit) {
           alert(res.message);
           return;
         }
-        if (res.message === "Tên danh mục không được để trống!") {
-          alert("Tên danh mục không được trống!");
-          return;
-        }
         alert("Sửa thành công!");
         window.location.href = "";
       })

@@ -6,12 +6,12 @@ block sidebar
 block content
   if(role.permissions.includes('category_create'))
     .form-create
-      h1 Create Product
+      h1 Create Category
       form(enctype="multipart/form-data", id="createProductForm")
-        label(for="name") Product Category:
+        label(for="name") Category Name:
         input#name(type="text", name="name")
         label(for="parent_id") Parent Id:
-        select(name="parent_id" id="parent_id" class="form-control" required)
+        select(name="parent_id" id="parent_id" class="form-control")
           option(value="") --  Chọn danh mục cha  --
           if(records)
             +Select-Category(records)
