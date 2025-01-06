@@ -36,6 +36,26 @@ if (submit) {
             alert("Tên sản phẩm không được trống!");
             return;
           }
+          if (res.message === "Giá không được để trống!") {
+            alert("Giá không được để trống!");
+            return;
+          }
+          if (res.message === "Giá không được âm!") {
+            alert("Giá không được âm!");
+            return;
+          }
+          if (res.message === "Số lượng không được để trống!") {
+            alert("Số lượng không được để trống!");
+            return;
+          }
+          if (res.message === "Số lượng không được âm!") {
+            alert("Số lượng không được âm!");
+            return;
+          }
+          if (res.message === "Danh mục không được để trống!") {
+            alert("Danh mục không được để trống!");
+            return;
+          }
           if (res.message === "Bạn không có quyền tạo sản phẩm") {
             alert(res.message);
             return;
