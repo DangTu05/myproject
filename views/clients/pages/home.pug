@@ -36,32 +36,17 @@ body
     //  Browse Categories 
     section.home__container
       .home__row
-        h2.home__heading Browse Categories
+        h2.home__heading Featured Product
       .home__cate.row.row-cols-3.row-cols-md-1
-        //  Category item 1 
-        .col
-          a(href="#!")
-            article.cate-item
-              img.cate-item__thumb(src="/client/home/assets/img/category-item/item-1.png", alt)
-              .cate-item__info
-                h3.cate-item__title $24 - $150
-                p.cate-item__desc New sumatra mandeling coffe blend
-        //  Category item 2 
-        .col
-          a(href="#!")
-            article.cate-item
-              img.cate-item__thumb(src="/client/home/assets/img/category-item/item-2.png", alt)
-              .cate-item__info
-                h3.cate-item__title $37 - $160
-                p.cate-item__desc Espresso arabica and robusta beans
-        //  Category item 3 
-        .col
-          a(href="#!")
-            article.cate-item
-              img.cate-item__thumb(src="/client/home/assets/img/category-item/item-3.png", alt)
-              .cate-item__info
-                h3.cate-item__title $32 - $160
-                p.cate-item__desc Lavazza top class whole bean coffee blend
+        //  Featured Product
+        each item,index in featuredProducts
+          .col
+            a(href="#!")
+              article.cate-item
+                img.cate-item__thumb(src=item.img, alt)
+                .cate-item__info
+                  h3.cate-item__title #{priceArray[index]}
+                  p.cate-item__desc !{item.description}
     //  Browse Products 
     section.home__container
       .home__row
