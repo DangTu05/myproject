@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+.sidebar {
+  width: 250px;
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+}
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.price-filter {
+  margin-top: 15px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 13px;
+}
+
+.filter-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+.sort-bar {
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+}
+.sort-option {
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+}
+
+.sort-option:hover {
+  background-color:  #ffc234;
+  color:aliceblue
+}

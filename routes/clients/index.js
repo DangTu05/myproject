@@ -1,7 +1,7 @@
 const show = require("./SiteRoute");
-const detail = require("./Product.route");
+const products = require("./Product.route");
 function route(app) {
   app.use("/home", show);
-  app.use("/product", detail);
+  app.use("/product", products);
 }
 module.exports = route;

@@ -3,18 +3,7 @@ const { mutipleMongooseToObject } = require("../../util/mongoose");
 class SiteController {
   async show(req, res, next) {
     try {
-      let find = {};
-      let Price = [];
-      find.deleted = false;
-      const products = await Products.find(find);
-      products.forEach((item) => {
-        const price = item.Price.toLocaleString("vi-VN");
-        Price.push(price);
-      });
-      res.render("./clients/pages/home", {
-        products: mutipleMongooseToObject(products),
-        Price: Price,
-      });
+      res.render("./clients/pages/home");
     } catch (err) {
       next(err);
     }

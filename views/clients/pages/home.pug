@@ -3,6 +3,7 @@ head
   meta(name="viewport", content="width=device-width,initial-scale=1")
   title Grocery Mart
   //  Favicon 
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css")
   link(rel="apple-touch-icon", sizes="76x76", href="/client/home/assets/favicon/apple-touch-icon.png")
   link(rel="icon", type="image/png", sizes="32x32", href="/client/home/assets/favicon/favicon-32x32.png")
   link(rel="icon", type="image/png", sizes="16x16", href="/client/home/assets/favicon/favicon-16x16.png")
@@ -37,11 +38,12 @@ body
     section.home__container
       .home__row
         h2.home__heading Featured Product
+        a(href="" style="background-color:#23b623").btn Xem tất cả
       .home__cate.row.row-cols-3.row-cols-md-1
         //  Featured Product
         each item,index in featuredProducts
           .col
-            a(href="#!")
+            a(href=`product/${item.slug}`)
               article.cate-item
                 img.cate-item__thumb(src=item.img, alt)
                 .cate-item__info
@@ -125,8 +127,16 @@ body
                 a(href="./product-detail.html") #{item.product_name}
               p.product-card__brand Lavazza
               .product-card__row
-                span.product-card__price #{Price[index]} VNĐ
+                span.product-card__price #{Cost[index]} VNĐ
                 img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
                 span.product-card__score 4.3
-
+    div(style="margin-top:20px; text-align:center" )
+      a(href="" class="btn-main-outline")
+        span Xem thêm
+        i.fa-solid.fa-angle-down
+  ///footer
+  footer#footer.footer
+  script.
+    load("#footer", "/client/home/templates/footer.html");
+    
     

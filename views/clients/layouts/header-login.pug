@@ -19,6 +19,14 @@
         img.nav-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
         span.nav-btn__title Favorite
         span.nav-btn__qnt 3
+      ul.navbar__list.js-dropdown-list
+        li.navbar__item
+          a(href="") Trang Chủ
+        li(class="").nav-menu
+          .menu-item.brand.has-submenu
+            - const path = "/product"
+            a(href=path) Sản phẩm
+            +sub-menu(newCategory, path)
     .navbar__overlay.js-toggle(toggle-target="#navbar")
     //  Actions 
     .top-act
