@@ -4,14 +4,21 @@ class ProductController {
     res.render("./clients/pages/products/Detail");
   }
   async showFeatured(req, res, next) {
-    /// Lấy ra các sản phẩm
+    /// Lấy ra các sản phẩm nổi bật và sắp xếp
+    let sort = {};
+    if (req.query.sortKey && req.query.sortValue) {
+      sort[req.query.sortKey] = req.query.sortValue;
+    } else {
+      sort.product_name = "asc";
+    }
     let cost = [];
     let find = {
       deleted: false,
       status: "active",
       featured: "1",
     };
-    const Featured_Product = await Products.find(find);
+    const Featured_Product = await Products.find(find).sort(sort);
+    console.log(Featured_Product);
     Featured_Product.forEach((item) => {
       const price = item.Price.toLocaleString("vi-VN");
       cost.push(price);

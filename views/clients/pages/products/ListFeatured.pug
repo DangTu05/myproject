@@ -44,9 +44,9 @@ body
         .row
           .sort-bar
             span(style=" padding: 5px 15px;") Ưu tiên xem:
-            .sort-option Theo tên
-            .sort-option Giảm dần
-            .sort-option Tăng dần
+            a(href="javascript:;",class="sort-option" sort-select,value="product_name-asc") Theo tên
+            a(href="javascript:;",class="sort-option" sort-select,value="Price-desc") Giảm dần
+            a(href="javascript:;",class="sort-option" sort-select,value="Price-asc") Tăng dần
           div
             .row.row-cols-4.row-cols-lg-2.row-cols-sm-1.g-3
               //  Product card 1
@@ -67,6 +67,6 @@ body
   footer#footer.footer
   script.
     load("#footer", "/client/home/templates/footer.html");
-
+  script(type="module", src="/client/home/assets/js/Featured_Product.js") 
     
   
