@@ -29,39 +29,44 @@ body
             h2 Bộ lọc
             .price-filter
               h3 Mức giá
-              .filter-item(style="margin-top:5px")
-                input#price1(type="checkbox")
-                label(for="price1") Dưới 5 triệu
-              .filter-item
-                input#price2(type="checkbox")
-                label(for="price2") 5 đến 10 triệu
-              .filter-item
-                input#price3(type="checkbox")
-                label(for="price3") 10 đến 15 triệu
-              .filter-item
-                input#price4(type="checkbox")
-                label(for="price4") Trên 15 triệu
-        .row
-          .sort-bar
-            span(style=" padding: 5px 15px;") Ưu tiên xem:
-            each item in Sort
-              a(href="javascript:;",class=`sort-option ${item.class}`,value=`${item.sortKey}-${item.sortValue}`) #{item.name}
-          div
-            .row.row-cols-4.row-cols-lg-2.row-cols-sm-1.g-3
-              //  Product card 1
-              each item, index in Featured_Product
-                .col
-                  article.product-card
-                    .product-card__img-wrap
-                      a(href=`/product/${item.slug}`)
-                        img.product-card__thumb(src=item.img, alt)
-                    h3.product-card__title
-                      a(href="./product-detail.html") #{item.product_name}
-                    p.product-card__brand Lavazza
-                    .product-card__row
-                      span.product-card__price #{cost[index]} VNĐ
-                      img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
-                      span.product-card__score 4.3
+              a(href="javascript:;" class="filter-item")
+                input#price1(type="checkbox" filter-price value="0-1000000")
+                label(for="price1") Dưới 1 triệu
+              a(href="javascript:;" class="filter-item" )
+                input#price2(type="checkbox" filter-price value="1000000-3000000")
+                label(for="price2") 1 đến 3 triệu
+              a(href="javascript:;" class="filter-item" )
+                input#price3(type="checkbox" filter-price value="3000000-5000000")
+                label(for="price3") 3 đến 5 triệu
+              a(href="javascript:;" class="filter-item")
+                input#price4(type="checkbox" filter-price value="5000000-1000000000")
+                label(for="price4") Trên 5 triệu
+        .col-md-7.col-9
+          .sort-bar(style="align-items:center")
+            span(style=" padding: 5px 15px 5px 0;") Ưu tiên xem:
+            div
+              each item in Sort
+                a(href="javascript:;",class=`sort-option ${item.class}`,value=`${item.sortKey}-${item.sortValue}`) #{item.name}
+          if(Featured_Product.length===0)
+            div Không có dữ liệu
+          else
+            div
+              .row.row-cols-4.row-cols-lg-2.row-cols-sm-1.g-3
+                //  Product card 1
+
+                each item, index in Featured_Product
+                  .col
+                    article.product-card
+                      .product-card__img-wrap
+                        a(href=`/product/${item.slug}`)
+                          img.product-card__thumb(src=item.img, alt)
+                      h3.product-card__title
+                        a(href="./product-detail.html") #{item.product_name}
+                      p.product-card__brand Lavazza
+                      .product-card__row
+                        span.product-card__price #{cost[index]} VNĐ
+                        img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
+                        span.product-card__score 4.3
   ///footer
   footer#footer.footer
   script.
