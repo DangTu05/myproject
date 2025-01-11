@@ -1,9 +1,12 @@
 const Products = require("../../models/products/products");
+const SortHepler = require("../../helpers/client/Sort.helper");
 class ProductController {
   async detail(req, res, next) {
     res.render("./clients/pages/products/Detail");
   }
   async showFeatured(req, res, next) {
+    /// Lấy ra thông tin của sort bên helper
+    const Sort = SortHepler.Sort(req.query);
     /// Lấy ra các sản phẩm nổi bật và sắp xếp
     let sort = {};
     if (req.query.sortKey && req.query.sortValue) {
@@ -26,6 +29,7 @@ class ProductController {
     res.render("./clients/pages/products/ListFeatured", {
       Featured_Product: Featured_Product,
       cost: cost,
+      Sort: Sort,
     });
   }
 }

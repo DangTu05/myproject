@@ -40,8 +40,12 @@
 
 .sort-option:hover {
   background-color: #ffc234;
-  color: aliceblue;
+  color: #fff;
 }
 .col:hover article.product-card {
   border: 1px solid black; /* Thay đổi giá trị border theo ý muốn */
+}
+.active{
+  background-color: #ffc234;
+  color:#fff ;
 }

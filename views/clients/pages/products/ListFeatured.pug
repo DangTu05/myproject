@@ -44,9 +44,8 @@ body
         .row
           .sort-bar
             span(style=" padding: 5px 15px;") Ưu tiên xem:
-            a(href="javascript:;",class="sort-option" sort-select,value="product_name-asc") Theo tên
-            a(href="javascript:;",class="sort-option" sort-select,value="Price-desc") Giảm dần
-            a(href="javascript:;",class="sort-option" sort-select,value="Price-asc") Tăng dần
+            each item in Sort
+              a(href="javascript:;",class=`sort-option ${item.class}`,value=`${item.sortKey}-${item.sortValue}`) #{item.name}
           div
             .row.row-cols-4.row-cols-lg-2.row-cols-sm-1.g-3
               //  Product card 1
