@@ -24,6 +24,7 @@ class ProductController {
       status: "active",
       featured: "1",
     };
+    let from_to="";
     // Kiểm tra xem có price_from và price_to trong params không
     if (req.query.price_from || req.query.price_to) {
       find.Price = {};
@@ -33,6 +34,7 @@ class ProductController {
       if (req.query.price_to) {
         find.Price.$lte = parseFloat(req.query.price_to); // Giá đến
       }
+      from_to=req.query.price_from +"-"+req.query.price_to;
     }
     const Featured_Product = await Products.find(find).sort(sort);
     Featured_Product.forEach((item) => {
@@ -44,6 +46,7 @@ class ProductController {
       Featured_Product: Featured_Product,
       cost: cost,
       Sort: Sort,
+      from_to:from_to
     });
   }
   /// End show giao diện danh sách sản phẩm nổi bật

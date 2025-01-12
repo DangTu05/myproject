@@ -5,6 +5,16 @@
 * {
   box-sizing: border-box;
 }
+.col:hover article.product-card {
+  border: 1px solid black;
+}
+.btn-main-outline:hover {
+  background-color: black;
+  color: white;
+}
+.cate-item:hover {
+  border: 1px solid black;
+}
 .btn-main-outline {
   display: inline-flex;
   align-items: center;
