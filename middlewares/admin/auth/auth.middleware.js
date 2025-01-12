@@ -7,7 +7,7 @@ module.exports.requireAuth = async (req, res, next) => {
   } else {
     const user = await Accounts.findOne({ token: req.cookies.token }).select(
       "-password"
-    );
+    );    
     const role = await Roles.findOne({ _id: user.role_id }).select(
       "title permissions"
     );        

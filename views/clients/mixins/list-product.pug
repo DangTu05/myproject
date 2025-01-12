@@ -1,0 +1,47 @@
+mixin List(from_to,cost,Sort,Products)
+  .main(style="margin-bottom:30px")
+    .container
+      .div(style="flex:1;display:flex" )
+        div(style="padding:13px")
+          .sidebar
+            h2 Bộ lọc
+            .price-filter
+              h3 Mức giá
+              a(href="javascript:;" class="filter-item")
+                input#price1(type="checkbox" filter-price value="0-500000" checked=(from_to == "0-500000" ? true : false ))
+                label(for="price1") Dưới 500000
+              a(href="javascript:;" class="filter-item" )
+                input#price2(type="checkbox" filter-price value="500000-2000000" checked=(from_to == "500000-2000000" ? true : false ))
+                label(for="price2") 500000 đến 2 triệu
+              a(href="javascript:;" class="filter-item" )
+                input#price3(type="checkbox" filter-price value="2000000-5000000" checked=(from_to == "2000000-5000000" ? true : false ))
+                label(for="price3") 2 đến 5 triệu
+              a(href="javascript:;" class="filter-item")
+                input#price4(type="checkbox" filter-price value="5000000-1000000000" checked=(from_to == "5000000-1000000000" ? true : false ))
+                label(for="price4") Trên 5 triệu
+        .col-md-7.col-9
+          .sort-bar(style="align-items:center")
+            span(style=" padding: 5px 15px 5px 0;") Ưu tiên xem:
+            div
+              each item in Sort
+                a(href="javascript:;",class=`sort-option ${item.class}`,value=`${item.sortKey}-${item.sortValue}`) #{item.name}
+          if(Products.length===0)
+            div Không có dữ liệu
+          else
+            div
+              .row.row-cols-4.row-cols-lg-2.row-cols-sm-1.g-3
+                //  Product card 1
+
+                each item, index in Products
+                  .col
+                    article.product-card
+                      .product-card__img-wrap
+                        a(href=`/product/${item.slug}`)
+                          img.product-card__thumb(src=item.img, alt)
+                      h3.product-card__title
+                        a(href="./product-detail.html") #{item.product_name}
+                      p.product-card__brand Lavazza
+                      .product-card__row
+                        span.product-card__price #{cost[index]} VNĐ
+                        img.product-card__star(src="/client/home/assets/icons/star.svg", alt)
+                        span.product-card__score 4.3
