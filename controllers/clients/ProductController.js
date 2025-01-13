@@ -67,7 +67,6 @@ class ProductController {
       sort.product_name = "asc";
     }
     const subs = await getSubCategory.getSubCategory(category._id);
-    console.log(subs);
     const listId=subs.map(item=>item._id)
     let cost = [];
     let find = {
@@ -85,7 +84,8 @@ class ProductController {
       if (req.query.price_to) {
         find.Price.$lte = parseFloat(req.query.price_to); // Giá đến
       }
-      from_to = req.query.price_from + " -" + req.query.price_to;
+      from_to = req.query.price_from + "-" + req.query.price_to;
+
     }
     const products = await Products.find(find).sort(sort);
     products.forEach((item) => {
