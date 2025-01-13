@@ -1,6 +1,7 @@
 const Products = require("../../models/products/products");
 const SortHepler = require("../../helpers/client/Sort.helper");
 const Category = require("../../models/categories/category.model");
+const getSubCategory = require("../../helpers/client/Product-Category");
 class ProductController {
   /// Show chi tiết sản phẩm
   async detail(req, res, next) {
@@ -56,8 +57,6 @@ class ProductController {
   async showProduct(req, res, next) {
     /// Lấy ra danh mục có slug giống slugCategory
     const category = await Category.findOne({ slug: req.params.slugCategory });
-    /// Lấy ra slug danh mục
-    const slugCategory = req.params.slugCategory;
     /// Lấy ra thông tin của sort bên helper
     const Sort = SortHepler.Sort(req.query);
     /// Lấy ra các sản phẩm nổi bật và sắp xếp
@@ -67,11 +66,14 @@ class ProductController {
     } else {
       sort.product_name = "asc";
     }
+    const subs = await getSubCategory.getSubCategory(category._id);
+    console.log(subs);
+    const listId=subs.map(item=>item._id)
     let cost = [];
     let find = {
       deleted: false,
       status: "active",
-      category_id: category._id,
+      category_id: { $in: [category._id, ...listId] },
     };
     let from_to = "";
     // Kiểm tra xem có price_from và price_to trong params không
