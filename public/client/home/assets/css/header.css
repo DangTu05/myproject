@@ -1,0 +1,54 @@
+.form-group {
+  margin-bottom: 1rem; /* Khoảng cách dưới cho group form */
+}
+
+.d-flex {
+  display: flex; /* Thiết lập chế độ hiển thị flex */
+}
+.btn {
+  font-weight: 400; /* Độ đậm của chữ */
+  text-align: center; /* Căn giữa chữ */
+  text-decoration: none; /* Không có gạch chân */
+  padding: 0.375rem 0.75rem; /* Padding cho nút */
+  border: 1px solid transparent; /* Đường viền trong suốt */
+  border-radius: 0.25rem; /* Bo tròn góc */
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out; /* Hiệu ứng chuyển tiếp */
+}
+
+.btn-primary {
+  color: #fff; /* Màu chữ */
+  background-color: #007bff; /* Màu nền chính */
+  border-color: #007bff; /* Màu viền chính */
+}
+
+.btn-primary:hover {
+  color: #fff; /* Màu chữ khi hover */
+  background-color: #0056b3; /* Màu nền khi hover */
+  border-color: #0056b3; /* Màu viền khi hover */
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); /* Hiệu ứng bóng khi focus hoặc active */
+}
+.mb-0 {
+  margin-bottom: 0; /* Không có khoảng cách dưới */
+}
+.form-control {
+  display: block; /* Hiển thị dưới dạng khối */
+  width: 100%; /* Độ rộng 100% */
+  padding: 0.375rem 0.75rem; /* Padding cho phần tử */
+  font-size: 1rem; /* Kích thước chữ */
+  line-height: 1.5; /* Chiều cao dòng */
+  color: #495057; /* Màu chữ */
+  background-color: #fff; /* Màu nền trắng */
+  border: 1px solid #ced4da; /* Đường viền */
+  border-radius: 0.25rem; /* Bo tròn góc */
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out; /* Hiệu ứng chuyển tiếp */
+}

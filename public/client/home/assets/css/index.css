@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+}
+.sidebar {
+  width: 250px;
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+}
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.price-filter {
+  margin-top: 15px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 13px;
+}
+
+.filter-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+.sort-bar {
+  padding: 15px 15px 15px 0px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+}
+.sort-option {
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  margin-right: 10px;
+}
+
+.sort-option:hover {
+  background-color: #ffc234;
+  color: #fff;
+}
+.col:hover article.product-card {
+  border: 1px solid black; /* Thay đổi giá trị border theo ý muốn */
+}
+.active {
+  background-color: #ffc234;
+  color: #fff;
+}

@@ -1,6 +1,7 @@
 include ../mixins/sub-menu.pug
 head 
   link(rel="stylesheet", href="/client/home/assets/css/home.css")
+  link(rel="stylesheet", href="/client/home/assets/css/header.css")
 .container
   .top-bar
     //  More 
@@ -30,6 +31,11 @@ head
             - const path = "/product"
             a(href=path) Sản phẩm
             +sub-menu(newCategory, path)
+    .col-3(style="margin-left:10px") 
+      form(action="/search",method="GET")
+        div(class="form-group d-flex mb-0")
+          input(type="text" class="form-control" name="keyword" placeholder="Nhập từ khóa...")
+          button(type="submit" class=" btn btn-primary") Tìm
     .navbar__overlay.js-toggle(toggle-target="#navbar")
     //  Actions 
     .top-act
