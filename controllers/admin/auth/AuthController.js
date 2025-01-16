@@ -23,7 +23,8 @@ class AuthController {
         res.json({ message: "Tài khoản này đã bị khóa" });
         return;
       }
-      res.cookie("token", user.token);
+      const time = 1000 * 60 * 60 * 24 * 7;
+      res.cookie("token", user.token, { maxAge: time });
       return res.status(200).json({ message: "Đăng nhập thành công!" });
     } catch (error) {
       return res.status(500).json({ message: error.message });
