@@ -13,6 +13,11 @@ head
   link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
   //  Styles 
   link(rel="stylesheet", href="/client/home/assets/css/main.css")
+  script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js")
+  link(
+    href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" 
+    rel="stylesheet"
+  )
   //  Scripts 
   script(src="/client/home/assets/js/scripts.js")
   //  Header 
@@ -66,7 +71,7 @@ body
               .prod-preview__thumbs
                 img.prod-preview__thumb-img.prod-preview__thumb-img--current(src=product.img, alt)
           .col-7.col-xl-6.col-lg-12
-            form.form(action)
+            form(id="submitForm").form
               section.prod-info
                 h1.prod-info__heading.
                   
@@ -87,13 +92,13 @@ body
                         .prod-info__row
                         p.prod-info__total-price #{Price} 
                         .prod-info__row
-                          button.btn.btn--primary.prod-info__add-to-cart.
-                            
+                          button(type="submit" id="add").btn.btn--primary.
+                          
                             Add to cart
-                            
                           button.like-btn.prod-info__like-btn
                             img.like-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
                             img.like-btn__icon--liked(src="/client/home/assets/icons/heart-red.svg", alt)
+                        input(name="quantity" value="1" min="1" type="number" class="form-control quantity")
       //  Product content 
       .product-container
         .prod-tab.js-tabs
@@ -336,7 +341,6 @@ body
                         span.product-card__score 3.4
   footer#footer.footer
   script.
-    
     load("#footer", "/client/home/templates/footer.html");
-    
+  script(type="module", src="/client/home/assets/js/Cart.js")   
     

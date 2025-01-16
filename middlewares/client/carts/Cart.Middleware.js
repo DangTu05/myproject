@@ -1,0 +1,12 @@
+const Cart = require("../../../models/carts/cart.model");
+module.exports.cartId = async (req, res, next) => {
+  if (!req.cookies.cartId) {
+    const cart = new Cart();
+    await cart.save();
+    const time = 1000 * 60 * 60 * 24 * 365;
+    res.cookie("cartId", cart._id, { maxAge: time });
+    next();
+  } else {
+    next();
+  }
+};
