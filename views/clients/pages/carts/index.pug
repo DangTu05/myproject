@@ -44,59 +44,69 @@ body
       .checkout-container
         .row.gy-xl-3
           .col-8.col-xl-12
-            .cart-info
-              .cart-info__list
-                //  Cart item  
-                each item, index in productCart
-                  article.cart-item
-                    a(href=`product/${item.slug}`)
-                      img.cart-item__thumb(src=item.img, alt)
-                    .cart-item__content
-                      .cart-item__content-left
-                        h3.cart-item__title
-                          a(href=`product/${item.slug}`).
-                            
-                            #{item.product_name}
-                            
-                        p.cart-item__price-wrap
-                          | ₫#{costs[index]} | 
-                          span.cart-item__quantity Số lượng: #{item.quantity}
-                        .cart-item__ctrl.cart-item__ctrl--md-block
-                          .cart-item__input
-                            button.cart-item__input-btn
-                              img.icon(src="./client/home/assets/icons/minus.svg", alt)
-                            span #{count[index]} 
-                            button.cart-item__input-btn
-                              img.icon(src="./client/home/assets/icons/plus.svg", alt)
-                      .cart-item__content-right
-                        p.cart-item__total-price ₫#{costs[index]}
-                        .cart-item__ctrl
-                          button.cart-item__ctrl-btn
-                            img(src="./client/home/assets/icons/heart-2.svg", alt)
-                            | Save
+            if(productCart.length>0)
+              .cart-info
+                .cart-info__list
+                  //  Cart item  
+                  each item, index in productCart
+                    article.cart-item
+                      a(href=`product/${item.slug}`)
+                        img.cart-item__thumb(src=item.img, alt)
+                      .cart-item__content
+                        .cart-item__content-left
+                          h3.cart-item__title
+                            a(href=`product/${item.slug}`).
+                              
+                              #{item.product_name}
+                              
+                          p.cart-item__price-wrap
+                            | ₫#{costs[index]} | 
+                            span.cart-item__quantity Số lượng: #{item.quantity}
+                          .cart-item__ctrl.cart-item__ctrl--md-block
+                            .cart-item__input
+                              button.cart-item__input-btn
+                                img.icon(src="./client/home/assets/icons/minus.svg", alt)
+                              span #{count[index]} 
+                              button.cart-item__input-btn
+                                img.icon(src="./client/home/assets/icons/plus.svg", alt)
+                        .cart-item__content-right
+                          p.cart-item__total-price ₫#{costs[index]}
+                          .cart-item__ctrl
+                            button.cart-item__ctrl-btn
+                              img(src="./client/home/assets/icons/heart-2.svg", alt)
+                              | Save
 
-                          button.cart-item__ctrl-btn.js-toggle(toggle-target="#delete-confirm")
-                            img(src="./client/home/assets/icons/trash.svg", alt)
-                            | Delete
-              .cart-info__bottom.d-md-none
-                .row
-                  .col-8.col-xxl-7
-                    .cart-info__continue
-                      a.cart-info__continue-link(href="./")
-                        img.cart-info__continue-icon.icon(src="./assets/icons/arrow-down-2.svg", alt)
-                        | Continue Shopping
+                            a(toggle-target="#delete-confirm" href=`/cart/delete/${item._id}`).cart-item__ctrl-btn.js-toggle
+                              img(src="./client/home/assets/icons/trash.svg", alt)
+                              | Delete
+                .cart-info__bottom.d-md-none
+                  .row
+                    .col-8.col-xxl-7
+                      .cart-info__continue
+                        a.cart-info__continue-link(href="./")
+                          img.cart-info__continue-icon.icon(src="./client/home/assets/icons/arrow-down-2.svg", alt)
+                          | Continue Shopping
 
-                  .col-4.col-xxl-5
-                    .cart-info__row
-                      span Subtotal:
-                      span $191.65
-                    .cart-info__row
-                      span Shipping:
-                      span $10.00
-                    .cart-info__separate
-                    .cart-info__row.cart-info__row--bold
-                      span Total:
-                      span $201.65
+                    .col-4.col-xxl-5
+                      .cart-info__row
+                        span Subtotal:
+                        span ₫#{total}
+                      .cart-info__row
+                        - var totalNumber=parseInt(total.replace(/\./g, ''));
+                        - var shipping = totalNumber * 0.01
+                        span Shipping:
+                        span ₫#{shipping.toLocaleString("vi-VN")}
+                      .cart-info__separate
+                      .cart-info__row.cart-info__row--bold
+                        - var EstimatedTotal = totalNumber + shipping
+                        span Total:
+                        span ₫#{EstimatedTotal.toLocaleString("vi-VN")}
+            else 
+              .cart-content
+                .empty-cart-message.
+                  
+                  Không có sản phẩm nào
+                  
           .col-4.col-xl-12
             .cart-info
               .cart-info__row
@@ -108,14 +118,14 @@ body
                 span
                   | Price 
                   span.cart-info__sub-label (Total)
-                span $191.65
+                span ₫#{total}
               .cart-info__row
                 span Shipping
-                span $10.00
+                span ₫#{shipping.toLocaleString("vi-VN")}
               .cart-info__separate
               .cart-info__row
                 span Estimated Total
-                span $201.65
+                span ₫#{EstimatedTotal.toLocaleString("vi-VN")}
               a.cart-info__next-btn.btn.btn--primary.btn--rounded(href="./shipping.html").
                 
                 Continue to checkout
@@ -124,7 +134,7 @@ body
               a(href="#!")
                 article.gift-item
                   .gift-item__icon-wrap
-                    img.gift-item__icon(src="./assets/icons/gift.svg", alt)
+                    img.gift-item__icon(src="./client/home/assets/icons/gift.svg", alt)
                   .gift-item__content
                     h3.gift-item__title Send this order as a gift.
                     p.gift-item__desc.
@@ -135,18 +145,19 @@ body
   footer#footer.footer
   script.
     load("#footer", "./client/home/templates/footer.html");
+  script(type="module", src="./client/home/assets/js/Cart.js") 
     
   //  Modal: confirm remove shopping cart item 
-  #delete-confirm.modal.modal--small.hide
-    .modal__content
-      p.modal__text Do you want to remove this item from shopping cart?
-      .modal__bottom
-        button.btn.btn--small.btn--outline.modal__btn.js-toggle(toggle-target="#delete-confirm").
+  //- #delete-confirm.modal.modal--small.hide
+  //-   .modal__content
+  //-     p.modal__text Do you want to remove this item from shopping cart?
+  //-     .modal__bottom
+  //-       button.btn.btn--small.btn--outline.modal__btn.js-toggle(toggle-target="#delete-confirm").
           
-          Cancel
+  //-         Cancel
           
-        button.btn.btn--small.btn--danger.btn--primary.modal__btn.btn--no-margin.js-toggle(toggle-target="#delete-confirm").
+  //-       button.btn.btn--small.btn--danger.btn--primary.modal__btn.btn--no-margin.js-toggle(toggle-target="#delete-confirm").
           
-          Delete
+  //-         Delete
           
-    .modal__overlay.js-toggle(toggle-target="#delete-confirm")
+  //-   .modal__overlay.js-toggle(toggle-target="#delete-confirm")

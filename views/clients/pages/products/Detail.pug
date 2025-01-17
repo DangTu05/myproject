@@ -92,10 +92,10 @@ body
                         .prod-info__row
                         p.prod-info__total-price #{Price} 
                         .prod-info__row
-                          button(type="submit" id="add").btn.btn--primary.
+                          button(type="submit" class="add" id="add").btn.btn--primary.
                           
                             Add to cart
-                          button.like-btn.prod-info__like-btn
+                          a(href="javascript:;").like-btn.prod-info__like-btn
                             img.like-btn__icon.icon(src="/client/home/assets/icons/heart.svg", alt)
                             img.like-btn__icon--liked(src="/client/home/assets/icons/heart-red.svg", alt)
                         input(name="quantity" value="1" min="1" type="number" class="form-control quantity")
@@ -342,5 +342,5 @@ body
   footer#footer.footer
   script.
     load("#footer", "/client/home/templates/footer.html")
-  script(type="module", src="/client/home/assets/js/Cart.js")   
+  script(type="module", src="/client/home/assets/js/Add_Cart.js")   
     
