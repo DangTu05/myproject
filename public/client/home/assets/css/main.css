@@ -135,7 +135,22 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
+.count {
+  background-color: white;
+  min-width: 0.6875rem;
+  height: 1rem;
+  border: 0.125rem solid rgba(0, 0, 0, 0.327);
+  border-radius: 2.75rem;
+  line-height: 1.2em;
+  position: absolute;
+  top: -0.5rem;
+  right: -0.9rem;
+  color: black;
+  text-align: center;
+  padding: 0 0.3rem;
+  font-size: 10px;
+  /* display: none; */
+}
 *,
 ::before,
 ::after {

@@ -5,8 +5,15 @@ module.exports.cartId = async (req, res, next) => {
     await cart.save();
     const time = 1000 * 60 * 60 * 24 * 365;
     res.cookie("cartId", cart._id, { maxAge: time });
-    next();
   } else {
-    next();
+    const cart = await Cart.findOne({
+      _id: req.cookies.cartId,
+    });
+    let totalQuantity = cart.products.reduce(
+      (sum, item) => sum + item.quantity,
+      0
+    );
+    res.locals.miniCart = totalQuantity;
   }
+  next();
 };

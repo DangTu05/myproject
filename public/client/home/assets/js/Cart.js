@@ -1,6 +1,7 @@
 const quantity = document.querySelector(".quantity");
 const submit = document.querySelector("#submitForm");
-const id = window.location.pathname.split("/").pop();
+const info = document.querySelector(".prod-info");
+const id = info.getAttribute("value");
 if (submit) {
   submit.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -28,6 +29,14 @@ if (submit) {
               title: "Thành công",
               text: "Bạn đã thêm thành công.",
               icon: "success",
+            });
+            document.addEventListener("click", (e) => {
+              if (
+                e.target.matches(".swal2-confirm") ||
+                e.target.matches(".swal2-container")
+              ) {
+                location.reload();
+              }
             });
           }
         })

@@ -72,7 +72,7 @@ body
                 img.prod-preview__thumb-img.prod-preview__thumb-img--current(src=product.img, alt)
           .col-7.col-xl-6.col-lg-12
             form(id="submitForm").form
-              section.prod-info
+              section(value=product._id).prod-info
                 h1.prod-info__heading.
                   
                   #{product.product_name}
@@ -341,6 +341,6 @@ body
                         span.product-card__score 3.4
   footer#footer.footer
   script.
-    load("#footer", "/client/home/templates/footer.html");
+    load("#footer", "/client/home/templates/footer.html")
   script(type="module", src="/client/home/assets/js/Cart.js")   
     

@@ -1,5 +1,35 @@
 const Cart = require("../../models/carts/cart.model");
+const Products = require("../../models/products/products");
 class CartController {
+  /// Giao diện giỏ hàng
+  async index(req, res) {
+    const carts = await Cart.findOne({ _id: req.cookies.cartId });
+    /// Lấy ra tất cả các id của sản phẩm đã thêm trong giỏ hàng
+    let items = [];
+    let count = [];
+    carts.products.forEach((item) => {
+      items.push(item.product_id);
+      count.push(item.quantity);
+    });
+    const productCart = await Products.find({ _id: { $in: items } });
+    // Sắp xếp các sản phẩm theo thứ tự của các ID trong mảng items
+    const sortedProductCart = items.map((id) =>
+      productCart.find((product) => product._id.toString() === id)
+    );
+
+    let costs = [];
+    sortedProductCart.forEach((item) => {
+      const price = item.Price.toLocaleString("vi-VN");
+      costs.push(price);
+    });
+    res.render("./clients/pages/carts/index", {
+      productCart: sortedProductCart,
+      costs: costs,
+      count: count,
+    });
+  }
+  /// End giao diện giỏ hàng
+  /// Thêm sản phẩm vào giỏ hàng
   async add(req, res) {
     const productId = req.params.productId;
     const cartId = req.cookies.cartId;
@@ -8,7 +38,6 @@ class CartController {
     const existProduct = cart.products.find(
       (item) => item.product_id === productId
     );
-
     try {
       if (existProduct) {
         quantity = quantity + existProduct.quantity;
@@ -29,5 +58,6 @@ class CartController {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
+  ///End thêm sản phẩm vào giỏ hàng
 }
 module.exports = new CartController();
