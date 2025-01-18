@@ -1,5 +1,5 @@
 const express = require("express");
-const flash= require('express-flash');
+const flash = require("express-flash");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
@@ -7,6 +7,7 @@ const configViewEngine = require("./configs/ViewEngine");
 const route = require("./routes/clients/index");
 const routeAdmin = require("./routes/admin/index.route");
 require("dotenv").config();
+const methodOverride = require("method-override");
 const app = express();
 const port = process.env.PORT;
 const path = require("path");
@@ -20,6 +21,7 @@ app.use(
     extended: true,
   })
 );
+app.use(methodOverride("_method"));
 app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
