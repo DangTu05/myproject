@@ -29,7 +29,7 @@ class AccountController {
         req.body.password = md5(req.body.password);
         const account = new Accounts(req.body);
         account.save();
-        return res.status(200).json({ message: "Tạo thành công!" });
+        return res.json({ message: "Tạo thành công!" });
       } catch (error) {
         return res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
