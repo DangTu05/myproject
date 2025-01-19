@@ -1,7 +1,3 @@
-const {
-  register,
-} = require("../../../../../controllers/clients/UserController");
-
 document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.querySelector("#registerForm");
   const passwordInput = document.getElementById("password");
