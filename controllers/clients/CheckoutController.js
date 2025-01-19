@@ -42,6 +42,8 @@ class CheckoutController {
     }
   }
   /// End thông tin nhận hàng
+
+  /// Sửa thông tin nhận hàng
   async editInfo(req, res) {
     const cartId = req.cookies.cartId;
     const info = await Address.findOne({ cartId: cartId });
@@ -64,7 +66,18 @@ class CheckoutController {
     await info.save();
     res.redirect("back");
   }
-  /// Sửa thông tin nhận hàng
   /// End sửa thông tin nhận hàng
+
+  /// Xóa thông tin nhận hàng
+  async deleteInfo(req, res) {
+    const id = req.params.id;
+    const cartId = req.cookies.cartId;
+    await Address.updateOne(
+      { cartId: cartId },
+      { $pull: { info: { _id: id } } }
+    );
+    res.redirect("back");
+  }
+  /// End xóa thông tin
 }
 module.exports = new CheckoutController();

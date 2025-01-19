@@ -5,5 +5,6 @@ const locals = require("../../middlewares/client/products/Home.Middleware");
 router.use(locals.locals);
 router.post("/address/create", CheckoutController.createInfo);
 router.patch("/address/edit/:id", CheckoutController.editInfo);
+router.get("/address/delete/:id", CheckoutController.deleteInfo);
 router.get("/", CheckoutController.index);
 module.exports = router;

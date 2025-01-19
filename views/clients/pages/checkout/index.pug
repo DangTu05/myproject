@@ -86,17 +86,20 @@ body
                             li.address-card__list-item Shipping
                             li.address-card__list-item Delivery from store
                       .address-card__right
-                        .address-card__ctrl
+                        .address-card__ctrl(style="align-items:center; gap:20px")
                           button.cart-info__edit-btn.js-toggle(
                             toggle-target="#Edit-new-address"
                             data-id=item._id
                             data-phone=item.phone
                             data-address=item.address
                             data-name=item.name
+                            style="color:#9e9da8"
                             )
                             img.icon(src="./client/home/assets/icons/edit.svg", alt)
                             | Edit
-
+                          a(href=`/checkout/address/delete/${item._id}`).cart-item__ctrl-btn
+                            img(src="./client/home/assets/icons/trash.svg", alt)
+                            | Delete
           
               .cart-info__separate
               h2.cart-info__sub-heading Items details
