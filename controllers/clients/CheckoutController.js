@@ -1,5 +1,7 @@
 const Order = require("../../models/orders/order.model");
 const Address = require("../../models/orders/address.model");
+const Cart = require("../../models/carts/cart.model");
+const Products = require("../../models/products/products");
 class CheckoutController {
   /// View giao diện checkout
   async index(req, res) {
@@ -7,8 +9,35 @@ class CheckoutController {
     const info = await Address.findOne({
       cartId: cartId,
     });
+    const carts = await Cart.findOne({ _id: req.cookies.cartId });
+    /// Lấy ra tất cả các id của sản phẩm đã thêm trong giỏ hàng
+    let items = [];
+    let count = [];
+    let total = 0;
+    if (carts.products.length > 0) {
+      carts.products.forEach((item) => {
+        items.push(item.product_id);
+        count.push(item.quantity);
+      });
+    }
+    const productCart = await Products.find({ _id: { $in: items } });
+    // Sắp xếp các sản phẩm theo thứ tự của các ID trong mảng items
+    const sortedProductCart = items.map((id) =>
+      productCart.find((product) => product._id.toString() === id)
+    );
+    let costs = [];
+    sortedProductCart.forEach((item, index) => {
+      total += item.Price * count[index];
+      const price = item.Price.toLocaleString("vi-VN");
+      costs.push(price);
+    });
+    total = total.toLocaleString("vi-VN");
     res.render("./clients/pages/checkout/index", {
       infos: info ? info.info : [],
+      productCart: sortedProductCart,
+      costs: costs,
+      count: count,
+      total: total,
     });
   }
   /// End view giao diện view

@@ -104,41 +104,42 @@ body
               .cart-info__separate
               h2.cart-info__sub-heading Items details
               .cart-info__list
-                //  Cart item 1 
-                article.cart-item
-                  a(href="./product-detail.html")
-                    img.cart-item__thumb(src="./client/home/assets/img/product/item-1.png", alt)
-                  .cart-item__content
-                    .cart-item__content-left
-                      h3.cart-item__title
-                        a(href="./product-detail.html").
-                          
-                          Coffee Beans - Espresso Arabica and Robusta Beans
-                          
-                      p.cart-item__price-wrap
-                        | $47.00 | 
-                        span.cart-item__status In Stock
-                      .cart-item__ctrl.cart-item__ctrl--md-block
-                        .cart-item__input
-                          | LavAzza
+                //  Cart item 
+                each item, index in productCart
+                  article.cart-item
+                    a(href="./product-detail.html")
+                      img.cart-item__thumb(src=item.img, alt)
+                    .cart-item__content
+                      .cart-item__content-left
+                        h3.cart-item__title
+                          a(href="./product-detail.html").
+                            
+                            #{item.product_name}
+                            
+                        p.cart-item__price-wrap
+                          | ₫#{costs[index]} | 
+                          span.cart-item__status In Stock
+                        .cart-item__ctrl.cart-item__ctrl--md-block
+                          .cart-item__input
+                            | LavAzza
 
-                          img.icon(src="./client/home/assets/icons/arrow-down-2.svg", alt)
-                        .cart-item__input
-                          button.cart-item__input-btn
-                            img.icon(src="./client/home/assets/icons/minus.svg", alt)
-                          span 1
-                          button.cart-item__input-btn
-                            img.icon(src="./client/home/assets/icons/plus.svg", alt)
-                    .cart-item__content-right
-                      p.cart-item__total-price $47.00
-                      .cart-item__ctrl
-                        button.cart-item__ctrl-btn
-                          img(src="./client/home/assets/icons/heart-2.svg", alt)
-                          | Save
+                            img.icon(src="./client/home/assets/icons/arrow-down-2.svg", alt)
+                          .cart-item__input
+                            button.cart-item__input-btn
+                              img.icon(src="./client/home/assets/icons/minus.svg", alt)
+                            span #{count[index]}
+                            button.cart-item__input-btn
+                              img.icon(src="./client/home/assets/icons/plus.svg", alt)
+                      .cart-item__content-right
+                        p.cart-item__total-price ₫#{costs[index]}
+                        .cart-item__ctrl
+                          button.cart-item__ctrl-btn
+                            img(src="./client/home/assets/icons/heart-2.svg", alt)
+                            | Save
 
-                        a(href="").cart-item__ctrl-btn
-                          img(src="./client/home/assets/icons/trash.svg", alt)
-                          | Delete
+                          a(href="").cart-item__ctrl-btn
+                            img(src="./client/home/assets/icons/trash.svg", alt)
+                            | Delete
 
               .cart-info__bottom.d-md-none
                 .row
@@ -151,33 +152,36 @@ body
                   .col-4.col-xxl-5
                     .cart-info__row
                       span Subtotal:
-                      span $191.65
+                      span ₫#{total}
                     .cart-info__row
+                      - var totalNumber=parseInt(total.replace(/\./g, ''));
+                      - var shipping = totalNumber * 0.01
                       span Shipping:
-                      span $10.00
+                      span ₫#{shipping.toLocaleString("vi-VN")}
                     .cart-info__separate
                     .cart-info__row.cart-info__row--bold
+                      - var EstimatedTotal = totalNumber + shipping
                       span Total:
-                      span $201.65
+                      span ₫#{EstimatedTotal.toLocaleString("vi-VN")}
           .col-4.col-xl-12
             .cart-info
               .cart-info__row
                 span
                   | Subtotal 
                   span.cart-info__sub-label (items)
-                span 3
+                span #{miniCart}
               .cart-info__row
                 span
                   | Price 
                   span.cart-info__sub-label (Total)
-                span $191.65
+                span ₫#{total}
               .cart-info__row
                 span Shipping
-                span $10.00
+                span ₫#{shipping.toLocaleString("vi-VN")}
               .cart-info__separate
               .cart-info__row
                 span Estimated Total
-                span $201.65
+                span ₫#{EstimatedTotal.toLocaleString("vi-VN")}
               a.cart-info__next-btn.btn.btn--primary.btn--rounded(href="./payment.html").
                 
                 Continue to checkout
