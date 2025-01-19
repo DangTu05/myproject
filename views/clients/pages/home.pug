@@ -15,12 +15,16 @@ head
   link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
   //  Styles 
   link(rel="stylesheet", href="/client/home/assets/css/main.css")
+  include ../layouts/head.pug
   //  Scripts 
   script(src="/client/home/assets/js/scripts.js")
   //  Header
 body
-
-  include ../layouts/header.pug
+  #header.header
+    if(user)
+      include ../layouts/header-logined.pug
+    else
+      include ../layouts/header.pug
   main.container.home
     //  Slideshow 
     .home__container

@@ -12,6 +12,7 @@ head
   //  Fonts 
   link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
   //  Styles 
+  include ../../layouts/head.pug
   link(rel="stylesheet", href="/client/home/assets/css/main.css")
   script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js")
   link(
@@ -22,8 +23,8 @@ head
   script(src="/client/home/assets/js/scripts.js")
   //  Header 
 body
-
-  include ../../layouts/header.pug
+  #header.header
+    include ../../layouts/header.pug
   
   //  MAIN 
   main.product-page

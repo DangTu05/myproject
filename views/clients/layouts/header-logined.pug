@@ -1,3 +1,4 @@
+include ../mixins/sub-menu.pug
 .container
   .top-bar
     //  More 
@@ -30,14 +31,13 @@
     .navbar__overlay.js-toggle(toggle-target="#navbar")
     //  Actions 
     .top-act
-      .top-act__group.d-md-none.top-act__group--single
-        button.top-act__btn
-          img.icon.top-act__icon(src="/client/home/assets/icons/search.svg", alt)
+      .d-md-none.top-act__group--single
+        form(action="/search",method="GET")
+          div(class="form-group d-flex mb-0")
+            input(type="text" class="form-control" style="width:200px" name="keyword" placeholder="Nhập từ khóa...")
+            button(type="submit" class=" btn btn-primary") Tìm
       .top-act__group.d-md-none
         .top-act__btn-wrap
-          button.top-act__btn
-            img.icon.top-act__icon(src="/client/home/assets/icons/heart.svg", alt)
-            span.top-act__title 03
           //  Dropdown 
           .act-dropdown
             .act-dropdown__inner
@@ -53,23 +53,6 @@
                       img.cart-preview-item__thumb(src="/client/home/assets/img/product/item-1.png", alt)
                     h3.cart-preview-item__title Lavazza Coffee Blends
                     p.cart-preview-item__price $329.00
-                //  Cart preview item 2 
-                .col
-                  article.cart-preview-item
-                    .cart-preview-item__img-wrap
-                      img.cart-preview-item__thumb(src="/client/home/assets/img/product/item-2.png", alt)
-                    h3.cart-preview-item__title Coffee Beans Espresso
-                    p.cart-preview-item__price $39.99
-                //  Cart preview item 3 
-                .col
-                  article.cart-preview-item
-                    .cart-preview-item__img-wrap
-                      img.cart-preview-item__thumb(src="/client/home/assets/img/product/item-3.png", alt)
-                    h3.cart-preview-item__title Qualità Oro Mountain
-                    p.cart-preview-item__price $47.00
-              .act-dropdown__separate
-              .act-dropdown__checkout
-                a.btn.btn--primary.btn--rounded.act-dropdown__checkout-btn(href="./checkout.html").
                   
                   Check Out All
                   
@@ -93,20 +76,6 @@
                       img.cart-preview-item__thumb(src="/client/home/assets/img/product/item-1.png", alt)
                     h3.cart-preview-item__title Lavazza Coffee Blends
                     p.cart-preview-item__price $329.00
-                //  Cart preview item 2 
-                .col
-                  article.cart-preview-item
-                    .cart-preview-item__img-wrap
-                      img.cart-preview-item__thumb(src="/client/home/assets/img/product/item-2.png", alt)
-                    h3.cart-preview-item__title Coffee Beans Espresso
-                    p.cart-preview-item__price $39.99
-                //  Cart preview item 3 
-                .col
-                  article.cart-preview-item
-                    .cart-preview-item__img-wrap
-                      img.cart-preview-item__thumb(src="/client/home/assets/img/product/item-3.png", alt)
-                    h3.cart-preview-item__title Qualità Oro Mountain
-                    p.cart-preview-item__price $47.00
               .act-dropdown__bottom
                 .act-dropdown__row
                   span.act-dropdown__label Subtotal
