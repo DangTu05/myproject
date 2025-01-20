@@ -1,5 +1,6 @@
 const User = require("../../models/Users/user.model");
 const md5 = require("md5");
+const time = require("../../util/times/VnTime");
 class UserController {
   /// Show giao diện đăng kí
   async showRegister(req, res) {
@@ -14,7 +15,8 @@ class UserController {
       console.log(req.body);
       const user = new User(req.body);
       await user.save();
-      return res.status(200).json({ message: "Tạo thành công!" });
+      return res.redirect("/user/login");
+      
     } catch {
       return res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
@@ -57,5 +59,18 @@ class UserController {
     res.redirect("/home");
   }
   /// End đăng xuất
+
+  /// Show thông tin tài khoản
+  async profile(req, res) {
+    const user = await User.findOne({
+      tokenUser: req.cookies.tokenUser,
+    }).select("-password");
+    let createdAt = time(user.createdAt);
+    res.render("./clients/pages/users/profile", {
+      user: user,
+      createdAt: createdAt,
+    });
+  }
+  /// End show thông tin
 }
 module.exports = new UserController();

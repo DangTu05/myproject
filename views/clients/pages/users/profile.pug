@@ -1,0 +1,200 @@
+head 
+  meta(charset="UTF-8")
+  meta(name="viewport", content="width=device-width,initial-scale=1")
+  title Profile | Grocery Mart
+  //  Favicon 
+  link(rel="apple-touch-icon", sizes="76x76", href="/client/home/assets/favicon/apple-touch-icon.png")
+  link(rel="icon", type="image/png", sizes="32x32", href="/client/home/assets/favicon/favicon-32x32.png")
+  link(rel="icon", type="image/png", sizes="16x16", href="/client/home/assets/favicon/favicon-16x16.png")
+  link(rel="manifest", href="/client/home/assets/favicon/site.webmanifest")
+  meta(name="msapplication-TileColor", content="#da532c")
+  meta(name="theme-color", content="#ffffff")
+  //  Fonts 
+  link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
+  //  Styles 
+  link(rel="stylesheet", href="/client/home/assets/css/main.css")
+  include ../../layouts/head.pug
+  //  Scripts 
+  script(src="/client/home/assets/js/scripts.js")
+body
+  #header.header
+    if(user)
+      include ../../layouts/header-logined.pug
+    else
+      include ../../layouts/header.pug
+  main.profile
+    .container
+      //  Search bar 
+      .profile-container
+        .search-bar.d-none.d-md-flex
+          input.search-bar__input(type="text", name, placeholder="Search for item")
+          button.search-bar__submit
+            img.search-bar__icon.icon(src="/client/home/assets/icons/search.svg", alt)
+      //  Profile content 
+      .profile-container
+        .row.gy-md-3
+          .col-3.col-xl-4.col-lg-5.col-md-12
+            aside.profile__sidebar
+              //  User 
+              .profile-user
+                img.profile-user__avatar(src="/client/home/assets/img/avatar/avatar-3.png", alt)
+                h1.profile-user__name #{user.name}
+                p.profile-user__desc Registered: #{createdAt}
+              //  Menu 1 
+              .profile-menu
+                h3.profile-menu__title Manage Account
+                ul.profile-menu__list
+                  li
+                    a.profile-menu__link(href="./edit-personal-info.html")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/profile.svg", alt)
+                      | Personal info
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/location.svg", alt)
+                      | Addresses
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/message-2.svg", alt)
+                      | Email
+
+              //  Menu 2 
+              .profile-menu
+                h3.profile-menu__title My items
+                ul.profile-menu__list
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/download.svg", alt)
+                      | Reorder
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/heart.svg", alt)
+                      | Lists
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/gift-2.svg", alt)
+                      | Registries
+
+              //  Menu 3 
+              .profile-menu
+                h3.profile-menu__title Subscriptions & plans
+                ul.profile-menu__list
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/shield.svg", alt)
+                      | Protection plans
+
+              //  Menu 4 
+              .profile-menu
+                h3.profile-menu__title Customer Service
+                ul.profile-menu__list
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/info.svg", alt)
+                      | Help
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/danger.svg", alt)
+                      | Terms of Use
+
+          .col-9.col-xl-8.col-lg-7.col-md-12
+            .cart-info
+              .row.gy-3
+                //  My Wallet 
+                .col-12
+                  h2.cart-info__heading My Wallet
+                  p.cart-info__desc.profile__desc Payment methods
+                  .row.gy-md-2.row-cols-3.row-cols-xl-2.row-cols-lg-1
+                    //  Payment card 1 
+                    .col
+                      article.payment-card(style="--bg-color: #1e2e69")
+                        img.payment-card__img(src="/client/home/assets/img/card/plane-bg.svg", alt)
+                        .payment-card__top
+                          img(src="/client/home/assets/img/card/plane.svg", alt)
+                          span.payment-card__type FeatherCard
+                        .payment-card__number 1234 4567 8901 2221
+                        .payment-card__bottom
+                          div
+                            p.payment-card__label Card Holder
+                            p.payment-card__value Imran Khan
+                          .payment-card__expired
+                            p.payment-card__label Expired
+                            p.payment-card__value 10/22
+                          .payment-card__circle
+                    //  Payment card 2 
+                    .col
+                      article.payment-card(style="--bg-color: #354151")
+                        img.payment-card__img(src="/client/home/assets/img/card/leaf-bg.svg", alt)
+                        .payment-card__top
+                          img(src="/client/home/assets/img/card/leaf.svg", alt)
+                          span.payment-card__type FeatherCard
+                        .payment-card__number 1234 4567 2221 8901
+                        .payment-card__bottom
+                          div
+                            p.payment-card__label Card Holder
+                            p.payment-card__value Imran Khan
+                          .payment-card__expired
+                            p.payment-card__label Expired
+                            p.payment-card__value 11/22
+                          .payment-card__circle
+                    //  Add new payment card 
+                    .col
+                      a.new-card(href="./add-new-card.html")
+                        img.new-card__icon.icon(src="/client/home/assets/icons/plus.svg", alt)
+                        p.new-card__text Add New Card
+                //  Account info 
+                .col-12
+                  h2.cart-info__heading Account info
+                  p.cart-info__desc.profile__desc.
+                    
+                    Addresses, contact information and password
+                    
+                  .row.gy-md-2.row-cols-2.row-cols-lg-1
+                    //  Account info 1 
+                    .col
+                      a(href="./edit-personal-info.html")
+                        article.account-info
+                          .account-info__icon
+                            img.icon(src="/client/home/assets/icons/message.svg", alt)
+                          div
+                            h3.account-info__title Email Address
+                            p.account-info__desc #{user.email}
+                    //  Account info 2 
+                    .col
+                      a(href="./edit-personal-info.html")
+                        article.account-info
+                          .account-info__icon
+                            img.icon(src="/client/home/assets/icons/calling.svg", alt)
+                          div
+                            h3.account-info__title Phone number
+                            p.account-info__desc +84 #{user.phone}
+                    //  Account info 3 
+                    .col
+                      a(href="./edit-personal-info.html")
+                        article.account-info
+                          .account-info__icon
+                            img.icon(src="/client/home/assets/icons/location.svg", alt)
+                          div
+                            h3.account-info__title Add an address
+                            p.account-info__desc.
+                              
+                              Bangladesh Embassy, Washington, DC 20008
+  footer#footer.footer
+  script.
+    
+    load("#footer", "/client/home/templates/footer.html");
+                
+                

@@ -8,9 +8,9 @@ body
       p Vui lòng điền thông tin để tạo tài khoản mới
     form#registerForm(action=`/user/register` method="POST" novalidate)
       .form-group
-        label(for="fullname") Họ và tên
+        label(for="name") Họ và tên
         .input-group
-          input#fullname.form-control(type="text",name="name" placeholder="Nhập họ và tên của bạn", required)
+          input#fullname.form-control(type="text", name="name" placeholder="Nhập họ và tên của bạn", required)
       .form-group
         label(for="email") Email
         .input-group

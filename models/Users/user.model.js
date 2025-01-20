@@ -6,12 +6,14 @@ const User = new Schema(
   {
     name: String,
     email: String,
-    img: {type:String,default:""},
+    img: { type: String, default: "" },
     tokenUser: {
       type: String,
       default: generateToken(20),
       unique: true,
     },
+    img: String,
+    address: String,
     password: String,
     phone: String,
     status: { type: String, default: "active" },

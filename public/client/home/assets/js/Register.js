@@ -22,8 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.querySelector("#email");
     const password = document.querySelector("#password");
     if (
-      (name.value =
-        "" || phone.value == "" || email.value == "" || password.value == "")
+      (name.value == "" || phone.value == "" || email.value == "" || password.value == "")
     ) {
       alert("Vui lòng nhập đầy đủ thông tin");
     } else {
