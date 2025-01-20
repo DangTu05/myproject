@@ -50,5 +50,12 @@ class UserController {
     }
   }
   /// End đăng nhập tài khoản
+
+  /// Đăng xuất
+  async logout(req, res) {
+    res.clearCookie("tokenUser");
+    res.redirect("/home");
+  }
+  /// End đăng xuất
 }
 module.exports = new UserController();

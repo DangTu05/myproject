@@ -36,7 +36,7 @@ include ../mixins/sub-menu.pug
     .navbar__overlay.js-toggle(toggle-target="#navbar")
     //  Actions 
     .top-act
-      a.btn.btn--text.d-md-none(href="./sign-in.html") Sign In
-      a.top-act__sign-up.btn.btn--primary(href="./sign-up.html") Sign Up
+      a.btn.btn--text.d-md-none(href="/user/login") Sign In
+      a.top-act__sign-up.btn.btn--primary(href="/user/register") Sign Up
       a(href="/cart", aria-label="Giỏ hàng" style="position: relative;").fa-solid.fa-cart-shopping
         .count(aria-hidden="true") #{miniCart}
