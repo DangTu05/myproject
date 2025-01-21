@@ -9,13 +9,15 @@ const Role = require("./roles/role.route");
 const Accounts = require("./accounts/account.route");
 const Auth = require("./auth/auth.route");
 const MyAccout = require("./my-account/index.route");
+const SettingMiddleware = require("../../middlewares/admin/auth/setting.middleware");
 function router(app) {
   const PATH_ADMIN = systemConfig.prefixAdmin;
+  app.use(SettingMiddleware.setting);
   app.use(PATH_ADMIN + "/dashboard", Site_Admin);
   app.use(PATH_ADMIN + "/Products", ListProduct);
   app.use(PATH_ADMIN, CreateCategory);
   app.use(PATH_ADMIN, Detail);
-  app.use(PATH_ADMIN+ "/product", Create);
+  app.use(PATH_ADMIN + "/product", Create);
   app.use(PATH_ADMIN + "/product", Edit);
   app.use(PATH_ADMIN + "/account", Accounts);
   app.use(PATH_ADMIN + "/role", Role);

@@ -1,0 +1,25 @@
+extends ../../layouts/default.pug
+block head 
+  link(rel="stylesheet", href="/admin/css/my-account/setting.css") 
+block sidebar
+block content
+  .form-setting
+    h1 Cài đặt chung
+    form(enctype="multipart/form-data", id="SettingAccountForm"  method="POST" action="/admin/my-account/setting?_method=PATCH")
+      label(for="websiteName") Tên website:
+      input#websiteName(type="text", name="websiteName" value = setting ? setting.websiteName : "")
+      label(for="email") Email:
+      input#email(type="email", name="email" value = setting ? setting.email : "")
+      label(for="phone") Số điện thoại:
+      input#phone(name="phone" value = setting ? setting.phone : "")
+      label(for="hotline") Hot Line:
+      input#hotline(name="hotline" value = setting ? setting.hotline : "")
+      label(for="address" ) Địa chỉ:
+      input#address(type="text", name="address" value = setting ? setting.address : "")
+      label(for="logo") Logo:
+      input#logo(type="file", name="logo", accept="image/*")
+      img(src = setting ? setting.logo : "").preview
+      label(for="map") Bản đồ (Nhúng iframe)
+      input#map(type="text",name="map" value = setting ? setting.map : "")
+      input(type="submit", value="Cập nhật")
+  script(type="module", src="/admin/js/my-account/Setting.js") 

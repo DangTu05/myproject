@@ -18,4 +18,16 @@ router.patch(
   uploadCloud.upload,
   MyAccoutController.edit
 );
+router.get(
+  "/setting",
+  AuthMiddleware.requireAuth,
+  MyAccoutController.showSetting
+);
+router.patch(
+  "/setting",
+  AuthMiddleware.requireAuth,
+  upload.single("logo"),
+  uploadCloud.upload,
+  MyAccoutController.setting
+);
 module.exports = router;

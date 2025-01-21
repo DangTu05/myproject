@@ -35,8 +35,8 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
     .sidebar-logo
       //  Logo Header 
       .logo-header(data-background-color="dark")
-        a.logo(href="index.html")
-          img.navbar-brand(src="/admin/img/kaiadmin/logo_light.svg", alt="navbar brand", height="20")
+        a.logo(href="")
+          img.navbar-brand(src= setting ? setting.logo : "" , alt="navbar brand", height="20")
         .nav-toggle
           button.btn.btn-toggle.toggle-sidebar
             i.gg-menu-right
