@@ -1,0 +1,47 @@
+head 
+  meta(charset="UTF-8")
+  meta(name="viewport", content="width=device-width,initial-scale=1")
+  title Profile | Grocery Mart
+  //  Favicon 
+  link(rel="apple-touch-icon", sizes="76x76", href="/client/home/assets/favicon/apple-touch-icon.png")
+  link(rel="icon", type="image/png", sizes="32x32", href="/client/home/assets/favicon/favicon-32x32.png")
+  link(rel="icon", type="image/png", sizes="16x16", href="/client/home/assets/favicon/favicon-16x16.png")
+  link(rel="manifest", href="/client/home/assets/favicon/site.webmanifest")
+  meta(name="msapplication-TileColor", content="#da532c")
+  meta(name="theme-color", content="#ffffff")
+  //  Fonts 
+  link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
+  //  Styles 
+  link(rel="stylesheet", href="/client/home/assets/css/main.css")
+  link(rel="stylesheet", href="/client/home/assets/css/chat.css")
+  include ../../layouts/head.pug
+  //  Scripts 
+  script(src="/client/home/assets/js/scripts.js")
+body
+  #header.header
+    if(user)
+      include ../../layouts/header-logined.pug
+    else
+      include ../../layouts/header.pug
+  .chat-container
+    .chat-header.
+      
+      Chat Hỗ Trợ
+      
+    .chat-messages(my-id=user._id)
+      each chat, index in chats
+        if(chat.user_id != user._id)
+          .inner-name #{chat.user_name}
+        .message(class=(user._id == chat.user_id ? "sent" : "received") style="padding-top:7px")
+          .message-content.
+            #{chat.content}
+    form(action="" class="form-submit").chat-input
+      input(type="text",class="content" placeholder="Nhập tin nhắn...")
+      button(type="submit") ➤
+  footer#footer.footer
+  script.
+    load("#footer", "/client/home/templates/footer.html");
+  script(src="/socket.io/socket.io.js")
+  script(src="/client/home/assets/js/Socket.js")
+  script(type="module", src="/client/home/assets/js/Chat.js") 
+    
