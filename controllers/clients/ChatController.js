@@ -18,6 +18,15 @@ class ChatController {
         });
         /// END_SEVER_RETURN__MESSAGE
       });
+      /// Typing
+      socket.on("client-typing", (data) => {
+        socket.broadcast.emit("server-return-typing", {
+          user_id: user_id,
+          name: res.locals.user.name,
+          type: data,
+        });
+      });
+      /// End Typing
       socket.on("disconnect", () => {
         console.log("user disconnected");
       });

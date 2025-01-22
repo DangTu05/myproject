@@ -30,17 +30,24 @@ body
       
     .chat-messages(my-id=user._id)
       each chat, index in chats
-        if(chat.user_id != user._id)
-          .inner-name #{chat.user_name}
-        .message(class=(user._id == chat.user_id ? "sent" : "received") style="padding-top:7px")
+        //- if(chat.user_id != user._id)
+        //-   .inner-name #{chat.user_name}
+        .message(class=(user._id == chat.user_id ? "sent" : "received"))
+          if(chat.user_id != user._id)
+            .inner-name #{chat.user_name}
           .message-content.
             #{chat.content}
+      .list-typing
     form(action="" class="form-submit").chat-input
       input(type="text",class="content" placeholder="Nhập tin nhắn...")
+      i.fa-regular.fa-face-smile.icon-button(style="cursor:pointer;margin-left:5px")
       button(type="submit") ➤
+  div(class="tooltip" role="tooltip" style="")
+    emoji-picker
   footer#footer.footer
   script.
     load("#footer", "/client/home/templates/footer.html");
+  script(type="module", src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js")
   script(src="/socket.io/socket.io.js")
   script(src="/client/home/assets/js/Socket.js")
   script(type="module", src="/client/home/assets/js/Chat.js") 
