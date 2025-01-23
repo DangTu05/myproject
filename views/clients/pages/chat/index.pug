@@ -32,7 +32,7 @@ body
       each chat, index in chats
         //- if(chat.user_id != user._id)
         //-   .inner-name #{chat.user_name}
-        .message(class=(user._id == chat.user_id ? "sent" : "received"))
+        .message(class=(user._id == chat.user_id ? "sent" : "received") style="padding-bottom:0 !important")
           if(chat.user_id != user._id)
             .inner-name #{chat.user_name}
           .message-content.

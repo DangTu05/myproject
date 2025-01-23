@@ -38,6 +38,15 @@ socket.on("server-return-message", (data) => {
 // END_SEVER_RETURN__MESSAGE
 
 /// End Client Send Message
+// function showTyping
+var timeout;
+function showTyping() {
+  socket.emit("client-typing", "show");
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    socket.emit("client-typing", "hidden");
+  }, 3000);
+}
 
 /// Icon Chat
 const iconChat = document.querySelector("emoji-picker");
@@ -51,19 +60,17 @@ if (iconChat) {
   iconChat.addEventListener("emoji-click", (e) => {
     const data = e.detail.unicode;
     content.value += data;
+    content.setSelectionRange(content.value.length, content.value.length);
+    content.focus();
+    showTyping();
   });
 }
 
 /// End Icon Chat
 
 /// Typing
-var timeout;
 content.addEventListener("keyup", (e) => {
-  socket.emit("client-typing", "show");
-  clearTimeout(timeout);
-  timeout = setTimeout(() => {
-    socket.emit("client-typing", "hidden");
-  }, 3000);
+  showTyping();
 });
 
 ///Server return typing
@@ -100,3 +107,8 @@ if (listTyping) {
 
 /// End Server return typing
 /// End Typing
+
+/// Upload nhiều ảnh
+// https://www.npmjs.com/package/file-upload-with-preview (gửi ảnh)
+/// https://github.com/fengyuanchen/viewerjs (xem ảnh)
+/// End Upload nhiều ảnh

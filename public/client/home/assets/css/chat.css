@@ -39,7 +39,6 @@
 }
 
 .message {
-  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   padding-top: 7px;
