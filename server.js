@@ -35,10 +35,10 @@ app.use(cors());
 app.use(express.json());
 //*HTTP Logger
 app.use(morgan("combined"));
-app.use(cookieParser("keyboard cat"));
+app.use(cookieParser(process.env.PASS_COOKIE));
 app.use(
   session({
-    secret: "07072005", // Thay thế bằng secret của bạn
+    secret: process.env.SESSION_SECRET, // Thay thế bằng secret của bạn
     resave: false, // Không lưu lại phiên nếu không thay đổi
     saveUninitialized: false, // Chỉ lưu phiên đã thay đổi
     cookie: {
