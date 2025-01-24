@@ -1,3 +1,4 @@
+include ../../../mixins/alert.pug
 head
   meta(charset="UTF-8")
   meta(name="viewport", content="width=device-width,initial-scale=1")
@@ -16,6 +17,7 @@ head
   //  Scripts 
   script(src="/client/home/assets/js/scripts.js")
 body 
+  +alertSuccess(3000)
   main.auth
     //  Auth intro 
     .auth__intro.d-md-none
@@ -49,7 +51,7 @@ body
               img.form__input-icon-error(src="/client/home/assets/icons/form-error.svg", alt)
             p.form__error Password must be at least 6 characters
           .form__group.form__group--inline
-            a.auth__link.form__pull-right(href="./reset-password.html") Forgot password?
+            a.auth__link.form__pull-right(href="/user/forgot-password") Forgot password?
           .form__group.auth__btn-group
             button.btn.btn--primary.auth__btn.form__submit-btn Sign In
 

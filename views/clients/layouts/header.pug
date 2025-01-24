@@ -6,8 +6,8 @@ include ../mixins/sub-menu.pug
       img.icon.top-bar__more-icon(src="/client/home/assets/icons/more.svg", alt)
     //  Logo 
     a.logo.top-bar__logo(href="./")
-      img.logo__img.top-bar__logo-img(src="/client/home/assets/icons/logo.svg", alt="grocerymart")
-      h1.logo__title.top-bar__logo-title grocerymart
+      img.logo__img.top-bar__logo-img.logo(src=setting.logo, alt="TUTA")
+      h1.logo__title.top-bar__logo-title #{setting.websiteName}
     //  Navbar 
     nav#navbar.navbar.hide
       button.navbar__close-btn.js-toggle(toggle-target="#navbar")

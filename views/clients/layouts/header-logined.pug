@@ -5,9 +5,9 @@ include ../mixins/sub-menu.pug
     button.top-bar__more.d-none.d-lg-block.js-toggle(toggle-target="#navbar")
       img.icon.top-bar__more-icon(src="/client/home/assets/icons/more.svg", alt)
     //  Logo 
-    a.logo.top-bar__logo(href="./")
-      img.logo__img.top-bar__logo-img(src="/client/home/assets/icons/logo.svg", alt="grocerymart")
-      h1.logo__title.top-bar__logo-title 
+    a.logo.top-bar__logo(href="/home")
+      img.logo__img.top-bar__logo-img.logo(src=setting.logo, alt="grocerymart")
+      h1.logo__title.top-bar__logo-title #{setting.websiteName}
     //  Navbar 
     nav#navbar.navbar.hide
       button.navbar__close-btn.js-toggle(toggle-target="#navbar")
@@ -22,12 +22,15 @@ include ../mixins/sub-menu.pug
         span.nav-btn__qnt 3
       ul.navbar__list.js-dropdown-list
         li.navbar__item
-          a(href="") Trang Chủ
+          a(href="/home") Trang Chủ
         li(class="").nav-menu
           .menu-item.brand.has-submenu
             - const path = "/product"
             a(href=path) Sản phẩm
             +sub-menu(newCategory, path)
+        li 
+          div(style="padding-left: 20px;")
+            a(href="/chat").fa-regular.fa-message
     .navbar__overlay.js-toggle(toggle-target="#navbar")
     //  Actions 
     .top-act

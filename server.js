@@ -60,6 +60,9 @@ app.use(
 //* route init
 routeAdmin(app);
 route(app);
+app.get("*", (req, res) => {
+  res.render("./clients/layouts/404");
+});
 server.listen(port, () => {
   console.log(` App listening at http://localhost:${port}/home`);
 });

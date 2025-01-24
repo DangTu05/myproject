@@ -1,11 +1,9 @@
-const Products = require("../../models/products/products");
-const { mutipleMongooseToObject } = require("../../util/mongoose");
 class SiteController {
-  async show(req, res, next) {
+  async show(req, res) {
     try {
       res.render("./clients/pages/home");
     } catch (err) {
-      next(err);
+      return res.status(500).json({ message: err.message });
     }
   }
 }

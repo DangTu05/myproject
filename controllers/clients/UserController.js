@@ -1,6 +1,8 @@
 const User = require("../../models/Users/user.model");
 const md5 = require("md5");
+/// config thời gian về thời gian Việt Nam
 const time = require("../../util/times/VnTime");
+/// Random OTP
 const generateOTP = require("../../helpers/client/GenerateOtp.helper");
 const ForgotPassword = require("../../models/Users/forgotPass.model");
 const SendMail = require("../../helpers/client/SendEmail.helper");
@@ -14,8 +16,8 @@ class UserController {
   /// Đăng kí tài khoản
   async register(req, res) {
     try {
+      /// Mã hóa mật khẩu
       req.body.password = md5(req.body.password);
-      console.log(req.body);
       const user = new User(req.body);
       await user.save();
       return res.redirect("/user/login");
@@ -46,6 +48,7 @@ class UserController {
       if (user.status === "inactive") {
         return res.json({ message: "Tài khoản này đã bị khóa" });
       }
+      /// set cookie thời gian sống là 7 ngày
       const time = 1000 * 60 * 60 * 24 * 7;
       res.cookie("tokenUser", user.tokenUser, { maxAge: time });
       return res.status(200).json({ message: "Đăng nhập thành công!" });
@@ -57,6 +60,7 @@ class UserController {
 
   /// Đăng xuất
   async logout(req, res) {
+    /// Xóa cookie khi đăng xuất
     res.clearCookie("tokenUser");
     res.redirect("/home");
   }
@@ -64,9 +68,11 @@ class UserController {
 
   /// Show thông tin tài khoản
   async profile(req, res) {
+    /// Lấy ra tài khoản thông qua tokenUser(trừ mật khẩu)
     const user = await User.findOne({
       tokenUser: req.cookies.tokenUser,
     }).select("-password");
+    /// Config thời gian tạo về kiểu thời gian Việt Nam
     let createdAt = time(user.createdAt);
     res.render("./clients/pages/users/profile", {
       user: user,
@@ -88,6 +94,11 @@ class UserController {
       req.flash("error", "Email không tồn tại");
       return res.redirect("back");
     }
+    /// Kiểm tra xem có bản ghi nào chưa nếu có thì xóa đi
+    const record = await ForgotPassword.findOne({ email: req.body.email });
+    if (record) {
+      await record.deleteOne();
+    }
     const object = {
       email: req.body.email,
       otp: generateOTP(8),
@@ -96,6 +107,7 @@ class UserController {
     await forgotPassword.save();
     var subject = `Mã OTP lấy lại mật khẩu`;
     var html = `Mã OTP của bạn là: <b>${object.otp}</b>`;
+    /// Gửi mail
     SendMail(req.body.email, subject, html);
     res.redirect(`/user/otp-password?email=${req.body.email}`);
   }

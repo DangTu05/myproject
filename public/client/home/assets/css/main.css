@@ -274,7 +274,13 @@ strong {
 .container {
   width: 1370px;
 }
-
+.logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(1.2) contrast(0.9) opacity(0.95) grayscale(15%);
+  mix-blend-mode: multiply;
+}
 .row {
   display: flex;
   flex-wrap: wrap;
