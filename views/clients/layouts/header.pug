@@ -31,7 +31,7 @@ include ../mixins/sub-menu.pug
     .col-3(style="margin-left:10px") 
       form(action="/search" style="position:relative",method="GET" class="search_form")
         div(class="form-group d-flex mb-0")
-          input(type="text" class="form-control search_input" name="keyword" placeholder="Nhập từ khóa...")
+          input(type="text" class="form-control search_input"  name="keyword" placeholder="Nhập từ khóa...")
           button(type="submit" class=" btn btn-primary") Tìm
     .navbar__overlay.js-toggle(toggle-target="#navbar")
     //  Actions 
@@ -39,4 +39,6 @@ include ../mixins/sub-menu.pug
       a.btn.btn--text.d-md-none(href="/user/login") Sign In
       a.top-act__sign-up.btn.btn--primary(href="/user/register") Sign Up
       a(href="/cart", aria-label="Giỏ hàng" style="position: relative;").fa-solid.fa-cart-shopping
-        .count(aria-hidden="true") #{miniCart}
+        .count(aria-hidden="true") #{miniCart > 0 ? miniCart  : 0}
+
+    

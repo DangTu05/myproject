@@ -1,5 +1,6 @@
 const User = require("../../models/Users/user.model");
 const md5 = require("md5");
+const Cart = require("../../models/carts/cart.model");
 /// config thời gian về thời gian Việt Nam
 const time = require("../../util/times/VnTime");
 /// Random OTP
@@ -51,6 +52,20 @@ class UserController {
       /// set cookie thời gian sống là 7 ngày
       const time = 1000 * 60 * 60 * 24 * 7;
       res.cookie("tokenUser", user.tokenUser, { maxAge: time });
+      if (req.cookies.cartId) {
+        res.clearCookie("cartId");
+      }
+      const record = await Cart.findOne({ user_id: user._id });
+      const maxAge = 1000 * 60 * 60 * 24 * 365;
+      if (!record) {
+        const cart = new Cart({
+          user_id: user._id,
+        });
+        await cart.save();
+        res.cookie("cartId", cart._id, { maxAge: maxAge });
+      } else {
+        res.cookie("cartId", record._id, { maxAge: time });
+      }
       return res.status(200).json({ message: "Đăng nhập thành công!" });
     } catch (error) {
       return res.status(500).json({ message: error.message });
@@ -62,6 +77,7 @@ class UserController {
   async logout(req, res) {
     /// Xóa cookie khi đăng xuất
     res.clearCookie("tokenUser");
+    res.clearCookie("cartId");
     res.redirect("/home");
   }
   /// End đăng xuất

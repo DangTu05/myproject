@@ -9,12 +9,14 @@ module.exports.cartId = async (req, res, next) => {
     const cart = await Cart.findOne({
       _id: req.cookies.cartId,
     });
-    if (cart.products.length>0) {
+    if(cart){
+    if (cart.products.length>0 ) {
       let totalQuantity = cart.products.reduce(
         (sum, item) => sum + item.quantity,
         0
       );
       res.locals.miniCart = totalQuantity;
+    }
     }
   }
   next();

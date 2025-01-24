@@ -14,8 +14,8 @@ head
   //  Fonts 
   link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
   //  Styles 
-  include ../../layouts/head.pug
   link(rel="stylesheet", href="/client/home/assets/css/main.css")
+  include ../../layouts/head.pug
   //  Scripts 
   script(src="/client/home/assets/js/scripts.js")
   //  Header 
@@ -103,45 +103,46 @@ body
                         - var EstimatedTotal = totalNumber + shipping
                         span Total:
                         span ₫#{EstimatedTotal.toLocaleString("vi-VN")}
-            else 
-              .cart-content
-                .empty-cart-message.
+          if(productCart.length>0)
+            .col-4.col-xl-12
+              .cart-info
+                .cart-info__row
+                  span
+                    | Subtotal 
+                    span.cart-info__sub-label (items)
+                  span #{miniCart}
+                .cart-info__row
+                  span
+                    | Price 
+                    span.cart-info__sub-label (Total)
+                  span ₫#{total}
+                .cart-info__row
+                  span Shipping
+                  span ₫#{shipping.toLocaleString("vi-VN")}
+                .cart-info__separate
+                .cart-info__row
+                  span Estimated Total
+                  span ₫#{EstimatedTotal.toLocaleString("vi-VN")}
+                a.cart-info__next-btn.btn.btn--primary.btn--rounded(href="./shipping.html").
                   
-                  Không có sản phẩm nào
+                  Continue to checkout
                   
-          .col-4.col-xl-12
-            .cart-info
-              .cart-info__row
-                span
-                  | Subtotal 
-                  span.cart-info__sub-label (items)
-                span #{miniCart}
-              .cart-info__row
-                span
-                  | Price 
-                  span.cart-info__sub-label (Total)
-                span ₫#{total}
-              .cart-info__row
-                span Shipping
-                span ₫#{shipping.toLocaleString("vi-VN")}
-              .cart-info__separate
-              .cart-info__row
-                span Estimated Total
-                span ₫#{EstimatedTotal.toLocaleString("vi-VN")}
-              a.cart-info__next-btn.btn.btn--primary.btn--rounded(href="./shipping.html").
-                
-                Continue to checkout
-                
-            .cart-info
-              a(href="#!")
-                article.gift-item
-                  .gift-item__icon-wrap
-                    img.gift-item__icon(src="./client/home/assets/icons/gift.svg", alt)
-                  .gift-item__content
-                    h3.gift-item__title Send this order as a gift.
-                    p.gift-item__desc.
-                      
-                      Available items will be shipped to your gift recipient.
+              .cart-info
+                a(href="#!")
+                  article.gift-item
+                    .gift-item__icon-wrap
+                      img.gift-item__icon(src="./client/home/assets/icons/gift.svg", alt)
+                    .gift-item__content
+                      h3.gift-item__title Send this order as a gift.
+                      p.gift-item__desc.
+                        
+                        Available items will be shipped to your gift recipient.
+        if(productCart.length==0)
+          .cart-content
+            .empty-cart-message.
+              
+              Không có sản phẩm nào
+                  
                       
   //  Footer 
   footer#footer.footer
