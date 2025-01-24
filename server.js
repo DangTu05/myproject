@@ -2,6 +2,7 @@ const express = require("express");
 const flash = require("express-flash");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+var session = require("express-session");
 const morgan = require("morgan");
 const configViewEngine = require("./configs/ViewEngine");
 const route = require("./routes/clients/index");
@@ -30,11 +31,22 @@ app.use(
 );
 
 app.use(methodOverride("_method"));
-app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 //*HTTP Logger
 app.use(morgan("combined"));
+app.use(cookieParser("keyboard cat"));
+app.use(
+  session({
+    secret: "07072005", // Thay thế bằng secret của bạn
+    resave: false, // Không lưu lại phiên nếu không thay đổi
+    saveUninitialized: false, // Chỉ lưu phiên đã thay đổi
+    cookie: {
+      maxAge: 600000, // Thời gian sống của cookie
+    },
+  })
+);
+app.use(flash());
 //* template engine
 configViewEngine(app);
 //* app locals variable

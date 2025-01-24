@@ -1,6 +1,9 @@
 const User = require("../../models/Users/user.model");
 const md5 = require("md5");
 const time = require("../../util/times/VnTime");
+const generateOTP = require("../../helpers/client/GenerateOtp.helper");
+const ForgotPassword = require("../../models/Users/forgotPass.model");
+const SendMail = require("../../helpers/client/SendEmail.helper");
 class UserController {
   /// Show giao diện đăng kí
   async showRegister(req, res) {
@@ -16,7 +19,6 @@ class UserController {
       const user = new User(req.body);
       await user.save();
       return res.redirect("/user/login");
-      
     } catch {
       return res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
@@ -72,5 +74,72 @@ class UserController {
     });
   }
   /// End show thông tin
+
+  /// Show giao diện quên mật khẩu
+  async showForgotPassword(req, res) {
+    res.render("./clients/pages/users/forgot-password");
+  }
+  /// End show giao diện quên mật khẩu
+
+  /// Quên mật khẩu
+  async forgotPassword(req, res) {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      req.flash("error", "Email không tồn tại");
+      return res.redirect("back");
+    }
+    const object = {
+      email: req.body.email,
+      otp: generateOTP(8),
+    };
+    const forgotPassword = new ForgotPassword(object);
+    await forgotPassword.save();
+    var subject = `Mã OTP lấy lại mật khẩu`;
+    var html = `Mã OTP của bạn là: <b>${object.otp}</b>`;
+    SendMail(req.body.email, subject, html);
+    res.redirect(`/user/otp-password?email=${req.body.email}`);
+  }
+  /// End quên mật khẩu
+
+  /// Show giao diện nhập OTP
+  async showOTPPassword(req, res) {
+    const email = req.query.email;
+    res.render("./clients/pages/users/otp-password", {
+      email: email,
+    });
+  }
+  /// End show giao diện nhập OTP
+
+  /// Xác nhận OTP
+  async otpPassword(req, res) {
+    const { email, otp } = req.body;
+    const otpPassword = await ForgotPassword({ email, otp });
+    if (!otpPassword) {
+      req.flash("error", "OTP không đúng");
+      return res.redirect("back");
+    }
+    res.redirect(`/user/change-password?email=${email}`);
+  }
+  /// End xác nhận OTP
+
+  /// Show giao diện đổi mật khẩu
+  async showChangePassword(req, res) {
+    res.render("./clients/pages/users/change-password", {});
+  }
+  /// End show giao diện đổi mật khẩu
+
+  /// Đổi mật khẩu
+  async changePassword(req, res) {
+    if (req.body.newPassword !== req.body.cfNewPassword) {
+      req.flash("error", "Mật khẩu không khớp");
+      return res.redirect("back");
+    }
+    const email = req.query.email;
+    const user = await User.findOne({ email: email });
+    await user.updateOne({ password: md5(req.body.newPassword) });
+    req.flash("success", "Đổi mật khẩu thành công");
+    res.redirect("/user/login");
+  }
+  /// End đổi mật khẩu
 }
 module.exports = new UserController();

@@ -1,0 +1,9 @@
+mixin alertError(time)
+  - if (messages.error)
+    .notification(data-time=time style="background-color: #dc3545;")
+      .message= messages.error
+
+mixin alertSuccess(time)
+  - if (messages.success)
+    .notification(data-time=time style="background-color: #28a745;")
+      .message= messages.success
