@@ -5,7 +5,7 @@ include ../mixins/sub-menu.pug
     button.top-bar__more.d-none.d-lg-block.js-toggle(toggle-target="#navbar")
       img.icon.top-bar__more-icon(src="/client/home/assets/icons/more.svg", alt)
     //  Logo 
-    a.logo.top-bar__logo(href="./")
+    a.logo.top-bar__logo(href="/home")
       img.logo__img.top-bar__logo-img.logo(src=setting.logo, alt="TUTA")
       h1.logo__title.top-bar__logo-title #{setting.websiteName}
     //  Navbar 
@@ -29,9 +29,9 @@ include ../mixins/sub-menu.pug
             a(href=path) Sản phẩm
             +sub-menu(newCategory, path)
     .col-3(style="margin-left:10px") 
-      form(action="/search",method="GET")
+      form(action="/search" style="position:relative",method="GET" class="search_form")
         div(class="form-group d-flex mb-0")
-          input(type="text" class="form-control" name="keyword" placeholder="Nhập từ khóa...")
+          input(type="text" class="form-control search_input" name="keyword" placeholder="Nhập từ khóa...")
           button(type="submit" class=" btn btn-primary") Tìm
     .navbar__overlay.js-toggle(toggle-target="#navbar")
     //  Actions 

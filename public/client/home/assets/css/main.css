@@ -281,6 +281,11 @@ strong {
   filter: brightness(1.2) contrast(0.9) opacity(0.95) grayscale(15%);
   mix-blend-mode: multiply;
 }
+.mic{
+  position: absolute;
+  top:41%;
+  right: 23%;
+}
 .row {
   display: flex;
   flex-wrap: wrap;

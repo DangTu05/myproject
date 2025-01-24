@@ -24,3 +24,49 @@ if (filter_price) {
     });
   });
 }
+/// Nhận dạng giọng nói
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+const searchForm = document.querySelector(".search_form");
+const searchInput = document.querySelector(".search_input");
+if (SpeechRecognition) {
+  const recognition = new SpeechRecognition();
+  recognition.continuous = true; // Kiểm soát việc có thu thập kết quả liên tục ( true) hay chỉ một kết quả duy nhất mỗi lần bắt đầu nhận dạng ( false).
+  recognition.interimResults = true; // Cho phép nhận diện kết quả tạm thời
+  searchForm.insertAdjacentHTML(
+    "beforeend",
+    '<button class="mic" type="button"><i class="fas fa-microphone"></i></button>'
+  );
+  searchInput.style.paddingRight = "50px";
+  const micBtn = searchForm.querySelector(".mic");
+  const micIcon = micBtn.firstElementChild;
+  micBtn.addEventListener("click", () => {
+    if (micIcon.classList.contains("fa-microphone")) {
+      console.log("Nhận diện giọng nói đã kích hoạt, NÓI");
+
+      recognition.start(); // Bắt đầu nhận diện giọng nói
+    } else {
+      recognition.stop(); // Dừng nhận diện giọng nói
+    }
+  });
+  recognition.addEventListener("start", () => {
+    micIcon.classList.remove("fa-microphone");
+    micIcon.classList.add("fa-microphone-slash");
+    searchInput.focus();
+    console.log("Nhận diện giọng nói đã kích hoạt, NÓI");
+  });
+  recognition.addEventListener("end", () => {
+    micIcon.classList.remove("fa-microphone-slash");
+    micIcon.classList.add("fa-microphone");
+    searchInput.focus();
+    console.log("Dịch vụ nhận diện giọng nói đã ngắt kết nối");
+  });
+  recognition.addEventListener("result", (event) => {
+    let transcript = "";
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+    }
+    searchInput.value = transcript; // Cập nhật giá trị trường nhập liệu với kết quả
+  });
+}
+/// End nhận dạng giọng nói
