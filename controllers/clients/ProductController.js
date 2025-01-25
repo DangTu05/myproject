@@ -7,7 +7,17 @@ const getSubCategory = require("../../helpers/client/Product-Category");
 class ProductController {
   /// Show chi tiết sản phẩm
   async detail(req, res, next) {
-    res.render("./clients/pages/products/Detail");
+    const users = await User.find({});
+    const feedbacks = await Feedback.find({});
+    const users_feedback = feedbacks.map((item) => {
+      return users.find((user) => {
+        return user._id.toString() === item.user_id;
+      });
+    });
+    res.render("./clients/pages/products/Detail", {
+      feedbacks: feedbacks,
+      users_feedback: users_feedback,
+    });
   }
   /// End show chi tiết sản phẩm
 
@@ -105,8 +115,8 @@ class ProductController {
 
   /// Feedback sản phẩm
   async feedback(req, res, next) {
-    if(!req.cookies.tokenUser){
-      req.flash("error", "Vui lòng đăng nhập")
+    if (!req.cookies.tokenUser) {
+      req.flash("error", "Vui lòng đăng nhập");
       return res.redirect("/user/login");
     }
     const user = await User.findOne({

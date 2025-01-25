@@ -18,7 +18,7 @@ class CartController {
     // Sắp xếp các sản phẩm theo thứ tự của các ID trong mảng items
     const sortedProductCart = items.map((id) =>
       productCart.find((product) => product._id.toString() === id)
-    );
+    );   
     let costs = [];
     sortedProductCart.forEach((item, index) => {
       total += item.Price * count[index];
