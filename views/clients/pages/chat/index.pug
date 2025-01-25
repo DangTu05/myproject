@@ -29,15 +29,19 @@ body
       Chat Hỗ Trợ
       
     .chat-messages(my-id=user._id)
-      each chat, index in chats
-        //- if(chat.user_id != user._id)
-        //-   .inner-name #{chat.user_name}
-        .message(class=(user._id == chat.user_id ? "sent" : "received") style="padding-bottom:0 !important")
-          if(chat.user_id != user._id)
-            .inner-name #{chat.user_name}
-          .message-content.
-            #{chat.content}
-      .list-typing
+      .message(class="received")
+        .inner-name Admin 
+        .message-content Xin chào! Tôi có thể giúp gì cho bạn?
+      if(chats)
+        each chat, index in chats
+          //- if(chat.user_id != user._id)
+          //-   .inner-name #{chat.user_name}
+          .message(class=(user._id == chat.user_id ? "sent" : "received") style="padding-bottom:0 !important")
+            if(chat.user_id != user._id)
+              .inner-name Admin
+            .message-content.
+              #{chat.content}
+        .list-typing
     form(action="" class="form-submit").chat-input
       input(type="text",class="content" placeholder="Nhập tin nhắn...")
       i.fa-regular.fa-face-smile.icon-button(style="cursor:pointer;margin-left:5px")

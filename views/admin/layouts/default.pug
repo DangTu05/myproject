@@ -139,7 +139,7 @@ html(lang="en")
                 .collapse#forms
                   ul.nav.nav-collapse
                     li
-                      a(href="/admin/Create")
+                      a(href="/admin/product/create")
                         span.sub-item Thêm sản phẩm
                     li
                       a(href="/admin/category/create")
@@ -267,37 +267,14 @@ html(lang="en")
                     li
                       .message-notif-scroll.scrollbar-outer
                         .notif-center
-                          a(href="#")
-                            .notif-img
-                              img(src="/admin/img/jm_denis.jpg", alt="Img Profile")
-                            .notif-content
-                              span.subject Jimmy Denis
-                              span.block How are you ? 
-                              span.time 5 minutes ago
-                          a(href="#")
-                            .notif-img
-                              img(src="/admin/img/chadengle.jpg", alt="Img Profile")
-                            .notif-content
-                              span.subject Chad
-                              span.block Ok, Thanks ! 
-                              span.time 12 minutes ago
-                          a(href="#")
-                            .notif-img
-                              img(src="/admin/img/mlane.jpg", alt="Img Profile")
-                            .notif-content
-                              span.subject Jhon Doe
-                              span.block.
-                                
-                                Ready for the meeting today...
-                                
-                              span.time 12 minutes ago
-                          a(href="#")
-                            .notif-img
-                              img(src="/admin/img/talha.jpg", alt="Img Profile")
-                            .notif-content
-                              span.subject Talha
-                              span.block Hi, Apa Kabar ? 
-                              span.time 17 minutes ago
+                          each item,index in room_id
+                            a(href="#")
+                              .notif-img
+                                img(src=users[index].img, alt="Img Profile")
+                              .notif-content
+                                span.subject users[index].name
+                                span.block chats[chats.length-1].content
+                                span.time 5 minutes ago
                     li
                       a.see-all(href="javascript:void(0);")
                         | See all messages

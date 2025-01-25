@@ -72,13 +72,20 @@ include ../mixins/sub-menu.pug
                 h2.act-dropdown__title You have #{miniCart} item(s)
                 a.act-dropdown__view-all(href="/cart") See All
               .row.row-cols-3.gx-2.act-dropdown__list
-                //  Cart preview item 1 
-                each item in productCart
+                //  Cart preview 
+                if(productCart)
+                  each item in productCart
+                    .col
+                      article.cart-preview-item
+                        .cart-preview-item__img-wrap
+                          img.cart-preview-item__thumb(src=item.img, alt="Sản Phẩm")
+                        h3.cart-preview-item__title #{item.product_name}
+                else 
                   .col
                     article.cart-preview-item
                       .cart-preview-item__img-wrap
-                        img.cart-preview-item__thumb(src=item.img, alt="Sản Phẩm")
-                      h3.cart-preview-item__title #{item.product_name}
+                        img.cart-preview-item__thumb()
+                      h3.cart-preview-item__title 
               .act-dropdown__checkout
                 a.btn.btn--primary.btn--rounded.act-dropdown__checkout-btn(href="./checkout.html").
                   
