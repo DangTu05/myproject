@@ -1,4 +1,5 @@
 const Cart = require("../../../models/carts/cart.model");
+const Products = require("../../../models/products/products");
 module.exports.cartId = async (req, res, next) => {
   if (!req.cookies.cartId) {
     const cart = new Cart();
@@ -9,14 +10,19 @@ module.exports.cartId = async (req, res, next) => {
     const cart = await Cart.findOne({
       _id: req.cookies.cartId,
     });
-    if(cart){
-    if (cart.products.length>0 ) {
-      let totalQuantity = cart.products.reduce(
-        (sum, item) => sum + item.quantity,
-        0
-      );
-      res.locals.miniCart = totalQuantity;
-    }
+    if (cart) {
+      if (cart.products.length > 0) {
+        let items = [];
+        cart.products.forEach((item) => {
+          items.push(item.product_id);
+        });
+        const productCart = await Products.find({ _id: { $in: items } }).limit(
+          3
+        );
+        res.locals.productCart = productCart;
+        res.locals.carts = cart;
+        res.locals.miniCart = cart.products.length;
+      }
     }
   }
   next();

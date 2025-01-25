@@ -46,7 +46,7 @@ include ../mixins/sub-menu.pug
             .act-dropdown__inner
               img.act-dropdown__arrow(src="/client/home/assets/icons/arrow-up.png", alt)
               .act-dropdown__top
-                h2.act-dropdown__title You have 3 item(s)
+                h2.act-dropdown__title You have #{miniCart} item(s)
                 a.act-dropdown__view-all(href="./favourite.html") 
               .row.row-cols-3.gx-2.act-dropdown__list
                 //  Cart preview item 1 
@@ -63,40 +63,27 @@ include ../mixins/sub-menu.pug
         .top-act__btn-wrap
           button.top-act__btn
             img.icon.top-act__icon(src="/client/home/assets/icons/buy.svg", alt)
-            span.top-act__title $65.42
+            span.top-act__title #{miniCart}
           //  Dropdown 
           .act-dropdown
             .act-dropdown__inner
               img.act-dropdown__arrow(src="/client/home/assets/icons/arrow-up.png", alt)
               .act-dropdown__top
-                h2.act-dropdown__title You have 3 item(s)
-                a.act-dropdown__view-all(href="./checkout.html") See All
+                h2.act-dropdown__title You have #{miniCart} item(s)
+                a.act-dropdown__view-all(href="/cart") See All
               .row.row-cols-3.gx-2.act-dropdown__list
                 //  Cart preview item 1 
-                .col
-                  article.cart-preview-item
-                    .cart-preview-item__img-wrap
-                      img.cart-preview-item__thumb(src="/client/home/assets/img/product/item-1.png", alt)
-                    h3.cart-preview-item__title Lavazza Coffee Blends
-                    p.cart-preview-item__price $329.00
-              .act-dropdown__bottom
-                .act-dropdown__row
-                  span.act-dropdown__label Subtotal
-                  span.act-dropdown__value $415.99
-                .act-dropdown__row
-                  span.act-dropdown__label Texes
-                  span.act-dropdown__value Free
-                .act-dropdown__row
-                  span.act-dropdown__label Shipping
-                  span.act-dropdown__value $10.00
-                .act-dropdown__row.act-dropdown__row--bold
-                  span.act-dropdown__label Total Price
-                  span.act-dropdown__value $425.99
+                each item in productCart
+                  .col
+                    article.cart-preview-item
+                      .cart-preview-item__img-wrap
+                        img.cart-preview-item__thumb(src=item.img, alt="Sản Phẩm")
+                      h3.cart-preview-item__title #{item.product_name}
               .act-dropdown__checkout
                 a.btn.btn--primary.btn--rounded.act-dropdown__checkout-btn(href="./checkout.html").
                   
                   Check Out All
-                  
+                    
       .top-act__user
         img.top-act__avatar(src=user.img, alt)
         //  Dropdown 
@@ -106,8 +93,8 @@ include ../mixins/sub-menu.pug
             .user-menu__top
               img.user-menu__avatar(src=user.img, alt)
               div
-                p.user-menu__name John Smith
-                p @johnsmith
+                p.user-menu__name #{user.name}
+                p #{user.email}
             ul.user-menu__list
               li
                 a.user-menu__link(href="/user/profile") Profile

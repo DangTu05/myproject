@@ -14,16 +14,18 @@ head
   //  Fonts 
   link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
   //  Styles 
-  include ../../layouts/head.pug
   link(rel="stylesheet", href="/client/home/assets/css/main.css")
+  include ../../layouts/head.pug
   //  Scripts 
   script(src="/client/home/assets/js/scripts.js")
   //  Header 
 body
-
   //  Header
   #header.header
-    include ../../layouts/header.pug
+    if(user)
+      include ../../layouts/header-logined.pug
+    else 
+      include ../../layouts/header.pug
   +List(from_to,cost,Sort,Products)
   ///footer
   footer#footer.footer
