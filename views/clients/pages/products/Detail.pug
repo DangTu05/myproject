@@ -1,3 +1,4 @@
+doctype 
 head
   meta(charset="UTF-8")
   meta(name="viewport", content="width=device-width,initial-scale=1")
@@ -240,6 +241,10 @@ body
                           img.review-card__star(src="/client/home/assets/icons/star-half.svg", alt)
                           img.review-card__star(src="/client/home/assets/icons/star-blank.svg", alt)
                         span.review-card__rating-title (3.5) Review
+              form(method="POST").comment 
+                label(for="comment") Comment
+                textarea.comment__input(class="form-control" name="comment", id="comment", rows="4", cols="50", placeholder="Nhập bình luận của bạn ở đây...")
+                button(type="submit" class="btn btn--primary" style="margin-top:10px").comment__submit Gửi
             .prod-tab__content
               .prod-content
                 h2.prod-content__heading Similar items you might like
@@ -343,5 +348,7 @@ body
   footer#footer.footer
   script.
     load("#footer", "/client/home/templates/footer.html")
-  script(type="module", src="/client/home/assets/js/Add_Cart.js")   
+  script(type="module", src="/client/home/assets/js/Add_Cart.js")
+  script(type="application/javascript", src="/tinymce/tinymce.min.js")
+  script(type="application/javascript", src="/admin/js/tinymce-config.js")   
     

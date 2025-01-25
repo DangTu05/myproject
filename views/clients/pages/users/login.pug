@@ -14,9 +14,11 @@ head
   link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
   //  Styles 
   link(rel="stylesheet", href="/client/home/assets/css/main.css")
+  link(rel="stylesheet", href="/client/home/assets/css/alert.css")
   //  Scripts 
   script(src="/client/home/assets/js/scripts.js")
-body 
+body
+  +alertError(3000)
   +alertSuccess(3000)
   main.auth
     //  Auth intro 
@@ -62,4 +64,5 @@ body
   script.
     
     window.dispatchEvent(new Event("template-loaded"));
-  script(type="module", src="/client/home/assets/js/Login.js")   
+  script(type="module", src="/client/home/assets/js/Login.js")
+  script(type="module", src="/client/home/assets/js/alert.js")    

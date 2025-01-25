@@ -274,6 +274,9 @@ strong {
 .container {
   width: 1370px;
 }
+.comment{
+  padding: 15px;
+}
 .logo {
   width: 32px;
   height: 32px;

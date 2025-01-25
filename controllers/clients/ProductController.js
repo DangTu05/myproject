@@ -1,6 +1,8 @@
 const Products = require("../../models/products/products");
+const Feedback = require("../../models/Users/feedback.model");
 const SortHepler = require("../../helpers/client/Sort.helper");
 const Category = require("../../models/categories/category.model");
+const User = require("../../models/Users/user.model");
 const getSubCategory = require("../../helpers/client/Product-Category");
 class ProductController {
   /// Show chi tiết sản phẩm
@@ -100,5 +102,29 @@ class ProductController {
     });
   }
   /// End show danh sách sản phẩm trong danh mục
+
+  /// Feedback sản phẩm
+  async feedback(req, res, next) {
+    if(!req.cookies.tokenUser){
+      req.flash("error", "Vui lòng đăng nhập")
+      return res.redirect("/user/login");
+    }
+    const user = await User.findOne({
+      tokenUser: req.cookies.tokenUser,
+    });
+    const product_id = Products.findOne({
+      slug: req.params.slug,
+    });
+    if (req.body.comment) {
+      const feedback = new Feedback({
+        user_id: user._id,
+        content: req.body.comment,
+        product_id: product_id._id,
+      });
+      await feedback.save();
+    }
+    return res.redirect("back");
+  }
+  /// End feedback sản phẩm
 }
 module.exports = new ProductController();
