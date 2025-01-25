@@ -18,10 +18,7 @@ head
   script(src="/client/home/assets/js/scripts.js")
 body
   #header.header
-    if(user)
-      include ../../layouts/header-logined.pug
-    else
-      include ../../layouts/header.pug
+    include ../../layouts/header-logined.pug
   main.profile
     .container
       //  Search bar 
@@ -37,7 +34,7 @@ body
             aside.profile__sidebar
               //  User 
               .profile-user
-                img.profile-user__avatar(src="/client/home/assets/img/avatar/avatar-3.png", alt)
+                img.profile-user__avatar(src=user.img, alt)
                 h1.profile-user__name #{user.name}
                 p.profile-user__desc Registered: #{createdAt}
               //  Menu 1 

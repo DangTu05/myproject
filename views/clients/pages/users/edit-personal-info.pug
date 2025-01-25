@@ -1,0 +1,202 @@
+include ../../../mixins/alert.pug
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title Edit personal info | Grocery Mart
+//  Favicon 
+link(rel="apple-touch-icon", sizes="76x76", href="/client/home/assets/favicon/apple-touch-icon.png")
+link(rel="icon", type="image/png", sizes="32x32", href="/client/home/assets/favicon/favicon-32x32.png")
+link(rel="icon", type="image/png", sizes="16x16", href="/client/home/assets/favicon/favicon-16x16.png")
+link(rel="manifest", href="/client/home/assets/favicon/site.webmanifest")
+meta(name="msapplication-TileColor", content="#da532c")
+meta(name="theme-color", content="#ffffff")
+//  Fonts 
+link(rel="stylesheet", href="/client/home/assets/fonts/stylesheet.css")
+//  Styles 
+link(rel="stylesheet", href="/client/home/assets/css/main.css")
+include ../../layouts/head.pug
+link(rel="stylesheet", href="/css/image.css")
+link(rel="stylesheet", href="/css/style.css")
+//  Scripts 
+script(src="/client/home/assets/js/scripts.js")
+//  Header 
+
+body
+  +alertSuccess(3000)
+  header#header.header
+    include ../../layouts/header-logined.pug
+    
+  //  MAIN 
+  main.profile
+    .container
+      //  Search bar 
+      .profile-container
+        .search-bar.d-none.d-md-flex
+          input.search-bar__input(type="text", name, placeholder="Search for item")
+          button.search-bar__submit
+            img.search-bar__icon.icon(src="/client/home/assets/icons/search.svg", alt)
+      //  Profile content 
+      .profile-container
+        .row.gy-md-3
+          .col-3.col-xl-4.d-lg-none
+            aside.profile__sidebar
+              //  User 
+              .profile-user
+                img.profile-user__avatar(src=user.img, alt="avatar")
+                h1.profile-user__name #{user.name}
+                p.profile-user__desc Registered: #{createAt}
+              //  Menu 1 
+              .profile-menu
+                h3.profile-menu__title Manage Account
+                ul.profile-menu__list
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/profile.svg", alt)
+                      | Personal info
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/location.svg", alt)
+                      | Addresses
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/message-2.svg", alt)
+                      | Communications & privacy
+
+              //  Menu 2 
+              .profile-menu
+                h3.profile-menu__title My items
+                ul.profile-menu__list
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/download.svg", alt)
+                      | Reorder
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/heart.svg", alt)
+                      | Lists
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/gift-2.svg", alt)
+                      | Registries
+
+              //  Menu 3 
+              .profile-menu
+                h3.profile-menu__title Subscriptions & plans
+                ul.profile-menu__list
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/shield.svg", alt)
+                      | Protection plans
+
+              //  Menu 4 
+              .profile-menu
+                h3.profile-menu__title Customer Service
+                ul.profile-menu__list
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/info.svg", alt)
+                      | Help
+
+                  li
+                    a.profile-menu__link(href="#!")
+                      span.profile-menu__icon
+                        img.icon(src="/client/home/assets/icons/danger.svg", alt)
+                      | Terms of Use
+
+          .col-9.col-xl-8.col-lg-12
+            .cart-info
+              .row.gy-3
+                .col-12
+                  h2.cart-info__heading
+                    a(href="/user/profile")
+                      img.icon.cart-info__back-arrow(src="/client/home/assets/icons/arrow-left.svg", alt)
+                    | Personal info
+
+                  form.form.form-card(enctype="multipart/form-data" method="POST" action="/user/edit-personal-info?_method=PATCH")
+                    //  Form row 1 
+                    .form__row
+                      .form__group
+                        label.form__label.form-card__label(for="name").
+                          
+                          Full name
+                          
+                        .form__text-input
+                          input#full-name.form__input(type="text", name="name", placeholder="Full name", required, autofocus, value=user.name)
+                          img.form__input-icon-error(src="/client/home/assets/icons/form-error.svg", alt)
+                        p.form__error Please enter your full name
+                      .form__group
+                        label.form__label.form-card__label(for="email").
+                          
+                          Email address
+                          
+                        .form__text-input
+                          input#email-adress.form__input(type="text", name="email", placeholder="Email address", required, value=user.email)
+                          img.form__input-icon-error(src="/client/home/assets/icons/form-error.svg", alt)
+                        p.form__error Please enter a valid email address
+                        
+                    //  Form row 2 
+                    .form__row
+                      .form__group
+                        label.form__label.form-card__label(for="phone").
+                          
+                          Phone Number
+                          
+                        .form__text-input
+                          input#phone-number.form__input(type="text", name="phone", placeholder="Phone Number", required, value=user.phone)
+                          img.form__input-icon-error(src="/client/home/assets/icons/form-error.svg", alt)
+                        p.form__error Please enter a valid phone number
+                      .form__group
+                        label.form__label.form-card__label(for="passowrd").
+                          
+                          Password
+                          
+                        .form__text-input
+                          input#passowrd.form__input(type="password", name="password", placeholder="Password")
+                          img.form__input-icon-error(src="/client/home/assets/icons/form-error.svg", alt)
+                        p.form__error Please enter new password
+                    /// form row 3
+                    .form__row
+                      .form__group
+                        label.form__label.form-card__label(for="img").
+                          AVATAR 
+                        .form__text-input
+                          input#image(type="file", name="img", accept="image/*")
+                    /// form row 4
+                    .form__row
+                      .form__group
+                        img.preview(src=user.img, alt="avatar")
+                    .form-card__bottom
+                      a.btn.btn--text(href="/user/profile") Cancel
+                      button(type="submit").btn.btn--primary.btn--rounded Save
+  //  Footer 
+  footer#footer.footer
+  script.
+    
+    load("#footer", "/client/home/templates/footer.html");
+    
+  //  Modal: confirm remove shopping cart item 
+  #delete-confirm.modal.modal--small.hide
+    .modal__content
+      p.modal__text Do you want to remove this item from shopping cart?
+      .modal__bottom
+        button.btn.btn--small.btn--outline.modal__btn.js-toggle(toggle-target="#delete-confirm").
+          
+          Cancel
+          
+        button.btn.btn--small.btn--danger.btn--primary.modal__btn.btn--no-margin.js-toggle(toggle-target="#delete-confirm").
+          
+          Delete
+          
+    .modal__overlay.js-toggle(toggle-target="#delete-confirm")
+  script(type="module", src="/js/global.js") 

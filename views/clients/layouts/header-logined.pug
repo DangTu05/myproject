@@ -98,13 +98,13 @@ include ../mixins/sub-menu.pug
                   Check Out All
                   
       .top-act__user
-        img.top-act__avatar(src="/client/home/assets/img/avatar.jpg", alt)
+        img.top-act__avatar(src=user.img, alt)
         //  Dropdown 
         .act-dropdown.top-act__dropdown
           .act-dropdown__inner.user-menu
             img.act-dropdown__arrow.top-act__dropdown-arrow(src="./assets/icons/arrow-up.png", alt)
             .user-menu__top
-              img.user-menu__avatar(src="./assets/img/avatar.jpg", alt)
+              img.user-menu__avatar(src=user.img, alt)
               div
                 p.user-menu__name John Smith
                 p @johnsmith

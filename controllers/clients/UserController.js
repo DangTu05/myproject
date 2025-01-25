@@ -97,6 +97,43 @@ class UserController {
   }
   /// End show thông tin
 
+  /// Show giao diện edit thông tin tài khoản
+  async showEditPersonalInfo(req, res) {
+    /// Lấy ra tài khoản thông qua tokenUser(trừ mật khẩu)
+    const user = await User.findOne({
+      tokenUser: req.cookies.tokenUser,
+    }).select("-password");
+    /// Config thời gian tạo về kiểu thời gian Việt Nam
+    let createdAt = time(user.createdAt);
+    res.render("./clients/pages/users/edit-personal-info", {
+      user: user,
+      createdAt: createdAt,
+    });
+  }
+  /// End show giao diện edit thông tin tài khoản
+
+  /// Sửa thông tin tài khoản
+  async editPersonalInfo(req, res) {
+    const user = await User.findOne({
+      tokenUser: req.cookies.tokenUser,
+    });
+    if (!req.body.img) {
+      delete req.body.img;
+    }
+    if (!req.body.password) {
+      delete req.body.password;
+      await user.updateOne(req.body);
+      req.flash("success", "Cập nhật thành công");
+      return res.redirect("back");
+    } else {
+      req.body.password = md5(req.body.password);
+      await user.updateOne(req.body);
+      req.flash("success", "Cập nhật thành công");
+      return res.redirect("back");
+    }
+  }
+  /// End sửa thông tin tài khoản
+
   /// Show giao diện quên mật khẩu
   async showForgotPassword(req, res) {
     res.render("./clients/pages/users/forgot-password");
