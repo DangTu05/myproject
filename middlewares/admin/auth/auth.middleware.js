@@ -16,25 +16,35 @@ module.exports.requireAuth = async (req, res, next) => {
     );
     const chats = await Chat.aggregate([
       {
-        $sort: { createdAt: -1 }, // Sắp xếp theo createdAt tăng dần
+        $sort: { createdAt: -1 }, // Sắp xếp theo createdAt giảm dần
       },
       {
+        ///Nhóm các tài liệu theo trường room_chat_id
         $group: {
+          // Sử dụng giá trị của trường room_chat_id làm _id của nhóm
           _id: "$room_chat_id",
+          // Lấy tài liệu đầu tiên trong mỗi nhóm và gán nó cho trường firstChat
           firstChat: { $first: "$$ROOT" },
         },
       },
       {
+        // Thay thế gốc của tài liệu bằng tài liệu đầu tiên trong mỗi nhóm (firstChat).
         $replaceRoot: { newRoot: "$firstChat" },
       },
-    ]);
-    const uniqueUserIds = await Chat.distinct("user_id").sort({ createdAt: 1 });
-    const room_id = await Chat.distinct("room_chat_id").sort({ createdAt: 1 });
-    const users = await User.find({ _id: { $in: uniqueUserIds } });
+    ]).sort({ createdAt: -1 });
+    const uniqueUserIds = chats.map((item) => item.user_id);
+    console.log(uniqueUserIds);
+
+    const room_id = chats.map((item) => item.room_chat_id);
+    const customers_array = await User.find({ _id: { $in: uniqueUserIds } });
+    const customers = uniqueUserIds.map((id) =>
+      customers_array.find((customer) => customer._id.toString() === id)
+    );
+
     if (!user) {
       return res.redirect(`${systemConfig.prefixAdmin}/auth/login`);
     } else {
-      res.locals.users = users;
+      res.locals.customers = customers;
       res.locals.room_id = room_id;
       res.locals.chats = chats;
       res.locals.user = user;

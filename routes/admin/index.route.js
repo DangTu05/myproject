@@ -9,6 +9,7 @@ const Role = require("./roles/role.route");
 const Accounts = require("./accounts/account.route");
 const Auth = require("./auth/auth.route");
 const MyAccout = require("./my-account/index.route");
+const Chat=require("./chats/chat.route")
 const SettingMiddleware = require("../../middlewares/admin/auth/setting.middleware");
 function router(app) {
   const PATH_ADMIN = systemConfig.prefixAdmin;
@@ -23,5 +24,6 @@ function router(app) {
   app.use(PATH_ADMIN + "/role", Role);
   app.use(PATH_ADMIN + "/auth", Auth);
   app.use(PATH_ADMIN + "/my-account", MyAccout);
+  app.use(PATH_ADMIN + "/chat", Chat);
 }
 module.exports = router;

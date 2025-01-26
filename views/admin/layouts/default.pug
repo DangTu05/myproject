@@ -267,18 +267,18 @@ html(lang="en")
                     li
                       .message-notif-scroll.scrollbar-outer
                         .notif-center
-                          each item,index in room_id
-                            a(href="#")
+                          each item,index in chats
+                            a(href=`${prefixAdmin}/chat/${item}`)
                               .notif-img
-                                img(src=users[index].img, alt="Img Profile")
+                                img(src=customers[index].img, alt="Img Profile")
                               .notif-content
-                                span.subject users[index].name
-                                span.block chats[chats.length-1].content
+                                span.subject #{customers[index].name}
+                                span.block #{chats[index].content}
                                 span.time 5 minutes ago
                     li
-                      a.see-all(href="javascript:void(0);")
-                        | See all messages
-                        i.fa.fa-angle-right
+                      div.see-all
+                        //- | See all messages
+                        //- i.fa.fa-angle-right
                 li.nav-item.topbar-icon.dropdown.hidden-caret
                   a.nav-link.dropdown-toggle#notifDropdown(href="#", role="button", data-bs-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
                     i.fa.fa-bell

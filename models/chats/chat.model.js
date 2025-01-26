@@ -3,7 +3,7 @@ const mongoose_delete = require("mongoose-delete");
 const Schema = mongoose.Schema;
 const Chat = new Schema(
   {
-    user_id: String,
+    user_id: { type: String, default: "" },
     img: Array,
     content: String,
     room_chat_id: String,
