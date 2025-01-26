@@ -1,56 +1,33 @@
+//- extends ../../layouts/default.pug
+//- block head 
+link(rel="stylesheet", href="/admin/css/roles/permissions.css") 
 meta(charset="UTF-8")
 meta(name="viewport", content="width=device-width,initial-scale=1")
 title Admin Chat Interface
 link(rel="stylesheet", href="/admin/css/chats/index.css")
+//- block sidebar
+//- block content
 body
   .chat-container
     .chat-header
       .user-info
-        img.img-avatar.rounded-circle(src=customer.img alt="Avatar")
+        img.avatar.circle(src=customer.img alt="Avatar")
         div
-          h2 Khách hàng #12345
+          h2 #{customer.name}
           .user-status Đang hoạt động
-    .chat-messages
+    .chat-messages(my-id="")
       .message.sent 
         .message-content Xin chào! Tôi có thể giúp gì cho bạn?
       each chat in chats
-        .message(class=(customer._id == customer.user_id ? "received" : "sent"))
+        .message(class=(customer._id == chat.user_id ? "received" : "sent"))
           .message-content.
           
             #{chat.content}
-          
-        //- .message-meta.
-          
-        //-   Khách hàng - 10:30 AM
-          
-      //- .message.sent
-      //-   .message-content.
-          
-      //-     Chào bạn, tôi có thể giúp gì cho bạn về đơn hàng #123456?
-          
-      //-   .message-meta
-      //-     | Admin - 10:31 AM
-
-      //-     span.message-status ✓ Đã xem
-      //- .message.received
-      //-   .message-content.
-          
-      //-     Tôi muốn biết thời gian dự kiến giao hàng
-          
-      //-   .message-meta.
-          
-      //-     Khách hàng - 10:32 AM
-          
-      //- .message.sent
-      //-   .message-content.
-          
-      //-     Đơn hàng của bạn dự kiến sẽ được giao vào ngày mai, trong khoảng 9h-11h sáng. Bạn có thể theo dõi đơn hàng qua mã vận đơn: GH123456789
-          
-      //-   .message-meta
-      //-     | Admin - 10:33 AM
-
-      //-     span.message-status ✓ Đã xem
-    .chat-input
+      .list-typing
+    form.form(action="" class="form-submit").chat-input
       .input-wrapper
-        input(type="text", placeholder="Nhập tin nhắn của bạn...")
-        button Gửi
+        input.content(type="text", placeholder="Nhập tin nhắn của bạn...")
+        button(type="submit") ➤
+  script(src="/socket.io/socket.io.js")
+  script(src="/client/home/assets/js/Socket.js")
+  script(type="module", src="/admin/js/chats/index.js") 

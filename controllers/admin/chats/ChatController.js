@@ -1,21 +1,23 @@
 const Chat = require("../../../models/chats/chat.model");
 const User = require("../../../models/Users/user.model");
+const chatSocket = require("../../../sockets/admin/chat.socket");
 class ChatController {
+  /// Show giao diện nhắn tin theo room_chat_id
   async showChat(req, res) {
+    chatSocket(req);
     const room_id = req.params.room_id;
+    /// Lấy ra mảng chats theo room_chat_id và sắp xếp theo tăng dần về thời gian tạo
     const chats = await Chat.find({ room_chat_id: room_id }).sort({
       createdAt: 1,
     });
+    /// Lấy ra user_id đầu tiên thoản mãn khác user_id = ""
     const user_id = chats.find((item) => item.user_id !== "").user_id;
-    console.log(user_id);
-    
     const user = await User.findOne({ _id: user_id });
-    console.log(user);
-    
     res.render("./admin/pages/chats/index", {
       chats: chats,
-      user: user,
+      customer: user,
     });
   }
+  /// End show giao diện nhắn tin theo room_chat_id
 }
 module.exports = new ChatController();

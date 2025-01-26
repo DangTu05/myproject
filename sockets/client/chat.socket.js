@@ -1,10 +1,14 @@
 const Chat = require("../../models/chats/chat.model");
 const GenerateOtp = require("../../helpers/client/GenerateOtp.helper");
 module.exports = async (res) => {
+  /// Lấy ra user_id của tài khoản client đăng nhập
   const user_id = res.locals.user.id;
+  /// Kiểm tra xem tài khoản đó có đoạn chat nào chưa
   const isUser = await Chat.findOne({ user_id: user_id });
   _io.once("connection", async (socket) => {
+    /// Nhận data từ sự kiện "client-send-message"
     socket.on("client-send-message", async (data) => {
+      /// Nếu user đấy có đoạn chat rồi thì tạo thêm document lưu nội dung đoạn chat user đó vừa gửi lên
       if (isUser) {
         const chat = new Chat({
           user_id: user_id,
@@ -12,7 +16,9 @@ module.exports = async (res) => {
           room_chat_id: isUser.room_chat_id,
         });
         await chat.save();
-      } else {
+      }
+      /// Nếu chưa thì tạo đoạn chat mới với room_chat_id được random
+      else {
         const chat = new Chat({
           user_id: user_id,
           content: data,
@@ -29,7 +35,9 @@ module.exports = async (res) => {
       /// END_SEVER_RETURN__MESSAGE
     });
     /// Typing
+    /// Nhận data từ sự kiện "client-typing"
     socket.on("client-typing", (data) => {
+      /// Trả data đó cho sự kiện "server-return-typing"
       socket.broadcast.emit("server-return-typing", {
         user_id: user_id,
         name: res.locals.user.name,

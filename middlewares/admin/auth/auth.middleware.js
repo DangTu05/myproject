@@ -14,9 +14,13 @@ module.exports.requireAuth = async (req, res, next) => {
     const role = await Roles.findOne({ _id: user.role_id }).select(
       "title permissions"
     );
+    /// Mảng chứa các tin nhắn cuối cùng của mỗi đoạn tin nhắn và sắp xếp giảm dần theo thời gian nhắn
     const chats = await Chat.aggregate([
       {
         $sort: { createdAt: -1 }, // Sắp xếp theo createdAt giảm dần
+      },
+      {
+        $match: { user_id: { $ne: "" } }, // Loại bỏ các tài liệu có user_id là chuỗi rỗng
       },
       {
         ///Nhóm các tài liệu theo trường room_chat_id
@@ -32,15 +36,19 @@ module.exports.requireAuth = async (req, res, next) => {
         $replaceRoot: { newRoot: "$firstChat" },
       },
     ]).sort({ createdAt: -1 });
-    const uniqueUserIds = chats.map((item) => item.user_id);
-    console.log(uniqueUserIds);
-
+    /// Mảng chứa các các user_id có trong mảng chats
+    const uniqueUserIds = chats
+      .map((item) => item.user_id)
+      .filter((id) => id !== "");
+    /// Mảng chứa các room_id có trong mảng chats
     const room_id = chats.map((item) => item.room_chat_id);
+    /// Lấy ra các thông tin user có id nằm trong mảng uniqueUserIds nhưng ko theo thứ tự
     const customers_array = await User.find({ _id: { $in: uniqueUserIds } });
+    /// Sắp xếp lại thông tin user theo đúng thứ tự id của mảng uniqueUserIds
     const customers = uniqueUserIds.map((id) =>
       customers_array.find((customer) => customer._id.toString() === id)
     );
-
+    /// Kiểm tra xem user có tồn tại không nếu không đẩy về trang login
     if (!user) {
       return res.redirect(`${systemConfig.prefixAdmin}/auth/login`);
     } else {

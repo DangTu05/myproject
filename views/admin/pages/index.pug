@@ -51,7 +51,7 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
           li.nav-item.active
             a(href="")
               i.fas.fa-home
-              p Dashboard
+              p Trang Chủ
           li.nav-section
             span.sidebar-mini-icon
               i.fa.fa-ellipsis-h
@@ -249,7 +249,7 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
                   .message-notif-scroll.scrollbar-outer
                     .notif-center
                       each item,index in chats
-                        a(href=`${prefixAdmin}/chat/${item}`)
+                        a(href=`${prefixAdmin}/chat/${item.room_chat_id}`)
                           .notif-img
                             img(src=customers[index].img, alt="Img Profile")
                           .notif-content

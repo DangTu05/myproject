@@ -264,7 +264,7 @@ html(lang="en")
                       .message-notif-scroll.scrollbar-outer
                         .notif-center
                           each item,index in chats
-                            a(href=`${prefixAdmin}/chat/${item}`)
+                            a(href=`${prefixAdmin}/chat/${item.room_chat_id}`)
                               .notif-img
                                 img(src=customers[index].img, alt="Img Profile")
                               .notif-content
