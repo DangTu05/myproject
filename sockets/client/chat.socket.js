@@ -6,6 +6,19 @@ module.exports = async (res) => {
   /// Kiểm tra xem tài khoản đó có đoạn chat nào chưa
   const isUser = await Chat.findOne({ user_id: user_id });
   _io.once("connection", async (socket) => {
+    /// Nhận sự kiện seen tin nhắn phía client
+    socket.on("client_seen_message", async () => {
+      /// Lấy ra các bản ghi theo room_chat_id
+      const chats = await Chat.find({ room_chat_id: isUser.room_chat_id });
+      for (const chat of chats) {
+        /// Kiểm tra nếu bản chat đấy có user_id khác với user_id của bản thân thì chuyển thành trạng thái true(đã xem)
+        if (chat.status == false && chat.user_id != user_id) {
+          chat.status = true;
+          chat.save();
+        }
+      }
+    });
+
     /// Nhận data từ sự kiện "client-send-message"
     socket.on("client-send-message", async (data) => {
       /// Nếu user đấy có đoạn chat rồi thì tạo thêm document lưu nội dung đoạn chat user đó vừa gửi lên

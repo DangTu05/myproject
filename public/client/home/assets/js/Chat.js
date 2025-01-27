@@ -4,6 +4,7 @@ const formSubmit = document.querySelector(".form-submit");
 const content = document.querySelector(".content");
 const chat_messages = document.querySelector(".chat-messages");
 if (formSubmit) {
+  socket.emit("client_seen_message", {});
   /// submit tin nhắn được gửi
   formSubmit.addEventListener("submit", (e) => {
     e.preventDefault();

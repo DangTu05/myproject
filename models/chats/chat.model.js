@@ -7,6 +7,7 @@ const Chat = new Schema(
     img: Array,
     content: String,
     room_chat_id: String,
+    status: { type: Boolean, default: false },
     deleted: { type: Boolean, default: false },
   },
   {

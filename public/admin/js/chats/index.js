@@ -3,6 +3,7 @@ const formSubmit = document.querySelector(".form-submit");
 const content = document.querySelector(".content");
 const chat_messages = document.querySelector(".chat-messages");
 if (formSubmit) {
+  socket.emit("admin_seen_message", {});
   formSubmit.addEventListener("submit", (e) => {
     e.preventDefault();
     const data = content.value;
@@ -17,6 +18,8 @@ if (formSubmit) {
 }
 // SEVER_RETURN__MESSAGE
 socket.on("server-return-message", (data) => {
+  console.log(data);
+
   const listTyping = document.querySelector(".list-typing");
   const my_id = document.querySelector("[my-id]").getAttribute("my-id");
   const div = document.createElement("div");
@@ -57,8 +60,6 @@ if (listTyping) {
       const existBoxTyping = document.querySelector(
         `.box-typing[user-id="${data.user_id}"]`
       );
-      console.log(existBoxTyping);
-      
       if (!existBoxTyping) {
         const boxTyping = document.createElement("div");
         boxTyping.classList.add("box-typing");
