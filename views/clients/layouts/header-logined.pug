@@ -29,8 +29,9 @@ include ../mixins/sub-menu.pug
             a(href=path) Sản phẩm
             +sub-menu(newCategory, path)
         li 
-          div(style="padding-left: 20px;")
-            a(href="/chat").fa-regular.fa-message
+          div(style="padding-left: 20px;") 
+            a(href="/chat").fa-regular.fa-message 
+              span #{unread_count}
     .navbar__overlay.js-toggle(toggle-target="#navbar")
     //  Actions 
     .top-act

@@ -36,6 +36,13 @@ module.exports.requireAuth = async (req, res, next) => {
         $replaceRoot: { newRoot: "$firstChat" },
       },
     ]).sort({ createdAt: -1 });
+    /// check xem có bao nhiêu tin nhắn có trạng thái là false(chưa xem)
+    let unread_count = 0;
+    chats.forEach((item) => {
+      if (item.status == false) {
+        unread_count++;
+      }
+    });
     /// Mảng chứa các các user_id có trong mảng chats
     const uniqueUserIds = chats
       .map((item) => item.user_id)
@@ -52,6 +59,7 @@ module.exports.requireAuth = async (req, res, next) => {
     if (!user) {
       return res.redirect(`${systemConfig.prefixAdmin}/auth/login`);
     } else {
+      res.locals.unread_count = unread_count;
       res.locals.customers = customers;
       res.locals.room_id = room_id;
       res.locals.chats = chats;
