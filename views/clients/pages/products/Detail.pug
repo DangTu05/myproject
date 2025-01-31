@@ -186,26 +186,27 @@ body
               .prod-content
                 h2.prod-content__heading What our customers are saying
                 .row.row-cols-3.gx-lg-2.row-cols-md-1.gy-md-3
-                  //  Review card 1 
-                  each item, index in feedbacks
-                    .col
-                      .review-card
-                        .review-card__content
-                          img.review-card__avatar(src=users_feedback[index].img, alt)
-                          .review-card__info
-                            h4.review-card__title #{users_feedback[index].name}
-                            p.review-card__desc.
-                              
-                              !{item.content}
-                              
-                        .review-card__rating
-                          .review-card__star-list
-                            img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
-                            img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
-                            img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
-                            img.review-card__star(src="/client/home/assets/icons/star-half.svg", alt)
-                            img.review-card__star(src="/client/home/assets/icons/star-blank.svg", alt)
-                          span.review-card__rating-title (3.5) Review
+                  //  Review card 1
+                  if(feedbacks)
+                    each item, index in feedbacks
+                      .col
+                        .review-card
+                          .review-card__content
+                            img.review-card__avatar(src=users_feedback[index].img, alt)
+                            .review-card__info
+                              h4.review-card__title #{users_feedback[index].name}
+                              p.review-card__desc.
+                                
+                                !{item.content}
+                                
+                          .review-card__rating
+                            .review-card__star-list
+                              img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                              img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                              img.review-card__star(src="/client/home/assets/icons/star.svg", alt)
+                              img.review-card__star(src="/client/home/assets/icons/star-half.svg", alt)
+                              img.review-card__star(src="/client/home/assets/icons/star-blank.svg", alt)
+                            span.review-card__rating-title (3.5) Review
               form(method="POST").comment 
                 label(for="comment") Comment
                 textarea.comment__input(class="form-control" name="comment", id="comment", rows="4", cols="50", placeholder="Nhập bình luận của bạn ở đây...")

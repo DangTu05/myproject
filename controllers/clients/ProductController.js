@@ -7,8 +7,9 @@ const getSubCategory = require("../../helpers/client/Product-Category");
 class ProductController {
   /// Show chi tiết sản phẩm
   async detail(req, res, next) {
+    const product = await Products.findOne({ slug: req.params.slug });
     const users = await User.find({});
-    const feedbacks = await Feedback.find({});
+    const feedbacks = await Feedback.find({ product_id: product._id });
     const users_feedback = feedbacks.map((item) => {
       return users.find((user) => {
         return user._id.toString() === item.user_id;
@@ -122,7 +123,7 @@ class ProductController {
     const user = await User.findOne({
       tokenUser: req.cookies.tokenUser,
     });
-    const product_id = Products.findOne({
+    const product_id = await Products.findOne({
       slug: req.params.slug,
     });
     if (req.body.comment) {

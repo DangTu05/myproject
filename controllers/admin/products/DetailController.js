@@ -14,6 +14,8 @@ class Detail {
       status: "active",
     });
     const product = await Products.findOne(find);
+    console.log(product);
+    
     if (product.createdBy) {
       const user = await Accounts.findOne({ _id: product.createdBy });
       product.createdName = user.name;

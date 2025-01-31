@@ -6,16 +6,21 @@ const user = require("../../middlewares/client/auth/User.Middleware");
 const isSlug = require("../../middlewares/client/categories/IsSlug.Middleware");
 
 /// Sử dụng middleware cho toàn đường dẫn của file này
-router.use(locals.locals, user.user);
+router.use(user.user);
 
 /// Đường dẫn dẫn đến trang danh sách sản phẩm nổi bật
-router.get("/san-pham-noi-bat", ProductController.showFeatured);
+router.get("/san-pham-noi-bat", locals.locals, ProductController.showFeatured);
 
 /// Đường dẫn dẫn đến trang danh sách sản phẩm theo danh mục
-router.get("/:slugCategory", isSlug.isSlug, ProductController.showProduct);
+router.get(
+  "/:slugCategory",
+  locals.locals,
+  isSlug.isSlug,
+  ProductController.showProduct
+);
 
 /// Đường dẫn dẫn đến trang chi tiết sản phẩm
-router.get("/:slug", ProductController.detail);
+router.get("/:slug", locals.locals, ProductController.detail);
 
 /// Đường dẫn gửi feedback về sản phẩm
 router.post("/:slug", ProductController.feedback);

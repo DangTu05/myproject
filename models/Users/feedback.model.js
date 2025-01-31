@@ -7,6 +7,8 @@ const Feedback = new Schema(
     content: String,
     deleted: { type: Boolean, default: false },
     product_id: String,
+    status: { type: Boolean, default: false },
+    product_id: String,
   },
   {
     timestamps: true,
