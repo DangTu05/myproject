@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES6", /// Cho phép biên dịch sang ES6
+    "module": "commonjs",///Commonjs là tiêu chuẩn sử dụng trong node.js để làm việc với các module
+    "outDir": "js", /// Biên dịch vào thư mục js
+    "removeComments": true, /// Xóa cmt khi biên dịch sang file js
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
+  }
+}
