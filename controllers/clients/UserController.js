@@ -1,11 +1,12 @@
 const User = require("../../models/users/user.model");
 const md5 = require("md5");
 const Cart = require("../../models/carts/cart.model");
+const generateToken = require("../../helpers/accounts/generate.helper");
 /// config thời gian về thời gian Việt Nam
 const time = require("../../util/times/VnTime");
 /// Random OTP
 const generateOTP = require("../../helpers/client/GenerateOtp.helper");
-const ForgotPassword = require("../../models/Users/forgotPass.model");
+const ForgotPassword = require("../../models/users/forgotPass.model");
 const SendMail = require("../../helpers/client/SendEmail.helper");
 class UserController {
   /// Show giao diện đăng kí

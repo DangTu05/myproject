@@ -2,7 +2,7 @@ const systemConfig = require("../../../configs/system");
 const Accounts = require("../../../models/accounts/account.model");
 const Roles = require("../../../models/roles/role.models");
 const Chat = require("../../../models/chats/chat.model");
-const User = require("../../../models/Users/user.model");
+const User = require("../../../models/users/user.model");
 const { create } = require("../validate/ValidateProduct");
 module.exports.requireAuth = async (req, res, next) => {
   if (!req.cookies.token) {

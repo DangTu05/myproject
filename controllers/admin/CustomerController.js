@@ -1,0 +1,44 @@
+const Customers = require("../../models/users/user.model");
+class CustomerController {
+  async show(req, res) {
+    const customers = await Customers.find({
+      deleted: false,
+    }).select(" -password");
+    res.render("./admin/pages/accounts/ListCustomer", {
+      clients: customers,
+    });
+  }
+
+  /// Thay đổi trạng thái
+  async changeStatus(req, res) {
+    try {
+      const updated = {
+        user_id: res.locals.user._id,
+        updateAt: new Date(),
+      };
+      await Customers.updateOne(
+        {
+          _id: req.params.id,
+        },
+        {
+          status: req.params.status,
+        }
+      );
+      await Customers.updateOne(
+        {
+          _id: req.params.id,
+        },
+        {
+          $push: { updatedBy: updated },
+        }
+      );
+      res.status(200).json({ message: "Cập nhật thành công" });
+      return;
+    } catch {
+      res.status(400).json({ message: "Đã xảy ra lỗi" });
+      return;
+    }
+  }
+  /// End thay đổi trạng thái
+}
+module.exports = new CustomerController();

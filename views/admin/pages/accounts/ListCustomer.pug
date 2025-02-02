@@ -406,7 +406,7 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
       .container
         .page-inner
           .page-header
-            h3.fw-bold.mb-3 Danh sách tài khoản
+            h3.fw-bold.mb-3 Danh sách customer
             ul.breadcrumbs.mb-3
               li.nav-home
                 a(href="#")
@@ -415,7 +415,7 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
                 i.icon-arrow-right
               if(role.permissions.includes('account_create'))
                 li.nav-item
-                  a(href="/admin/account/register") Thêm tài khoản
+                  a(href="#") Thêm tài khoản
               else 
                 li.nav-item
                   span Thêm tài khoản
@@ -428,30 +428,39 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
                       thead
                         tr
                           th Họ tên
-                          th Quyền
                           th Email 
                           th Số điện thoại
                           th(style="width: 10%") Hành động
                       tfoot
                         tr
                           th Họ tên
-                          th Quyền
                           th Email 
                           th Số điện thoại 
                           th Hành động
                       tbody
-                        each item in accounts
+                        each item in clients
                           tr
                             td #{item.name}
-                            td #{item.role.title}
                             td #{item.email}
                             td #{item.phone}
                             td
-                              .form-button-action
+                              .form-button-action(style="align-items:center")
                                 if(role.permissions.includes('account_edit'))
+                                  if(item.status==="active")
+                                    a(href="javascript:;",change-status="",data-status=item.status,data-id=item._id, class="badge badge-success" )
+                                      i Hoạt Động
+                                  else 
+                                    a(href="javascript:;",change-status="",data-status=item.status,data-id=item._id, class="badge badge-danger" )
+                                      i Dừng hoạt động
                                   button.btn.btn-link.btn-primary.btn-lg(data-id=`${item._id}`,class="edit",type="button", data-bs-toggle="tooltip", data-original-title="Edit Task")
                                     i.fa.fa-edit
-                                else 
+                                else
+                                  if(item.status==="active")
+                                    span.disabled(href="javascript:;",change-status="",data-status=item.status,data-id=item._id, class="badge badge-success" )
+                                      i Hoạt Động
+                                  else 
+                                    span.disabled(href="javascript:;",change-status="",data-status=item.status,data-id=item._id, class="badge badge-danger" )
+                                      i Dừng hoạt động
                                   span.btn.btn-link.btn-primary.btn-lg.disabled(type="button", data-bs-toggle="tooltip", data-original-title="Edit Task")
                                     i.fa.fa-edit
                                 if(role.permissions.includes('account_delete'))
@@ -537,7 +546,7 @@ link(rel="stylesheet", href="/admin/css/dashboard/demo.css")
     .custom-toggle
       i.icon-settings
   //  End Custom template 
-script(type="module", src="/admin/js/accounts/AccountList.js") 
+script(type="module", src="/admin/js/customer.js") 
 //    Core JS Files   
 script(src="/admin/js/core/jquery-3.7.1.min.js")
 script(src="/admin/js/core/popper.min.js")

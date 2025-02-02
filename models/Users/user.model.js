@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 var mongoose_delete = require("mongoose-delete");
-const generateToken = require("../../helpers/accounts/generate.helper");
 const Schema = mongoose.Schema;
 const User = new Schema(
   {

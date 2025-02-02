@@ -7,6 +7,7 @@ const router = express.Router();
 const AccountController = require("../../../controllers/admin/accounts/AccountController");
 const emailExist = require("../../../middlewares/admin/exist/EmailExist");
 const AuthMiddleware = require("../../../middlewares/admin/auth/auth.middleware");
+const CustomerController = require("../../../controllers/admin/CustomerController");
 router.post(
   "/create",
   AuthMiddleware.requireAuth,
@@ -35,5 +36,11 @@ router.delete(
   "/delete/:id",
   AuthMiddleware.requireAuth,
   AccountController.delete
+);
+router.get("/customers", AuthMiddleware.requireAuth, CustomerController.show);
+router.patch(
+  "/customers/change-status/:status/:id",
+  AuthMiddleware.requireAuth,
+  CustomerController.changeStatus
 );
 module.exports = router;
