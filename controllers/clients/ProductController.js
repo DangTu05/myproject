@@ -1,8 +1,8 @@
 const Products = require("../../models/products/products");
-const Feedback = require("../../models/Users/feedback.model");
+const Feedback = require("../../models/users/feedback.model");
 const SortHepler = require("../../helpers/client/Sort.helper");
 const Category = require("../../models/categories/category.model");
-const User = require("../../models/Users/user.model");
+const User = require("../../models/users/user.model");
 const getSubCategory = require("../../helpers/client/Product-Category");
 class ProductController {
   /// Show chi tiết sản phẩm

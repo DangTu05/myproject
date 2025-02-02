@@ -1,5 +1,5 @@
 const Chat = require("../../models/chats/chat.model");
-const User = require("../../models/Users/user.model");
+const User = require("../../models/users/user.model");
 const chatSocket = require("../../sockets/client/chat.socket");
 class ChatController {
   async showChat(req, res) {

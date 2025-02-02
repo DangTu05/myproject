@@ -1,5 +1,5 @@
 const Chat = require("../../../models/chats/chat.model");
-const User = require("../../../models/Users/user.model");
+const User = require("../../../models/users/user.model");
 const chatSocket = require("../../../sockets/admin/chat.socket");
 class ChatController {
   /// Show giao diện nhắn tin theo room_chat_id

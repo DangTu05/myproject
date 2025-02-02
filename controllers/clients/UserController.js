@@ -1,4 +1,4 @@
-const User = require("../../models/Users/user.model");
+const User = require("../../models/users/user.model");
 const md5 = require("md5");
 const Cart = require("../../models/carts/cart.model");
 /// config thời gian về thời gian Việt Nam

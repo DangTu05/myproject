@@ -1,4 +1,4 @@
-const Users = require("../../../models/Users/user.model");
+const Users = require("../../../models/users/user.model");
 const Chat = require("../../../models/chats/chat.model");
 module.exports.user = async (req, res, next) => {
   if (req.cookies.tokenUser) {

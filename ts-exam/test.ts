@@ -19,8 +19,6 @@ const Product: product = {
   image: "ao.jpg",
   rating: "4",
 };
-console.log(Product);
-
 /// intersection type
 type productInfo = product & cart;
 
