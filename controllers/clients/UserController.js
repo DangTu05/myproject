@@ -19,6 +19,7 @@ class UserController {
     try {
       /// Mã hóa mật khẩu
       req.body.password = md5(req.body.password);
+      req.body.tokenUser = generateToken(20);
       const user = new User(req.body);
       await user.save();
       return res.redirect("/user/login");

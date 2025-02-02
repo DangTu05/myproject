@@ -9,7 +9,6 @@ const Account = new Schema(
     img: {type:String,default:""},
     token: {
       type: String,
-      default: generateToken(20),
       unique: true,
     },
     password: String,

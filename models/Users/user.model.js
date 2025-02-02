@@ -9,7 +9,6 @@ const User = new Schema(
     img: { type: String, default: "" },
     tokenUser: {
       type: String,
-      default: generateToken(20),
       unique: true,
     },
     img: String,

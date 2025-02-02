@@ -18,8 +18,6 @@ if (formSubmit) {
 }
 // SEVER_RETURN__MESSAGE
 socket.on("server-return-message", (data) => {
-  console.log(data);
-
   const listTyping = document.querySelector(".list-typing");
   const my_id = document.querySelector("[my-id]").getAttribute("my-id");
   const div = document.createElement("div");

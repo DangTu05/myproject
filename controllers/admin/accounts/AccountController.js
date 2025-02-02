@@ -1,6 +1,7 @@
 const Accounts = require("../../../models/accounts/account.model");
 const Role = require("../../../models/roles/role.models");
 const md5 = require("md5");
+const generateToken = require("../../../helpers/accounts/generate.helper");
 class AccountController {
   /// Show giao diện tạo tk
   async show(req, res, next) {
@@ -27,6 +28,7 @@ class AccountController {
         }
         req.body.createdBy = res.locals.user._id;
         req.body.password = md5(req.body.password);
+        req.body.token = generateToken(20);
         const account = new Accounts(req.body);
         account.save();
         return res.json({ message: "Tạo thành công!" });
