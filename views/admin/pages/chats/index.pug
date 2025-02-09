@@ -1,6 +1,7 @@
 //- extends ../../layouts/default.pug
 //- block head 
 link(rel="stylesheet", href="/admin/css/roles/permissions.css") 
+link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css")
 meta(charset="UTF-8")
 meta(name="viewport", content="width=device-width,initial-scale=1")
 title Admin Chat Interface
@@ -23,6 +24,9 @@ body
           .message-content.
           
             #{chat.content}
+      if(chats[chats.length-1].status === true)
+        div(style="display:flex; justify-content:flex-end; gap:5px").fa-regular.fa-circle-check 
+          span đã xem
       .list-typing
     form.form(action="" class="form-submit").chat-input
       .input-wrapper
