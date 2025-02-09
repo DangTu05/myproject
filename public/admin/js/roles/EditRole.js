@@ -18,14 +18,14 @@ if (submit) {
       }),
     })
       .then((res) => {
-        if(res.message === "Bạn không có quyền sửa nhóm quyền"){
+        if (res.message === "Bạn không có quyền sửa nhóm quyền") {
           alert(res.message);
           return;
         }
         alert("Cập nhật thành công!");
         window.location.href = `/admin/role/edit/${id}`;
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Đã xảy ra lỗi khi cập !");
       });
   });

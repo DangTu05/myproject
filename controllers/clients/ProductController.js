@@ -6,7 +6,7 @@ const User = require("../../models/users/user.model");
 const getSubCategory = require("../../helpers/client/Product-Category");
 class ProductController {
   /// Show chi tiết sản phẩm
-  async detail(req, res, next) {
+  async detail(req, res) {
     const product = await Products.findOne({ slug: req.params.slug });
     const users = await User.find({});
     const feedbacks = await Feedback.find({ product_id: product._id });
@@ -23,7 +23,7 @@ class ProductController {
   /// End show chi tiết sản phẩm
 
   /// Show giao diện danh sách sản phẩm nổi bật
-  async showFeatured(req, res, next) {
+  async showFeatured(req, res) {
     /// Lấy ra thông tin của sort bên helper
     const Sort = SortHepler.Sort(req.query);
     /// Lấy ra các sản phẩm nổi bật và sắp xếp
@@ -67,7 +67,7 @@ class ProductController {
   /// End show giao diện danh sách sản phẩm nổi bật
 
   /// Show danh sách sản phẩm trong danh mục
-  async showProduct(req, res, next) {
+  async showProduct(req, res) {
     /// Lấy ra danh mục có slug giống slugCategory
     const category = await Category.findOne({ slug: req.params.slugCategory });
     /// Lấy ra thông tin của sort bên helper
@@ -115,7 +115,7 @@ class ProductController {
   /// End show danh sách sản phẩm trong danh mục
 
   /// Feedback sản phẩm
-  async feedback(req, res, next) {
+  async feedback(req, res) {
     if (!req.cookies.tokenUser) {
       req.flash("error", "Vui lòng đăng nhập");
       return res.redirect("/user/login");

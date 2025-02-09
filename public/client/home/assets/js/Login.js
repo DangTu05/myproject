@@ -45,7 +45,7 @@ if (submit) {
         alert("Đăng nhập thành công!");
         window.location.href = "/home";
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Đã xảy ra lỗi khi tạo tài khoản.");
       });
   });

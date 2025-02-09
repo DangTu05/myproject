@@ -2,7 +2,7 @@ const add = document.querySelector("#add");
 const deleteRole = document.querySelectorAll(".btn-delete");
 /// Xử lý khi người dùng thêm quyền
 if (add) {
-  add.onclick = (e) => {
+  add.onclick = () => {
     window.location.href = "/admin/role/create";
   };
 }
@@ -11,7 +11,7 @@ if (add) {
 /// Xử lý khi người dùng xóa quyền
 if (deleteRole) {
   deleteRole.forEach((item) => {
-    item.onclick = (e) => {
+    item.onclick = () => {
       const id = item.getAttribute("data-id");
       Swal.fire({
         text: "Bạn có muốn xóa sản phẩm không?",
@@ -37,7 +37,7 @@ if (deleteRole) {
               }
             })
             .then((res) => {
-              if(res.message==="Bạn không có quyền xóa nhóm quyền"){
+              if (res.message==="Bạn không có quyền xóa nhóm quyền") {
                 alert(res.message);
                 return;
               }

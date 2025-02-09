@@ -1,7 +1,7 @@
 const ChangeStatus = document.querySelectorAll("[change-status]");
 if (ChangeStatus) {
   ChangeStatus.forEach((item) => {
-    item.onclick = (e) => {
+    item.onclick = () => {
       const StatusCurrent = item.getAttribute("data-status");
       const Id = item.getAttribute("data-id");
       const ChangeStatus = StatusCurrent == "active" ? "inactive" : "active";

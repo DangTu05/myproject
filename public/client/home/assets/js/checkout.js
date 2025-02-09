@@ -1,20 +1,20 @@
-function isHidden(element) {
-  if (!element) return true;
+// function isHidden(element) {
+//   if (!element) return true;
 
-  if (window.getComputedStyle(element).display === "none") {
-    return true;
-  }
+//   if (window.getComputedStyle(element).display === "none") {
+//     return true;
+//   }
 
-  let parent = element.parentElement;
-  while (parent) {
-    if (window.getComputedStyle(parent).display === "none") {
-      return true;
-    }
-    parent = parent.parentElement;
-  }
+//   let parent = element.parentElement;
+//   while (parent) {
+//     if (window.getComputedStyle(parent).display === "none") {
+//       return true;
+//     }
+//     parent = parent.parentElement;
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
 window.addEventListener("template-loaded", initJsToggle);
 function initJsToggle() {

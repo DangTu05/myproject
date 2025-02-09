@@ -49,7 +49,7 @@ if (tablePermission) {
             }
           })
           .then((res) => {
-            if(res.message === "Bạn không có quyền cập nhật quyền"){
+            if (res.message === "Bạn không có quyền cập nhật quyền") {
               alert(res.message);
               return;
             }

@@ -2,7 +2,7 @@ const Products = require("../../../models/products/products");
 
 class EditController {
   /// Show giao diện tạo sản phẩm
-  async show(req, res, next) {
+  async show(req, res) {
     const id = req.params.id;
     try {
       const Count = await Products.countDocuments({ deleted: false });
@@ -11,14 +11,14 @@ class EditController {
         Count: Count,
         product: product,
       });
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
   /// end show
 
   /// Sửa sản phẩm
-  async Edit(req, res, next) {
+  async Edit(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("product_create")) {
       return res.json({ message: "Bạn không có quyền tạo sản phẩm" });
@@ -42,7 +42,7 @@ class EditController {
           { $push: { updatedBy: updated } }
         );
         return res.status(200).json({ message: "Thành công!" });
-      } catch (err) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }

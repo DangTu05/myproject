@@ -44,6 +44,7 @@ module.exports = async (req) => {
     });
     /// End Typing
     socket.on("disconnect", () => {
+      // eslint-disable-next-line no-console
       console.log("user disconnected");
     });
   });

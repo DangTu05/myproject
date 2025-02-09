@@ -20,6 +20,7 @@ module.exports.upload = async (req, res, next) => {
           { resource_type: "auto" }, // Chế độ tự động nhận diện loại file
           (error, result) => {
             if (error) {
+              // eslint-disable-next-line no-console
               console.error("Cloudinary upload error:", error); // In ra lỗi của Cloudinary nếu có
               return reject(error);
             }
@@ -31,7 +32,6 @@ module.exports.upload = async (req, res, next) => {
         .end(byteArrayBuffer); // Truyền buffer vào Cloudinary
     });
   } catch (error) {
-    console.error("Error:", error); // In ra lỗi để debug
     res.status(500).json({ error: error.message });
   }
 };

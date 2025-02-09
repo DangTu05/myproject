@@ -1,7 +1,6 @@
 const express = require("express");
 const multer = require("multer");
 const uploadCloud = require("../../../middlewares/admin/upload/uploadCloud");
-const validate = require("../../../middlewares/admin/validate/ValidateCategory");
 const upload = multer();
 const router = express.Router();
 const CategoryController = require("../../../controllers/admin/category/CategoryController");

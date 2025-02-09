@@ -64,5 +64,6 @@ app.get("*", (req, res) => {
   res.render("./clients/layouts/404");
 });
 server.listen(port, () => {
+  // eslint-disable-next-line no-console
   console.log(` App listening at http://localhost:${port}/home`);
 });

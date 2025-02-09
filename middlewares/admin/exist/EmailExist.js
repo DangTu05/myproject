@@ -10,8 +10,7 @@ module.exports.emailExist = async (req, res, next) => {
       return res.json({ message: "Email đã tồn tại" });
     }
     next();
-  } catch (error) {
-    console.error("Lỗi trong middleware:", error);
+  } catch {
     return res
       .status(500)
       .json({ message: "Đã xảy ra lỗi, vui lòng thử lại sau." });

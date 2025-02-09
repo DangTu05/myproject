@@ -18,7 +18,7 @@ class CartController {
     // Sắp xếp các sản phẩm theo thứ tự của các ID trong mảng items
     const sortedProductCart = items.map((id) =>
       productCart.find((product) => product._id.toString() === id)
-    );   
+    );
     let costs = [];
     sortedProductCart.forEach((item, index) => {
       total += item.Price * count[index];
@@ -63,10 +63,10 @@ class CartController {
           );
           res.status(200).json({ message: "Thành công" });
         }
-      } catch (error) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
-    } 
+    }
   }
   ///End thêm sản phẩm vào giỏ hàng
   /// Xóa sản phẩm ra khỏi giỏ hàng

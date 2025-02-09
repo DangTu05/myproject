@@ -1,10 +1,9 @@
 const productCategories = require("../../../models/categories/category.model");
 const Products = require("../../../models/products/products");
 const buildCategoryTree = require("../../../helpers/products/buildCategoryTree.helper");
-const accountModel = require("../../../models/accounts/account.model");
 class CreateController {
   /// Show giao diện tạo sản phẩm
-  async show(req, res, next) {
+  async show(req, res) {
     try {
       const count = await Products.countDocuments({ deleted: false });
       const categories = await productCategories.find({
@@ -17,13 +16,14 @@ class CreateController {
         records: records, // Thêm categories vào render nếu cần
       });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error fetching categories:", error);
       return;
     }
   }
   /// end show sản phẩm
   /// show giao diện danh mục sản phẩm
-  async Detail(req, res, next) {
+  async Detail(req, res) {
     try {
       let find = {
         deleted: false,
@@ -33,13 +33,13 @@ class CreateController {
       res.render("./admin/pages/categories/Category", {
         records: categories,
       });
-    } catch (error) {
+    } catch {
       res.redirect("dashboard");
     }
   }
   /// end show giao diện danh mục sản phẩm
   /// Tạo sản phẩm
-  async create(req, res, next) {
+  async create(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("category_create")) {
       return res.json({ message: "Bạn không có quyền tạo danh mục sản phẩm" });
@@ -49,13 +49,13 @@ class CreateController {
       try {
         await category.save();
         return res.status(200).json({ message: "Thành công!" });
-      } catch (err) {
+      } catch {
         return res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
   }
   /// end tạo sản phẩm
-  async showEdit(req, res, next) {
+  async showEdit(req, res) {
     try {
       const id = req.params.id;
       const categories = await productCategories.find({ deleted: false });
@@ -66,12 +66,13 @@ class CreateController {
         records: records,
       });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error fetching categories:", error);
       return;
     }
   }
   /// change status
-  async ChangeStatus(req, res, next) {
+  async ChangeStatus(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("category_edit")) {
       return res.json({ message: "Bạn không có quyền sửa danh mục sản phẩm" });
@@ -89,6 +90,7 @@ class CreateController {
         );
         res.status(200).json("Cập nhật thành công");
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("Error fetching categories:", error);
         return;
       }
@@ -97,7 +99,7 @@ class CreateController {
   /// end change status
 
   /// xóa mềm
-  async Delete(req, res, next) {
+  async Delete(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("category_delete")) {
       return res.json({ message: "Bạn không có quyền xóa danh mục sản phẩm" });
@@ -108,14 +110,14 @@ class CreateController {
         await productCategories.updateOne({ _id }, { deletedBy: deletedBy });
         await productCategories.delete({ _id });
         res.status(200).json({ message: "Xóa thành công!" });
-      } catch (error) {
+      } catch {
         return res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
   }
   /// end xóa mềm
   /// chỉnh sửa sản phẩm
-  async Edit(req, res, next) {
+  async Edit(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("category_edit")) {
       return res.json({ message: "Bạn không có quyền sửa danh mục sản phẩm" });
@@ -137,7 +139,7 @@ class CreateController {
           { $push: { updatedBy: updated } }
         );
         res.status(200).json({ message: "Thành công!" });
-      } catch (error) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
@@ -146,7 +148,7 @@ class CreateController {
   }
 
   /// change-multi-status
-  async ChangeMultiStatus(req, res, next) {
+  async ChangeMultiStatus(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("category_edit")) {
       return res.json({ message: "Bạn không có quyền sửa danh mục sản phẩm" });
@@ -164,6 +166,7 @@ class CreateController {
         );
         res.status(200).json("Cập nhật thành công");
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("Error fetching categories:", error);
         return;
       }
@@ -172,7 +175,7 @@ class CreateController {
   /// end change-multi-status
 
   /// xóa nhiều
-  async DeleteMulti(req, res, next) {
+  async DeleteMulti(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("category_delete")) {
       return res.json({ message: "Bạn không có quyền xóa danh mục sản phẩm" });
@@ -187,6 +190,7 @@ class CreateController {
         await productCategories.deleteMany({ _id: { $in: ids } });
         res.status(200).json("Xóa thành công");
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("Error fetching categories:", error);
         return;
       }

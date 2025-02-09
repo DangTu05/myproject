@@ -7,7 +7,7 @@ module.exports.getSubCategory = async (parent_id) => {
       status: "active",
     });
     let allSubs = [...subs];
-    for (const sub of subs) {    
+    for (const sub of subs) {
       const childs = await getCategory(sub._id);
       allSubs = allSubs.concat(childs);
     }

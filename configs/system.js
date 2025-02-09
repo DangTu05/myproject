@@ -1,4 +1,4 @@
 const PATH={
-    prefixAdmin:"/admin"
-}
+  prefixAdmin:"/admin"
+};
 module.exports=PATH;

@@ -99,7 +99,7 @@ if (!toggle_customSidebar) {
 }
 
 function getCheckmark() {
-  var checkmark = `<i class="gg-check"></i>`;
+  var checkmark = "<i class=\"gg-check\"></i>";
   $(".btnSwitch").find("button").empty();
   $(".btnSwitch").find("button.selected").append(checkmark);
 }
