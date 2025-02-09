@@ -1,1 +1,1 @@
-Projec1: lập trình web bán hàng với Node.js
+Project1: lập trình web bán hàng với Node.js
