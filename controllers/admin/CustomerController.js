@@ -42,5 +42,21 @@ class CustomerController {
     }
   }
   /// End thay đổi trạng thái
+
+  /// Xóa tài khoản
+  async delete(req, res) {
+    // const role = res.locals.user.role;
+    try {
+      await Customers.delete({ _id: req.params.id });
+      await Customers.updateOne(
+        { _id: req.params.id },
+        { deletedBy: res.locals.user._id }
+      );
+      res.status(200).json({ message: "Xóa thành công" });
+    } catch {
+      res.status(500).json({ message: "Đã xảy ra lỗi" });
+    }
+  }
+  /// End xóa tài khoản
 }
 module.exports = new CustomerController();
