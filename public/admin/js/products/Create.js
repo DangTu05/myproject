@@ -3,7 +3,6 @@ const quantity = document.querySelector("#quantity");
 const price = document.querySelector("#price");
 const img = document.querySelector("#image");
 const submit = document.querySelector("#createProductForm");
-const option = document.querySelector("#optionSelect");
 const preview = document.querySelector(".preview");
 const category_id = document.querySelector("#category_id");
 if (submit) {
@@ -63,7 +62,7 @@ if (submit) {
           alert("Đã tạo thành công!");
           window.location.href = "/admin/Products";
         })
-        .catch((err) => {
+        .catch(() => {
           alert("Đã xảy ra lỗi khi tạo sản phẩm.");
         });
     }

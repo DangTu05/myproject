@@ -3,7 +3,7 @@ const Categories = require("../../../models/categories/category.model");
 const buildCategoryTree = require("../../../helpers/products/buildCategoryTree.helper");
 class CreateController {
   /// Show giao diện tạo sản phẩm
-  async show(req, res, next) {
+  async show(req, res) {
     const categories = await Categories.find({
       deleted: false,
       status: "active",
@@ -18,7 +18,7 @@ class CreateController {
   /// end show
 
   /// Tạo sản phẩm
-  async create(req, res, next) {
+  async create(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("product_create")) {
       return res.json({ message: "Bạn không có quyền tạo sản phẩm" });
@@ -28,7 +28,7 @@ class CreateController {
       try {
         await product.save();
         return res.status(200).json({ message: "Thành công!" });
-      } catch (err) {
+      } catch {
         return res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }

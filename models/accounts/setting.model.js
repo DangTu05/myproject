@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { emailExist } = require("../../middlewares/admin/exist/EmailExist");
 const Schema = mongoose.Schema;
 const Setting = new Schema(
   {

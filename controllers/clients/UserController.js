@@ -160,7 +160,7 @@ class UserController {
     };
     const forgotPassword = new ForgotPassword(object);
     await forgotPassword.save();
-    var subject = `Mã OTP lấy lại mật khẩu`;
+    var subject = "Mã OTP lấy lại mật khẩu";
     var html = `Mã OTP của bạn là: <b>${object.otp}</b>`;
     /// Gửi mail
     SendMail(req.body.email, subject, html);

@@ -4,16 +4,16 @@ const Checkbox = document.querySelectorAll(".checkbox");
 const CheckboxAll = document.getElementById("checkbox-all");
 const Add_Category = document.querySelector(".add-category");
 const Apply = document.querySelector(".apply");
-const selectElement = document.querySelector('select[name="type"]');
+const selectElement = document.querySelector("select[name=\"type\"]");
 /// Đẩy về trang tạo danh mục
-Add_Category.onclick = (e) => {
-  window.location.href = "/admin/category/create"
+Add_Category.onclick = () => {
+  window.location.href = "/admin/category/create";
 };
 // end đẩy về trang tạo danh mục
 /// Thay đổi trạng thái
 if (ChangeStatus) {
   ChangeStatus.forEach((item) => {
-    item.onclick = (e) => {
+    item.onclick = () => {
       const StatusCurrent = item.getAttribute("data-status");
       const Id = item.getAttribute("data-id");
       const ChangeStatus = StatusCurrent == "active" ? "inactive" : "active";
@@ -49,7 +49,7 @@ if (CheckboxAll) {
     });
   });
 }
-Checkbox.forEach((item, index) => {
+Checkbox.forEach((item) => {
   item.addEventListener("change", function () {
     // Kiểm tra xem tất cả checkbox có được chọn không
     /// from(check) để chuyển check về mảng và dùng filter
@@ -63,7 +63,7 @@ Checkbox.forEach((item, index) => {
 /// xóa mềm
 if (Delete) {
   Delete.forEach((item) => {
-    item.onclick = (e) => {
+    item.onclick = () => {
       const _id = item.value;
       Swal.fire({
         text: "Bạn có muốn xóa sản phẩm không?",
@@ -101,7 +101,7 @@ if (Delete) {
                 title: "Xóa!",
                 text: "Bạn đã xóa thành công!",
                 icon: "success",
-              }).then((res) => {
+              }).then(() => {
                 document.addEventListener("click", (e) => {
                   if (
                     e.target.matches(".swal2-confirm") ||
@@ -112,11 +112,11 @@ if (Delete) {
                 });
               });
             })
-            .catch((err) => {
+            .catch(() => {
               // Xử lý khi lỗi
               Swal.fire({
                 title: "Lỗi!",
-                text: `Đã xảy ra lỗi!`,
+                text: "Đã xảy ra lỗi!",
                 icon: "error",
               });
             });
@@ -129,7 +129,7 @@ if (Delete) {
 
 /// change-multi-status and  soft delete multi
 if (Apply) {
-  Apply.onclick = (e) => {
+  Apply.onclick = () => {
     const CheckboxChecked = document.querySelectorAll(".checkbox:checked");
     const status = selectElement.value;
     let ids = [];
@@ -167,7 +167,7 @@ if (Apply) {
           }
           location.reload();
         })
-        .catch((err) => {
+        .catch(() => {
           alert("Lỗi!!!");
         });
     }
@@ -175,7 +175,7 @@ if (Apply) {
 }
 /// soft delete multi
 if (Apply) {
-  Apply.addEventListener("click", (e) => {
+  Apply.addEventListener("click", () => {
     const CheckboxChecked = document.querySelectorAll(".checkbox:checked");
     const status = selectElement.value;
     let ids = [];

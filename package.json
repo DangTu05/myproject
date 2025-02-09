@@ -9,7 +9,8 @@
     "beautiful": "prettier --write 'src/**/*.{js,json,scss}' --write --single-quote --tab-width 4 --trailing-comma all",
     "start": "nodemon --inspect server.js",
     "watch": "sass --watch prj1\\public\\scss\\ --output prj1\\public\\css\\",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
   },
   "author": "",
   "license": "ISC",
@@ -45,6 +46,9 @@
     "tinymce": "^7.6.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.20.0",
+    "globals": "^15.14.0",
     "nodemon": "^3.1.7",
     "scss": "^0.2.4"
   }

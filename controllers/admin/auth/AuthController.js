@@ -2,10 +2,10 @@ const Accounts = require("../../../models/accounts/account.model");
 const md5 = require("md5");
 const systemConfig = require("../../../configs/system");
 class AuthController {
-  async showLogin(req, res, next) {
+  async showLogin(req, res) {
     res.render("admin/pages/auth/login");
   }
-  async login(req, res, next) {
+  async login(req, res) {
     const user = await Accounts.findOne({
       email: req.body.email,
       deleted: false,
@@ -30,7 +30,7 @@ class AuthController {
       return res.status(500).json({ message: error.message });
     }
   }
-  async logout(req, res, next) {
+  async logout(req, res) {
     res.clearCookie("token");
     res.redirect(`${systemConfig.prefixAdmin}/auth/login`);
   }

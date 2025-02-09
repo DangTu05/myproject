@@ -24,7 +24,7 @@ class MyAccout {
   /// End show giao diện sửa thông tin cá nhân
 
   /// Sửa thông tin cá nhân
-  async edit(req, res, next) {
+  async edit(req, res) {
     try {
       const id = res.locals.user._id;
       if (!req.file) {
@@ -37,7 +37,7 @@ class MyAccout {
       }
       await Accounts.updateOne({ _id: id }, req.body);
       res.status(200).json({ message: "Cập nhật thành công" });
-    } catch (error) {
+    } catch {
       res.status(500).json({ message: "Đã xảy ra lỗi" });
     }
   }
@@ -51,8 +51,6 @@ class MyAccout {
 
   /// Tạo và cập nhật setting
   async setting(req, res) {
-    console.log(req.body);
-
     const setting = await Setting.findOne({});
     if (setting) {
       await Setting.updateOne({}, req.body);

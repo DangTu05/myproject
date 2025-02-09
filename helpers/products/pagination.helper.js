@@ -1,4 +1,4 @@
-module.exports = (ObjectPagination, query,CountProduct) => {
+module.exports = (ObjectPagination, query, CountProduct) => {
   if (query.page) {
     ObjectPagination.currentPage = parseInt(query.page);
   }
@@ -6,6 +6,6 @@ module.exports = (ObjectPagination, query,CountProduct) => {
     (ObjectPagination.currentPage - 1) * ObjectPagination.limitItems;
   const TotalPage = Math.ceil(CountProduct / ObjectPagination.limitItems);
   ObjectPagination.TotalPage = TotalPage;
-  ObjectPagination.CountProduct=CountProduct
+  ObjectPagination.CountProduct=CountProduct;
   return ObjectPagination;
 };

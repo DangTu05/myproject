@@ -4,12 +4,12 @@ var mongoose_delete = require("mongoose-delete");
 const Schema = mongoose.Schema;
 const product = new Schema(
   {
-    product_name:{type:String,required:true} ,
+    product_name:{ type:String, required:true },
     quantity: Number,
-    img: {type:String,unique:true},
+    img: { type:String, unique:true },
     slug: { type: String, unique: true },
     Price: Number,
-    description: {type:String,default:""},
+    description: { type:String, default:"" },
     status: { type: String, default: "active" },
     deleted: { type: Boolean, default: false },
     featured: String,

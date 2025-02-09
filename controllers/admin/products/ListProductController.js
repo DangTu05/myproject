@@ -1,10 +1,12 @@
+/* eslint-disable indent */
 const Products = require("../../../models/products/products");
 const FilterStatusHelper = require("../../../helpers/products/FilterStatus");
 const SearchHelper = require("../../../helpers/products/Search");
 const PaginationHelper = require("../../../helpers/products/pagination.helper");
+
 class ListProductController {
   /// Show danh sách sản phẩm
-  async show(req, res, next) {
+  async show(req, res) {
     ///Bộ lọc tìm kiếm
     const FilterStatus = FilterStatusHelper(req.query);
     let find = {};
@@ -51,7 +53,7 @@ class ListProductController {
   /// End show danh sách sản phẩm
 
   /// thay đổi trạng thái
-  async ChangeStatus(req, res, next) {
+  async ChangeStatus(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("product_edit")) {
       return res.json({ message: "Bạn không có quyền sửa" });
@@ -65,7 +67,7 @@ class ListProductController {
         await Products.updateOne({ _id }, { status });
         await Products.updateOne({ _id }, { $push: { updatedBy: updated } });
         res.status(200).send("Cập nhật thành công");
-      } catch (err) {
+      } catch {
         res.status(500).send("Đã xảy ra lỗi");
       }
     }
@@ -73,7 +75,7 @@ class ListProductController {
   /// End thay đổi trạng thái
 
   /// thay đổi trạng thái nhiều
-  async ChangeMultiStatus(req, res, next) {
+  async ChangeMultiStatus(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("product_edit")) {
       return res.json({ message: "Bạn không có quyền sửa" });
@@ -106,7 +108,7 @@ class ListProductController {
           { $push: { updatedBy: updated } }
         );
         res.status(200).json({ message: "Cập nhật thành công " });
-      } catch (err) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
@@ -114,7 +116,7 @@ class ListProductController {
   /// End thay đổi trạng thái nhiều
 
   /// soft delete
-  async DeleteItem(req, res, next) {
+  async DeleteItem(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("product_delete")) {
       return res.json({ message: "Bạn không có quyền xóa" });
@@ -125,7 +127,7 @@ class ListProductController {
         await Products.updateOne({ _id: id }, { deleted: true, deletedBy });
         await Products.delete({ _id: id });
         res.status(200).json({ message: "Xóa thành công" });
-      } catch (err) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
@@ -134,7 +136,7 @@ class ListProductController {
   /// End soft delete
 
   /// soft delete multi
-  async DeleteMulti(req, res, next) {
+  async DeleteMulti(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("product_create")) {
       return res.json({ message: "Bạn không có quyền xóa" });
@@ -148,7 +150,7 @@ class ListProductController {
         );
         await Products.delete({ _id: { $in: ids } });
         res.status(200).json({ message: "Xóa thành công" });
-      } catch (err) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }

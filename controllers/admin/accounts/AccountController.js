@@ -4,20 +4,20 @@ const md5 = require("md5");
 const generateToken = require("../../../helpers/accounts/generate.helper");
 class AccountController {
   /// Show giao diện tạo tk
-  async show(req, res, next) {
+  async show(req, res) {
     const Roles = await Role.find({ deleted: false });
     try {
       res.render("./admin/pages/accounts/Create", {
         Roles: Roles,
       });
-    } catch (error) {
+    } catch {
       res.redirect("/admin/dashboard");
     }
   }
   /// End show giao diện tạo tk
 
   /// Tạo tài khoản
-  async create(req, res, next) {
+  async create(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("account_create")) {
       return res.json({ message: "Bạn không có quyền tạo tài khoản" });
@@ -32,7 +32,7 @@ class AccountController {
         const account = new Accounts(req.body);
         account.save();
         return res.json({ message: "Tạo thành công!" });
-      } catch (error) {
+      } catch {
         return res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
@@ -40,7 +40,7 @@ class AccountController {
   /// End tạo tk
 
   /// Show danh sách tài khoản
-  async showAccounts(req, res, next) {
+  async showAccounts(req, res) {
     const accounts = await Accounts.find({
       deleted: false,
       _id: { $ne: res.locals.user._id },
@@ -60,14 +60,14 @@ class AccountController {
       res.render("./admin/pages/accounts/AccountList", {
         accounts: accounts,
       });
-    } catch (err) {
+    } catch {
       res.redirect("/admin/dashboard");
     }
   }
   /// End show danh sách tài khoản
 
   ///Show sửa thông tin tài khoản
-  async showEdit(req, res, next) {
+  async showEdit(req, res) {
     const id = req.params.id;
     const account = await Accounts.findOne({ _id: id });
     const Roles = await Role.find({ deleted: false });
@@ -76,14 +76,14 @@ class AccountController {
         account: account,
         Roles: Roles,
       });
-    } catch (error) {
+    } catch {
       res.redirect("admin/dashboard ");
     }
   }
   /// End show sửa thông tin tài khoản
 
   /// Sửa thông tin tài khoản
-  async edit(req, res, next) {
+  async edit(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("account_edit")) {
       return res.json({ message: "Bạn không có quyền sửa tài khoản" });
@@ -109,7 +109,7 @@ class AccountController {
           { $push: { updatedBy: updated } }
         );
         res.status(200).json({ message: "Cập nhật thành công" });
-      } catch (error) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
@@ -117,7 +117,7 @@ class AccountController {
   /// End sửa thông tin tài khoản
 
   /// Xóa tài khoản
-  async delete(req, res, next) {
+  async delete(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("account_delete")) {
       return res.json({ message: "Bạn không có quyền xóa tài khoản" });
@@ -128,12 +128,11 @@ class AccountController {
         await Accounts.updateOne({ _id: id }, { deletedBy: deletedBy });
         await Accounts.delete({ _id: id });
         res.status(200).json({ message: "Xóa thành công" });
-      } catch (error) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
   }
   /// End xóa tài khoản
-  
 }
 module.exports = new AccountController();

@@ -24,7 +24,7 @@ if (submit) {
             quantity: quantity.value,
           }),
         })
-          .then((res) => {
+          .then(() => {
             Swal.fire({
               title: "Thành công",
               text: "Bạn đã thêm thành công.",

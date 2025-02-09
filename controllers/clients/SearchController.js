@@ -2,7 +2,7 @@ const Products = require("../../models/products/products");
 const SearchHelper = require("../../helpers/products/Search");
 const SortHepler = require("../../helpers/client/Sort.helper");
 class Search {
-  async index(req, res, next) {
+  async index(req, res) {
     let find = {
       deleted: false,
       status: "active",

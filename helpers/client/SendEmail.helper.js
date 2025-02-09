@@ -18,8 +18,10 @@ module.exports = async (email, subject, html) => {
     },
     (error, info) => {
       if (error) {
+        // eslint-disable-next-line no-console
         return console.log(error);
       }
+      // eslint-disable-next-line no-console
       console.log("Email sent: " + info.response);
     }
   );

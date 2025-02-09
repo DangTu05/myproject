@@ -2,7 +2,7 @@ const Products = require("../../models/products/products");
 const Accounts = require("../../models/accounts/account.model");
 const Categories = require("../../models/categories/category.model");
 class SiteController {
-  async show(req, res, next) {
+  async show(req, res) {
     const user = await Accounts.findOne({
       deleted: false,
       token: req.cookies.token,

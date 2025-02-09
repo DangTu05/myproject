@@ -21,7 +21,6 @@ socket.on("server-return-message", (data) => {
   const listTyping = document.querySelector(".list-typing");
   const my_id = document.querySelector("[my-id]").getAttribute("my-id");
   const div = document.createElement("div");
-  let htmlName = "";
   if (my_id == data.user_id) {
     div.classList.add("message", "sent");
   } else {
@@ -46,7 +45,7 @@ function showTyping() {
   }, 3000);
 }
 /// Typing
-content.addEventListener("keyup", (e) => {
+content.addEventListener("keyup", () => {
   showTyping();
 });
 

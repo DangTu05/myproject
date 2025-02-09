@@ -43,7 +43,7 @@ if (submit) {
         alert("Đã tạo thành công!");
         window.location.href = "/admin/account/accounts";
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Đã xảy ra lỗi khi tạo tài khoản.");
       });
   });

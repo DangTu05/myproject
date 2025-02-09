@@ -3,11 +3,10 @@ const Search = document.querySelector(".Search");
 const Value = document.querySelector(".ValueSearch");
 const CheckboxAll = document.getElementById("checkbox-all");
 const Checkbox = document.querySelectorAll(".checkbox");
-const selectElement = document.querySelector('select[name="type"]');
+// eslint-disable-next-line quotes
+const selectElement = document.querySelector(' select[name=" type "]');
 const Apply = document.querySelector(".apply");
-const Fix = document.querySelectorAll(".fix");
 const Delete = document.querySelectorAll(".delete");
-const modal = document.querySelector("#modal");
 const addPro = document.querySelector(".add-pro");
 const sort = document.querySelector("[sort]");
 if (ButtonStatus.length > 0) {
@@ -47,7 +46,7 @@ if (CheckboxAll) {
     });
   });
 }
-Checkbox.forEach((item, index) => {
+Checkbox.forEach((item) => {
   item.addEventListener("change", function () {
     // Kiểm tra xem tất cả checkbox có được chọn không
     /// from(check) để chuyển check về mảng và dùng filter
@@ -61,7 +60,7 @@ Checkbox.forEach((item, index) => {
 
 /// change-multi-status and  soft delete multi
 if (Apply) {
-  Apply.addEventListener("click", (e) => {
+  Apply.addEventListener("click", () => {
     const CheckboxChecked = document.querySelectorAll(".checkbox:checked");
     const status = selectElement.value;
     let ids = [];
@@ -100,7 +99,6 @@ if (Apply) {
           location.reload(); // Tải lại trang nếu thành công
         })
         .catch((error) => {
-          console.error("Lỗi:", error); // Ghi log chi tiết lỗi
           alert("Đã xảy ra lỗi: " + error.message); // Hiển thị thông báo lỗi cho người dùng
         });
     }
@@ -167,7 +165,7 @@ if (Delete) {
 
 /// xử lý khi nhấn nút thêm sp
 if (addPro) {
-  addPro.addEventListener("click", (item) => {
+  addPro.addEventListener("click", () => {
     window.location.href = "product/create";
   });
 }
@@ -175,7 +173,7 @@ if (addPro) {
 
 /// soft delete multi
 if (Apply) {
-  Apply.addEventListener("click", (e) => {
+  Apply.addEventListener("click", () => {
     const CheckboxChecked = document.querySelectorAll(".checkbox:checked");
     const status = selectElement.value;
     let ids = [];

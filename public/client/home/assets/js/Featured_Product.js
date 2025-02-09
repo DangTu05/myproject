@@ -2,7 +2,7 @@ const sort_option = document.querySelectorAll(".sort-option");
 const filter_price = document.querySelectorAll("[filter-price]");
 if (sort_option) {
   sort_option.forEach((item) => {
-    item.onclick = (e) => {
+    item.onclick = () => {
       let url = new URL(window.location.href);
       const value = item.getAttribute("value");
       const [sortKey, sortValue] = value.split("-");
@@ -35,13 +35,14 @@ if (SpeechRecognition) {
   recognition.interimResults = true; // Cho phép nhận diện kết quả tạm thời
   searchForm.insertAdjacentHTML(
     "beforeend",
-    '<button class="mic" type="button"><i class="fas fa-microphone"></i></button>'
+    "<button class=\"mic\" type=\"button\"><i class=\"fas fa-microphone\"></i></button>"
   );
   searchInput.style.paddingRight = "50px";
   const micBtn = searchForm.querySelector(".mic");
   const micIcon = micBtn.firstElementChild;
   micBtn.addEventListener("click", () => {
     if (micIcon.classList.contains("fa-microphone")) {
+      // eslint-disable-next-line no-console
       console.log("Nhận diện giọng nói đã kích hoạt, NÓI");
 
       recognition.start(); // Bắt đầu nhận diện giọng nói
@@ -53,12 +54,14 @@ if (SpeechRecognition) {
     micIcon.classList.remove("fa-microphone");
     micIcon.classList.add("fa-microphone-slash");
     searchInput.focus();
+    // eslint-disable-next-line no-console
     console.log("Nhận diện giọng nói đã kích hoạt, NÓI");
   });
   recognition.addEventListener("end", () => {
     micIcon.classList.remove("fa-microphone-slash");
     micIcon.classList.add("fa-microphone");
     searchInput.focus();
+    // eslint-disable-next-line no-console
     console.log("Dịch vụ nhận diện giọng nói đã ngắt kết nối");
   });
   recognition.addEventListener("result", (event) => {

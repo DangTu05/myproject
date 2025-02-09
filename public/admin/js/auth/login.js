@@ -2,7 +2,7 @@ const submit = document.querySelector("#submit");
 const togglePassword = document.querySelector("#togglePassword");
 const password = document.querySelector("#password");
 const email = document.querySelector("#email");
-togglePassword.addEventListener("click", function (e) {
+togglePassword.addEventListener("click", function () {
   // toggle the type attribute
   const type =
     password.getAttribute("type") === "password" ? "text" : "password";
@@ -53,7 +53,7 @@ if (submit) {
         alert("Đăng nhập thành công!");
         window.location.href = "/admin/dashboard";
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Đã xảy ra lỗi khi tạo tài khoản.");
       });
   });

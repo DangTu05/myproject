@@ -2,17 +2,17 @@ const Role = require("../../../models/roles/role.models");
 const Accounts = require("../../../models/accounts/account.model");
 class RoleController {
   /// show giao diện tạo role
-  async show(req, res, next) {
+  async show(req, res) {
     try {
       res.render("admin/pages/roles/create");
-    } catch (error) {
+    } catch {
       res.redirect("/admin/dashboard");
     }
   }
   /// end show giao diện tạo role
 
   /// xử lý tạo role
-  async create(req, res, next) {
+  async create(req, res) {
     if (!res.locals.role.permissions.includes("role_create")) {
       return res.json({ message: "Bạn không có quyền tạo nhóm quyền" });
     } else {
@@ -21,7 +21,7 @@ class RoleController {
       try {
         await role.save();
         return res.status(200).json({ message: "Tạo thành công!" });
-      } catch (error) {
+      } catch {
         return res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
@@ -29,7 +29,7 @@ class RoleController {
   /// end xử lý tạo role
 
   /// show danh sách nhóm quyền
-  async permissions(req, res, next) {
+  async permissions(req, res) {
     let find = {
       deleted: false,
     };
@@ -49,7 +49,7 @@ class RoleController {
   /// end show danh sách nhóm quyền
 
   /// show danh sách role
-  async roles(req, res, next) {
+  async roles(req, res) {
     let find = {
       deleted: false,
     };
@@ -57,14 +57,14 @@ class RoleController {
     const count = await Role.countDocuments({ deleted: false });
     try {
       res.render("admin/pages/roles/role", { roles: roles, count: count });
-    } catch (error) {
+    } catch {
       res.redirect("/admin/dashboard");
     }
   }
   /// end show danh sách role
 
   /// Xử lý xóa role
-  async delete(req, res, next) {
+  async delete(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("role_delete")) {
       return res.json({ message: "Bạn không có quyền xóa nhóm quyền" });
@@ -75,7 +75,7 @@ class RoleController {
         await Role.updateOne({ _id: id }, { deletedBy: deletedBy });
         await Role.delete({ _id: id });
         return res.status(200).json({ message: "Xóa thành công" });
-      } catch (error) {
+      } catch {
         return res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
@@ -83,20 +83,20 @@ class RoleController {
   /// End xử lý xóa role
 
   /// Show giao diện edit
-  async showEdit(req, res, next) {
+  async showEdit(req, res) {
     const role = await Role.findOne({ _id: req.params.id });
     try {
       res.render("admin/pages/roles/edit", {
         role: role,
       });
-    } catch (error) {
+    } catch {
       res.redirect("/admin/dashboard");
     }
   }
   /// End show giao diện edit
 
   /// Xử lý edit nhóm quyền
-  async edit(req, res, next) {
+  async edit(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("role_edit")) {
       return res.json({ message: "Bạn không có quyền sửa nhóm quyền" });
@@ -114,7 +114,7 @@ class RoleController {
         );
         await Role.updatedOne({ _id: id }, { $push: { updatedBy: updated } });
         return res.status(200).json({ message: "Cập nhật thành công" });
-      } catch (error) {
+      } catch {
         return res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }
@@ -122,7 +122,7 @@ class RoleController {
   /// End xử lý nhóm quyền
 
   /// Cập nhật quyền
-  async updatePermissions(req, res, next) {
+  async updatePermissions(req, res) {
     const role = res.locals.role;
     if (role.permissions.includes("role_premission")) {
       return res.json({ message: "Bạn không có quyền cập nhật quyền" });
@@ -144,7 +144,7 @@ class RoleController {
           );
         }
         res.status(200).json({ message: "Cập nhật thành công" });
-      } catch (error) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     }

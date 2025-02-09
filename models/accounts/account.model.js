@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 var mongoose_delete = require("mongoose-delete");
-const generateToken = require("../../helpers/accounts/generate.helper");
 const Schema = mongoose.Schema;
 const Account = new Schema(
   {
     name: String,
     email: String,
-    img: {type:String,default:""},
+    img: { type:String, default:"" },
     token: {
       type: String,
       unique: true,

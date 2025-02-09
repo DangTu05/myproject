@@ -36,7 +36,7 @@ if (edit) {
         alert("Đã sửa thành công!");
         window.location.href = "";
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Đã xảy ra lỗi khi cập nhật tài khoản.");
       });
   });

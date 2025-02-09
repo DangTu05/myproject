@@ -48,7 +48,7 @@ if (submit) {
         alert("Đã sửa thành công!");
         window.location.href = "";
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Đã xảy ra lỗi khi sửa tài khoản.");
       });
   });

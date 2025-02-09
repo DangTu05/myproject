@@ -2,9 +2,7 @@ const category_name = document.querySelector("#name");
 const parent_id = document.querySelector("#parent_id");
 const img = document.querySelector("#image");
 const submit = document.querySelector("#createProductForm");
-const option = document.querySelector("#optionSelect");
 const preview = document.querySelector(".preview");
-const Delete = document.querySelector(".delete");
 
 if (submit) {
   submit.addEventListener("submit", (e) => {
@@ -35,7 +33,7 @@ if (submit) {
         alert("Đã tạo thành công!");
         window.location.href = "/admin/category";
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Đã xảy ra lỗi khi tạo sản phẩm.");
       });
   });

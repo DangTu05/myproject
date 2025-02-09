@@ -3,7 +3,6 @@ const parent_id = document.querySelector("#parent_id");
 const img = document.querySelector("#image");
 const submit = document.querySelector("#editProductForm");
 const preview = document.querySelector(".preview");
-const Delete = document.querySelector(".delete");
 /// lấy ra id gửi lên từ url
 const id = window.location.pathname.split("/").pop();
 if (submit) {
@@ -34,7 +33,7 @@ if (submit) {
         alert("Sửa thành công!");
         window.location.href = "";
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Đã xảy ra lỗi khi sửa sản phẩm.");
       });
   });

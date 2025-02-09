@@ -23,7 +23,7 @@ if (submit) {
         alert("Tạo thành công!");
         window.location.href = "/admin/role/roles";
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Đã xảy ra lỗi khi tạo !");
       });
   });

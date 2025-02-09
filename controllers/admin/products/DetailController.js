@@ -2,7 +2,7 @@ const Products = require("../../../models/products/products");
 const time = require("../../../util/times/VnTime");
 const Accounts = require("../../../models/accounts/account.model");
 class Detail {
-  async show(req, res, next) {
+  async show(req, res) {
     let find = {
       status: "active",
       deleted: false,
@@ -14,8 +14,7 @@ class Detail {
       status: "active",
     });
     const product = await Products.findOne(find);
-    console.log(product);
-    
+
     if (product.createdBy) {
       const user = await Accounts.findOne({ _id: product.createdBy });
       product.createdName = user.name;

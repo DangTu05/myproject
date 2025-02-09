@@ -10,7 +10,7 @@ class ChatController {
     const chat = await Chat.findOne({
       user_id: user._id
     });
-    
+
     if (chat) {
       const chats = await Chat.find({
         room_chat_id: chat.room_chat_id,

@@ -1,4 +1,3 @@
-const Order = require("../../models/orders/order.model");
 const Address = require("../../models/orders/address.model");
 const Cart = require("../../models/carts/cart.model");
 const Products = require("../../models/products/products");
@@ -59,7 +58,7 @@ class CheckoutController {
       try {
         await info.save();
         res.status(200).json({ message: "Thành công" });
-      } catch (error) {
+      } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
       }
     } else {
@@ -76,12 +75,6 @@ class CheckoutController {
   async editInfo(req, res) {
     const cartId = req.cookies.cartId;
     const info = await Address.findOne({ cartId: cartId });
-    console.log(info.info);
-    console.log(req.params.id);
-
-    info.info.forEach((item) => {
-      console.log(item);
-    });
     const data = info.info.find(
       (item) => item._id.toString() === req.params.id
     );
