@@ -43,4 +43,9 @@ router.patch(
   AuthMiddleware.requireAuth,
   CustomerController.changeStatus
 );
+router.delete(
+  "/customer/delete/:id",
+  AuthMiddleware.requireAuth,
+  CustomerController.delete
+);
 module.exports = router;
