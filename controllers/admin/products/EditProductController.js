@@ -28,13 +28,8 @@ class EditController {
         user_id: res.locals.user._id,
         updateAt: new Date(),
       };
-      if (!req.file) {
-        const product = await Products.findOne({ _id: id });
-        req.body.img = product.img;
-      }
-      if (!req.body.description) {
-        delete req.body.description;
-      }
+      if (!req.file) delete req.body.img;
+      if (!req.body.description) delete req.body.description;
       try {
         await Products.updateOne({ _id: id }, req.body);
         await Products.updateOne(

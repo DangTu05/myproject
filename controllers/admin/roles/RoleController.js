@@ -17,8 +17,8 @@ class RoleController {
       return res.json({ message: "Bạn không có quyền tạo nhóm quyền" });
     } else {
       req.body.createdBy = res.locals.user._id;
-      const role = new Role(req.body);
       try {
+        const role = new Role(req.body);
         await role.save();
         return res.status(200).json({ message: "Tạo thành công!" });
       } catch {

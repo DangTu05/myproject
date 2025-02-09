@@ -34,7 +34,7 @@ class CreateController {
         records: categories,
       });
     } catch {
-      res.redirect("dashboard");
+      res.redirect("/dashboard");
     }
   }
   /// end show giao diện danh mục sản phẩm
@@ -45,8 +45,8 @@ class CreateController {
       return res.json({ message: "Bạn không có quyền tạo danh mục sản phẩm" });
     } else {
       req.body.createdBy = res.locals.user._id;
-      const category = new productCategories(req.body);
       try {
+        const category = new productCategories(req.body);
         await category.save();
         return res.status(200).json({ message: "Thành công!" });
       } catch {
@@ -55,6 +55,8 @@ class CreateController {
     }
   }
   /// end tạo sản phẩm
+
+  /// Show giao diện chỉnh sửa
   async showEdit(req, res) {
     try {
       const id = req.params.id;
@@ -122,12 +124,7 @@ class CreateController {
     if (!role.permissions.includes("category_edit")) {
       return res.json({ message: "Bạn không có quyền sửa danh mục sản phẩm" });
     } else {
-      if (!req.file) {
-        const category = await productCategories.findOne({
-          _id: req.params.id,
-        });
-        req.body.img = category.img;
-      }
+      if (!req.file) delete req.body.img;
       const updated = {
         user_id: res.locals.user._id,
         updateAt: new Date(),

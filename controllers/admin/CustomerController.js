@@ -1,5 +1,6 @@
 const Customers = require("../../models/users/user.model");
 class CustomerController {
+  /// show danh sách tài khoản customer
   async show(req, res) {
     const customers = await Customers.find({
       deleted: false,
@@ -8,6 +9,7 @@ class CustomerController {
       clients: customers,
     });
   }
+  /// end show
 
   /// Thay đổi trạng thái
   async changeStatus(req, res) {

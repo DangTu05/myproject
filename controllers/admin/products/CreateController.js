@@ -24,8 +24,8 @@ class CreateController {
       return res.json({ message: "Bạn không có quyền tạo sản phẩm" });
     } else {
       req.body.createdBy = res.locals.user._id;
-      const product = new Products(req.body);
       try {
+        const product = new Products(req.body);
         await product.save();
         return res.status(200).json({ message: "Thành công!" });
       } catch {
