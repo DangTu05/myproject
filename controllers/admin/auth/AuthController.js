@@ -2,9 +2,13 @@ const Accounts = require("../../../models/accounts/account.model");
 const md5 = require("md5");
 const systemConfig = require("../../../configs/system");
 class AuthController {
+  /// Show giao diện đăng nhập
   async showLogin(req, res) {
     res.render("admin/pages/auth/login");
   }
+  /// End show giao diện đăng nhập
+
+  /// Đăng nhập
   async login(req, res) {
     const user = await Accounts.findOne({
       email: req.body.email,
@@ -30,9 +34,13 @@ class AuthController {
       return res.status(500).json({ message: error.message });
     }
   }
+  /// End đăng nhập
+
+  /// Đăng xuất
   async logout(req, res) {
     res.clearCookie("token");
     res.redirect(`${systemConfig.prefixAdmin}/auth/login`);
   }
+  /// End đx
 }
 module.exports = new AuthController();

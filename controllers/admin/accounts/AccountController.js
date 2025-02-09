@@ -24,7 +24,7 @@ class AccountController {
     } else {
       try {
         if (!req.file) {
-          req.body.img = "";
+          delete req.body.img;
         }
         req.body.createdBy = res.locals.user._id;
         req.body.password = md5(req.body.password);
@@ -43,6 +43,7 @@ class AccountController {
   async showAccounts(req, res) {
     const accounts = await Accounts.find({
       deleted: false,
+      /// $ne :not-equal
       _id: { $ne: res.locals.user._id },
     }).select("-token -password");
     // Lấy vai trò cho tất cả tài khoản đồng thời
@@ -94,10 +95,7 @@ class AccountController {
         updateAt: new Date(),
       };
       try {
-        if (!req.file) {
-          const account = await Accounts.findOne({ _id: id });
-          req.body.img = account.img;
-        }
+        if (!req.file) delete req.body.img;
         if (req.body.password) {
           req.body.password = md5(req.body.password);
         } else {
@@ -106,6 +104,7 @@ class AccountController {
         await Accounts.updateOne({ _id: id }, req.body);
         await Accounts.updateOne(
           { _id: id },
+          // push vào mảng updatedBy trong db
           { $push: { updatedBy: updated } }
         );
         res.status(200).json({ message: "Cập nhật thành công" });
@@ -125,8 +124,8 @@ class AccountController {
       const id = req.body._id;
       const deletedBy = res.locals.user._id;
       try {
-        await Accounts.updateOne({ _id: id }, { deletedBy: deletedBy });
         await Accounts.delete({ _id: id });
+        await Accounts.updateOne({ _id: id }, { deletedBy: deletedBy });
         res.status(200).json({ message: "Xóa thành công" });
       } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });

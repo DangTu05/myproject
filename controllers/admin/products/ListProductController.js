@@ -124,8 +124,8 @@ class ListProductController {
       const id = req.body._id;
       const deletedBy = res.locals.user._id;
       try {
-        await Products.updateOne({ _id: id }, { deleted: true, deletedBy });
         await Products.delete({ _id: id });
+        await Products.updateOne({ _id: id }, { deleted: true, deletedBy });
         res.status(200).json({ message: "Xóa thành công" });
       } catch {
         res.status(500).json({ message: "Đã xảy ra lỗi" });
