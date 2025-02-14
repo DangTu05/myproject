@@ -38,6 +38,11 @@ router.delete(
   AccountController.delete
 );
 router.get("/customers", AuthMiddleware.requireAuth, CustomerController.show);
+router.get(
+  "/customer/:id",
+  AuthMiddleware.requireAuth,
+  CustomerController.showDetail
+);
 router.patch(
   "/customers/change-status/:status/:id",
   AuthMiddleware.requireAuth,
