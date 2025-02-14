@@ -48,6 +48,11 @@ router.patch(
   AuthMiddleware.requireAuth,
   CustomerController.changeStatus
 );
+router.patch(
+  "/customer/edit/:id",
+  // AuthMiddleware.requireAuth,
+  CustomerController.editInfo
+);
 router.delete(
   "/customer/delete/:id",
   AuthMiddleware.requireAuth,

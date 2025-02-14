@@ -86,7 +86,7 @@ class RoleController {
   async showEdit(req, res) {
     const role = await Role.findOne({ _id: req.params.id });
     try {
-      res.render("admin/pages/roles/edit", {
+      res.render("./admin/pages/roles/edit", {
         role: role,
       });
     } catch {

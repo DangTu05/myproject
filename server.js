@@ -11,6 +11,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 require("dotenv").config();
 const methodOverride = require("method-override");
+const errorHandlingMiddleware = require("./middlewares/errorHandling.middleware");
 const app = express();
 const port = process.env.PORT;
 const path = require("path");
@@ -60,6 +61,8 @@ app.use(
 //* route init
 routeAdmin(app);
 route(app);
+/// Middleware xử lý lỗi tập chung
+app.use(errorHandlingMiddleware);
 app.get("*", (req, res) => {
   res.render("./clients/layouts/404");
 });
