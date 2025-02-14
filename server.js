@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require("express");
 const flash = require("express-flash");
 const cors = require("cors");
@@ -67,6 +68,12 @@ app.get("*", (req, res) => {
   res.render("./clients/layouts/404");
 });
 server.listen(port, () => {
-  // eslint-disable-next-line no-console
   console.log(` App listening at http://localhost:${port}/home`);
+});
+process.on("unhandledRejection", (err) => {
+  console.error(`ERROR: ${err.message}`);
+  console.log(
+    "Shutting down the server due to an Unhandled Promise Rejection."
+  );
+  process.exit(1); // Dừng chương trình với mã lỗi
 });

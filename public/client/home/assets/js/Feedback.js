@@ -5,12 +5,11 @@ if (commentForm) {
     const comment = tinymce.get("comment").getContent();
     /// Phát ra sự kiện client-feedback và gửi lên nội dung tin nhắn đã submit
     socket.emit("client_feedback", comment);
+    commentForm.reset();
   });
 }
 /// Client nhận về feedback
 socket.on("client_return_feedback", (data) => {
-  console.log(data);
-
   const feedbacks = document.querySelector(".feedbacks");
   const div = document.createElement("div");
   div.classList.add("col");
