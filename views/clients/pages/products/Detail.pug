@@ -185,7 +185,7 @@ body
             .prod-tab__content
               .prod-content
                 h2.prod-content__heading What our customers are saying
-                .row.row-cols-3.gx-lg-2.row-cols-md-1.gy-md-3
+                .row.row-cols-3.gx-lg-2.row-cols-md-1.gy-md-3.feedbacks
                   //  Review card 1
                   if(feedbacks)
                     each item, index in feedbacks
@@ -207,7 +207,7 @@ body
                               img.review-card__star(src="/client/home/assets/icons/star-half.svg", alt)
                               img.review-card__star(src="/client/home/assets/icons/star-blank.svg", alt)
                             span.review-card__rating-title (3.5) Review
-              form(method="POST").comment 
+              form(action="", method="POST").comment 
                 label(for="comment") Comment
                 textarea.comment__input(class="form-control" name="comment", id="comment", rows="4", cols="50", placeholder="Nhập bình luận của bạn ở đây...")
                 button(type="submit" class="btn btn--primary" style="margin-top:10px").comment__submit Gửi
@@ -314,7 +314,10 @@ body
   footer#footer.footer
   script.
     load("#footer", "/client/home/templates/footer.html")
+  script(src="/socket.io/socket.io.js")
+  script(src="/client/home/assets/js/Socket.js")
   script(type="module", src="/client/home/assets/js/Add_Cart.js")
+  script(type="module", src="/client/home/assets/js/Feedback.js") 
   script(type="application/javascript", src="/tinymce/tinymce.min.js")
   script(type="application/javascript", src="/admin/js/tinymce-config.js")   
     

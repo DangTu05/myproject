@@ -1,6 +1,8 @@
 const Address = require("../../models/orders/address.model");
 const Cart = require("../../models/carts/cart.model");
 const Products = require("../../models/products/products");
+const Orders = require("../../models/orders/order.model");
+
 class CheckoutController {
   /// View giao diện checkout
   async index(req, res) {
@@ -101,5 +103,8 @@ class CheckoutController {
     res.redirect("back");
   }
   /// End xóa thông tin
+
+  /// Mua hàng
+  async order(req, res) {}
 }
 module.exports = new CheckoutController();

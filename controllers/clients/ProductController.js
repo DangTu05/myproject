@@ -4,12 +4,14 @@ const SortHepler = require("../../helpers/client/Sort.helper");
 const Category = require("../../models/categories/category.model");
 const User = require("../../models/users/user.model");
 const getSubCategory = require("../../helpers/client/Product-Category");
+const Client_Feedback = require("../../sockets/client/feedback.socket");
 class ProductController {
   /// Show chi tiết sản phẩm
   async detail(req, res) {
+    Client_Feedback(req, res);
     const product = await Products.findOne({ slug: req.params.slug });
     const users = await User.find({});
-    const feedbacks = await Feedback.find({ product_id: product._id });
+    const feedbacks = await Feedback.find({ product_id: product._id }).limit(3);
     const users_feedback = feedbacks.map((item) => {
       return users.find((user) => {
         return user._id.toString() === item.user_id;
@@ -114,28 +116,6 @@ class ProductController {
   }
   /// End show danh sách sản phẩm trong danh mục
 
-  /// Feedback sản phẩm
-  async feedback(req, res) {
-    if (!req.cookies.tokenUser) {
-      req.flash("error", "Vui lòng đăng nhập");
-      return res.redirect("/user/login");
-    }
-    const user = await User.findOne({
-      tokenUser: req.cookies.tokenUser,
-    });
-    const product_id = await Products.findOne({
-      slug: req.params.slug,
-    });
-    if (req.body.comment) {
-      const feedback = new Feedback({
-        user_id: user._id,
-        content: req.body.comment,
-        product_id: product_id._id,
-      });
-      await feedback.save();
-    }
-    return res.redirect("back");
-  }
-  /// End feedback sản phẩm
+  // /// Feedback sản phẩm
 }
 module.exports = new ProductController();

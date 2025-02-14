@@ -18,4 +18,7 @@ router.get("/address/delete/:id", CheckoutController.deleteInfo);
 
 /// Đường dẫn dẫn đến trang checkout
 router.get("/", CheckoutController.index);
+
+/// Mua hàng
+router.get("/order", CheckoutController.order);
 module.exports = router;

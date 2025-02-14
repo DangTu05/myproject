@@ -22,6 +22,4 @@ router.get(
 /// Đường dẫn dẫn đến trang chi tiết sản phẩm
 router.get("/:slug", locals.locals, ProductController.detail);
 
-/// Đường dẫn gửi feedback về sản phẩm
-router.post("/:slug", ProductController.feedback);
 module.exports = router;
