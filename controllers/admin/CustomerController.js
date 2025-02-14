@@ -58,5 +58,19 @@ class CustomerController {
     }
   }
   /// End xóa tài khoản
+
+  /// Thông tin chi tiết user
+  async showDetail(req, res) {
+    const info_customer = await Customers.findOne({
+      _id: req.params.id,
+    }).select("-password");
+    console.log(info_customer);
+
+    res.status(200).json({
+      info_customer: info_customer,
+    });
+    return;
+  }
+  /// End thông tin chin= tiết
 }
 module.exports = new CustomerController();
