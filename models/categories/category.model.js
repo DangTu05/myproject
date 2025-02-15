@@ -8,7 +8,7 @@ const productCategory = new Schema(
     parent_id: String,
     img: { type: String, unique: true },
     slug: { type: String, unique: true },
-    description: { type: String, default: "" },
+    description: { type: String, default: " " },
     position: Number,
     status: { type: String, default: "active" },
     deleted: { type: Boolean, default: false },

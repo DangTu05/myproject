@@ -13,6 +13,7 @@ socket.on("client_return_feedback", (data) => {
   const feedbacks = document.querySelector(".feedbacks");
   const div = document.createElement("div");
   div.classList.add("col");
+  div.style.marginBottom = "10px";
   div.innerHTML = `
   <div class="review-card">
     <div class="review-card__content">

@@ -11,7 +11,7 @@ if (submit) {
     const formData = new FormData();
     formData.append("category_name", category_name.value);
     formData.append("parent_id", parent_id.value);
-    formData.append("description", description.value);
+    formData.append("description", description);
     formData.append("img", img.files[0]); // Thêm tệp hình ảnh
     formData.append("img", img.value);
     fetch("create", {

@@ -70,6 +70,7 @@ app.get("*", (req, res) => {
 server.listen(port, () => {
   console.log(` App listening at http://localhost:${port}/home`);
 });
+///Khi một Promise bị reject mà không có .catch()
 process.on("unhandledRejection", (err) => {
   console.error(`ERROR: ${err.message}`);
   console.log(

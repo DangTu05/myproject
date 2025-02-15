@@ -11,6 +11,7 @@ class CreateController {
         status: "active",
       });
       const records = buildCategoryTree(categories);
+
       res.render("./admin/pages/categories/CreateCategory", {
         count: count,
         records: records, // Thêm categories vào render nếu cần
@@ -23,7 +24,7 @@ class CreateController {
   }
   /// end show sản phẩm
   /// show giao diện danh mục sản phẩm
-  async Detail(req, res) {
+  async Detail(req, res, next) {
     try {
       let find = {
         deleted: false,
@@ -33,8 +34,8 @@ class CreateController {
       res.render("./admin/pages/categories/Category", {
         records: categories,
       });
-    } catch {
-      res.redirect("/dashboard");
+    } catch (err) {
+      next(err);
     }
   }
   /// end show giao diện danh mục sản phẩm

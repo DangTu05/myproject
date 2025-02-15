@@ -11,7 +11,7 @@ class ProductController {
     Client_Feedback(req, res);
     const product = await Products.findOne({ slug: req.params.slug });
     const users = await User.find({});
-    const feedbacks = await Feedback.find({ product_id: product._id }).limit(3);
+    const feedbacks = await Feedback.find({ product_id: product._id }).limit(6);
     const users_feedback = feedbacks.map((item) => {
       return users.find((user) => {
         return user._id.toString() === item.user_id;
