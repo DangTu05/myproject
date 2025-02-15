@@ -19,6 +19,7 @@ const User = new Schema(
     createdBy: String,
     deletedBy: String,
     updatedBy: [{ user_id: String, updateAt: Date }],
+    isBlocked: { type: Boolean, default: false },
   },
   {
     timestamps: true,
