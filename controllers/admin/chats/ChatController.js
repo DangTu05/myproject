@@ -1,9 +1,11 @@
 const Chat = require("../../../models/chats/chat.model");
 const User = require("../../../models/users/user.model");
 const chatSocket = require("../../../sockets/admin/chat.socket");
+const blockSocket = require("../../../sockets/admin/block.socket");
 class ChatController {
   /// Show giao diện nhắn tin theo room_chat_id
-  async showChat(req, res) {
+  async showChat(req, res, next) {
+    blockSocket(next);
     chatSocket(req);
     const room_id = req.params.room_id;
     /// Lấy ra mảng chats theo room_chat_id và sắp xếp theo tăng dần về thời gian tạo
