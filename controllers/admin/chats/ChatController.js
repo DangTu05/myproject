@@ -21,5 +21,24 @@ class ChatController {
     });
   }
   /// End show giao diện nhắn tin theo room_chat_id
+
+  /// Xóa tin nhắn
+  async deleteChat(req, res, next) {
+    const room_chat_id = req.params.room_id;
+    try {
+      await Chat.updateMany(
+        {
+          room_chat_id: room_chat_id,
+        },
+        {
+          $addToSet: { deletedBy: res.locals.user._id.toString() },
+        }
+      );
+      res.status(200).json({ message: "Xóa thành công", code: 200 });
+    } catch (err) {
+      next(err);
+    }
+  }
+  ///End xóa tin nhắn
 }
 module.exports = new ChatController();

@@ -84,6 +84,61 @@ if (listTyping) {
 /// End Server return typing
 /// End Typing
 
+/// Xóa tin nhắn
+const action = document.querySelector(".action");
+if (action) {
+  const deleteChat = document.querySelector("[delete-chat]");
+  deleteChat.onclick = () => {
+    Swal.fire({
+      text: "Bạn có muốn xóa đoạn chat này không?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch("", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            {
+              return response.json();
+            }
+          })
+          .then((res) => {
+            if (res.message === "Bạn không có quyền xóa") {
+              alert(res.message);
+              return;
+            }
+            if (res.code === 200) {
+              Swal.fire({
+                title: "Xóa!",
+                text: "Bạn đã xóa thành công!",
+                icon: "success",
+              });
+              document.addEventListener("click", (e) => {
+                if (
+                  e.target.matches(".swal2-confirm") ||
+                  e.target.matches(".swal2-container")
+                ) {
+                  location.reload();
+                }
+              });
+            }
+          })
+          .catch((err) => {
+            alert("Đã xảy ra lỗi: " + err.message); // Hiển thị thông báo lỗi cho người dùng
+          });
+      }
+    });
+  };
+}
+/// End xóa tin nhắn
+
 /// Upload nhiều ảnh
 // https://www.npmjs.com/package/file-upload-with-preview (gửi ảnh)
 /// https://github.com/fengyuanchen/viewerjs (xem ảnh)

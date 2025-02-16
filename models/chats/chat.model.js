@@ -9,6 +9,7 @@ const Chat = new Schema(
     room_chat_id: String,
     status: { type: Boolean, default: false },
     deleted: { type: Boolean, default: false },
+    deletedBy: [String],
   },
   {
     timestamps: true,
