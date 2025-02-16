@@ -3,7 +3,7 @@ const User = require("../../models/users/user.model");
 const Products = require("../../models/products/products");
 // eslint-disable-next-line no-unused-vars
 module.exports = async (req, res) => {
-  _io.once("connection", async (socket) => {
+  _io.on("connection", async (socket) => {
     socket.on("client_feedback", async (data) => {
       const user = await User.findOne({
         tokenUser: req.cookies.tokenUser,

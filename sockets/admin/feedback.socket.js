@@ -1,6 +1,6 @@
 const Feedback = require("../../models/users/feedback.model");
 module.exports = async (req, res) => {
-  _io.once("connection", async (socket) => {
+  _io.on("connection", async (socket) => {
     /// Admin gửi bình luận
     socket.on("admin_feedback", (data) => {
       data.user_id = "";

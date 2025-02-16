@@ -25,9 +25,10 @@ module.exports = async (req) => {
         content: data,
         room_chat_id: req.params.room_id,
       });
+      socket.join(req.params.room_id);
       await chat.save();
-      /// SEVER_RETURN__MESSAGE
-      _io.emit("server-return-message", {
+
+      _io.to(req.params.room_id).emit("server-return-message", {
         user_id: "",
         content: data,
         name: "Admin",

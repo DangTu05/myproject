@@ -61,6 +61,11 @@ app.use(
 // end tinymce
 //* route init
 routeAdmin(app);
+// Truyền `io` vào route
+// app.use((req, res, next) => {
+//   req.io = io;
+//   next();
+// });
 route(app);
 /// Middleware xử lý lỗi tập chung
 app.use(errorHandlingMiddleware);

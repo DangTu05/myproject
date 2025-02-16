@@ -21,12 +21,14 @@ module.exports = async (res) => {
 
     /// Nhận data từ sự kiện "client-send-message"
     socket.on("client-send-message", async (data) => {
+      const roomId = isUser ? isUser.room_chat_id : GenerateOtp(10); // Chọn room ID phù hợp
+      socket.join(roomId);
       /// Nếu user đấy có đoạn chat rồi thì tạo thêm document lưu nội dung đoạn chat user đó vừa gửi lên
       if (isUser) {
         const chat = new Chat({
           user_id: user_id,
           content: data,
-          room_chat_id: isUser.room_chat_id,
+          room_chat_id: roomId,
         });
         await chat.save();
       }
@@ -35,12 +37,17 @@ module.exports = async (res) => {
         const chat = new Chat({
           user_id: user_id,
           content: data,
-          room_chat_id: GenerateOtp(10),
+          room_chat_id: roomId,
         });
         await chat.save();
       }
       /// SEVER_RETURN__MESSAGE
-      _io.emit("server-return-message", {
+      // _io.to(data.my_id).emit("server-return-message", {
+      //   user_id: user_id,
+      //   content: data.data,
+      //   name: res.locals.user.name,
+      // });
+      _io.to(roomId).emit("server-return-message", {
         user_id: user_id,
         content: data,
         name: res.locals.user.name,

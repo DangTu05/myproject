@@ -92,7 +92,7 @@ if (listTyping) {
       const existBoxTyping = document.querySelector(
         `.box-typing[user-id="${data.user_id}"]`
       );
-      // nếu chưa có thì tạo typing 
+      // nếu chưa có thì tạo typing
       if (!existBoxTyping) {
         const boxTyping = document.createElement("div");
         boxTyping.classList.add("box-typing");
