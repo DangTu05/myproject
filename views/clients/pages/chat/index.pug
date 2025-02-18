@@ -23,7 +23,7 @@ body
       include ../../layouts/header-logined.pug
     else
       include ../../layouts/header.pug
-  .chat-container
+  .chat-container(room-id=room_id)
     .chat-header.
       
       Chat Hỗ Trợ

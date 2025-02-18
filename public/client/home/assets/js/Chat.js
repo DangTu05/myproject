@@ -3,7 +3,11 @@ import * as Popper from "https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm
 const formSubmit = document.querySelector(".form-submit");
 const content = document.querySelector(".content");
 const chat_messages = document.querySelector(".chat-messages");
+const room_id = document.querySelector("[room-id]").getAttribute("room-id");
 if (formSubmit) {
+  /// Phát sự kiện client-join
+  socket.emit("client-join-room", room_id);
+  /// Phát sự kiện client_seen_message
   socket.emit("client_seen_message", {});
   /// submit tin nhắn được gửi
   formSubmit.addEventListener("submit", (e) => {
@@ -15,7 +19,10 @@ if (formSubmit) {
       content.value = "";
     }
     /// Khi nhập xong phát ra sự client tắt typing
-    socket.emit("client-typing", "hidden");
+    socket.emit("client-typing", {
+      room_id: room_id,
+      type: "hidden",
+    });
     chat_messages.scrollTop = chat_messages.scrollHeight;
   });
   chat_messages.scrollTop = chat_messages.scrollHeight;
@@ -49,10 +56,16 @@ socket.on("server-return-message", (data) => {
 /// set thời gian show typing
 var timeout;
 function showTyping() {
-  socket.emit("client-typing", "show");
+  socket.emit("client-typing", {
+    room_id: room_id,
+    type: "show",
+  });
   clearTimeout(timeout);
   timeout = setTimeout(() => {
-    socket.emit("client-typing", "hidden");
+    socket.emit("client-typing", {
+      room_id: room_id,
+      type: "hidden",
+    });
   }, 3000);
 }
 

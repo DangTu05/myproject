@@ -2,7 +2,9 @@
 const formSubmit = document.querySelector(".form-submit");
 const content = document.querySelector(".content");
 const chat_messages = document.querySelector(".chat-messages");
+const room_id = document.querySelector("[room-id]").getAttribute("room-id");
 if (formSubmit) {
+  socket.emit("admin-join-room", room_id);
   socket.emit("admin_seen_message", {});
   formSubmit.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -11,7 +13,10 @@ if (formSubmit) {
       socket.emit("admin-send-message", data);
       content.value = "";
     }
-    socket.emit("client-typing", "hidden");
+    socket.emit("client-typing", {
+      room_id: room_id,
+      type: "hidden",
+    });
     chat_messages.scrollTop = chat_messages.scrollHeight;
   });
   chat_messages.scrollTop = chat_messages.scrollHeight;
@@ -38,10 +43,16 @@ socket.on("server-return-message", (data) => {
 // function showTyping
 var timeout;
 function showTyping() {
-  socket.emit("client-typing", "show");
+  socket.emit("client-typing", {
+    room_id: room_id,
+    type: "show",
+  });
   clearTimeout(timeout);
   timeout = setTimeout(() => {
-    socket.emit("client-typing", "hidden");
+    socket.emit("client-typing", {
+      room_id: room_id,
+      type: "hidden",
+    });
   }, 3000);
 }
 /// Typing

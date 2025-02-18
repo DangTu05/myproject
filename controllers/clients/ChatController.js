@@ -8,7 +8,7 @@ class ChatController {
       tokenUser: req.cookies.tokenUser,
     });
     const chat = await Chat.findOne({
-      user_id: user._id
+      user_id: user._id,
     });
 
     if (chat) {
@@ -24,6 +24,7 @@ class ChatController {
       // }).select("name");
       res.render("./clients/pages/chat/index", {
         chats: chats,
+        room_id: chat.room_chat_id,
         // sender: user_sender.name,
       });
     } else {

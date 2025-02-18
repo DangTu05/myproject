@@ -20,7 +20,7 @@ link(rel="stylesheet", href="/admin/css/chats/index.css")
 //- block sidebar
 //- block content
 body
-  .chat-container
+  .chat-container(room-id=room_id)
     .chat-header(style="display:flex; justify-content:space-between;align-items:center")
       .user-info
         img.avatar.circle(src=customer.img alt="Avatar")

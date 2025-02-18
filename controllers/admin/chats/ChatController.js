@@ -18,6 +18,7 @@ class ChatController {
     res.render("./admin/pages/chats/index", {
       chats: chats,
       customer: user,
+      room_id: room_id,
     });
   }
   /// End show giao diện nhắn tin theo room_chat_id

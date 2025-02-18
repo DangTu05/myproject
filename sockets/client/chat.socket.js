@@ -6,6 +6,10 @@ module.exports = async (res) => {
   /// Kiểm tra xem tài khoản đó có đoạn chat nào chưa
   const isUser = await Chat.findOne({ user_id: user_id });
   _io.once("connection", async (socket) => {
+    /// Bắt sự kiện client join room
+    socket.on("client-join-room", (data) => {
+      socket.join(data);
+    });
     /// Nhận sự kiện seen tin nhắn phía client
     socket.on("client_seen_message", async () => {
       /// Lấy ra các bản ghi theo room_chat_id
@@ -22,7 +26,7 @@ module.exports = async (res) => {
     /// Nhận data từ sự kiện "client-send-message"
     socket.on("client-send-message", async (data) => {
       const roomId = isUser ? isUser.room_chat_id : GenerateOtp(10); // Chọn room ID phù hợp
-      socket.join(roomId);
+      // socket.join(roomId);
       /// Nếu user đấy có đoạn chat rồi thì tạo thêm document lưu nội dung đoạn chat user đó vừa gửi lên
       if (isUser) {
         const chat = new Chat({
@@ -58,10 +62,10 @@ module.exports = async (res) => {
     /// Nhận data từ sự kiện "client-typing"
     socket.on("client-typing", (data) => {
       /// Trả data đó cho sự kiện "server-return-typing"
-      socket.broadcast.emit("server-return-typing", {
+      socket.broadcast.to(data.room_id).emit("server-return-typing", {
         user_id: user_id,
         name: res.locals.user.name,
-        type: data,
+        type: data.type,
       });
     });
     /// End Typing

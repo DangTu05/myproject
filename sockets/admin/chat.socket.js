@@ -1,6 +1,10 @@
 const Chat = require("../../models/chats/chat.model");
 module.exports = async (req) => {
   _io.once("connection", async (socket) => {
+    // Lắng nghe sự kiện admin-join
+    socket.on("admin-join-room", (data) => {
+      socket.join(data);
+    });
     /// Nhận sự kiện admin seen tin nhắn
     socket.on("admin_seen_message", async () => {
       /// Tìm ra các bản ghi theo room_chat_id
@@ -25,9 +29,8 @@ module.exports = async (req) => {
         content: data,
         room_chat_id: req.params.room_id,
       });
-      socket.join(req.params.room_id);
+      // socket.join(req.params.room_id);
       await chat.save();
-
       _io.to(req.params.room_id).emit("server-return-message", {
         user_id: "",
         content: data,
@@ -37,10 +40,10 @@ module.exports = async (req) => {
     });
     /// Typing
     socket.on("client-typing", (data) => {
-      socket.broadcast.emit("server-return-typing", {
+      socket.broadcast.to(data.room_id).emit("server-return-typing", {
         user_id: "",
         name: "Admin",
-        type: data,
+        type: data.type,
       });
     });
     /// End Typing
