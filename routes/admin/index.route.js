@@ -9,7 +9,7 @@ const Role = require("./roles/role.route");
 const Accounts = require("./accounts/account.route");
 const Auth = require("./auth/auth.route");
 const MyAccout = require("./my-account/index.route");
-const Chat=require("./chats/chat.route");
+const Chat = require("./chats/chat.route");
 const SettingMiddleware = require("../../middlewares/admin/auth/setting.middleware");
 function router(app) {
   const PATH_ADMIN = systemConfig.prefixAdmin;

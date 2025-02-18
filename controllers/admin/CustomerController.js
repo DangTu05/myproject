@@ -70,6 +70,8 @@ class CustomerController {
     const info_customer = await Customers.findOne({
       _id: req.params.id,
     }).select("-password");
+    console.log(info_customer);
+
     res.status(200).json({
       info_customer: info_customer,
     });
