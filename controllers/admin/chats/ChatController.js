@@ -25,6 +25,9 @@ class ChatController {
 
   /// Xóa tin nhắn
   async deleteChat(req, res, next) {
+    if (res.locals.role.permissions.includes("chat_delete")) {
+      return res.json({ message: "Bạn không có quyền xóa", code: 403 });
+    }
     const room_chat_id = req.params.room_id;
     try {
       await Chat.updateMany(
@@ -41,6 +44,5 @@ class ChatController {
     }
   }
   ///End xóa tin nhắn
-
 }
 module.exports = new ChatController();

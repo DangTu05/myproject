@@ -2,6 +2,12 @@ const Customers = require("../../models/users/user.model");
 class CustomerController {
   /// show danh sách tài khoản customer
   async show(req, res) {
+    if (res.locals.role.permissions.includes("account_views")) {
+      return res.json({
+        message: "Bạn không có quyền xem danh sách tài khoản",
+        code: 403,
+      });
+    }
     const customers = await Customers.find({
       deleted: false,
     }).select(" -password");
@@ -13,6 +19,12 @@ class CustomerController {
 
   /// Thay đổi trạng thái
   async changeStatus(req, res) {
+    if (res.locals.role.permissions.includes("account_edit")) {
+      return res.json({
+        message: "Bạn không có quyền thay đổi trạng thái",
+        code: 403,
+      });
+    }
     try {
       const updated = {
         user_id: res.locals.user._id,
@@ -45,7 +57,12 @@ class CustomerController {
 
   /// Xóa tài khoản
   async delete(req, res) {
-    // const role = res.locals.user.role;
+    if (res.locals.role.permissions.includes("account_delete")) {
+      return res.json({
+        message: "Bạn không có quyền xóa tài khoản",
+        code: 403,
+      });
+    }
     try {
       await Customers.delete({ _id: req.params.id });
       await Customers.updateOne(
@@ -65,13 +82,12 @@ class CustomerController {
     if (!role.permissions.includes("account_views")) {
       return res.json({
         message: "Bạn không có quyền xem danh sách tài khoản",
+        code: 403,
       });
     }
     const info_customer = await Customers.findOne({
       _id: req.params.id,
     }).select("-password");
-    console.log(info_customer);
-
     res.status(200).json({
       info_customer: info_customer,
     });
@@ -82,7 +98,10 @@ class CustomerController {
   async editInfo(req, res) {
     const role = res.locals.role;
     if (!role.permissions.includes("account_edit")) {
-      return res.json({ message: "Bạn không có quyền sửa tài khoản" });
+      return res.json({
+        message: "Bạn không có quyền sửa tài khoản",
+        code: 403,
+      });
     } else {
       if (!req.file) delete req.body.img;
       if (req.body.password) {

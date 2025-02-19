@@ -14,9 +14,6 @@ class ListProductController {
       find.status = req.query.status;
     }
     const ObjectSearch = SearchHelper(req.query);
-    if (ObjectSearch.regex) {
-      find.product_name = ObjectSearch.regex;
-    }
     find.deleted = false;
     const CountProduct = await Products.countDocuments(find);
     const Count_Deleted = await Products.countDocuments({ deleted: true });
@@ -36,7 +33,13 @@ class ListProductController {
     } else {
       sort.product_name = "asc";
     }
-    const products = await Products.find(find)
+    const products = await Products.find({
+      ...find,
+      $or: [
+        { product_name: ObjectSearch.regexKeyword },
+        { slug: ObjectSearch.regexSlug },
+      ],
+    })
       .sort(sort)
       .limit(ObjectPagination.limitItems)
       .skip(ObjectPagination.skip);
